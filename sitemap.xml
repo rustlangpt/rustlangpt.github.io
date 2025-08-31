@@ -1,75 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>https://rustlang.pt/</loc>
+        <loc>https://rustlangpt.github.io/</loc>
     </url>
     <url>
-        <loc>https://rustlang.pt/acerca/</loc>
+        <loc>https://rustlangpt.github.io/acerca/</loc>
         <lastmod>2025-09-01</lastmod>
     </url>
     <url>
-        <loc>https://rustlang.pt/docs/</loc>
-    </url>
-    <url>
-        <loc>https://rustlang.pt/docs/page/1/</loc>
-    </url>
-    <url>
-        <loc>https://rustlang.pt/empregos/</loc>
+        <loc>https://rustlangpt.github.io/empregos/</loc>
         <lastmod>2025-09-01</lastmod>
     </url>
     <url>
-        <loc>https://rustlang.pt/eventos/</loc>
+        <loc>https://rustlangpt.github.io/eventos/</loc>
         <lastmod>2025-09-01</lastmod>
     </url>
     <url>
-        <loc>https://rustlang.pt/formacao/</loc>
-        <lastmod>2025-09-01</lastmod>
+        <loc>https://rustlangpt.github.io/posts/</loc>
     </url>
     <url>
-        <loc>https://rustlang.pt/livros/</loc>
-        <lastmod>2025-09-01</lastmod>
-    </url>
-    <url>
-        <loc>https://rustlang.pt/posts/</loc>
-    </url>
-    <url>
-        <loc>https://rustlang.pt/posts/data1/</loc>
+        <loc>https://rustlangpt.github.io/posts/data1/</loc>
         <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-        <loc>https://rustlang.pt/posts/data2/</loc>
+        <loc>https://rustlangpt.github.io/posts/data2/</loc>
         <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-        <loc>https://rustlang.pt/posts/page/1/</loc>
+        <loc>https://rustlangpt.github.io/posts/page/1/</loc>
     </url>
     <url>
-        <loc>https://rustlang.pt/tags/</loc>
+        <loc>https://rustlangpt.github.io/recursos/</loc>
     </url>
     <url>
-        <loc>https://rustlang.pt/tags/lorem/</loc>
-    </url>
-    <url>
-        <loc>https://rustlang.pt/tags/lorem/page/1/</loc>
-    </url>
-    <url>
-        <loc>https://rustlang.pt/tags/tag1/</loc>
-    </url>
-    <url>
-        <loc>https://rustlang.pt/tags/tag1/page/1/</loc>
-    </url>
-    <url>
-        <loc>https://rustlang.pt/tags/tag2/</loc>
-    </url>
-    <url>
-        <loc>https://rustlang.pt/tags/tag2/page/1/</loc>
-    </url>
-    <url>
-        <loc>https://rustlang.pt/tutoriais/</loc>
+        <loc>https://rustlangpt.github.io/recursos/formacao/</loc>
         <lastmod>2025-09-01</lastmod>
     </url>
     <url>
-        <loc>https://rustlang.pt/videos/</loc>
+        <loc>https://rustlangpt.github.io/recursos/livros/</loc>
         <lastmod>2025-09-01</lastmod>
+    </url>
+    <url>
+        <loc>https://rustlangpt.github.io/recursos/page/1/</loc>
+    </url>
+    <url>
+        <loc>https://rustlangpt.github.io/recursos/tutoriais/</loc>
+        <lastmod>2025-09-01</lastmod>
+    </url>
+    <url>
+        <loc>https://rustlangpt.github.io/recursos/videos/</loc>
+        <lastmod>2025-09-01</lastmod>
+    </url>
+    <url>
+        <loc>https://rustlangpt.github.io/tags/</loc>
+    </url>
+    <url>
+        <loc>https://rustlangpt.github.io/tags/lorem/</loc>
+    </url>
+    <url>
+        <loc>https://rustlangpt.github.io/tags/lorem/page/1/</loc>
+    </url>
+    <url>
+        <loc>https://rustlangpt.github.io/tags/tag1/</loc>
+    </url>
+    <url>
+        <loc>https://rustlangpt.github.io/tags/tag1/page/1/</loc>
+    </url>
+    <url>
+        <loc>https://rustlangpt.github.io/tags/tag2/</loc>
+    </url>
+    <url>
+        <loc>https://rustlangpt.github.io/tags/tag2/page/1/</loc>
     </url>
 </urlset>

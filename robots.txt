@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: https://rustlang.pt/sitemap.xml
+Sitemap: https://rustlangpt.github.io/sitemap.xml
