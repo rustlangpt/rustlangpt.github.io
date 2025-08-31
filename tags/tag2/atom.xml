@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>RustlangPT - tag2</title>
+    <link rel="self" type="application/atom+xml" href="https://rustlang.pt/tags/tag2/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://rustlang.pt"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2025-09-25T00:00:00+00:00</updated>
+    <id>https://rustlang.pt/tags/tag2/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Data2</title>
+        <published>2025-09-25T00:00:00+00:00</published>
+        <updated>2025-09-25T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://rustlang.pt/posts/data2/"/>
+        <id>https://rustlang.pt/posts/data2/</id>
+        
+        <content type="html" xml:base="https://rustlang.pt/posts/data2/">&lt;p&gt;This is my first blog post.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>
