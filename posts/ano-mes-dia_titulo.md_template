@@ -1,18 +1,51 @@
 +++
-title= ""
-description = ""
-date = 2030-01-30 
-#updated =  2030-01-31
-#weight = 0
-#draft = true
-#slug = ""
-#path = ""
-#aliases = []
-#authors= ["aaa","bbb"]
+title = "Bem-vindo à 'Comunidade de linguagem de programação Rust - Rust em Português'! Vamos construir esta comunidade juntos."
+description = "Apresentação e convite para a nova comunidade e blog de Rust em Português."
+author = "RustlangPT"
+date = "2025-09-01"
+image = "/images/rust-community-banner.png"
 in_search_index = true
 [taxonomies]
-tags= ["aaa","bbb"]
+tags = ["Comunidade"]
 +++
 
-xxxx
+
+Olá a todos\!
+
+Sejam muito bem-vindos ao 'Rust em Português', um novo espaço digital que nasce com um propósito claro: juntar todos os que, como eu, são apaixonados pela linguagem **Rust** ou têm curiosidade em mergulhar neste universo. Este blog e a comunidade que o acompanha são a nossa casa, o sítio onde podemos partilhar conhecimento, tirar dúvidas e, claro, celebrar as vitórias (e rir das frustrações\!) que a programação nos dá.
+
+-----
+
+### Porquê 'Rust em Português'?
+
+Porque, embora a documentação oficial e os recursos em inglês sejam excelentes (e essenciais\!), muitas vezes, uma explicação na nossa língua-mãe faz toda a diferença. O objetivo é criar um ponto de encontro para a comunidade lusófona, um lugar onde a barreira do idioma não seja um problema, permitindo que mais pessoas se sintam à vontade para aprender e contribuir.
+
+Vamos falar de tudo: desde os conceitos básicos de **ownership** e **borrowing** até aos projetos mais complexos de **WebAssembly**, **sistemas embebidos** ou **servidores de alta performance**. A ideia é que o blog seja um reflexo do que a comunidade quer e precisa.
+
+-----
+
+### Os Nossos Princípios de Ouro
+
+Para que este espaço cresça de forma saudável e produtiva, é fundamental que todos sigamos alguns princípios básicos. A nossa comunidade deve ser um lugar seguro e acolhedor para todos, independentemente do nível de conhecimento, género, etnia ou experiência.
+
+Aqui estão as nossas regras de ouro:
+
+1.  **Respeito acima de tudo:** Trata os outros como gostarias de ser tratado. Divergências de opinião são normais e até saudáveis, mas o respeito mútuo não é negociável.
+2.  **Seja acolhedor:** Lembra-te de como foi a tua primeira vez com o Rust. Sê paciente e encorajador com quem está a começar. Não há perguntas "estúpidas", apenas a curiosidade de quem quer aprender.
+3.  **Partilha e colabora:** O conhecimento cresce quando é partilhado. Contribui com as tuas experiências, os teus projetos e as tuas soluções. Ajuda os outros e, sem dúvida, serás ajudado também.
+4.  **Cria um ambiente positivo:** Evita críticas destrutivas, comentários negativos ou sarcasmo desnecessário. O nosso foco é a construção e o crescimento.
+
+-----
+
+### Onde Podes Encontrar-nos?
+
+A tua participação é o que vai dar vida a este projeto. Estamos a criar canais online para nos juntarmos, partilharmos experiências e, claro, nos conhecermos.
+
+Não tenhas medo de te apresentar, partilhar o que te trouxe ao Rust e o que esperas aprender. A nossa comunidade vai começar pequena, mas, com a tua ajuda, cresceremos juntos\!
+
+**Em breve, irei partilhar os links para os nossos canais de comunicação online.** Fiquem atentos às próximas publicações\!
+
+Estou mesmo entusiasmado para começar esta jornada contigo. Vamos tornar a comunidade de Rust em português numa das mais vibrantes e acolhedoras do mundo\!
+
+Vamos a isso?
 

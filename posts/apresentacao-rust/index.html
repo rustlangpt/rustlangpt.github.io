@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <meta content="#ffffff" name="theme-color" />
+  <meta content="#da532c" name="msapplication-TileColor" />
+
+  
+  <link href='&#x2F;icons&#x2F;site.webmanifest' rel="manifest" />
+  
+  
+  <link color="#5bbad5" href='&#x2F;icons&#x2F;safari-pinned-tab.svg' rel="mask-icon" />
+  
+  
+  <link href='&#x2F;icons&#x2F;rustlangpt1_16px.png' rel="icon" sizes="16x16" type="image/png" />
+  
+  
+  <link href='&#x2F;icons&#x2F;rustlangpt1_32px.png' rel="icon" sizes="32x32" type="image/png" />
+  
+  
+  <link href='&#x2F;icons&#x2F;apple-touch-icon.png' rel="apple-touch-icon" sizes="180x180" />
+  
+
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galleria@1.6.1/dist/themes/folio/galleria.folio.min.css" integrity="sha384-+rY0QD+LRnTOquDMzGa9lXU6jIwdiQuwCJQ2cdcW0qeP/0UbjQCZlXnRsUMA+9pH" crossorigin="anonymous">
+  
+
+  
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1.9.1/css/academicons.min.css" integrity="sha384-FIue+PI4SsI9XfHCz8dBLg33b0c1fMJgNU3X//L26FYbGnlSEfWmNT7zgWc2N9b6" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link href="https://rustlangpt.github.io/deep-thought.css" rel="stylesheet" />
+  
+  
+
+  <title>
+    
+RustlangPT | Apresentação da Linguagem de Programação Rust
+
+  </title>
+
+  
+  
+  
+
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css" integrity="sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js" integrity="sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx" crossorigin="anonymous"></script>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/mathtex-script-type.min.js" integrity="sha384-jiBVvJ8NGGj5n7kJaiWwWp9AjC+Yh8rhZY3GtAX8yU28azcLgoRo4oukO87g7zDT" crossorigin="anonymous"></script>
+  
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+  
+  
+</head>
+
+<body class="has-background-white">
+  <nav aria-label="section navigation" class="navbar is-light" role="navigation">
+    <div class="container">
+      <div class="navbar-brand">
+        <a class="navbar-item is-size-5 has-text-weight-bold" href="https:&#x2F;&#x2F;rustlangpt.github.io">RustlangPT</a>
+        <a aria-expanded="false" aria-label="menu" class="navbar-burger burger" data-target="navMenu" role="button">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+      <div class="navbar-menu" id="navMenu">
+        <div class="navbar-end has-text-centered">
+          
+          
+          
+          <a class="navbar-item has-text-weight-semibold" href="https:&#x2F;&#x2F;rustlangpt.github.io&#x2F;posts">
+            Blog
+          </a>
+          
+          <a class="navbar-item has-text-weight-semibold" href="https:&#x2F;&#x2F;rustlangpt.github.io&#x2F;recursos">
+            Recursos
+          </a>
+          
+          <a class="navbar-item has-text-weight-semibold" href="https:&#x2F;&#x2F;rustlangpt.github.io&#x2F;acerca">
+            Acerca
+          </a>
+          
+          <a class="navbar-item has-text-weight-semibold" href="https:&#x2F;&#x2F;rustlangpt.github.io&#x2F;eventos">
+            Eventos
+          </a>
+          
+          <a class="navbar-item has-text-weight-semibold" href="https:&#x2F;&#x2F;rustlangpt.github.io&#x2F;empregos">
+            Empregos
+          </a>
+          
+          <a class="navbar-item has-text-weight-semibold" href="https:&#x2F;&#x2F;rustlangpt.github.io&#x2F;tags">
+            Tags
+          </a>
+          
+          
+          
+          <a class="navbar-item" id="nav-search" title="Search" data-target="#search-modal">
+            <span class="icon">
+              <i class="fas fa-search"></i>
+            </span>
+          </a>
+          <a class="navbar-item" id="dark-mode" title="Switch to dark theme">
+            <span class="icon">
+              <i class="fas fa-adjust"></i>
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  
+  
+
+  
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-8 is-offset-2">
+        <article class="box">
+          <h1 class="title">
+            Apresentação da Linguagem de Programação Rust
+          </h1>
+          <p class="subtitle">Linguagem de Programação Rust: Origem, evolução, paradigmas, aplicação, comparativos e recursos disponíveis.</p>
+          <div class="columns is-multiline is-gapless">
+            <div class="column is-8">
+              
+<span class="icon-text has-text-grey">
+  <span class="icon">
+    <i class="fas fa-user"></i>
+  </span>
+  <span>RustLangPT published on</span>
+  <span class="icon">
+    <i class="far fa-calendar-alt"></i>
+  </span>
+  <span><time datetime="2025-09-06">September 06, 2025</time></span>
+</span>
+
+            </div>
+            <div class="column is-4 has-text-right-desktop">
+              
+<span class="icon-text has-text-grey">
+  <span class="icon">
+    <i class="far fa-clock"></i>
+  </span>
+  <span>7 min,</span>
+  <span class="icon">
+    <i class="fas fa-pencil-alt"></i>
+  </span>
+  <span>1298 words</span>
+</span>
+
+            </div>
+            <div class="column">
+              
+            </div>
+            <div class="column has-text-right-desktop">
+              
+              
+<p>
+  Tags:
+  
+  <a class="has-text-info-dark has-text-weight-semibold" href="https://rustlangpt.github.io/tags/introducao/">
+    <span class="icon-text">
+      <span class="icon">
+        <i class="fas fa-tag"></i>
+      </span>
+      <span>Introdução</span>
+    </span>
+  </a>
+  
+  <a class="has-text-info-dark has-text-weight-semibold" href="https://rustlangpt.github.io/tags/iniciantes/">
+    <span class="icon-text">
+      <span class="icon">
+        <i class="fas fa-tag"></i>
+      </span>
+      <span>Iniciantes</span>
+    </span>
+  </a>
+  
+</p>
+
+              
+            </div>
+          </div>
+          <div class="content mt-2">
+            <h2 id="introducao">Introdução</h2>
+<p>Rust surgiu como uma das linguagens de programação mais inovadoras e promissoras da última década. Com foco na segurança de memória sem comprometer a performance, esta linguagem tem transformado a forma como pensamos sobre programação.</p>
+<h3 id="a-genesis-do-rust-graydon-hoare-e-o-nascimento-de-uma-visao">A Genesis do Rust: Graydon Hoare e o nascimento de uma visão</h3>
+<p>Rust foi criada por Graydon Hoare, um engenheiro de software que trabalhava na Mozilla Research. O projeto começou em 2006 como um esforço pessoal de Hoare, que procurava desenvolver uma linguagem que combinasse a eficiência de linguagens de baixo nível com garantias de segurança e concorrência. Em 2009, a Mozilla começou a patrocinar o desenvolvimento de Rust, e a primeira versão estável (<strong>Rust 1.0</strong>) foi lançada em <strong>15 de maio de 2015</strong>.
+A evolução de Rust tem sido marcada por um forte envolvimento da comunidade. A linguagem é desenvolvida de forma aberta e colaborativa, com contribuições de vários programadores e entusiasastas em todo o mundo. A <strong>Fundação Rust</strong>, criada em <strong>2021</strong>, supervisiona agora o desenvolvimento da linguagem, garantindo a sua sustentabilidade e crescimento contínuo.</p>
+<h3 id="motivacoes-para-criar-o-rust">Motivações para criar o Rust</h3>
+<p>O Rust foi criado para resolver um dos problemas mais persistentes na programação de sistemas: <strong>a segurança de memória</strong>. As linguagens tradicionais como C e C++ oferecem performance excepcional, mas são propensas a vulnerabilidades como <em>buffer overflows</em>, <em>use-after-free</em>, e <em>null pointer dereferences</em> - problemas responsáveis por uma grande percentagem das vulnerabilidades de segurança em software.</p>
+<p>O Rust usa uma abordagem diferenciadora: a memória é gerida através de um sistema de <em>ownership</em> com um conjunto de regras que o compilador verifica. Se alguma das regras for violada, o programa não compila. Esta abordagem única permite:</p>
+<ul>
+<li>Segurança de memória sem <em>garbage collector</em></li>
+<li>Performance comparável a C/C++</li>
+<li>Prevenção de <em>data races</em> em tempo de compilação</li>
+<li><em>Zero-cost abstractions</em></li>
+</ul>
+<p>O sistema de <em>ownership</em> e <em>borrowing</em> é único em Rust e garante segurança de memória sem a necessidade de um <em>garbage collector</em>.</p>
+<h2 id="utilizacao-do-rust-no-mundo-real">Utilização do Rust no mundo real</h2>
+<p>O Rust encontrou seu nicho em várias áreas críticas, tais como:</p>
+<ol>
+<li><strong>Sistemas Operativos</strong>: Componentes do kernel Linux, redox-os</li>
+<li><strong>Motores de Browsers</strong>: Servo (Mozilla), componentes do Firefox</li>
+<li><strong>Infraestrutura Cloud</strong>: Dropbox, Cloudflare, Discord</li>
+<li><strong>Blockchain e Criptomoedas</strong>: Solana, Polkadot, Libra (agora Diem)</li>
+<li><strong>Ferramentas de Linha de Comando</strong>: ripgrep, bat, exa</li>
+<li><strong>Bases de Dados</strong>: TiKV, FoundationDB</li>
+<li><strong>Redes e Proxies</strong>: Envoy Proxy, linkerd2-proxy</li>
+</ol>
+<p>Empresas como a Cloudflare descobriram que o Rust oferecia uma mistura ideal de "performance, segurança de memória e baixo uso de memória" para os seus sistemas.</p>
+<p>O Rust é particularmente eficaz em cenários que exigem:</p>
+<ul>
+<li>Alta performance com segurança</li>
+<li>Concorrência segura</li>
+<li>Sistemas embebidos</li>
+<li>Processamento de dados em tempo real</li>
+<li>APIs de alta throughput</li>
+</ul>
+<h2 id="a-filosofia-multiparadigma-do-rust">A filosofia multiparadigma do Rust</h2>
+<p>O Rust situa-se na intersecção entre teoria de linguagens de programação e programação de sistemas, usando ideias de programação funcional para melhorar a correção e velocidade do software de sistemas.
+O Rust abraça múltiplos paradigmas:</p>
+<ol>
+<li>
+<p><strong>Programação Imperativa</strong>:</p>
+<ul>
+<li>Controlo explícito do fluxo de execução</li>
+<li>Modificação de estado através de variáveis mutáveis</li>
+</ul>
+</li>
+<li>
+<p><strong>Programação Funcional</strong>:</p>
+<ul>
+<li>Immutability por defeito</li>
+<li>Pattern matching avançado</li>
+<li>Closures e higher-order functions</li>
+<li>Iteradores lazy e transformações funcionais</li>
+</ul>
+</li>
+<li>
+<p><strong>Programação Orientada por Objectos</strong>:</p>
+<ul>
+<li>Structs com métodos</li>
+<li>Traits como interfaces/mixins</li>
+<li>Polimorfismo através de trait objects</li>
+</ul>
+</li>
+<li>
+<p><strong>Programação Genérica</strong>:</p>
+<ul>
+<li>Tipos parametrizados</li>
+<li>Trait bounds</li>
+<li>Associated types</li>
+<li>Monomorphization para zero-cost abstractions</li>
+</ul>
+</li>
+</ol>
+<h3 id="o-sistema-de-ownership-paradigma-unico">O Sistema de Ownership: Paradigma Único</h3>
+<p>O sistema de ownership do Rust consiste em regras que garantem segurança de memória sem usar um garbage collector. Em tempo de compilação, cada valor deve estar ligado a uma variável chamada owner desse valor, e cada valor deve ter exatamente um owner.</p>
+<p>Este paradigma único combina:</p>
+<ul>
+<li><strong>Move semantics</strong> para transferência eficiente de recursos</li>
+<li><strong>Borrowing</strong> para referências seguras</li>
+<li><strong>Lifetimes</strong> para validação de referências</li>
+</ul>
+<h2 id="rust-vs-outras-linguagens-analise-comparativa">Rust vs Outras Linguagens: Análise Comparativa</h2>
+<p>Na comparação com outras linguagens, Rust posiciona-se num espaço muito particular. Tal como C e C++, oferece desempenho próximo do hardware, mas ao contrário destas evita uma grande parte dos erros clássicos de memória. Face a linguagens como Java ou Python, que privilegiam a produtividade, Rust destaca-se pela eficiência e pelo baixo consumo de recursos, mesmo que à custa de uma curva de aprendizagem mais exigente. Em relação a Go, que também se tornou popular em sistemas distribuídos e aplicações de rede, Rust oferece mais controlo de baixo nível e não depende de <em>garbage collector</em>.</p>
+<table><thead><tr><th>Característica</th><th>Rust</th><th>C/C++</th><th>Python</th><th>Go</th></tr></thead><tbody>
+<tr><td><strong>Segurança</strong></td><td>Compilação rigorosa</td><td>Manual</td><td>Interpretada</td><td>Compilada</td></tr>
+<tr><td><strong>Concorrência</strong></td><td>Segura por design</td><td>Manual</td><td>GIL (Global Lock)</td><td>Goroutines</td></tr>
+<tr><td><strong>Desempenho</strong></td><td>Alto</td><td>Alto</td><td>Baixo</td><td>Médio</td></tr>
+<tr><td><strong>Gerenciamento</strong></td><td>Ownership/Borrowing</td><td>Manual</td><td>Garbage Collector</td><td>Garbage Collector</td></tr>
+<tr><td><strong>Curva de Aprendizado</strong></td><td>Alta</td><td>Alta</td><td>Baixa</td><td>Moderada</td></tr>
+</tbody></table>
+<h2 id="o-futuro-do-rust-tendencias-e-adopcao">O Futuro do Rust: tendências e adopção</h2>
+<p>A evolução de Rust tem sido marcada por um forte envolvimento da comunidade. A linguagem é desenvolvida de forma aberta e colaborativa, com contribuições de milhares de desenvolvedores em todo o mundo. A Fundação Rust, criada em <strong>2021</strong>, agora supervisiona o desenvolvimento da linguagem, garantindo sua sustentabilidade e crescimento contínuo.</p>
+<p>Recentemente, organizações governamentais, incluindo governos e agências de cibersegurança, têm recomendado linguagens memory-safe como Rust para sistemas críticos, reconhecendo o seu potencial para reduzir vulnerabilidades de segurança.</p>
+<h3 id="areas-de-expansao">Áreas de Expansão</h3>
+<ul>
+<li><strong>WebAssembly</strong>: <a href="https://www.rust-lang.org/what/wasm">Rust + WASM</a> para performance web</li>
+<li><strong>Machine Learning</strong>: <a href="https://github.com/VDHewei/candle-rs">Candle</a>, <a href="https://docs.rs/crate/tch/latest">tch crates</a></li>
+<li><strong>Game Development</strong>: <a href="https://docs.rs/bevy/latest/bevy/">Bevy</a> engine</li>
+<li><strong>Mobile Development</strong>: Projetos como <a href="https://docs.rs/tauri/latest/tauri/">Tauri</a> e integração com <a href="https://source.android.com/docs/setup/build/rust/building-rust-modules/overview?hl=pt-br">Android</a>.</li>
+<li><strong>Embedded Systems</strong>: Crescente adopção em <a href="https://docs.rust-embedded.org/book/">sistemas embarcadas</a> em IOT</li>
+</ul>
+<h2 id="recursos-e-documentacao">Recursos e Documentação</h2>
+<p>Para aprofundar o conhecimento em Rust, recomenda-se consultar os seguintes recursos oficiais:</p>
+<h4 id="documentacao-principal">Documentação Principal</h4>
+<ul>
+<li><a href="https://doc.rust-lang.org/book/">The Rust Programming Language Book</a>: O guia oficial e mais completo</li>
+<li><a href="https://doc.rust-lang.org/rust-by-example/">Rust by Example</a>: Aprendizagem através de exemplos práticos</li>
+<li><a href="https://doc.rust-lang.org/nomicon/">The Rustonomicon</a>: Para programação unsafe e tópicos avançados</li>
+<li><a href="https://doc.rust-lang.org/reference/">Rust Reference</a>: Especificação técnica da linguagem</li>
+</ul>
+<h4 id="apis-e-standard-library">APIs e Standard Library</h4>
+<ul>
+<li><a href="https://doc.rust-lang.org/std/">std Documentation</a>: Documentação da biblioteca padrão</li>
+<li><a href="https://docs.rs/">docs.rs</a>: Documentação de todas as crates publicadas</li>
+<li><a href="https://crates.io/">crates.io</a>: Repositório oficial de packages</li>
+</ul>
+<h4 id="ferramentas-e-recursos">Ferramentas e Recursos</h4>
+<ul>
+<li>**<a href="https://play.rust-lang.org/">Rust Playground</a>: Editor online para experimentação</li>
+<li>**<a href="https://rustup.rs/">rustup</a>: Toolchain installer oficial</li>
+<li>**<a href="https://doc.rust-lang.org/cargo/">Cargo Book</a>: Documentação do build system</li>
+</ul>
+<h4 id="referencias-adicionais">Referências Adicionais</h4>
+<ul>
+<li><a href="https://rustfoundation.org/">Rust Foundation</a> - Organização que suporta o desenvolvimento do Rust</li>
+<li><a href="https://this-week-in-rust.org/">This Week in Rust</a> - Newsletter semanal da comunidade</li>
+<li><a href="https://blog.rust-lang.org/">Rust Blog</a> - Anúncios e atualizações oficiais</li>
+<li><a href="https://rustlang.app/">Rust Language App</a></li>
+</ul>
+<h2 id="conclusao">Conclusão</h2>
+<p>O Rust representa uma evolução significativa na programação de sistemas, oferecendo a performance de linguagens de baixo nível com garantias de segurança que tradicionalmente só eram possíveis com linguagens de alto nível. Criado com velocidade, segurança de memória e paralelismo em mente, o Rust não é apenas mais uma linguagem de programação - é uma nova forma de pensar sobre como construir software seguro e eficiente.</p>
+<p>A jornada do Rust, desde um projeto pessoal de Graydon Hoare até se tornar uma das linguagens mais respeitadas na indústria, demonstra como inovação técnica sólida, combinada com uma comunidade forte e governança eficaz, pode transformar o panorama da programação.</p>
+<p>Para programadores que trabalham em sistemas críticos, infraestrutura de alta performance, ou simplesmente querem explorar o futuro da programação de sistemas, o Rust oferece uma proposta de valor única: <strong>a capacidade de escrever código rápido, seguro e concorrente sem compromissos</strong>.</p>
+<p>A revolução do Rust está apenas a começar, e as suas aplicações continuam a expandir-se em domínios cada vez mais diversos, desde sistemas embebidos até computação em nuvem. É uma linguagem que vale a pena dominar para qualquer programador sério sobre o futuro da tecnologia.</p>
+<hr />
+<p><strong><em>Disclaimer</em></strong>: Artigo elaborado com auxilio a ferramentas de inteligência artificial mas revisto por humanos.</p>
+
+          </div>
+        </article>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+
+  
+  <section class="modal" id="search-modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Search</p>
+      </header>
+      <section class="modal-card-body">
+        <div class="field mb-2">
+          <div class="control">
+            <input class="input" id="search" placeholder="Search this website." type="search" />
+          </div>
+        </div>
+        <div class="search-results">
+          <div class="search-results__items"></div>
+        </div>
+      </section>
+    </div>
+    <button aria-label="close" class="modal-close is-large"></button>
+  </section>
+  
+
+
+  
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <nav class="level">
+              
+          <div class="level-item has-text-centered">
+            <a class="button is-black is-outlined" href="https:&#x2F;&#x2F;rustlangpt.github.io&#x2F;posts&#x2F;anuncio-comunidade&#x2F;">
+              <span class="icon mr-2">
+                <i class="fas fa-arrow-circle-left"></i>
+              </span>
+              Bem-vindo à &#x27;Comunidade da Linguagem de Programação Rust - Rust em Português&#x27; !
+            </a>
+          </div>
+           
+        </nav>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+  
+
+
+
+
+
+
+  
+  <footer class="footer py-4">
+    <div class="content has-text-centered">
+    <!--
+    <p>
+        Built with
+        <span class="icon-text">
+          <span class="icon">
+            <i class="fas fa-code"></i>
+          </span>
+          <span>code</span>
+        </span>
+        and
+        <span class="icon-text">
+          <span class="icon">
+            <i class="fas fa-heart"></i>
+          </span>
+          <span>love</span>
+        </span>
+      </p>
+    -->
+      <p>
+        Powered by
+        <span class="icon-text">
+          <span class="icon">
+            <i class="fas fa-power-off"></i>
+          </span>
+          <span>zola</span>
+        </span>
+      </p>
+    
+    </div>
+  </footer>
+  
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/galleria@1.6.1/dist/galleria.min.js" integrity="sha384-QSfwGT8/EU536DKdtyP2D6SLlh8zBaZ0cVkwfrwhqzIU9VCfJT00CLVP5t+HAiYg" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/galleria@1.6.1/dist/themes/folio/galleria.folio.min.js" integrity="sha384-DwpKI+deZB267+hPKwiOIc5Y2GKsVL0mR6hgz7GgIu7AgAMYqJwcJKY1YBNfhWcY" crossorigin="anonymous"></script>
+  
+  
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@8.13.5/dist/mermaid.min.js" integrity="sha384-0yWn54pSGtfKCU+skfA69l25VsCw+MZt4LQov3xNRoS7YkAMrFokGgSBnAWSK4pv" crossorigin="anonymous"></script>
+  
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.xkcd@1.1.13/dist/chart.xkcd.min.js" integrity="sha384-xC3h1+IHXK8seA+8KfT79Z4e0GPsznjXBoMa5nd8ooWKplPyXx92NOmljWxLC/cs" crossorigin="anonymous"></script>
+  
+  
+  <script src="https://rustlangpt.github.io/elasticlunr.min.js"></script>
+  <script src="https://rustlangpt.github.io/search_index.en.js"></script><script src="https://rustlangpt.github.io/js/site.js"></script>
+
+  
+
+
+
+
+
+  
+  
+</body>
+
+</html>
