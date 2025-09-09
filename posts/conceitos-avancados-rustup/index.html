@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <meta content="#ffffff" name="theme-color" />
+  <meta content="#da532c" name="msapplication-TileColor" />
+
+  
+  <link href='&#x2F;icons&#x2F;site.webmanifest' rel="manifest" />
+  
+  
+  <link color="#5bbad5" href='&#x2F;icons&#x2F;safari-pinned-tab.svg' rel="mask-icon" />
+  
+  
+  <link href='&#x2F;icons&#x2F;rustlangpt1_16px.png' rel="icon" sizes="16x16" type="image/png" />
+  
+  
+  <link href='&#x2F;icons&#x2F;rustlangpt1_32px.png' rel="icon" sizes="32x32" type="image/png" />
+  
+  
+  <link href='&#x2F;icons&#x2F;apple-touch-icon.png' rel="apple-touch-icon" sizes="180x180" />
+  
+
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galleria@1.6.1/dist/themes/folio/galleria.folio.min.css" integrity="sha384-+rY0QD+LRnTOquDMzGa9lXU6jIwdiQuwCJQ2cdcW0qeP/0UbjQCZlXnRsUMA+9pH" crossorigin="anonymous">
+  
+
+  
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1.9.1/css/academicons.min.css" integrity="sha384-FIue+PI4SsI9XfHCz8dBLg33b0c1fMJgNU3X//L26FYbGnlSEfWmNT7zgWc2N9b6" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link href="https://rustlangpt.github.io/deep-thought.css" rel="stylesheet" />
+  
+  
+
+  <title>
+    
+RustlangPT | Dominando o rustup: indo além do básico
+
+  </title>
+
+  
+  
+  
+
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css" integrity="sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js" integrity="sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx" crossorigin="anonymous"></script>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/mathtex-script-type.min.js" integrity="sha384-jiBVvJ8NGGj5n7kJaiWwWp9AjC+Yh8rhZY3GtAX8yU28azcLgoRo4oukO87g7zDT" crossorigin="anonymous"></script>
+  
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+  
+  
+</head>
+
+<body class="has-background-white">
+  <nav aria-label="section navigation" class="navbar is-light" role="navigation">
+    <div class="container">
+      <div class="navbar-brand">
+        <a class="navbar-item is-size-5 has-text-weight-bold" href="https:&#x2F;&#x2F;rustlangpt.github.io">RustlangPT</a>
+        <a aria-expanded="false" aria-label="menu" class="navbar-burger burger" data-target="navMenu" role="button">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+      <div class="navbar-menu" id="navMenu">
+        <div class="navbar-end has-text-centered">
+          
+          
+          
+          <a class="navbar-item has-text-weight-semibold" href="https:&#x2F;&#x2F;rustlangpt.github.io&#x2F;posts">
+            Blog
+          </a>
+          
+          <a class="navbar-item has-text-weight-semibold" href="https:&#x2F;&#x2F;rustlangpt.github.io&#x2F;recursos">
+            Recursos
+          </a>
+          
+          <a class="navbar-item has-text-weight-semibold" href="https:&#x2F;&#x2F;rustlangpt.github.io&#x2F;acerca">
+            Acerca
+          </a>
+          
+          <a class="navbar-item has-text-weight-semibold" href="https:&#x2F;&#x2F;rustlangpt.github.io&#x2F;eventos">
+            Eventos
+          </a>
+          
+          <a class="navbar-item has-text-weight-semibold" href="https:&#x2F;&#x2F;rustlangpt.github.io&#x2F;tags">
+            Tags
+          </a>
+          
+          
+          
+          <a class="navbar-item" id="nav-search" title="Search" data-target="#search-modal">
+            <span class="icon">
+              <i class="fas fa-search"></i>
+            </span>
+          </a>
+          <a class="navbar-item" id="dark-mode" title="Switch to dark theme">
+            <span class="icon">
+              <i class="fas fa-adjust"></i>
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  
+  
+
+  
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-8 is-offset-2">
+        <article class="box">
+          <h1 class="title">
+            Dominando o rustup: indo além do básico
+          </h1>
+          <p class="subtitle">Um guia detalhado sobre os conceitos avançados do rustup, como channels, toolchains, components, profiles, proxies, cross-compilation e environment variables.</p>
+          <div class="columns is-multiline is-gapless">
+            <div class="column is-8">
+              
+<span class="icon-text has-text-grey">
+  
+  <span class="icon">
+    <i class="fas fa-user"></i>
+  </span>
+  <span>RustLangPT publicado em</span>
+  <span class="icon">
+    <i class="far fa-calendar-alt"></i>
+  </span>
+  <span><time datetime="2025-09-10">10 September, 2025</time></span>
+
+</span>
+
+            </div>
+            <div class="column is-4 has-text-right-desktop">
+              
+<span class="icon-text has-text-grey">
+  <span class="icon">
+    <i class="far fa-clock"></i>
+  </span>
+  <span>7 min,</span>
+  <span class="icon">
+    <i class="fas fa-pencil-alt"></i>
+  </span>
+  <span>1354 words</span>
+</span>
+
+            </div>
+            <div class="column">
+              
+            </div>
+            <div class="column has-text-right-desktop">
+              
+              
+<p>
+  Tags:
+  
+  <a class="has-text-info-dark has-text-weight-semibold" href="https://rustlangpt.github.io/tags/rustup/">
+    <span class="icon-text">
+      <span class="icon">
+        <i class="fas fa-tag"></i>
+      </span>
+      <span>rustup</span>
+    </span>
+  </a>
+  
+  <a class="has-text-info-dark has-text-weight-semibold" href="https://rustlangpt.github.io/tags/setup/">
+    <span class="icon-text">
+      <span class="icon">
+        <i class="fas fa-tag"></i>
+      </span>
+      <span>setup</span>
+    </span>
+  </a>
+  
+  <a class="has-text-info-dark has-text-weight-semibold" href="https://rustlangpt.github.io/tags/avancado/">
+    <span class="icon-text">
+      <span class="icon">
+        <i class="fas fa-tag"></i>
+      </span>
+      <span>Avançado</span>
+    </span>
+  </a>
+  
+</p>
+
+              
+            </div>
+          </div>
+          <div class="content mt-2">
+            <h2 id="introducao">Introdução</h2>
+<p>Se já instalaste o Rust, o mais provável é que tenhas usado o rustup, a ferramenta oficial que simplifica a gestão da linguagem. Mas o rustup é muito mais do que um simples instalador. Ele é a chave para desbloquear o verdadeiro poder do ecossistema Rust, permitindo-te gerir diferentes versões da linguagem, adicionar novas funcionalidades e até compilar para outras plataformas.</p>
+<p>Neste artigo, exploramos conceitos chave como channels, toolchains, components, profiles, proxies, cross-compilation e environment variables. Cada seção inclui explicações, exemplos práticos e referências à documentação oficial do <a href="https://rust-lang.github.io/rustup/concepts/index.html">Rustup</a>. Vamos mergulhar nesses tópicos para otimizar seu fluxo de trabalho!</p>
+<hr />
+<h2 id="channels-os-canais-de-release-do-rust">Channels: Os Canais de Release do Rust</h2>
+<h3 id="conceitos-fundamentais">Conceitos Fundamentais</h3>
+<p>O Rust é distribuído em três canais de release diferentes: stable, beta, e nightly. Cada canal serve a propósitos específicos no ciclo de desenvolvimento:</p>
+<ul>
+<li><strong>Stable</strong>: Releases estáveis são feitas a cada 6 semanas (com releases pontuais ocasionais)</li>
+<li><strong>Beta</strong>: Releases beta são a versão que aparecerá no próximo release estável</li>
+<li><strong>Nightly</strong>: Releases nightly são feitas todas as noites</li>
+</ul>
+<h3 id="gestao-pratica-de-channels">Gestão Prática de Channels</h3>
+<h4 id="instalacao-de-channels-especificos">Instalação de Channels Específicos</h4>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># Instalar channel nightly
+</span><span style="color:#bf616a;">$</span><span> rustup toolchain install nightly
+</span><span>
+</span><span style="color:#65737e;"># Instalar channel beta
+</span><span style="color:#bf616a;">$</span><span> rustup toolchain install beta
+</span><span>
+</span><span style="color:#65737e;"># Instalar version específica do stable
+</span><span style="color:#bf616a;">$</span><span> rustup toolchain install 1.75.0
+</span></code></pre>
+<h4 id="alternancia-entre-channels">Alternância Entre Channels</h4>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># Definir default global
+</span><span style="color:#bf616a;">$</span><span> rustup default nightly
+</span><span style="color:#bf616a;">info:</span><span> using existing install for &#39;</span><span style="color:#a3be8c;">nightly-x86_64-unknown-linux-gnu</span><span>&#39;
+</span><span style="color:#bf616a;">info:</span><span> default toolchain set to &#39;</span><span style="color:#a3be8c;">nightly-x86_64-unknown-linux-gnu</span><span>&#39;
+</span><span>
+</span><span style="color:#65737e;"># Override para projeto específico
+</span><span style="color:#bf616a;">$</span><span> cd meu-projeto
+</span><span style="color:#bf616a;">$</span><span> rustup override set beta
+</span><span style="color:#bf616a;">info:</span><span> override toolchain for &#39;</span><span style="color:#a3be8c;">/home/user/meu-projeto</span><span>&#39; set to &#39;</span><span style="color:#a3be8c;">beta-x86_64-unknown-linux-gnu</span><span>&#39;
+</span><span>
+</span><span style="color:#65737e;"># Verificar channel ativo
+</span><span style="color:#bf616a;">$</span><span> rustup show active-toolchain
+</span><span style="color:#bf616a;">beta-x86_64-unknown-linux-gnu</span><span> (overridden by &#39;</span><span style="color:#a3be8c;">/home/user/meu-projeto</span><span>&#39;)
+</span></code></pre>
+<h4 id="uso-pontual-de-channel">Uso Pontual de Channel</h4>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># Executar cargo com nightly sem mudar default
+</span><span style="color:#bf616a;">$</span><span> rustup run nightly cargo build
+</span><span>
+</span><span style="color:#65737e;"># Executar rustc com beta específico
+</span><span style="color:#bf616a;">$</span><span> rustup run beta rustc</span><span style="color:#bf616a;"> --version
+</span></code></pre>
+<h3 id="quando-usar-cada-channel">Quando Usar Cada Channel</h3>
+<p><strong>Stable</strong>: Para código de produção, bibliotecas públicas, e projetos que requerem máxima estabilidade.</p>
+<p><strong>Beta</strong>: Para testar compatibilidade com a próxima versão estável antes do lançamento.</p>
+<p><strong>Nightly</strong>: Para experimentar com features experimentais, desenvolvimento de macros procedurais, ou contribuições ao próprio Rust.</p>
+<hr />
+<h2 id="toolchains-especificacoes-completas-do-compilador">Toolchains: Especificações Completas do Compilador</h2>
+<h3 id="anatomia-de-uma-toolchain">Anatomia de uma Toolchain</h3>
+<p>Um toolchain é um pacote que inclui o compilador (rustc), o gestor de pacotes (cargo) e outros componentes necessários para o desenvolvimento. O rustup permite-te ter múltiplos toolchains instalados ao mesmo tempo. A sintaxe de um toolchain combina o canal e a plataforma-alvo.</p>
+<p>Uma especificação de toolchain inclui:</p>
+<ol>
+<li><strong>Channel ou versão</strong> (stable, beta, nightly, ou versão específica)</li>
+<li><strong>Data</strong> (opcional, para nightly)</li>
+<li><strong>Host platform</strong> (arquitetura e SO onde a toolchain executa)</li>
+</ol>
+<p>Elas suportam channels oficiais (stable, beta, nightly) e builds customizadas. O nome de uma toolchain segue o formato <code>&lt;channel&gt;[-&lt;date&gt;][-&lt;host&gt;]</code>, onde <channel> pode ser stable, beta, nightly ou uma versão específica (ex.: 1.42.0), <date> é opcional (YYYY-MM-DD para arquivos históricos), e <host> é um triple de target (ex.: x86_64-pc-windows-msvc).</p>
+<h4 id="exemplos-de-especificacoes-de-toolchain">Exemplos de Especificações de Toolchain</h4>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># Toolchains básicas
+</span><span style="color:#bf616a;">stable-x86_64-unknown-linux-gnu
+</span><span style="color:#bf616a;">nightly-x86_64-pc-windows-msvc  
+</span><span style="color:#bf616a;">beta-aarch64-apple-darwin
+</span><span>
+</span><span style="color:#65737e;"># Toolchain com data específica (nightly)
+</span><span style="color:#bf616a;">nightly-2024-01-15-x86_64-unknown-linux-gnu
+</span><span>
+</span><span style="color:#65737e;"># Versão específica
+</span><span style="color:#bf616a;">1.75.0-x86_64-unknown-linux-gnu
+</span></code></pre>
+<h3 id="gestao-avancada-de-toolchains">Gestão Avançada de Toolchains</h3>
+<h4 id="instalacao-de-toolchains-especificas">Instalação de Toolchains Específicas</h4>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># Instalar toolchain MSVC no Windows
+</span><span style="color:#bf616a;">$</span><span> rustup toolchain install stable-x86_64-pc-windows-msvc
+</span><span>
+</span><span style="color:#65737e;"># Instalar nightly de data específica
+</span><span style="color:#bf616a;">$</span><span> rustup toolchain install nightly-2024-01-15
+</span><span>
+</span><span style="color:#65737e;"># Instalar toolchain 32-bit numa máquina 64-bit
+</span><span style="color:#bf616a;">$</span><span> rustup toolchain install stable-i686-unknown-linux-gnu
+</span></code></pre>
+<h4 id="toolchains-customizadas">Toolchains Customizadas</h4>
+<p>O rustup pode gerir builds locais da toolchain Rust para desenvolvedores que trabalham no próprio Rust:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># Linkar build local
+</span><span style="color:#bf616a;">$</span><span> rustup toolchain link my-custom /path/to/my/rust/build
+</span><span>
+</span><span style="color:#65737e;"># Usar toolchain customizada
+</span><span style="color:#bf616a;">$</span><span> rustup run my-custom rustc</span><span style="color:#bf616a;"> --version
+</span></code></pre>
+<h4 id="listagem-e-gestao">Listagem e Gestão</h4>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># Listar todas as toolchains instaladas
+</span><span style="color:#bf616a;">$</span><span> rustup toolchain list
+</span><span style="color:#bf616a;">stable-x86_64-unknown-linux-gnu</span><span> (default)
+</span><span style="color:#bf616a;">beta-x86_64-unknown-linux-gnu
+</span><span style="color:#bf616a;">nightly-x86_64-unknown-linux-gnu
+</span><span style="color:#bf616a;">nightly-2024-01-15-x86_64-unknown-linux-gnu
+</span><span>
+</span><span style="color:#65737e;"># Remover toolchain específica
+</span><span style="color:#bf616a;">$</span><span> rustup toolchain uninstall beta
+</span><span>
+</span><span style="color:#65737e;"># Atualizar toolchain específica
+</span><span style="color:#bf616a;">$</span><span> rustup update nightly
+</span></code></pre>
+<hr />
+<h2 id="components-componentes-modulares-das-toolchains">Components: Componentes Modulares das Toolchains</h2>
+<h3 id="conceito-de-components">Conceito de Components</h3>
+<p>Components são partes modulares de uma toolchain, como o compilador (rustc), o gerenciador de pacotes (cargo) ou ferramentas opcionais (clippy, rustfmt). Alguns são obrigatórios, outros opcionais, e incluem targets (ex.: rust-std para bibliotecas padrão por plataforma). Esta modularidade permite instalar apenas os componentes necessários.</p>
+<h3 id="components-principais">Components Principais</h3>
+<p>A maioria dos componentes tem um sufixo target-triple, como rustc-x86_64-apple-darwin, para indicar a plataforma para a qual o componente é destinado:</p>
+<h4 id="components-essenciais">Components Essenciais</h4>
+<ul>
+<li><strong>rustc</strong>: O compilador Rust</li>
+<li><strong>rust-std</strong>: A biblioteca padrão do Rust, com componente separado para cada target suportado</li>
+<li><strong>cargo</strong>: O build system e package manager</li>
+<li><strong>rust-docs</strong>: Documentação offline</li>
+</ul>
+<h4 id="components-de-desenvolvimento">Components de Desenvolvimento</h4>
+<ul>
+<li><strong>clippy</strong>: Linter avançado</li>
+<li><strong>rustfmt</strong>: Formatador de código</li>
+<li><strong>rls</strong> ou <strong>rust-analyzer</strong>: Language server</li>
+<li><strong>miri</strong>: Interpretador para detecção de undefined behavior</li>
+</ul>
+<h4 id="components-de-target">Components de Target</h4>
+<ul>
+<li><strong>rust-std-{target}</strong>: Biblioteca padrão para targets específicos</li>
+<li><strong>rust-src</strong>: Código fonte para análise avançada</li>
+</ul>
+<h3 id="gestao-de-components">Gestão de Components</h3>
+<h4 id="listar-components-disponiveis">Listar Components Disponíveis</h4>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># Listar todos os components da toolchain ativa
+</span><span style="color:#bf616a;">$</span><span> rustup component list
+</span><span style="color:#bf616a;">cargo-x86_64-unknown-linux-gnu</span><span> (installed)
+</span><span style="color:#bf616a;">clippy-x86_64-unknown-linux-gnu
+</span><span style="color:#bf616a;">llvm-tools-preview-x86_64-unknown-linux-gnu
+</span><span style="color:#bf616a;">rls-x86_64-unknown-linux-gnu
+</span><span style="color:#bf616a;">rust-analyzer-x86_64-unknown-linux-gnu
+</span><span style="color:#bf616a;">rust-docs-x86_64-unknown-linux-gnu</span><span> (installed)
+</span><span style="color:#bf616a;">rust-src</span><span> (installed)
+</span><span style="color:#bf616a;">rust-std-x86_64-unknown-linux-gnu</span><span> (installed)
+</span><span style="color:#bf616a;">rustc-x86_64-unknown-linux-gnu</span><span> (installed)
+</span><span style="color:#bf616a;">rustfmt-x86_64-unknown-linux-gnu
+</span></code></pre>
+<h4 id="instalacao-e-remocao-de-components">Instalação e Remoção de Components</h4>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># Instalar clippy
+</span><span style="color:#bf616a;">$</span><span> rustup component add clippy
+</span><span style="color:#bf616a;">info:</span><span> downloading component &#39;</span><span style="color:#a3be8c;">clippy</span><span>&#39;
+</span><span style="color:#bf616a;">info:</span><span> installing component &#39;</span><span style="color:#a3be8c;">clippy</span><span>&#39;
+</span><span>
+</span><span style="color:#65737e;"># Instalar para toolchain específica
+</span><span style="color:#bf616a;">$</span><span> rustup component add</span><span style="color:#bf616a;"> --toolchain</span><span> nightly rust-src
+</span><span>
+</span><span style="color:#65737e;"># Remover component
+</span><span style="color:#bf616a;">$</span><span> rustup component remove rls
+</span><span>
+</span><span style="color:#65737e;"># Instalar múltiplos components
+</span><span style="color:#bf616a;">$</span><span> rustup component add rustfmt clippy rust-src
+</span></code></pre>
+<h4 id="components-por-toolchain">Components por Toolchain</h4>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># Verificar components de toolchain específica
+</span><span style="color:#bf616a;">$</span><span> rustup component list</span><span style="color:#bf616a;"> --toolchain</span><span> nightly
+</span><span>
+</span><span style="color:#65737e;"># Instalar component apenas para nightly
+</span><span style="color:#bf616a;">$</span><span> rustup +nightly component add miri
+</span></code></pre>
+<hr />
+<h2 id="profiles-grupos-predefinidos-de-components">Profiles: Grupos Predefinidos de Components</h2>
+<h3 id="conceito-de-profiles">Conceito de Profiles</h3>
+<p>Para facilitar a escolha de quais components instalar, o rustup tem o conceito de "profiles" que fornecem agrupamentos nomeados de diferentes components.</p>
+<p>Profiles são grupos predefinidos de components para simplificar instalações.</p>
+<p>Existem três tipos:</p>
+<ul>
+<li>minimal (apenas rustc, rust-std, cargo – ideal para CI ou Windows para evitar problemas com docs)</li>
+<li>default (adiciona rust-docs, rustfmt, clippy – recomendado para uso geral)</li>
+<li>complete (todos os components disponíveis – não recomendado, pois pode falhar devido a metadados extensos).</li>
+</ul>
+<h3 id="gestao-de-profiles">Gestão de Profiles</h3>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># Ver profile atual
+</span><span style="color:#bf616a;">$</span><span> rustup show profile
+</span><span style="color:#bf616a;">Default</span><span> host: x86_64-unknown-linux-gnu
+</span><span style="color:#bf616a;">rustup</span><span> home:  /home/user/.rustup
+</span><span>
+</span><span style="color:#bf616a;">default</span><span> profile: default
+</span><span>
+</span><span style="color:#65737e;"># Definir profile para futuras instalações
+</span><span style="color:#bf616a;">$</span><span> rustup set profile minimal
+</span><span style="color:#bf616a;">info:</span><span> profile set to &#39;</span><span style="color:#a3be8c;">minimal</span><span>&#39;
+</span><span>
+</span><span style="color:#65737e;"># Instalar nova toolchain com profile minimal
+</span><span style="color:#bf616a;">$</span><span> rustup toolchain install beta
+</span><span style="color:#bf616a;">info:</span><span> syncing channel updates for &#39;</span><span style="color:#a3be8c;">beta-x86_64-unknown-linux-gnu</span><span>&#39;
+</span><span style="color:#bf616a;">info:</span><span> downloading component &#39;</span><span style="color:#a3be8c;">cargo</span><span>&#39;
+</span><span style="color:#bf616a;">info:</span><span> downloading component &#39;</span><span style="color:#a3be8c;">rust-std</span><span>&#39;
+</span><span style="color:#bf616a;">info:</span><span> downloading component &#39;</span><span style="color:#a3be8c;">rustc</span><span>&#39;
+</span><span style="color:#bf616a;">info:</span><span> installing component &#39;</span><span style="color:#a3be8c;">cargo</span><span>&#39;
+</span><span style="color:#bf616a;">info:</span><span> installing component &#39;</span><span style="color:#a3be8c;">rust-std</span><span>&#39;
+</span><span style="color:#bf616a;">info:</span><span> installing component &#39;</span><span style="color:#a3be8c;">rustc</span><span>&#39;
+</span><span>
+</span><span style="color:#65737e;"># Voltar ao profile default
+</span><span style="color:#bf616a;">$</span><span> rustup set profile default
+</span></code></pre>
+<p>Os profiles apenas afetarão toolchains recém-instaladas: como sempre será possível instalar components individuais posteriormente com rustup component add.</p>
+<hr />
+<h2 id="proxies-o-sistema-de-redirecionamento">Proxies: O Sistema de Redirecionamento</h2>
+<h3 id="como-funcionam-os-proxies">Como Funcionam os Proxies</h3>
+<p>No contexto do Rustup, proxies referem-se a executáveis proxy instalados em ~/.cargo/bin, que delegam comandos para a toolchain ativa. Isso permite alternar toolchains sem alterar caminhos manualmente.
+Os executáveis rustc e cargo instalados em ~/.cargo/bin são proxies que delegam para a toolchain real. Este sistema permite que o mesmo comando execute diferentes versões do compilador dependendo do contexto.</p>
+<h3 id="configuracao-de-proxies">Configuração de Proxies</h3>
+<p>Os proxies são instalados automaticamente em <code>~/.cargo/bin</code> e adicionados ao PATH. O comportamento pode ser configurado:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># Verificar localização dos proxies
+</span><span style="color:#bf616a;">$</span><span> which rustc
+</span><span style="color:#bf616a;">/home/user/.cargo/bin/rustc
+</span><span>
+</span><span style="color:#bf616a;">$</span><span> which cargo  
+</span><span style="color:#bf616a;">/home/user/.cargo/bin/cargo
+</span><span>
+</span><span style="color:#65737e;"># Ver para onde o proxy está a redirecionar
+</span><span style="color:#bf616a;">$</span><span> rustup which rustc
+</span><span style="color:#bf616a;">/home/user/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rustc
+</span></code></pre>
+<h3 id="proxies-customizados">Proxies Customizados</h3>
+<p>É possível criar proxies para ferramentas específicas:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># Criar proxy para ferramenta específica
+</span><span style="color:#bf616a;">$</span><span> rustup run nightly which miri
+</span><span style="color:#bf616a;">/home/user/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/miri
+</span><span>
+</span><span style="color:#65737e;"># Usar proxy diretamente
+</span><span style="color:#bf616a;">$ ~</span><span>/.cargo/bin/cargo +nightly miri test
+</span></code></pre>
+<hr />
+<h2 id="cross-compilation-compilacao-multi-plataforma">Cross-Compilation: Compilação Multi-Plataforma</h2>
+<h3 id="conceitos-base">Conceitos Base</h3>
+<p>O rustc é capaz de gerar código para muitas plataformas. O "target" especifica a plataforma para a qual o código será gerado. Por defeito, cargo e rustc usam a plataforma da toolchain host como target.</p>
+<h3 id="instalacao-de-targets">Instalação de Targets</h3>
+<p>Quando instalas uma toolchain pela primeira vez, o rustup instala apenas a biblioteca padrão para a tua plataforma host. Para compilar para outras plataformas deves instalar outras plataformas target:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># Adicionar target para Android
+</span><span style="color:#bf616a;">$</span><span> rustup target add arm-linux-androideabi
+</span><span style="color:#bf616a;">info:</span><span> downloading component &#39;</span><span style="color:#a3be8c;">rust-std</span><span>&#39; for &#39;</span><span style="color:#a3be8c;">arm-linux-androideabi</span><span>&#39;
+</span><span style="color:#bf616a;">info:</span><span> installing component &#39;</span><span style="color:#a3be8c;">rust-std</span><span>&#39; for &#39;</span><span style="color:#a3be8c;">arm-linux-androideabi</span><span>&#39;
+</span><span>
+</span><span style="color:#65737e;"># Adicionar target para WebAssembly
+</span><span style="color:#bf616a;">$</span><span> rustup target add wasm32-unknown-unknown
+</span><span>
+</span><span style="color:#65737e;"># Adicionar target para Windows (em Linux)
+</span><span style="color:#bf616a;">$</span><span> rustup target add x86_64-pc-windows-gnu
+</span></code></pre>
+<h3 id="targets-populares">Targets Populares</h3>
+<h4 id="mobile">Mobile</h4>
+<ul>
+<li><code>aarch64-apple-ios</code> - iOS 64-bit</li>
+<li><code>arm-linux-androideabi</code> - Android ARM</li>
+<li><code>aarch64-linux-android</code> - Android ARM64</li>
+</ul>
+<h4 id="webassembly">WebAssembly</h4>
+<ul>
+<li><code>wasm32-unknown-unknown</code> - WebAssembly padrão</li>
+<li><code>wasm32-wasi</code> - WebAssembly com WASI</li>
+</ul>
+<h4 id="embedded">Embedded</h4>
+<ul>
+<li><code>thumbv7em-none-eabihf</code> - Cortex-M4/M7</li>
+<li><code>riscv32imc-unknown-none-elf</code> - RISC-V</li>
+</ul>
+<h4 id="desktop-cross-platform">Desktop Cross-Platform</h4>
+<ul>
+<li><code>x86_64-pc-windows-gnu</code> - Windows 64-bit (MinGW)</li>
+<li><code>x86_64-apple-darwin</code> - macOS 64-bit</li>
+<li><code>aarch64-apple-darwin</code> - macOS Apple Silicon</li>
+</ul>
+<h3 id="cross-compilation-na-pratica">Cross-Compilation na Prática</h3>
+<h4 id="compilacao-basica">Compilação Básica</h4>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># Compilar para Windows a partir de Linux
+</span><span style="color:#bf616a;">$</span><span> cargo build</span><span style="color:#bf616a;"> --target</span><span> x86_64-pc-windows-gnu
+</span><span>
+</span><span style="color:#65737e;"># Compilar para WebAssembly
+</span><span style="color:#bf616a;">$</span><span> cargo build</span><span style="color:#bf616a;"> --target</span><span> wasm32-unknown-unknown
+</span><span>
+</span><span style="color:#65737e;"># Compilar para múltiplos targets
+</span><span style="color:#bf616a;">$</span><span> cargo build</span><span style="color:#bf616a;"> --target</span><span> x86_64-pc-windows-gnu</span><span style="color:#bf616a;"> --target</span><span> wasm32-unknown-unknown
+</span></code></pre>
+<h4 id="configuracao-de-cross-compilation">Configuração de Cross-Compilation</h4>
+<p><strong>Cargo.toml</strong>:</p>
+<pre data-lang="toml" style="background-color:#2b303b;color:#c0c5ce;" class="language-toml "><code class="language-toml" data-lang="toml"><span>[build]
+</span><span style="color:#bf616a;">target </span><span>= &quot;</span><span style="color:#a3be8c;">wasm32-unknown-unknown</span><span>&quot;
+</span><span>
+</span><span>[[bin]]
+</span><span style="color:#bf616a;">name </span><span>= &quot;</span><span style="color:#a3be8c;">my-app</span><span>&quot;
+</span><span style="color:#bf616a;">path </span><span>= &quot;</span><span style="color:#a3be8c;">src/main.rs</span><span>&quot;
+</span></code></pre>
+<p><strong>.cargo/config.toml</strong>:</p>
+<pre data-lang="toml" style="background-color:#2b303b;color:#c0c5ce;" class="language-toml "><code class="language-toml" data-lang="toml"><span>[build]
+</span><span style="color:#bf616a;">target </span><span>= &quot;</span><span style="color:#a3be8c;">x86_64-pc-windows-gnu</span><span>&quot;
+</span><span>
+</span><span>[target.x86_64-pc-windows-gnu]
+</span><span style="color:#bf616a;">linker </span><span>= &quot;</span><span style="color:#a3be8c;">x86_64-w64-mingw32-gcc</span><span>&quot;
+</span></code></pre>
+<h4 id="gestao-de-targets">Gestão de Targets</h4>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># Listar targets instalados
+</span><span style="color:#bf616a;">$</span><span> rustup target list</span><span style="color:#bf616a;"> --installed
+</span><span style="color:#bf616a;">x86_64-unknown-linux-gnu
+</span><span style="color:#bf616a;">wasm32-unknown-unknown
+</span><span style="color:#bf616a;">x86_64-pc-windows-gnu
+</span><span>
+</span><span style="color:#65737e;"># Listar todos os targets disponíveis
+</span><span style="color:#bf616a;">$</span><span> rustup target list
+</span><span>
+</span><span style="color:#65737e;"># Remover target
+</span><span style="color:#bf616a;">$</span><span> rustup target remove arm-linux-androideabi
+</span><span>
+</span><span style="color:#65737e;"># Instalar target para toolchain específica
+</span><span style="color:#bf616a;">$</span><span> rustup target add</span><span style="color:#bf616a;"> --toolchain</span><span> nightly wasm32-unknown-unknown
+</span></code></pre>
+<hr />
+<h2 id="environment-variables-configuracao-avancada">Environment Variables: Configuração Avançada</h2>
+<h3 id="variaveis-de-configuracao-principal">Variáveis de Configuração Principal</h3>
+<p>O rustup reconhece várias variáveis de ambiente para configuração avançada:</p>
+<p><strong>RUSTUP_HOME</strong></p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># Definir diretório personalizado para rustup
+</span><span style="color:#b48ead;">export </span><span style="color:#bf616a;">RUSTUP_HOME</span><span>=</span><span style="color:#a3be8c;">/custom/path/rustup
+</span></code></pre>
+<p><strong>CARGO_HOME</strong></p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># Definir diretório personalizado para cargo
+</span><span style="color:#b48ead;">export </span><span style="color:#bf616a;">CARGO_HOME</span><span>=</span><span style="color:#a3be8c;">/custom/path/cargo
+</span></code></pre>
+<h3 id="variaveis-de-comportamento">Variáveis de Comportamento</h3>
+<p><strong>RUSTUP_AUTO_INSTALL</strong>
+Quando definida como 1, instala a toolchain ativa quando está ausente. Define este valor como 0 para desativar a instalação automática:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># Desativar instalação automática
+</span><span style="color:#b48ead;">export </span><span style="color:#bf616a;">RUSTUP_AUTO_INSTALL</span><span>=</span><span style="color:#a3be8c;">0
+</span></code></pre>
+<p><strong>RUSTUP_TOOLCHAIN</strong></p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># Forçar toolchain específica
+</span><span style="color:#b48ead;">export </span><span style="color:#bf616a;">RUSTUP_TOOLCHAIN</span><span>=</span><span style="color:#a3be8c;">nightly-2024-01-15
+</span><span>
+</span><span style="color:#65737e;"># Verificar resultado
+</span><span style="color:#bf616a;">$</span><span> rustc</span><span style="color:#bf616a;"> --version
+</span><span style="color:#bf616a;">rustc</span><span> 1.77.0-nightly (90d6f0acb 2024-01-14)
+</span></code></pre>
+<h3 id="variaveis-de-proxy-e-network">Variáveis de Proxy e Network</h3>
+<p><strong>RUSTUP_DIST_SERVER</strong></p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># Usar servidor de distribuição alternativo
+</span><span style="color:#b48ead;">export </span><span style="color:#bf616a;">RUSTUP_DIST_SERVER</span><span>=</span><span style="color:#a3be8c;">https://dev-static.rust-lang.org
+</span></code></pre>
+<p><strong>HTTP_PROXY / HTTPS_PROXY</strong></p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># Configurar proxy para downloads
+</span><span style="color:#b48ead;">export </span><span style="color:#bf616a;">HTTPS_PROXY</span><span>=</span><span style="color:#a3be8c;">http://proxy.company.com:8080
+</span><span style="color:#b48ead;">export </span><span style="color:#bf616a;">HTTP_PROXY</span><span>=</span><span style="color:#a3be8c;">http://proxy.company.com:8080
+</span></code></pre>
+<h3 id="variaveis-de-sistema-avancadas">Variáveis de Sistema Avançadas</h3>
+<p><strong>RUSTUP_PERMIT_COPY_RENAME</strong>
+Quando definida, permite ao rustup recorrer à cópia de ficheiros se tentativas de renomear resultarem em erros de cross-device link. Estes erros ocorrem no OverlayFS, que é usado pelo Docker:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># Para ambientes Docker
+</span><span style="color:#b48ead;">export </span><span style="color:#bf616a;">RUSTUP_PERMIT_COPY_RENAME</span><span>=</span><span style="color:#a3be8c;">1
+</span></code></pre>
+<p><strong>RUSTUP_HARDLINK_PROXIES</strong>
+Quando definida, o rustup não tentará fazer symlink dos proxies e em vez disso usará sempre hardlinks:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># Usar hardlinks em vez de symlinks
+</span><span style="color:#b48ead;">export </span><span style="color:#bf616a;">RUSTUP_HARDLINK_PROXIES</span><span>=</span><span style="color:#a3be8c;">1
+</span></code></pre>
+<hr />
+<h2 id="configuracao-de-projetos-com-rust-toolchain-toml">Configuração de Projetos com rust-toolchain.toml</h2>
+<h3 id="ficheiro-de-configuracao-de-projeto">Ficheiro de Configuração de Projeto</h3>
+<p>Para projetos que requerem configurações específicas, pode criar <code>rust-toolchain.toml</code>:</p>
+<pre data-lang="toml" style="background-color:#2b303b;color:#c0c5ce;" class="language-toml "><code class="language-toml" data-lang="toml"><span>[toolchain]
+</span><span style="color:#bf616a;">channel </span><span>= &quot;</span><span style="color:#a3be8c;">nightly-2024-01-15</span><span>&quot;
+</span><span style="color:#bf616a;">components </span><span>= [&quot;</span><span style="color:#a3be8c;">rustfmt</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">clippy</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">rust-src</span><span>&quot;]
+</span><span style="color:#bf616a;">targets </span><span>= [&quot;</span><span style="color:#a3be8c;">wasm32-unknown-unknown</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">x86_64-pc-windows-gnu</span><span>&quot;]
+</span><span style="color:#bf616a;">profile </span><span>= &quot;</span><span style="color:#a3be8c;">default</span><span>&quot;
+</span></code></pre>
+<h3 id="overrides-automaticos">Overrides Automáticos</h3>
+<p>As configurações de componentes contêm uma lista de componentes adicionais para instalar. Os componentes listados aqui são aditivos com o profile atual:</p>
+<pre data-lang="toml" style="background-color:#2b303b;color:#c0c5ce;" class="language-toml "><code class="language-toml" data-lang="toml"><span>[toolchain]
+</span><span style="color:#bf616a;">channel </span><span>= &quot;</span><span style="color:#a3be8c;">stable</span><span>&quot;
+</span><span style="color:#bf616a;">components </span><span>= [
+</span><span>    &quot;</span><span style="color:#a3be8c;">clippy</span><span>&quot;,
+</span><span>    &quot;</span><span style="color:#a3be8c;">rustfmt</span><span>&quot;, 
+</span><span>    &quot;</span><span style="color:#a3be8c;">rust-analyzer</span><span>&quot;,
+</span><span>    &quot;</span><span style="color:#a3be8c;">llvm-tools-preview</span><span>&quot;
+</span><span>]
+</span><span style="color:#bf616a;">targets </span><span>= [
+</span><span>    &quot;</span><span style="color:#a3be8c;">wasm32-unknown-unknown</span><span>&quot;,
+</span><span>    &quot;</span><span style="color:#a3be8c;">x86_64-apple-darwin</span><span>&quot;,
+</span><span>    &quot;</span><span style="color:#a3be8c;">aarch64-apple-darwin</span><span>&quot;
+</span><span>]
+</span></code></pre>
+<hr />
+<h2 id="workflows-avancados">Workflows Avançados</h2>
+<h3 id="desenvolvimento-multi-target">Desenvolvimento Multi-Target</h3>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;">#!/bin/bash
+</span><span style="color:#65737e;"># Script para build multi-plataforma
+</span><span>
+</span><span style="color:#bf616a;">TARGETS</span><span>=(
+</span><span>    &quot;</span><span style="color:#a3be8c;">x86_64-unknown-linux-gnu</span><span>&quot;
+</span><span>    &quot;</span><span style="color:#a3be8c;">x86_64-pc-windows-gnu</span><span>&quot;
+</span><span>    &quot;</span><span style="color:#a3be8c;">x86_64-apple-darwin</span><span>&quot;
+</span><span>    &quot;</span><span style="color:#a3be8c;">aarch64-apple-darwin</span><span>&quot;
+</span><span>    &quot;</span><span style="color:#a3be8c;">wasm32-unknown-unknown</span><span>&quot;
+</span><span>)
+</span><span>
+</span><span style="color:#b48ead;">for</span><span> target </span><span style="color:#b48ead;">in </span><span>&quot;$</span><span style="color:#a3be8c;">{</span><span style="color:#bf616a;">TARGETS[@]</span><span style="color:#a3be8c;">}</span><span>&quot;; </span><span style="color:#b48ead;">do
+</span><span>    </span><span style="color:#96b5b4;">echo </span><span>&quot;</span><span style="color:#a3be8c;">Building for </span><span>$</span><span style="color:#bf616a;">target</span><span style="color:#a3be8c;">...</span><span>&quot;
+</span><span>    </span><span style="color:#bf616a;">rustup</span><span> target add &quot;$</span><span style="color:#bf616a;">target</span><span>&quot;
+</span><span>    </span><span style="color:#bf616a;">cargo</span><span> build</span><span style="color:#bf616a;"> --release --target </span><span>&quot;$</span><span style="color:#bf616a;">target</span><span>&quot;
+</span><span style="color:#b48ead;">done
+</span></code></pre>
+<h3 id="ci-cd-com-rustup">CI/CD com Rustup</h3>
+<pre data-lang="yaml" style="background-color:#2b303b;color:#c0c5ce;" class="language-yaml "><code class="language-yaml" data-lang="yaml"><span style="color:#65737e;"># .github/workflows/ci.yml
+</span><span style="color:#bf616a;">name</span><span>: </span><span style="color:#a3be8c;">CI
+</span><span style="color:#d08770;">on</span><span>: [</span><span style="color:#a3be8c;">push</span><span>, </span><span style="color:#a3be8c;">pull_request</span><span>]
+</span><span>
+</span><span style="color:#bf616a;">jobs</span><span>:
+</span><span>  </span><span style="color:#bf616a;">test</span><span>:
+</span><span>    </span><span style="color:#bf616a;">strategy</span><span>:
+</span><span>      </span><span style="color:#bf616a;">matrix</span><span>:
+</span><span>        </span><span style="color:#bf616a;">toolchain</span><span>: [</span><span style="color:#a3be8c;">stable</span><span>, </span><span style="color:#a3be8c;">beta</span><span>, </span><span style="color:#a3be8c;">nightly</span><span>]
+</span><span>        </span><span style="color:#bf616a;">os</span><span>: [</span><span style="color:#a3be8c;">ubuntu-latest</span><span>, </span><span style="color:#a3be8c;">windows-latest</span><span>, </span><span style="color:#a3be8c;">macos-latest</span><span>]
+</span><span>    </span><span style="color:#bf616a;">runs-on</span><span>: </span><span style="color:#a3be8c;">${{ matrix.os }}
+</span><span>    
+</span><span>    </span><span style="color:#bf616a;">steps</span><span>:
+</span><span>      - </span><span style="color:#bf616a;">uses</span><span>: </span><span style="color:#a3be8c;">actions/checkout@v3
+</span><span>      - </span><span style="color:#bf616a;">name</span><span>: </span><span style="color:#a3be8c;">Install Rust
+</span><span>        </span><span style="color:#bf616a;">run</span><span>: </span><span style="color:#b48ead;">|
+</span><span style="color:#a3be8c;">          rustup toolchain install ${{ matrix.toolchain }}
+</span><span style="color:#a3be8c;">          rustup default ${{ matrix.toolchain }}
+</span><span style="color:#a3be8c;">          rustup component add clippy rustfmt
+</span><span style="color:#a3be8c;">      
+</span><span>      - </span><span style="color:#bf616a;">name</span><span>: </span><span style="color:#a3be8c;">Run tests
+</span><span>        </span><span style="color:#bf616a;">run</span><span>: </span><span style="color:#b48ead;">|
+</span><span style="color:#a3be8c;">          cargo test
+</span><span style="color:#a3be8c;">          cargo clippy -- -D warnings
+</span><span style="color:#a3be8c;">          cargo fmt -- --check
+</span></code></pre>
+<h3 id="profile-de-desenvolvimento-otimizado">Profile de Desenvolvimento Otimizado</h3>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># Setup para desenvolvimento performante
+</span><span style="color:#bf616a;">rustup</span><span> set profile minimal
+</span><span style="color:#bf616a;">rustup</span><span> toolchain install stable nightly
+</span><span style="color:#bf616a;">rustup</span><span> component add</span><span style="color:#bf616a;"> --toolchain</span><span> stable rustfmt clippy rust-analyzer
+</span><span style="color:#bf616a;">rustup</span><span> component add</span><span style="color:#bf616a;"> --toolchain</span><span> nightly rustfmt clippy rust-analyzer rust-src miri
+</span><span>
+</span><span style="color:#65737e;"># Alias para comandos frequentes
+</span><span style="color:#96b5b4;">alias </span><span style="color:#8fa1b3;">rn</span><span>=&#39;</span><span style="color:#a3be8c;">rustup run nightly</span><span>&#39;
+</span><span style="color:#96b5b4;">alias </span><span style="color:#8fa1b3;">rs</span><span>=&#39;</span><span style="color:#a3be8c;">rustup run stable</span><span>&#39;
+</span><span style="color:#96b5b4;">alias </span><span style="color:#8fa1b3;">cb</span><span>=&#39;</span><span style="color:#a3be8c;">cargo build</span><span>&#39;
+</span><span style="color:#96b5b4;">alias </span><span style="color:#8fa1b3;">ct</span><span>=&#39;</span><span style="color:#a3be8c;">cargo test</span><span>&#39;
+</span><span style="color:#96b5b4;">alias </span><span style="color:#8fa1b3;">cc</span><span>=&#39;</span><span style="color:#a3be8c;">cargo check</span><span>&#39;
+</span></code></pre>
+<hr />
+<h2 id="troubleshooting-e-otimizacao">Troubleshooting e Otimização</h2>
+<h3 id="limpeza-de-espaco">Limpeza de Espaço</h3>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># Ver tamanho ocupado
+</span><span style="color:#bf616a;">$</span><span> du</span><span style="color:#bf616a;"> -sh ~</span><span>/.rustup
+</span><span style="color:#bf616a;">2.5G</span><span>    /home/user/.rustup
+</span><span>
+</span><span style="color:#65737e;"># Limpar cache de downloads
+</span><span style="color:#bf616a;">$</span><span> rustup self update-data</span><span style="color:#bf616a;"> --clean
+</span><span>
+</span><span style="color:#65737e;"># Remover toolchains antigas
+</span><span style="color:#bf616a;">$</span><span> rustup toolchain list
+</span><span style="color:#bf616a;">$</span><span> rustup toolchain uninstall nightly-2023-12-01
+</span><span>
+</span><span style="color:#65737e;"># Limpar targets não utilizados
+</span><span style="color:#bf616a;">$</span><span> rustup target list</span><span style="color:#bf616a;"> --installed
+</span><span style="color:#bf616a;">$</span><span> rustup target remove arm-linux-androideabi
+</span></code></pre>
+<h3 id="verificacao-de-integridade">Verificação de Integridade</h3>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># Verificar instalação
+</span><span style="color:#bf616a;">$</span><span> rustup check
+</span><span style="color:#bf616a;">info:</span><span> checking for rustup updates...
+</span><span style="color:#bf616a;">info:</span><span> checking for toolchain updates...
+</span><span>
+</span><span style="color:#65737e;"># Reinstalar toolchain corrompida  
+</span><span style="color:#bf616a;">$</span><span> rustup toolchain uninstall stable
+</span><span style="color:#bf616a;">$</span><span> rustup toolchain install stable
+</span></code></pre>
+<h3 id="performance-de-compilacao">Performance de Compilação</h3>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># Usar lld como linker (mais rápido)
+</span><span style="color:#65737e;"># .cargo/config.toml
+</span><span style="color:#bf616a;">[target.x86_64-unknown-linux-gnu]
+</span><span style="color:#bf616a;">rustflags</span><span> = </span><span style="color:#b48ead;">[</span><span>&quot;</span><span style="color:#a3be8c;">-C</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">link-arg=-fuse-ld=lld</span><span>&quot;</span><span style="color:#b48ead;">]
+</span><span>
+</span><span style="color:#65737e;"># Configurar número de jobs paralelos
+</span><span style="color:#b48ead;">export </span><span style="color:#bf616a;">CARGO_BUILD_JOBS</span><span>=</span><span style="color:#a3be8c;">8
+</span><span>
+</span><span style="color:#65737e;"># Cache de compilação com sccache
+</span><span style="color:#b48ead;">export </span><span style="color:#bf616a;">RUSTC_WRAPPER</span><span>=</span><span style="color:#a3be8c;">sccache
+</span></code></pre>
+<hr />
+<h2 id="conclusao">Conclusão</h2>
+<p>O rustup é uma ferramenta incrivelmente poderosa que vai muito além da instalação simples do Rust. Dominar seus conceitos avançados - channels, toolchains, components, profiles, proxies, cross-compilation e environment variables - permite criar workflows de desenvolvimento extremamente eficientes e flexíveis.</p>
+<p>Estas funcionalidades tornam o rustup único no ecossistema de linguagens de programação, oferecendo um nível de controlo e flexibilidade que é essencial para projetos sérios de Rust, especialmente aqueles que envolvem multi-plataformas, sistemas embarcados, ou WebAssembly.</p>
+<p>A configuração adequada do rustup pode significar a diferença entre um desenvolvimento frustrante e um workflow fluido e produtivo. Investe tempo a compreender estas funcionalidades - o retorno em produtividade será substancial.</p>
+<hr />
+<h2 id="recursos-de-referencia">Recursos de Referência</h2>
+<h3 id="documentacao-oficial">Documentação Oficial</h3>
+<ul>
+<li><a href="https://rust-lang.github.io/rustup/concepts/index.html">Rustup Concepts</a> - Documentação completa de conceitos</li>
+<li><a href="https://rust-lang.github.io/rustup/concepts/channels.html">Channels</a> - Detalhes sobre channels</li>
+<li><a href="https://rust-lang.github.io/rustup/concepts/toolchains.html">Toolchains</a> - Especificações de toolchains</li>
+<li><a href="https://rust-lang.github.io/rustup/concepts/components.html">Components</a> - Sistema de componentes</li>
+<li><a href="https://rust-lang.github.io/rustup/concepts/profiles.html">Profiles</a> - Grupos de componentes</li>
+<li><a href="https://rust-lang.github.io/rustup/cross-compilation.html">Cross-compilation</a> - Guia de cross-compilation</li>
+<li><a href="https://rust-lang.github.io/rustup/environment-variables.html">Environment Variables</a> - Variáveis de configuração</li>
+<li><a href="https://rust-lang.github.io/rustup/overrides.html">Overrides</a> - Sistema de overrides por projeto</li>
+</ul>
+<h3 id="comandos-de-referencia-rapida">Comandos de Referência Rápida</h3>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># Gestão básica
+</span><span style="color:#bf616a;">rustup</span><span> show                 </span><span style="color:#65737e;"># Estado atual
+</span><span style="color:#bf616a;">rustup</span><span> update              </span><span style="color:#65737e;"># Atualizar tudo
+</span><span style="color:#bf616a;">rustup</span><span> self update         </span><span style="color:#65737e;"># Atualizar rustup
+</span><span>
+</span><span style="color:#65737e;"># Toolchains
+</span><span style="color:#bf616a;">rustup</span><span> toolchain list      </span><span style="color:#65737e;"># Listar toolchains
+</span><span style="color:#bf616a;">rustup</span><span> toolchain install   </span><span style="color:#65737e;"># Instalar toolchain
+</span><span style="color:#bf616a;">rustup</span><span> default &lt;toolchain&gt; </span><span style="color:#65737e;"># Definir padrão
+</span><span>
+</span><span style="color:#65737e;"># Components
+</span><span style="color:#bf616a;">rustup</span><span> component list      </span><span style="color:#65737e;"># Listar components
+</span><span style="color:#bf616a;">rustup</span><span> component add       </span><span style="color:#65737e;"># Instalar component
+</span><span>
+</span><span style="color:#65737e;"># Targets  
+</span><span style="color:#bf616a;">rustup</span><span> target list         </span><span style="color:#65737e;"># Listar targets
+</span><span style="color:#bf616a;">rustup</span><span> target add          </span><span style="color:#65737e;"># Instalar target
+</span><span>
+</span><span style="color:#65737e;"># Overrides
+</span><span style="color:#bf616a;">rustup</span><span> override set        </span><span style="color:#65737e;"># Override local
+</span><span style="color:#bf616a;">rustup</span><span> override list       </span><span style="color:#65737e;"># Listar overrides
+</span></code></pre>
+<p>Lembra-te: o rustup é uma ferramenta em constante evolução. Consulta sempre a <a href="https://rust-lang.github.io/rustup/">documentação oficial</a> para as funcionalidades mais recentes e melhores práticas atualizadas.</p>
+<hr />
+<p><strong><em>Disclaimer</em></strong>: Artigo elaborado com auxilio a ferramentas de inteligência artificial mas revisto por humanos.</p>
+
+          </div>
+        </article>
+      </div>
+      
+      <div class="column is-2 is-hidden-mobile">
+        <aside class="menu" style="position: sticky; top: 48px">
+          <p class="heading has-text-weight-bold">Contents</p>
+          <ul class="menu-list">
+            
+            <li>
+              <a id="link-introducao" class="toc is-size-7 is-active"
+                href="https://rustlangpt.github.io/posts/conceitos-avancados-rustup/#introducao">
+                Introdução
+              </a>
+              
+            </li>
+            
+            <li>
+              <a id="link-channels-os-canais-de-release-do-rust" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/conceitos-avancados-rustup/#channels-os-canais-de-release-do-rust">
+                Channels: Os Canais de Release do Rust
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-conceitos-fundamentais" class="toc is-size-7" href="https://rustlangpt.github.io/posts/conceitos-avancados-rustup/#conceitos-fundamentais">
+                    Conceitos Fundamentais
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-gestao-pratica-de-channels" class="toc is-size-7" href="https://rustlangpt.github.io/posts/conceitos-avancados-rustup/#gestao-pratica-de-channels">
+                    Gestão Prática de Channels
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-quando-usar-cada-channel" class="toc is-size-7" href="https://rustlangpt.github.io/posts/conceitos-avancados-rustup/#quando-usar-cada-channel">
+                    Quando Usar Cada Channel
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-toolchains-especificacoes-completas-do-compilador" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/conceitos-avancados-rustup/#toolchains-especificacoes-completas-do-compilador">
+                Toolchains: Especificações Completas do Compilador
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-anatomia-de-uma-toolchain" class="toc is-size-7" href="https://rustlangpt.github.io/posts/conceitos-avancados-rustup/#anatomia-de-uma-toolchain">
+                    Anatomia de uma Toolchain
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-gestao-avancada-de-toolchains" class="toc is-size-7" href="https://rustlangpt.github.io/posts/conceitos-avancados-rustup/#gestao-avancada-de-toolchains">
+                    Gestão Avançada de Toolchains
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-components-componentes-modulares-das-toolchains" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/conceitos-avancados-rustup/#components-componentes-modulares-das-toolchains">
+                Components: Componentes Modulares das Toolchains
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-conceito-de-components" class="toc is-size-7" href="https://rustlangpt.github.io/posts/conceitos-avancados-rustup/#conceito-de-components">
+                    Conceito de Components
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-components-principais" class="toc is-size-7" href="https://rustlangpt.github.io/posts/conceitos-avancados-rustup/#components-principais">
+                    Components Principais
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-gestao-de-components" class="toc is-size-7" href="https://rustlangpt.github.io/posts/conceitos-avancados-rustup/#gestao-de-components">
+                    Gestão de Components
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-profiles-grupos-predefinidos-de-components" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/conceitos-avancados-rustup/#profiles-grupos-predefinidos-de-components">
+                Profiles: Grupos Predefinidos de Components
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-conceito-de-profiles" class="toc is-size-7" href="https://rustlangpt.github.io/posts/conceitos-avancados-rustup/#conceito-de-profiles">
+                    Conceito de Profiles
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-gestao-de-profiles" class="toc is-size-7" href="https://rustlangpt.github.io/posts/conceitos-avancados-rustup/#gestao-de-profiles">
+                    Gestão de Profiles
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-proxies-o-sistema-de-redirecionamento" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/conceitos-avancados-rustup/#proxies-o-sistema-de-redirecionamento">
+                Proxies: O Sistema de Redirecionamento
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-como-funcionam-os-proxies" class="toc is-size-7" href="https://rustlangpt.github.io/posts/conceitos-avancados-rustup/#como-funcionam-os-proxies">
+                    Como Funcionam os Proxies
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-configuracao-de-proxies" class="toc is-size-7" href="https://rustlangpt.github.io/posts/conceitos-avancados-rustup/#configuracao-de-proxies">
+                    Configuração de Proxies
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-proxies-customizados" class="toc is-size-7" href="https://rustlangpt.github.io/posts/conceitos-avancados-rustup/#proxies-customizados">
+                    Proxies Customizados
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-cross-compilation-compilacao-multi-plataforma" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/conceitos-avancados-rustup/#cross-compilation-compilacao-multi-plataforma">
+                Cross-Compilation: Compilação Multi-Plataforma
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-conceitos-base" class="toc is-size-7" href="https://rustlangpt.github.io/posts/conceitos-avancados-rustup/#conceitos-base">
+                    Conceitos Base
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-instalacao-de-targets" class="toc is-size-7" href="https://rustlangpt.github.io/posts/conceitos-avancados-rustup/#instalacao-de-targets">
+                    Instalação de Targets
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-targets-populares" class="toc is-size-7" href="https://rustlangpt.github.io/posts/conceitos-avancados-rustup/#targets-populares">
+                    Targets Populares
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-cross-compilation-na-pratica" class="toc is-size-7" href="https://rustlangpt.github.io/posts/conceitos-avancados-rustup/#cross-compilation-na-pratica">
+                    Cross-Compilation na Prática
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-environment-variables-configuracao-avancada" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/conceitos-avancados-rustup/#environment-variables-configuracao-avancada">
+                Environment Variables: Configuração Avançada
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-variaveis-de-configuracao-principal" class="toc is-size-7" href="https://rustlangpt.github.io/posts/conceitos-avancados-rustup/#variaveis-de-configuracao-principal">
+                    Variáveis de Configuração Principal
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-variaveis-de-comportamento" class="toc is-size-7" href="https://rustlangpt.github.io/posts/conceitos-avancados-rustup/#variaveis-de-comportamento">
+                    Variáveis de Comportamento
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-variaveis-de-proxy-e-network" class="toc is-size-7" href="https://rustlangpt.github.io/posts/conceitos-avancados-rustup/#variaveis-de-proxy-e-network">
+                    Variáveis de Proxy e Network
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-variaveis-de-sistema-avancadas" class="toc is-size-7" href="https://rustlangpt.github.io/posts/conceitos-avancados-rustup/#variaveis-de-sistema-avancadas">
+                    Variáveis de Sistema Avançadas
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-configuracao-de-projetos-com-rust-toolchain-toml" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/conceitos-avancados-rustup/#configuracao-de-projetos-com-rust-toolchain-toml">
+                Configuração de Projetos com rust-toolchain.toml
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-ficheiro-de-configuracao-de-projeto" class="toc is-size-7" href="https://rustlangpt.github.io/posts/conceitos-avancados-rustup/#ficheiro-de-configuracao-de-projeto">
+                    Ficheiro de Configuração de Projeto
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-overrides-automaticos" class="toc is-size-7" href="https://rustlangpt.github.io/posts/conceitos-avancados-rustup/#overrides-automaticos">
+                    Overrides Automáticos
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-workflows-avancados" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/conceitos-avancados-rustup/#workflows-avancados">
+                Workflows Avançados
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-desenvolvimento-multi-target" class="toc is-size-7" href="https://rustlangpt.github.io/posts/conceitos-avancados-rustup/#desenvolvimento-multi-target">
+                    Desenvolvimento Multi-Target
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-ci-cd-com-rustup" class="toc is-size-7" href="https://rustlangpt.github.io/posts/conceitos-avancados-rustup/#ci-cd-com-rustup">
+                    CI&#x2F;CD com Rustup
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-profile-de-desenvolvimento-otimizado" class="toc is-size-7" href="https://rustlangpt.github.io/posts/conceitos-avancados-rustup/#profile-de-desenvolvimento-otimizado">
+                    Profile de Desenvolvimento Otimizado
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-troubleshooting-e-otimizacao" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/conceitos-avancados-rustup/#troubleshooting-e-otimizacao">
+                Troubleshooting e Otimização
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-limpeza-de-espaco" class="toc is-size-7" href="https://rustlangpt.github.io/posts/conceitos-avancados-rustup/#limpeza-de-espaco">
+                    Limpeza de Espaço
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-verificacao-de-integridade" class="toc is-size-7" href="https://rustlangpt.github.io/posts/conceitos-avancados-rustup/#verificacao-de-integridade">
+                    Verificação de Integridade
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-performance-de-compilacao" class="toc is-size-7" href="https://rustlangpt.github.io/posts/conceitos-avancados-rustup/#performance-de-compilacao">
+                    Performance de Compilação
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-conclusao" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/conceitos-avancados-rustup/#conclusao">
+                Conclusão
+              </a>
+              
+            </li>
+            
+            <li>
+              <a id="link-recursos-de-referencia" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/conceitos-avancados-rustup/#recursos-de-referencia">
+                Recursos de Referência
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-documentacao-oficial" class="toc is-size-7" href="https://rustlangpt.github.io/posts/conceitos-avancados-rustup/#documentacao-oficial">
+                    Documentação Oficial
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-comandos-de-referencia-rapida" class="toc is-size-7" href="https://rustlangpt.github.io/posts/conceitos-avancados-rustup/#comandos-de-referencia-rapida">
+                    Comandos de Referência Rápida
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+          </ul>
+        </aside>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+
+  
+  <section class="modal" id="search-modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Search</p>
+      </header>
+      <section class="modal-card-body">
+        <div class="field mb-2">
+          <div class="control">
+            <input class="input" id="search" placeholder="Search this website." type="search" />
+          </div>
+        </div>
+        <div class="search-results">
+          <div class="search-results__items"></div>
+        </div>
+      </section>
+    </div>
+    <button aria-label="close" class="modal-close is-large"></button>
+  </section>
+  
+
+
+  
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <nav class="level">
+              
+          <div class="level-item has-text-centered">
+            <a class="button is-black is-outlined" href="https:&#x2F;&#x2F;rustlangpt.github.io&#x2F;posts&#x2F;instalacao-rust&#x2F;">
+              <span class="icon mr-2">
+                <i class="fas fa-arrow-circle-left"></i>
+              </span>
+              Instalação do Rust: Guia Completo para Linux, Windows e macOS
+            </a>
+          </div>
+           
+        </nav>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+  
+
+
+
+
+
+
+  
+  <footer class="footer py-4">
+    <div class="content has-text-centered">
+    <!--
+    <p>
+        Built with
+        <span class="icon-text">
+          <span class="icon">
+            <i class="fas fa-code"></i>
+          </span>
+          <span>code</span>
+        </span>
+        and
+        <span class="icon-text">
+          <span class="icon">
+            <i class="fas fa-heart"></i>
+          </span>
+          <span>love</span>
+        </span>
+      </p>
+    -->
+      <p>
+        Powered by
+        <span class="icon-text">
+          <span class="icon">
+            <i class="fas fa-power-off"></i>
+          </span>
+          <span>zola</span>
+        </span>
+      </p>
+    
+    </div>
+  </footer>
+  
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/galleria@1.6.1/dist/galleria.min.js" integrity="sha384-QSfwGT8/EU536DKdtyP2D6SLlh8zBaZ0cVkwfrwhqzIU9VCfJT00CLVP5t+HAiYg" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/galleria@1.6.1/dist/themes/folio/galleria.folio.min.js" integrity="sha384-DwpKI+deZB267+hPKwiOIc5Y2GKsVL0mR6hgz7GgIu7AgAMYqJwcJKY1YBNfhWcY" crossorigin="anonymous"></script>
+  
+  
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@8.13.5/dist/mermaid.min.js" integrity="sha384-0yWn54pSGtfKCU+skfA69l25VsCw+MZt4LQov3xNRoS7YkAMrFokGgSBnAWSK4pv" crossorigin="anonymous"></script>
+  
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.xkcd@1.1.13/dist/chart.xkcd.min.js" integrity="sha384-xC3h1+IHXK8seA+8KfT79Z4e0GPsznjXBoMa5nd8ooWKplPyXx92NOmljWxLC/cs" crossorigin="anonymous"></script>
+  
+  
+  <script src="https://rustlangpt.github.io/elasticlunr.min.js"></script>
+  <script src="https://rustlangpt.github.io/search_index.en.js"></script><script src="https://rustlangpt.github.io/js/site.js"></script>
+
+  
+
+<script type="text/javascript">
+  const menuBarHeight = document.querySelector("nav.navbar").clientHeight;
+  const tocItems = document.querySelectorAll(".toc");
+  const navSections = new Array(tocItems.length);
+
+  tocItems.forEach((el, i) => {
+    let id = el.getAttribute("id").substring(5);
+    navSections[i] = document.getElementById(id);
+  })
+
+  function isVisible(tocIndex) {
+    const current = navSections[tocIndex];
+    const next = tocIndex < tocItems.length - 1 ? navSections[tocIndex + 1]
+      : document.querySelectorAll("section.section").item(1);
+
+    const c = current.getBoundingClientRect();
+    const n = next.getBoundingClientRect();
+    const h = (window.innerHeight || document.documentElement.clientHeight);
+
+    return (c.top <= h) && (n.top - menuBarHeight >= 0);
+  }
+
+  function activateIfVisible() {
+    for (b = true, i = 0; i < tocItems.length; i++) {
+      if (b && isVisible(i)) {
+        tocItems[i].classList.add('is-active');
+        b = false;
+      } else
+        tocItems[i].classList.remove('is-active');
+    }
+  }
+
+  var isTicking = null;
+  window.addEventListener('scroll', () => {
+    if (!isTicking) {
+      window.requestAnimationFrame(() => {
+        activateIfVisible();
+        isTicking = false;
+      });
+      isTicking = true;
+    }
+  }, false);
+</script>
+
+
+
+
+
+  
+  
+</body>
+
+</html>

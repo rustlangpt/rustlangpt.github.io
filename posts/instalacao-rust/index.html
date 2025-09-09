@@ -162,6 +162,15 @@ RustlangPT | Instalação do Rust: Guia Completo para Linux, Windows e macOS
 <p>
   Tags:
   
+  <a class="has-text-info-dark has-text-weight-semibold" href="https://rustlangpt.github.io/tags/instalacao/">
+    <span class="icon-text">
+      <span class="icon">
+        <i class="fas fa-tag"></i>
+      </span>
+      <span>instalação</span>
+    </span>
+  </a>
+  
   <a class="has-text-info-dark has-text-weight-semibold" href="https://rustlangpt.github.io/tags/rustup/">
     <span class="icon-text">
       <span class="icon">
@@ -204,6 +213,15 @@ RustlangPT | Instalação do Rust: Guia Completo para Linux, Windows e macOS
         <i class="fas fa-tag"></i>
       </span>
       <span>macOS</span>
+    </span>
+  </a>
+  
+  <a class="has-text-info-dark has-text-weight-semibold" href="https://rustlangpt.github.io/tags/iniciantes/">
+    <span class="icon-text">
+      <span class="icon">
+        <i class="fas fa-tag"></i>
+      </span>
+      <span>Iniciantes</span>
     </span>
   </a>
   
@@ -463,6 +481,231 @@ Em algum momento da instalação, será solicitado que instale o Visual Studio. 
         </article>
       </div>
       
+      <div class="column is-2 is-hidden-mobile">
+        <aside class="menu" style="position: sticky; top: 48px">
+          <p class="heading has-text-weight-bold">Contents</p>
+          <ul class="menu-list">
+            
+            <li>
+              <a id="link-introducao" class="toc is-size-7 is-active"
+                href="https://rustlangpt.github.io/posts/instalacao-rust/#introducao">
+                Introdução
+              </a>
+              
+            </li>
+            
+            <li>
+              <a id="link-o-que-e-o-rustup" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/instalacao-rust/#o-que-e-o-rustup">
+                O que é o Rustup?
+              </a>
+              
+            </li>
+            
+            <li>
+              <a id="link-instalacao-no-linux-e-macos" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/instalacao-rust/#instalacao-no-linux-e-macos">
+                Instalação no Linux e macOS
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-pre-requisitos" class="toc is-size-7" href="https://rustlangpt.github.io/posts/instalacao-rust/#pre-requisitos">
+                    Pré-requisitos
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-processo-de-instalacao" class="toc is-size-7" href="https://rustlangpt.github.io/posts/instalacao-rust/#processo-de-instalacao">
+                    Processo de Instalação
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-configuracao-do-path" class="toc is-size-7" href="https://rustlangpt.github.io/posts/instalacao-rust/#configuracao-do-path">
+                    Configuração do PATH
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-verificacao-da-instalacao" class="toc is-size-7" href="https://rustlangpt.github.io/posts/instalacao-rust/#verificacao-da-instalacao">
+                    Verificação da Instalação
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-instalacao-no-windows" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/instalacao-rust/#instalacao-no-windows">
+                Instalação no Windows
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-metodos-de-instalacao" class="toc is-size-7" href="https://rustlangpt.github.io/posts/instalacao-rust/#metodos-de-instalacao">
+                    Métodos de Instalação
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-metodo-1-instalador-visual-recomendado" class="toc is-size-7" href="https://rustlangpt.github.io/posts/instalacao-rust/#metodo-1-instalador-visual-recomendado">
+                    Método 1: Instalador Visual (Recomendado)
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-visual-studio-build-tools" class="toc is-size-7" href="https://rustlangpt.github.io/posts/instalacao-rust/#visual-studio-build-tools">
+                    Visual Studio Build Tools
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-metodo-2-windows-subsystem-for-linux-wsl" class="toc is-size-7" href="https://rustlangpt.github.io/posts/instalacao-rust/#metodo-2-windows-subsystem-for-linux-wsl">
+                    Método 2: Windows Subsystem for Linux (WSL)
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-verificacao-no-windows" class="toc is-size-7" href="https://rustlangpt.github.io/posts/instalacao-rust/#verificacao-no-windows">
+                    Verificação no Windows
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-configuracao-do-path-no-windows" class="toc is-size-7" href="https://rustlangpt.github.io/posts/instalacao-rust/#configuracao-do-path-no-windows">
+                    Configuração do PATH no Windows
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-gestao-de-versoes-com-rustup" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/instalacao-rust/#gestao-de-versoes-com-rustup">
+                Gestão de Versões com Rustup
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-atualizacoes" class="toc is-size-7" href="https://rustlangpt.github.io/posts/instalacao-rust/#atualizacoes">
+                    Atualizações
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-instalacao-de-toolchains-especificas" class="toc is-size-7" href="https://rustlangpt.github.io/posts/instalacao-rust/#instalacao-de-toolchains-especificas">
+                    Instalação de Toolchains Específicas
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-alternar-entre-versoes" class="toc is-size-7" href="https://rustlangpt.github.io/posts/instalacao-rust/#alternar-entre-versoes">
+                    Alternar Entre Versões
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-listar-toolchains-instaladas" class="toc is-size-7" href="https://rustlangpt.github.io/posts/instalacao-rust/#listar-toolchains-instaladas">
+                    Listar Toolchains Instaladas
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-documentacao-local" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/instalacao-rust/#documentacao-local">
+                Documentação Local
+              </a>
+              
+            </li>
+            
+            <li>
+              <a id="link-desinstalacao" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/instalacao-rust/#desinstalacao">
+                Desinstalação
+              </a>
+              
+            </li>
+            
+            <li>
+              <a id="link-configuracao-de-editors-e-ides" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/instalacao-rust/#configuracao-de-editors-e-ides">
+                Configuração de Editors e IDEs
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-visual-studio-code" class="toc is-size-7" href="https://rustlangpt.github.io/posts/instalacao-rust/#visual-studio-code">
+                    Visual Studio Code
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-outros-editores-populares" class="toc is-size-7" href="https://rustlangpt.github.io/posts/instalacao-rust/#outros-editores-populares">
+                    Outros Editores Populares
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-verificacao-final-da-instalacao" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/instalacao-rust/#verificacao-final-da-instalacao">
+                Verificação Final da Instalação
+              </a>
+              
+            </li>
+            
+            <li>
+              <a id="link-recursos-oficiais-de-referencia" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/instalacao-rust/#recursos-oficiais-de-referencia">
+                Recursos Oficiais de Referência
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-documentacao-principal" class="toc is-size-7" href="https://rustlangpt.github.io/posts/instalacao-rust/#documentacao-principal">
+                    Documentação Principal
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-ferramentas-e-utilitarios" class="toc is-size-7" href="https://rustlangpt.github.io/posts/instalacao-rust/#ferramentas-e-utilitarios">
+                    Ferramentas e Utilitários
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-conclusao" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/instalacao-rust/#conclusao">
+                Conclusão
+              </a>
+              
+            </li>
+            
+          </ul>
+        </aside>
+      </div>
+      
     </div>
   </div>
 </section>
@@ -508,6 +751,14 @@ Em algum momento da instalação, será solicitado que instale o Visual Studio. 
             </a>
           </div>
            
+          <div class="level-item has-text-centered">
+            <a class="button is-black is-outlined" href="https:&#x2F;&#x2F;rustlangpt.github.io&#x2F;posts&#x2F;conceitos-avancados-rustup&#x2F;">
+              Dominando o rustup: indo além do básico<span class="icon ml-2">
+                <i class="fas fa-arrow-circle-right"></i>
+              </span>
+            </a>
+          </div>
+          
         </nav>
       </div>
     </div>
@@ -574,6 +825,50 @@ Em algum momento da instalação, será solicitado que instale o Visual Studio. 
   <script src="https://rustlangpt.github.io/search_index.en.js"></script><script src="https://rustlangpt.github.io/js/site.js"></script>
 
   
+
+<script type="text/javascript">
+  const menuBarHeight = document.querySelector("nav.navbar").clientHeight;
+  const tocItems = document.querySelectorAll(".toc");
+  const navSections = new Array(tocItems.length);
+
+  tocItems.forEach((el, i) => {
+    let id = el.getAttribute("id").substring(5);
+    navSections[i] = document.getElementById(id);
+  })
+
+  function isVisible(tocIndex) {
+    const current = navSections[tocIndex];
+    const next = tocIndex < tocItems.length - 1 ? navSections[tocIndex + 1]
+      : document.querySelectorAll("section.section").item(1);
+
+    const c = current.getBoundingClientRect();
+    const n = next.getBoundingClientRect();
+    const h = (window.innerHeight || document.documentElement.clientHeight);
+
+    return (c.top <= h) && (n.top - menuBarHeight >= 0);
+  }
+
+  function activateIfVisible() {
+    for (b = true, i = 0; i < tocItems.length; i++) {
+      if (b && isVisible(i)) {
+        tocItems[i].classList.add('is-active');
+        b = false;
+      } else
+        tocItems[i].classList.remove('is-active');
+    }
+  }
+
+  var isTicking = null;
+  window.addEventListener('scroll', () => {
+    if (!isTicking) {
+      window.requestAnimationFrame(() => {
+        activateIfVisible();
+        isTicking = false;
+      });
+      isTicking = true;
+    }
+  }, false);
+</script>
 
 
 

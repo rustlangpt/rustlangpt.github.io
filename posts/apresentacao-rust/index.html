@@ -327,6 +327,135 @@ O Rust abraça múltiplos paradigmas:</p>
         </article>
       </div>
       
+      <div class="column is-2 is-hidden-mobile">
+        <aside class="menu" style="position: sticky; top: 48px">
+          <p class="heading has-text-weight-bold">Contents</p>
+          <ul class="menu-list">
+            
+            <li>
+              <a id="link-introducao" class="toc is-size-7 is-active"
+                href="https://rustlangpt.github.io/posts/apresentacao-rust/#introducao">
+                Introdução
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-a-genesis-do-rust-graydon-hoare-e-o-nascimento-de-uma-visao" class="toc is-size-7" href="https://rustlangpt.github.io/posts/apresentacao-rust/#a-genesis-do-rust-graydon-hoare-e-o-nascimento-de-uma-visao">
+                    A Genesis do Rust: Graydon Hoare e o nascimento de uma visão
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-motivacoes-para-criar-o-rust" class="toc is-size-7" href="https://rustlangpt.github.io/posts/apresentacao-rust/#motivacoes-para-criar-o-rust">
+                    Motivações para criar o Rust
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-utilizacao-do-rust-no-mundo-real" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/apresentacao-rust/#utilizacao-do-rust-no-mundo-real">
+                Utilização do Rust no mundo real
+              </a>
+              
+            </li>
+            
+            <li>
+              <a id="link-a-filosofia-multiparadigma-do-rust" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/apresentacao-rust/#a-filosofia-multiparadigma-do-rust">
+                A filosofia multiparadigma do Rust
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-o-sistema-de-ownership-paradigma-unico" class="toc is-size-7" href="https://rustlangpt.github.io/posts/apresentacao-rust/#o-sistema-de-ownership-paradigma-unico">
+                    O Sistema de Ownership: Paradigma Único
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-rust-vs-outras-linguagens-analise-comparativa" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/apresentacao-rust/#rust-vs-outras-linguagens-analise-comparativa">
+                Rust vs Outras Linguagens: Análise Comparativa
+              </a>
+              
+            </li>
+            
+            <li>
+              <a id="link-o-futuro-do-rust-tendencias-e-adopcao" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/apresentacao-rust/#o-futuro-do-rust-tendencias-e-adopcao">
+                O Futuro do Rust: tendências e adopção
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-areas-de-expansao" class="toc is-size-7" href="https://rustlangpt.github.io/posts/apresentacao-rust/#areas-de-expansao">
+                    Áreas de Expansão
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-recursos-e-documentacao" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/apresentacao-rust/#recursos-e-documentacao">
+                Recursos e Documentação
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-documentacao-principal" class="toc is-size-7" href="https://rustlangpt.github.io/posts/apresentacao-rust/#documentacao-principal">
+                    Documentação Principal
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-apis-e-standard-library" class="toc is-size-7" href="https://rustlangpt.github.io/posts/apresentacao-rust/#apis-e-standard-library">
+                    APIs e Standard Library
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-ferramentas-e-recursos" class="toc is-size-7" href="https://rustlangpt.github.io/posts/apresentacao-rust/#ferramentas-e-recursos">
+                    Ferramentas e Recursos
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-referencias-adicionais" class="toc is-size-7" href="https://rustlangpt.github.io/posts/apresentacao-rust/#referencias-adicionais">
+                    Referências Adicionais
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-conclusao" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/apresentacao-rust/#conclusao">
+                Conclusão
+              </a>
+              
+            </li>
+            
+          </ul>
+        </aside>
+      </div>
+      
     </div>
   </div>
 </section>
@@ -446,6 +575,50 @@ O Rust abraça múltiplos paradigmas:</p>
   <script src="https://rustlangpt.github.io/search_index.en.js"></script><script src="https://rustlangpt.github.io/js/site.js"></script>
 
   
+
+<script type="text/javascript">
+  const menuBarHeight = document.querySelector("nav.navbar").clientHeight;
+  const tocItems = document.querySelectorAll(".toc");
+  const navSections = new Array(tocItems.length);
+
+  tocItems.forEach((el, i) => {
+    let id = el.getAttribute("id").substring(5);
+    navSections[i] = document.getElementById(id);
+  })
+
+  function isVisible(tocIndex) {
+    const current = navSections[tocIndex];
+    const next = tocIndex < tocItems.length - 1 ? navSections[tocIndex + 1]
+      : document.querySelectorAll("section.section").item(1);
+
+    const c = current.getBoundingClientRect();
+    const n = next.getBoundingClientRect();
+    const h = (window.innerHeight || document.documentElement.clientHeight);
+
+    return (c.top <= h) && (n.top - menuBarHeight >= 0);
+  }
+
+  function activateIfVisible() {
+    for (b = true, i = 0; i < tocItems.length; i++) {
+      if (b && isVisible(i)) {
+        tocItems[i].classList.add('is-active');
+        b = false;
+      } else
+        tocItems[i].classList.remove('is-active');
+    }
+  }
+
+  var isTicking = null;
+  window.addEventListener('scroll', () => {
+    if (!isTicking) {
+      window.requestAnimationFrame(() => {
+        activateIfVisible();
+        isTicking = false;
+      });
+      isTicking = true;
+    }
+  }, false);
+</script>
 
 
 

@@ -27,6 +27,10 @@
         <lastmod>2025-09-06</lastmod>
     </url>
     <url>
+        <loc>https://rustlangpt.github.io/posts/conceitos-avancados-rustup/</loc>
+        <lastmod>2025-09-10</lastmod>
+    </url>
+    <url>
         <loc>https://rustlangpt.github.io/posts/instalacao-rust/</loc>
         <lastmod>2025-09-09</lastmod>
     </url>
@@ -59,6 +63,12 @@
         <loc>https://rustlangpt.github.io/tags/</loc>
     </url>
     <url>
+        <loc>https://rustlangpt.github.io/tags/avancado/</loc>
+    </url>
+    <url>
+        <loc>https://rustlangpt.github.io/tags/avancado/page/1/</loc>
+    </url>
+    <url>
         <loc>https://rustlangpt.github.io/tags/comunidade/</loc>
     </url>
     <url>
@@ -69,6 +79,12 @@
     </url>
     <url>
         <loc>https://rustlangpt.github.io/tags/iniciantes/page/1/</loc>
+    </url>
+    <url>
+        <loc>https://rustlangpt.github.io/tags/instalacao/</loc>
+    </url>
+    <url>
+        <loc>https://rustlangpt.github.io/tags/instalacao/page/1/</loc>
     </url>
     <url>
         <loc>https://rustlangpt.github.io/tags/introducao/</loc>
