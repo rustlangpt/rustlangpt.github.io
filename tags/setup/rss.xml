@@ -11,7 +11,7 @@
       <item>
           <title>Cargo: O Gestor de Pacotes do Rust</title>
           <pubDate>Fri, 12 Sep 2025 00:00:00 +0000</pubDate>
-          <author>Unknown</author>
+          <author>RustlangPT</author>
           <link>https://rustlangpt.github.io/posts/cargo/</link>
           <guid>https://rustlangpt.github.io/posts/cargo/</guid>
           <description xml:base="https://rustlangpt.github.io/posts/cargo/">&lt;p&gt;Cargo é o gestor de pacotes oficial da linguagem de programação Rust, responsável por tarefas como descarregar dependências, compilar pacotes, criar pacotes distribuíveis e carregá-los para o crates.io, o registo de pacotes da comunidade Rust. Desenvolvido para simplificar o desenvolvimento em Rust, Cargo integra-se perfeitamente com o ecossistema da linguagem, permitindo uma gestão eficiente de projetos.&lt;&#x2F;p&gt;
@@ -523,7 +523,7 @@
       <item>
           <title>Dominando o rustup: indo além do básico</title>
           <pubDate>Wed, 10 Sep 2025 00:00:00 +0000</pubDate>
-          <author>Unknown</author>
+          <author>RustlangPT</author>
           <link>https://rustlangpt.github.io/posts/conceitos-avancados-rustup/</link>
           <guid>https://rustlangpt.github.io/posts/conceitos-avancados-rustup/</guid>
           <description xml:base="https://rustlangpt.github.io/posts/conceitos-avancados-rustup/">&lt;h2 id=&quot;introducao&quot;&gt;Introdução&lt;&#x2F;h2&gt;
@@ -1063,7 +1063,7 @@ Quando definida, o rustup não tentará fazer symlink dos proxies e em vez disso
       <item>
           <title>Instalação do Rust: Guia Completo para Linux, Windows e macOS</title>
           <pubDate>Tue, 09 Sep 2025 00:00:00 +0000</pubDate>
-          <author>Unknown</author>
+          <author>RustlangPT</author>
           <link>https://rustlangpt.github.io/posts/instalacao-rust/</link>
           <guid>https://rustlangpt.github.io/posts/instalacao-rust/</guid>
           <description xml:base="https://rustlangpt.github.io/posts/instalacao-rust/">&lt;h2 id=&quot;introducao&quot;&gt;Introdução&lt;&#x2F;h2&gt;

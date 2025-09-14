@@ -11,7 +11,7 @@
       <item>
           <title>Cargo: O Gestor de Pacotes do Rust</title>
           <pubDate>Fri, 12 Sep 2025 00:00:00 +0000</pubDate>
-          <author>Unknown</author>
+          <author>RustlangPT</author>
           <link>https://rustlangpt.github.io/posts/cargo/</link>
           <guid>https://rustlangpt.github.io/posts/cargo/</guid>
           <description xml:base="https://rustlangpt.github.io/posts/cargo/">&lt;p&gt;Cargo é o gestor de pacotes oficial da linguagem de programação Rust, responsável por tarefas como descarregar dependências, compilar pacotes, criar pacotes distribuíveis e carregá-los para o crates.io, o registo de pacotes da comunidade Rust. Desenvolvido para simplificar o desenvolvimento em Rust, Cargo integra-se perfeitamente com o ecossistema da linguagem, permitindo uma gestão eficiente de projetos.&lt;&#x2F;p&gt;
@@ -523,7 +523,7 @@
       <item>
           <title>Dominando o rustup: indo além do básico</title>
           <pubDate>Wed, 10 Sep 2025 00:00:00 +0000</pubDate>
-          <author>Unknown</author>
+          <author>RustlangPT</author>
           <link>https://rustlangpt.github.io/posts/conceitos-avancados-rustup/</link>
           <guid>https://rustlangpt.github.io/posts/conceitos-avancados-rustup/</guid>
           <description xml:base="https://rustlangpt.github.io/posts/conceitos-avancados-rustup/">&lt;h2 id=&quot;introducao&quot;&gt;Introdução&lt;&#x2F;h2&gt;
@@ -1063,7 +1063,7 @@ Quando definida, o rustup não tentará fazer symlink dos proxies e em vez disso
       <item>
           <title>Instalação do Rust: Guia Completo para Linux, Windows e macOS</title>
           <pubDate>Tue, 09 Sep 2025 00:00:00 +0000</pubDate>
-          <author>Unknown</author>
+          <author>RustlangPT</author>
           <link>https://rustlangpt.github.io/posts/instalacao-rust/</link>
           <guid>https://rustlangpt.github.io/posts/instalacao-rust/</guid>
           <description xml:base="https://rustlangpt.github.io/posts/instalacao-rust/">&lt;h2 id=&quot;introducao&quot;&gt;Introdução&lt;&#x2F;h2&gt;
@@ -1316,7 +1316,7 @@ Em algum momento da instalação, será solicitado que instale o Visual Studio. 
       <item>
           <title>Apresentação da Linguagem de Programação Rust</title>
           <pubDate>Sat, 06 Sep 2025 00:00:00 +0000</pubDate>
-          <author>Unknown</author>
+          <author>RustlangPT</author>
           <link>https://rustlangpt.github.io/posts/apresentacao-rust/</link>
           <guid>https://rustlangpt.github.io/posts/apresentacao-rust/</guid>
           <description xml:base="https://rustlangpt.github.io/posts/apresentacao-rust/">&lt;h2 id=&quot;introducao&quot;&gt;Introdução&lt;&#x2F;h2&gt;
@@ -1460,7 +1460,7 @@ O Rust abraça múltiplos paradigmas:&lt;&#x2F;p&gt;
       <item>
           <title>Acerca do Rust</title>
           <pubDate>Mon, 01 Sep 2025 00:00:00 +0000</pubDate>
-          <author>Unknown</author>
+          <author>RustLangPT</author>
           <link>https://rustlangpt.github.io/acerca/</link>
           <guid>https://rustlangpt.github.io/acerca/</guid>
           <description xml:base="https://rustlangpt.github.io/acerca/">&lt;br&gt;
@@ -1475,7 +1475,7 @@ O Rust abraça múltiplos paradigmas:&lt;&#x2F;p&gt;
       <item>
           <title>Empregos</title>
           <pubDate>Mon, 01 Sep 2025 00:00:00 +0000</pubDate>
-          <author>Unknown</author>
+          <author>RustLangPT</author>
           <link>https://rustlangpt.github.io/empregos/</link>
           <guid>https://rustlangpt.github.io/empregos/</guid>
           <description xml:base="https://rustlangpt.github.io/empregos/">&lt;br&gt;
@@ -1487,7 +1487,7 @@ O Rust abraça múltiplos paradigmas:&lt;&#x2F;p&gt;
       <item>
           <title>Eventos</title>
           <pubDate>Mon, 01 Sep 2025 00:00:00 +0000</pubDate>
-          <author>Unknown</author>
+          <author>RustLangPT</author>
           <link>https://rustlangpt.github.io/eventos/</link>
           <guid>https://rustlangpt.github.io/eventos/</guid>
           <description xml:base="https://rustlangpt.github.io/eventos/">&lt;br&gt;
@@ -1503,7 +1503,7 @@ O Rust abraça múltiplos paradigmas:&lt;&#x2F;p&gt;
       <item>
           <title>Bem-vindo à &#x27;Comunidade da Linguagem de Programação Rust - Rust em Português&#x27; !</title>
           <pubDate>Mon, 01 Sep 2025 00:00:00 +0000</pubDate>
-          <author>Unknown</author>
+          <author>RustlangPT</author>
           <link>https://rustlangpt.github.io/posts/anuncio-comunidade/</link>
           <guid>https://rustlangpt.github.io/posts/anuncio-comunidade/</guid>
           <description xml:base="https://rustlangpt.github.io/posts/anuncio-comunidade/">&lt;div style=&quot;text-align: center;&quot;&gt;
@@ -1537,7 +1537,7 @@ O Rust abraça múltiplos paradigmas:&lt;&#x2F;p&gt;
       <item>
           <title>Formação - Cursos</title>
           <pubDate>Mon, 01 Sep 2025 00:00:00 +0000</pubDate>
-          <author>Unknown</author>
+          <author>RustLangPT</author>
           <link>https://rustlangpt.github.io/recursos/formacao/</link>
           <guid>https://rustlangpt.github.io/recursos/formacao/</guid>
           <description xml:base="https://rustlangpt.github.io/recursos/formacao/">&lt;br&gt;
@@ -1573,7 +1573,7 @@ O Rust abraça múltiplos paradigmas:&lt;&#x2F;p&gt;
       <item>
           <title>Livros</title>
           <pubDate>Mon, 01 Sep 2025 00:00:00 +0000</pubDate>
-          <author>Unknown</author>
+          <author>RustLangPT</author>
           <link>https://rustlangpt.github.io/recursos/livros/</link>
           <guid>https://rustlangpt.github.io/recursos/livros/</guid>
           <description xml:base="https://rustlangpt.github.io/recursos/livros/">&lt;br&gt;
@@ -1605,7 +1605,7 @@ O Rust abraça múltiplos paradigmas:&lt;&#x2F;p&gt;
       <item>
           <title>Tutoriais</title>
           <pubDate>Mon, 01 Sep 2025 00:00:00 +0000</pubDate>
-          <author>Unknown</author>
+          <author>RustLangPT</author>
           <link>https://rustlangpt.github.io/recursos/tutoriais/</link>
           <guid>https://rustlangpt.github.io/recursos/tutoriais/</guid>
           <description xml:base="https://rustlangpt.github.io/recursos/tutoriais/">&lt;br&gt;
@@ -1625,7 +1625,7 @@ O Rust abraça múltiplos paradigmas:&lt;&#x2F;p&gt;
       <item>
           <title>Vídeos</title>
           <pubDate>Mon, 01 Sep 2025 00:00:00 +0000</pubDate>
-          <author>Unknown</author>
+          <author>RustLangPT</author>
           <link>https://rustlangpt.github.io/recursos/videos/</link>
           <guid>https://rustlangpt.github.io/recursos/videos/</guid>
           <description xml:base="https://rustlangpt.github.io/recursos/videos/">&lt;br&gt;

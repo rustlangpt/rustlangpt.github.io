@@ -11,7 +11,7 @@
       <item>
           <title>Cargo: O Gestor de Pacotes do Rust</title>
           <pubDate>Fri, 12 Sep 2025 00:00:00 +0000</pubDate>
-          <author>Unknown</author>
+          <author>RustlangPT</author>
           <link>https://rustlangpt.github.io/posts/cargo/</link>
           <guid>https://rustlangpt.github.io/posts/cargo/</guid>
           <description xml:base="https://rustlangpt.github.io/posts/cargo/">&lt;p&gt;Cargo é o gestor de pacotes oficial da linguagem de programação Rust, responsável por tarefas como descarregar dependências, compilar pacotes, criar pacotes distribuíveis e carregá-los para o crates.io, o registo de pacotes da comunidade Rust. Desenvolvido para simplificar o desenvolvimento em Rust, Cargo integra-se perfeitamente com o ecossistema da linguagem, permitindo uma gestão eficiente de projetos.&lt;&#x2F;p&gt;
