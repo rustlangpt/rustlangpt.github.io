@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+      <title>RustlangPT - cargo</title>
+      <link>https://rustlangpt.github.io</link>
+      <description></description>
+      <generator>Zola</generator>
+      <language>en</language>
+      <atom:link href="https://rustlangpt.github.io/tags/cargo/rss.xml" rel="self" type="application/rss+xml"/>
+      <lastBuildDate>Fri, 12 Sep 2025 00:00:00 +0000</lastBuildDate>
+      <item>
+          <title>Cargo: O Gestor de Pacotes do Rust</title>
+          <pubDate>Fri, 12 Sep 2025 00:00:00 +0000</pubDate>
+          <author>Unknown</author>
+          <link>https://rustlangpt.github.io/posts/cargo/</link>
+          <guid>https://rustlangpt.github.io/posts/cargo/</guid>
+          <description xml:base="https://rustlangpt.github.io/posts/cargo/">&lt;p&gt;Cargo é o gestor de pacotes oficial da linguagem de programação Rust, responsável por tarefas como descarregar dependências, compilar pacotes, criar pacotes distribuíveis e carregá-los para o crates.io, o registo de pacotes da comunidade Rust. Desenvolvido para simplificar o desenvolvimento em Rust, Cargo integra-se perfeitamente com o ecossistema da linguagem, permitindo uma gestão eficiente de projetos.&lt;&#x2F;p&gt;
+&lt;p&gt;Neste artigo, vamos desvendar os segredos do Cargo, desde a sua instalação até às suas funcionalidades mais avançadas, sempre com a &lt;a href=&quot;https:&#x2F;&#x2F;doc.rust-lang.org&#x2F;cargo&#x2F;&quot;&gt;documentação oficial do Cargo&lt;&#x2F;a&gt; como nosso guia.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;processo-de-instalacao&quot;&gt;Processo de Instalação&lt;&#x2F;h2&gt;
+&lt;h3 id=&quot;instalacao-automatica-com-rustup&quot;&gt;Instalação Automática com Rustup&lt;&#x2F;h3&gt;
+&lt;p&gt;O Cargo é instalado automaticamente quando instala o Rust através do rustup. Esta é a forma recomendada e mais simples:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Instalar Rust e Cargo via rustup
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; curl&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --proto &lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;=https&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --tlsv1&lt;&#x2F;span&gt;&lt;span&gt;.2 https:&#x2F;&#x2F;sh.rustup.rs&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -sSf &lt;&#x2F;span&gt;&lt;span&gt;| &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;sh
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Verificar instalação
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; cargo&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --version
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cargo&lt;&#x2F;span&gt;&lt;span&gt; 1.75.0 (1d8b05cdd 2023-11-20)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;verificacao-da-instalacao&quot;&gt;Verificação da Instalação&lt;&#x2F;h3&gt;
+&lt;p&gt;Para confirmar que o Cargo está correctamente instalado e configurado:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Verificar versão do Cargo
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; cargo&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --version
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Ver informação detalhada sobre a instalação
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; cargo version&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --verbose
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cargo&lt;&#x2F;span&gt;&lt;span&gt; 1.75.0 (1d8b05cdd 2023-11-20)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;release:&lt;&#x2F;span&gt;&lt;span&gt; 1.75.0
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;commit-hash:&lt;&#x2F;span&gt;&lt;span&gt; 1d8b05cdd2353964c50fe0b8f07a16e4c8caaf15
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;commit-date:&lt;&#x2F;span&gt;&lt;span&gt; 2023-11-20
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;host:&lt;&#x2F;span&gt;&lt;span&gt; x86_64-unknown-linux-gnu
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Testar funcionalidades básicas
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; cargo help
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;atualizacao-do-cargo&quot;&gt;Atualização do Cargo&lt;&#x2F;h3&gt;
+&lt;p&gt;O Cargo é atualizado automaticamente quando atualiza o Rust:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Atualizar Rust e Cargo
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup update
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;hr &#x2F;&gt;
+&lt;h2 id=&quot;criacao-de-pacotes&quot;&gt;Criação de Pacotes&lt;&#x2F;h2&gt;
+&lt;h3 id=&quot;criacao-de-um-novo-projeto&quot;&gt;Criação de um Novo Projeto&lt;&#x2F;h3&gt;
+&lt;p&gt;O comando &lt;code&gt;cargo new&lt;&#x2F;code&gt; é a forma padrão de criar novos projetos Rust:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Criar aplicação executável (binary)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; cargo new minha-app
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Created&lt;&#x2F;span&gt;&lt;span&gt; binary (application) `&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;minha-app&lt;&#x2F;span&gt;&lt;span&gt;` package
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Criar biblioteca (library)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; cargo new minha-lib&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --lib
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Created&lt;&#x2F;span&gt;&lt;span&gt; library `&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;minha-lib&lt;&#x2F;span&gt;&lt;span&gt;` package
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Criar projeto no diretório atual
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; cargo init
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Criar com VCS específico, por exemplo o git
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; cargo new meu-projeto&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --vcs&lt;&#x2F;span&gt;&lt;span&gt; git
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Isto cria uma pasta minha-app com a seguinte estrutura:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;minha-app&#x2F;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;├──&lt;&#x2F;span&gt;&lt;span&gt; src&#x2F;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;│&lt;&#x2F;span&gt;&lt;span&gt;   └── main.rs  (Onde o teu código vai estar)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;└──&lt;&#x2F;span&gt;&lt;span&gt; Cargo.toml   (O ficheiro de configuração do teu pacote)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;No caso da biblioteca, a estrutura é semelhante, mas o ficheiro principal é src&#x2F;lib.rs.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;estrutura-de-um-projeto-cargo&quot;&gt;Estrutura de um Projeto Cargo&lt;&#x2F;h3&gt;
+&lt;p&gt;Um projeto típico criado pelo Cargo tem esta estrutura:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;minha-app&#x2F;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;├──&lt;&#x2F;span&gt;&lt;span&gt; Cargo.toml        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Manifest do projeto
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;├──&lt;&#x2F;span&gt;&lt;span&gt; Cargo.lock        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Lock file das dependências
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;├──&lt;&#x2F;span&gt;&lt;span&gt; src&#x2F;              &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Código fonte
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;│&lt;&#x2F;span&gt;&lt;span&gt;   ├── main.rs       &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Ponto de entrada (para binários)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;│&lt;&#x2F;span&gt;&lt;span&gt;   └── lib.rs        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Módulo raiz (para bibliotecas)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;├──&lt;&#x2F;span&gt;&lt;span&gt; tests&#x2F;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Testes de integração
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;├──&lt;&#x2F;span&gt;&lt;span&gt; examples&#x2F;         &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Exemplos de uso
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;├──&lt;&#x2F;span&gt;&lt;span&gt; benches&#x2F;          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Benchmarks
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;└──&lt;&#x2F;span&gt;&lt;span&gt; target&#x2F;           &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Diretório de build (gerado automaticamente)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;o-ficheiro-cargo-toml&quot;&gt;O Ficheiro Cargo.toml&lt;&#x2F;h3&gt;
+&lt;p&gt;O ficheiro Cargo.toml é a alma do teu projeto Rust. É nele que defines os metadados do teu pacote e, mais importante, as tuas dependências.&lt;&#x2F;p&gt;
+&lt;p&gt;O ficheiro Cargo.toml é o manifesto do projeto, seguindo o formato TOML (exemplo):&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;[package]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;name&lt;&#x2F;span&gt;&lt;span&gt; = &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;meu_projeto&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;version&lt;&#x2F;span&gt;&lt;span&gt; = &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;0.1.0&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;edition&lt;&#x2F;span&gt;&lt;span&gt; = &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;2021&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;authors&lt;&#x2F;span&gt;&lt;span&gt; = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;[&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Seu Nome &amp;lt;email@example.com&amp;gt;&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;description&lt;&#x2F;span&gt;&lt;span&gt; = &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Uma breve descrição do projeto&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;license&lt;&#x2F;span&gt;&lt;span&gt; = &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;MIT OR Apache-2.0&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;repository&lt;&#x2F;span&gt;&lt;span&gt; = &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;https:&#x2F;&#x2F;github.com&#x2F;user&#x2F;projeto&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;homepage&lt;&#x2F;span&gt;&lt;span&gt; = &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;https:&#x2F;&#x2F;projeto.example.com&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;documentation&lt;&#x2F;span&gt;&lt;span&gt; = &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;https:&#x2F;&#x2F;docs.rs&#x2F;meu_projeto&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;readme&lt;&#x2F;span&gt;&lt;span&gt; = &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;README.md&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;keywords&lt;&#x2F;span&gt;&lt;span&gt; = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;[&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;web&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;api&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;rust&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;categories&lt;&#x2F;span&gt;&lt;span&gt; = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;[&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;web-programming&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;]
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;[dependencies]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;serde&lt;&#x2F;span&gt;&lt;span&gt; = { version = &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;1.0&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, features = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;[&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;derive&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;] &lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;tokio&lt;&#x2F;span&gt;&lt;span&gt; = { version = &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;1.0&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, features = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;[&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;full&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;] &lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;[dev-dependencies]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;criterion&lt;&#x2F;span&gt;&lt;span&gt; = &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;0.4&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;[build-dependencies]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cc&lt;&#x2F;span&gt;&lt;span&gt; = &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;1.0&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Para aprenderes mais sobre o formato e as opções do Cargo.toml, a &lt;a href=&quot;https:&#x2F;&#x2F;doc.rust-lang.org&#x2F;cargo&#x2F;reference&#x2F;manifest.html&quot;&gt;documentação oficial&lt;&#x2F;a&gt; é o teu melhor recurso.&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+&lt;h2 id=&quot;gestao-de-pacotes&quot;&gt;Gestão de Pacotes&lt;&#x2F;h2&gt;
+&lt;p&gt;A gestão de pacotes no Cargo envolve comandos para construir, executar, atualizar e instalar pacotes. Embora a documentação de comandos gerais esteja indexada, focamo-nos em comandos chave para gestão.&lt;&#x2F;p&gt;
+&lt;p&gt;Comandos Principais:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Construir: &lt;code&gt;cargo build&lt;&#x2F;code&gt; – Compila o pacote atual.&lt;&#x2F;li&gt;
+&lt;li&gt;Executar: &lt;code&gt;cargo run&lt;&#x2F;code&gt; – Compila e executa o binário principal.&lt;&#x2F;li&gt;
+&lt;li&gt;Atualizar Dependências: &lt;code&gt;cargo update&lt;&#x2F;code&gt; – Atualiza as dependências no Cargo.lock.&lt;&#x2F;li&gt;
+&lt;li&gt;Instalar Pacotes Globais: &lt;code&gt;cargo install nome_do_crate&lt;&#x2F;code&gt; – Instala um crate como ferramenta global.&lt;&#x2F;li&gt;
+&lt;li&gt;Procurar Pacotes: &lt;code&gt;cargo search nome&lt;&#x2F;code&gt; – Procura crates no crates.io.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;comandos-fundamentais-de-build&quot;&gt;Comandos Fundamentais de Build&lt;&#x2F;h3&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Compilar o projeto
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; cargo build
+&lt;&#x2F;span&gt;&lt;span&gt;   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Compiling&lt;&#x2F;span&gt;&lt;span&gt; minha-app v0.1.0 (&#x2F;path&#x2F;to&#x2F;minha-app)
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Finished&lt;&#x2F;span&gt;&lt;span&gt; dev &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;[&lt;&#x2F;span&gt;&lt;span&gt;unoptimized + debuginfo&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;]&lt;&#x2F;span&gt;&lt;span&gt; target(s) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;in&lt;&#x2F;span&gt;&lt;span&gt; 2.41s
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Compilar em modo release (otimizado)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; cargo build&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --release
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Compilar e executar
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; cargo run
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Finished&lt;&#x2F;span&gt;&lt;span&gt; dev &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;[&lt;&#x2F;span&gt;&lt;span&gt;unoptimized + debuginfo&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;]&lt;&#x2F;span&gt;&lt;span&gt; target(s) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;in&lt;&#x2F;span&gt;&lt;span&gt; 0.0s
+&lt;&#x2F;span&gt;&lt;span&gt;     &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Running &lt;&#x2F;span&gt;&lt;span&gt;`&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;target&#x2F;debug&#x2F;minha-app&lt;&#x2F;span&gt;&lt;span&gt;`
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Hello,&lt;&#x2F;span&gt;&lt;span&gt; world!
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Verificar compilação sem gerar executável
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; cargo check
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;gestao-de-builds-e-cache&quot;&gt;Gestão de Builds e Cache&lt;&#x2F;h3&gt;
+&lt;p&gt;Em comandos subsequentes &lt;code&gt;$ cargo build&lt;&#x2F;code&gt;, o Cargo não recompila a crate porque não há mudanças no código fonte, dependências ou configurações de build. O Cargo também compila e faz cache das dependências dentro do diretório target&#x2F;debug&#x2F;deps.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Limpar artefactos de build
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; cargo clean
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Build com informação detalhada
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; cargo build&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --verbose
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Build para targets específicos
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; cargo build&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --target&lt;&#x2F;span&gt;&lt;span&gt; x86_64-pc-windows-gnu
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;gestao-de-dependencias&quot;&gt;Gestão de Dependências&lt;&#x2F;h2&gt;
+&lt;h3 id=&quot;adicionar-dependencias&quot;&gt;Adicionar Dependências&lt;&#x2F;h3&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;crates.io&#x2F;&quot;&gt;crates.io&lt;&#x2F;a&gt; é o registo central de pacotes da comunidade Rust que serve como local para pesquisar e descarregar pacotes. O cargo está configurado para usá-lo por defeito para encontrar pacotes solicitados. Para depender de uma biblioteca alojada em crates.io, adicione-a ao seu Cargo.toml.&lt;&#x2F;p&gt;
+&lt;h4 id=&quot;dependencias-basicas&quot;&gt;Dependências Básicas&lt;&#x2F;h4&gt;
+&lt;pre data-lang=&quot;toml&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-toml &quot;&gt;&lt;code class=&quot;language-toml&quot; data-lang=&quot;toml&quot;&gt;&lt;span&gt;[dependencies]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;serde &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;1.0&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;tokio &lt;&#x2F;span&gt;&lt;span&gt;= { &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;version &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;1.0&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;features &lt;&#x2F;span&gt;&lt;span&gt;= [&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;full&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;] }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;reqwest &lt;&#x2F;span&gt;&lt;span&gt;= { &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;version &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;0.11&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;features &lt;&#x2F;span&gt;&lt;span&gt;= [&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;json&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;] }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Dependências de desenvolvimento (apenas para testes)
+&lt;&#x2F;span&gt;&lt;span&gt;[dev-dependencies]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;tokio-test &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;0.4&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Dependências de build (para build scripts)
+&lt;&#x2F;span&gt;&lt;span&gt;[build-dependencies]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cc &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;1.0&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h4 id=&quot;especificacao-de-versoes&quot;&gt;Especificação de Versões&lt;&#x2F;h4&gt;
+&lt;p&gt;A string de versão &quot;1.0.136&quot; é chamada requirement de versão.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;toml&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-toml &quot;&gt;&lt;code class=&quot;language-toml&quot; data-lang=&quot;toml&quot;&gt;&lt;span&gt;[dependencies]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Versão exata
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;serde &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;=1.0.136&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Compatibilidade com patch
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;serde &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;1.0.136&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# &amp;gt;=1.0.136, &amp;lt;1.1.0
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Compatibilidade com minor
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;serde &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;1.*&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# &amp;gt;=1.0.0, &amp;lt;2.0.0
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Range de versões
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;serde &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&amp;gt;=1.0.100, &amp;lt;1.2.0&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Versão mais recente
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;serde &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Pre-release
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;serde &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;1.0.0-alpha&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;comando-cargo-add&quot;&gt;Comando cargo add&lt;&#x2F;h3&gt;
+&lt;p&gt;Adicionando via cmds&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Adicionar dependência
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; cargo add serde
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Updating&lt;&#x2F;span&gt;&lt;span&gt; crates.io index
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Adding&lt;&#x2F;span&gt;&lt;span&gt; serde v1.0.193 to dependencies.
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Adicionar com features
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; cargo add tokio&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --features&lt;&#x2F;span&gt;&lt;span&gt; full
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Adicionar dependência de desenvolvimento
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; cargo add&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --dev&lt;&#x2F;span&gt;&lt;span&gt; tokio-test
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Adicionar dependência opcional
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; cargo add&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --optional&lt;&#x2F;span&gt;&lt;span&gt; serde
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;atualizacao-de-dependencias&quot;&gt;Atualização de Dependências&lt;&#x2F;h3&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Atualizar todas as dependências
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; cargo update
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Atualizar dependência específica
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; cargo update serde
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Atualizar para versão específica
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; cargo update serde&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --precise&lt;&#x2F;span&gt;&lt;span&gt; 1.0.150
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;publicacao-de-pacotes&quot;&gt;Publicação de Pacotes&lt;&#x2F;h2&gt;
+&lt;p&gt;Quando a tua biblioteca estiver pronta para ser partilhada com o mundo, o Cargo torna o processo de publicação no crates.io incrivelmente simples.&lt;&#x2F;p&gt;
+&lt;p&gt;Passos que deves seguir:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Criar uma conta em crates.io.&lt;&#x2F;li&gt;
+&lt;li&gt;Obter token de acesso no crates.io&lt;&#x2F;li&gt;
+&lt;li&gt;Fazer login no terminal.&lt;&#x2F;li&gt;
+&lt;li&gt;Publicar.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;preparacao-para-publicacao&quot;&gt;Preparação para Publicação&lt;&#x2F;h3&gt;
+&lt;p&gt;Antes de publicar no crates.io, certifique-se que tem os metadados necessários no Cargo.toml:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;toml&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-toml &quot;&gt;&lt;code class=&quot;language-toml&quot; data-lang=&quot;toml&quot;&gt;&lt;span&gt;[package]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;name &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;minha-biblioteca&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;version &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;0.1.0&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;edition &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;2021&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;authors &lt;&#x2F;span&gt;&lt;span&gt;= [&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Seu Nome &amp;lt;email@example.com&amp;gt;&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;license &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;MIT&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;description &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Uma biblioteca útil para demonstração&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;homepage &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;https:&#x2F;&#x2F;github.com&#x2F;usuario&#x2F;minha-biblioteca&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;repository &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;https:&#x2F;&#x2F;github.com&#x2F;usuario&#x2F;minha-biblioteca&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;documentation &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;https:&#x2F;&#x2F;docs.rs&#x2F;minha-biblioteca&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;readme &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;README.md&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;keywords &lt;&#x2F;span&gt;&lt;span&gt;= [&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;rust&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;biblioteca&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;exemplo&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;categories &lt;&#x2F;span&gt;&lt;span&gt;= [&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;development-tools&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;]
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;[dependencies]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# suas dependências aqui
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;criar-conta-no-crates-io&quot;&gt;Criar Conta no Crates.io&lt;&#x2F;h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Visite &lt;a href=&quot;https:&#x2F;&#x2F;crates.io&quot;&gt;crates.io&lt;&#x2F;a&gt; e crie conta via GitHub&lt;&#x2F;li&gt;
+&lt;li&gt;Obtenha o seu API token no Account Settings&lt;&#x2F;li&gt;
+&lt;li&gt;Configure o token localmente no terminal:&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; cargo login
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Cole o token quando solicitado
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;processo-de-publicacao&quot;&gt;Processo de Publicação&lt;&#x2F;h3&gt;
+&lt;p&gt;Para isso usamos o subcomando &#x27;cargo publish&#x27;. Este comando executa os seguintes passos: executa algumas verificações de validação no seu pacote, comprime o seu código fonte num ficheiro &#x27;.crate&#x27;, extrai o ficheiro &#x27;.crate&#x27; para um diretório temporário e verifica que compila.&lt;&#x2F;p&gt;
+&lt;h4 id=&quot;empacotamento-e-verificacao&quot;&gt;Empacotamento e Verificação&lt;&#x2F;h4&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Criar pacote local para verificação
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; cargo package
+&lt;&#x2F;span&gt;&lt;span&gt;   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Packaging&lt;&#x2F;span&gt;&lt;span&gt; minha-biblioteca v0.1.0 (&#x2F;path&#x2F;to&#x2F;projeto)
+&lt;&#x2F;span&gt;&lt;span&gt;   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Verifying&lt;&#x2F;span&gt;&lt;span&gt; minha-biblioteca v0.1.0 (&#x2F;path&#x2F;to&#x2F;projeto)
+&lt;&#x2F;span&gt;&lt;span&gt;   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Compiling&lt;&#x2F;span&gt;&lt;span&gt; minha-biblioteca v0.1.0 (&#x2F;path&#x2F;to&#x2F;projeto&#x2F;target&#x2F;package&#x2F;minha-biblioteca-0.1.0)
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Finished&lt;&#x2F;span&gt;&lt;span&gt; dev &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;[&lt;&#x2F;span&gt;&lt;span&gt;unoptimized + debuginfo&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;]&lt;&#x2F;span&gt;&lt;span&gt; target(s) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;in&lt;&#x2F;span&gt;&lt;span&gt; 0.61s
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Verificar conteúdo do pacote
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; cargo package&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --list
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Como bónus adicional, o *.crate será verificado independentemente da árvore fonte atual. Após a criação do *.crate, é desempacotado em target&#x2F;package e depois construído do zero para garantir que todos os ficheiros necessários estão presentes para que o build tenha sucesso.&lt;&#x2F;p&gt;
+&lt;h4 id=&quot;publicacao&quot;&gt;Publicação&lt;&#x2F;h4&gt;
+&lt;p&gt;Para a publicação basta fazer o comando &lt;code&gt;cargo publish&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Publicar no crates.io
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; cargo publish
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Updating&lt;&#x2F;span&gt;&lt;span&gt; crates.io index
+&lt;&#x2F;span&gt;&lt;span&gt;   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Packaging&lt;&#x2F;span&gt;&lt;span&gt; minha-biblioteca v0.1.0 (&#x2F;path&#x2F;to&#x2F;projeto)
+&lt;&#x2F;span&gt;&lt;span&gt;   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Verifying&lt;&#x2F;span&gt;&lt;span&gt; minha-biblioteca v0.1.0 (&#x2F;path&#x2F;to&#x2F;projeto)
+&lt;&#x2F;span&gt;&lt;span&gt;   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Compiling&lt;&#x2F;span&gt;&lt;span&gt; minha-biblioteca v0.1.0 (&#x2F;path&#x2F;to&#x2F;projeto&#x2F;target&#x2F;package&#x2F;minha-biblioteca-0.1.0)
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Finished&lt;&#x2F;span&gt;&lt;span&gt; dev &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;[&lt;&#x2F;span&gt;&lt;span&gt;unoptimized + debuginfo&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;]&lt;&#x2F;span&gt;&lt;span&gt; target(s) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;in&lt;&#x2F;span&gt;&lt;span&gt; 0.61s
+&lt;&#x2F;span&gt;&lt;span&gt;   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Uploading&lt;&#x2F;span&gt;&lt;span&gt; minha-biblioteca v0.1.0 (&#x2F;path&#x2F;to&#x2F;projeto)
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Dry-run para testar sem publicar
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; cargo publish&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --dry-run
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;strong&gt;Versionamento Semântico&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;O Cargo segue o &lt;a href=&quot;https:&#x2F;&#x2F;semver.org&#x2F;&quot;&gt;Semantic Versioning&lt;&#x2F;a&gt;:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;MAJOR.MINOR.PATCH&lt;&#x2F;strong&gt; (e.g., 1.2.3)&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;MAJOR&lt;&#x2F;strong&gt;: Breaking changes&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;MINOR&lt;&#x2F;strong&gt;: Nova funcionalidade (backward compatible)&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;PATCH&lt;&#x2F;strong&gt;: Bug fixes&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Se publicar uma versão com problemas:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Remover versão problemática (impede novos usos)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; cargo yank&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --version&lt;&#x2F;span&gt;&lt;span&gt; 0.1.1
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Reverter yank
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; cargo yank&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --version&lt;&#x2F;span&gt;&lt;span&gt; 0.1.1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --undo
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;testes&quot;&gt;Testes&lt;&#x2F;h2&gt;
+&lt;p&gt;O Cargo tem  suporte para testes, não precisando de frameworks de terceiros para começar a testar o teu código.&lt;&#x2F;p&gt;
+&lt;p&gt;Tipos de Testes:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Unitários: Em ficheiros src&#x2F; com #[test].&lt;&#x2F;li&gt;
+&lt;li&gt;Integração: Em tests&#x2F;nome_teste.rs, importando o crate.&lt;&#x2F;li&gt;
+&lt;li&gt;Documentação: Em comentários com &#x2F;&#x2F;&#x2F; # Examples.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h4 id=&quot;testes-unitarios&quot;&gt;Testes Unitários&lt;&#x2F;h4&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; src&#x2F;lib.rs
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;pub fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;add&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;a&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;i32&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;b&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;i32&lt;&#x2F;span&gt;&lt;span&gt;) -&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;i32 &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    a + b
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;#[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cfg&lt;&#x2F;span&gt;&lt;span&gt;(test)]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;mod &lt;&#x2F;span&gt;&lt;span&gt;tests {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;use super&lt;&#x2F;span&gt;&lt;span&gt;::*;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    #[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;test&lt;&#x2F;span&gt;&lt;span&gt;]
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;test_add&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;        assert_eq!(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;add&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span&gt;), &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;4&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h4 id=&quot;testes-de-integracao&quot;&gt;Testes de Integração&lt;&#x2F;h4&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; tests&#x2F;integration_test.rs
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;use &lt;&#x2F;span&gt;&lt;span&gt;meu_projeto::add;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;#[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;test&lt;&#x2F;span&gt;&lt;span&gt;]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;test_integration_add&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;    assert_eq!(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;add&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;5&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;5&lt;&#x2F;span&gt;&lt;span&gt;), &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;10&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h4 id=&quot;doc-tests&quot;&gt;Doc Tests&lt;&#x2F;h4&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F;&#x2F; Adiciona dois números.
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F;&#x2F;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F;&#x2F; # Examples
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F;&#x2F;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F;&#x2F; ```
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F;&#x2F; use meu_projeto::add;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F;&#x2F; 
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F;&#x2F; let result = add(2, 3);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F;&#x2F; assert_eq!(result, 5);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F;&#x2F; ```
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;pub fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;add&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;a&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;i32&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;b&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;i32&lt;&#x2F;span&gt;&lt;span&gt;) -&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;i32 &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    a + b
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;comandos-de-teste&quot;&gt;Comandos de Teste&lt;&#x2F;h3&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Executar todos os testes
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; cargo test
+&lt;&#x2F;span&gt;&lt;span&gt;   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Compiling&lt;&#x2F;span&gt;&lt;span&gt; meu_projeto v0.1.0 (&#x2F;path&#x2F;to&#x2F;meu_projeto)
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Finished&lt;&#x2F;span&gt;&lt;span&gt; test &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;[&lt;&#x2F;span&gt;&lt;span&gt;unoptimized + debuginfo&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;]&lt;&#x2F;span&gt;&lt;span&gt; target(s) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;in&lt;&#x2F;span&gt;&lt;span&gt; 0.61s
+&lt;&#x2F;span&gt;&lt;span&gt;     &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Running&lt;&#x2F;span&gt;&lt;span&gt; unittests src&#x2F;lib.rs (target&#x2F;debug&#x2F;deps&#x2F;meu_projeto-...)
+&lt;&#x2F;span&gt;&lt;span&gt;     &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Running&lt;&#x2F;span&gt;&lt;span&gt; tests&#x2F;integration_test.rs (target&#x2F;debug&#x2F;deps&#x2F;integration_test-...)
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Executar testes específicos
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; cargo test test_add
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Executar testes ignorados
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; cargo test -- --ignored
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Executar testes com output detalhado
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; cargo test -- --nocapture
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Executar testes em série (não paralelo)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; cargo test -- --test-threads=1
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Executar apenas unit tests
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; cargo test&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --lib
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Executar apenas integration tests
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; cargo test&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --test&lt;&#x2F;span&gt;&lt;span&gt; integration_test
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Executar apenas doc tests
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; cargo test&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --doc
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;configuracao-de-testes&quot;&gt;Configuração de Testes&lt;&#x2F;h3&gt;
+&lt;pre data-lang=&quot;toml&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-toml &quot;&gt;&lt;code class=&quot;language-toml&quot; data-lang=&quot;toml&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Cargo.toml
+&lt;&#x2F;span&gt;&lt;span&gt;[dependencies]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;serde &lt;&#x2F;span&gt;&lt;span&gt;= { &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;version &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;1.0&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;features &lt;&#x2F;span&gt;&lt;span&gt;= [&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;derive&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;] }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;[dev-dependencies]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;tokio-test &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;0.4&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;criterion &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;0.5&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;proptest &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;1.0&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;mockall &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;0.11&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;serial_test &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;2.0&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Configuração específica para testes
+&lt;&#x2F;span&gt;&lt;span&gt;[[test]]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;name &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;integration&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;path &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;tests&#x2F;integration&#x2F;main.rs&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;required-features &lt;&#x2F;span&gt;&lt;span&gt;= [&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;integration&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;]
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;benchmarks&quot;&gt;Benchmarks&lt;&#x2F;h3&gt;
+&lt;p&gt;Para benchmarks, adicione ao Cargo.toml:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;toml&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-toml &quot;&gt;&lt;code class=&quot;language-toml&quot; data-lang=&quot;toml&quot;&gt;&lt;span&gt;[dev-dependencies]
+&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#bf616a;color:#2b303b;&quot;&gt;...&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;[[bench]]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;name &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;meus_benchmarks&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;harness &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;false
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; benches&#x2F;benchmark.rs
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;use &lt;&#x2F;span&gt;&lt;span&gt;criterion::{black_box, criterion_group, criterion_main, Criterion};
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;use &lt;&#x2F;span&gt;&lt;span&gt;meu_projeto::add;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;criterion_benchmark&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;c&lt;&#x2F;span&gt;&lt;span&gt;: &amp;amp;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;mut&lt;&#x2F;span&gt;&lt;span&gt; Criterion) {
+&lt;&#x2F;span&gt;&lt;span&gt;    c.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;bench_function&lt;&#x2F;span&gt;&lt;span&gt;(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;add 2 + 2&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, |&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;b&lt;&#x2F;span&gt;&lt;span&gt;| b.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;iter&lt;&#x2F;span&gt;&lt;span&gt;(|| &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;add&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;black_box&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span&gt;), &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;black_box&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span&gt;))));
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;criterion_group!(benches, criterion_benchmark);
+&lt;&#x2F;span&gt;&lt;span&gt;criterion_main!(benches);
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Executar benchmarks
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; cargo bench
+&lt;&#x2F;span&gt;&lt;span&gt;   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Compiling&lt;&#x2F;span&gt;&lt;span&gt; meu_projeto v0.1.0 (&#x2F;path&#x2F;to&#x2F;meu_projeto)
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Finished&lt;&#x2F;span&gt;&lt;span&gt; bench &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;[&lt;&#x2F;span&gt;&lt;span&gt;optimized&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;]&lt;&#x2F;span&gt;&lt;span&gt; target(s) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;in&lt;&#x2F;span&gt;&lt;span&gt; 0.88s
+&lt;&#x2F;span&gt;&lt;span&gt;     &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Running&lt;&#x2F;span&gt;&lt;span&gt; benches&#x2F;benchmark.rs (target&#x2F;release&#x2F;deps&#x2F;benchmark-...)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;add&lt;&#x2F;span&gt;&lt;span&gt; 2 + 2               time:   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;[&lt;&#x2F;span&gt;&lt;span&gt;0.0000 ns 0.0001 ns 0.0002 ns&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;]
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;continuous-integration&quot;&gt;Continuous Integration&lt;&#x2F;h2&gt;
+&lt;h3 id=&quot;github-actions&quot;&gt;GitHub Actions&lt;&#x2F;h3&gt;
+&lt;p&gt;Verificar as versões mais recentes ajudaria... &lt;code&gt;cargo add&lt;&#x2F;code&gt; ou &lt;code&gt;cargo install&lt;&#x2F;code&gt;. Ao testar as versões mais recentes algumas considerações são: minimizar fatores externos que afetam o desenvolvimento local ou CI, custos de CI, incluindo custos indiretos como se um serviço de CI tem um máximo de runners paralelos, fazendo com que novos jobs sejam serializados quando no máximo.&lt;&#x2F;p&gt;
+&lt;h4 id=&quot;configuracao-basica&quot;&gt;Configuração Básica&lt;&#x2F;h4&gt;
+&lt;pre data-lang=&quot;yaml&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-yaml &quot;&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# .github&#x2F;workflows&#x2F;ci.yml
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;name&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;CI
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;on&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;push&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;branches&lt;&#x2F;span&gt;&lt;span&gt;: [ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;main &lt;&#x2F;span&gt;&lt;span&gt;]
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;pull_request&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;branches&lt;&#x2F;span&gt;&lt;span&gt;: [ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;main &lt;&#x2F;span&gt;&lt;span&gt;]
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;env&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;CARGO_TERM_COLOR&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;always
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;jobs&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;test&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;runs-on&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;ubuntu-latest
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;strategy&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;matrix&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;rust-version&lt;&#x2F;span&gt;&lt;span&gt;: [&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;stable&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;beta&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;nightly&lt;&#x2F;span&gt;&lt;span&gt;]
+&lt;&#x2F;span&gt;&lt;span&gt;        
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;steps&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;    - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;uses&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;actions&#x2F;checkout@v4
+&lt;&#x2F;span&gt;&lt;span&gt;    
+&lt;&#x2F;span&gt;&lt;span&gt;    - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;name&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Install Rust
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;uses&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;dtolnay&#x2F;rust-toolchain@stable
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;with&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;toolchain&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;${{ matrix.rust-version }}
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;components&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;rustfmt, clippy
+&lt;&#x2F;span&gt;&lt;span&gt;        
+&lt;&#x2F;span&gt;&lt;span&gt;    - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;name&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Cache dependencies
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;uses&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;actions&#x2F;cache@v3
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;with&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;path&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;|
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;          ~&#x2F;.cargo&#x2F;registry
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;          ~&#x2F;.cargo&#x2F;git
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;          target
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;key&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;${{ runner.os }}-cargo-${{ hashFiles(&amp;#39;**&#x2F;Cargo.lock&amp;#39;) }}
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;restore-keys&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;|
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;          ${{ runner.os }}-cargo-
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;          
+&lt;&#x2F;span&gt;&lt;span&gt;    - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;name&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Run tests
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;run&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;cargo test --verbose
+&lt;&#x2F;span&gt;&lt;span&gt;      
+&lt;&#x2F;span&gt;&lt;span&gt;    - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;name&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Check formatting
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;run&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;cargo fmt -- --check
+&lt;&#x2F;span&gt;&lt;span&gt;      
+&lt;&#x2F;span&gt;&lt;span&gt;    - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;name&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Run clippy
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;run&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;cargo clippy -- -D warnings
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h4 id=&quot;gitlab-ci&quot;&gt;GitLab CI&lt;&#x2F;h4&gt;
+&lt;pre data-lang=&quot;yaml&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-yaml &quot;&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# .gitlab-ci.yml
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;image&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;rust:latest
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;variables&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;CARGO_HOME&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;$CI_PROJECT_DIR&#x2F;cargo
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cache&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;paths&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;    - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;cargo&#x2F;
+&lt;&#x2F;span&gt;&lt;span&gt;    - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;target&#x2F;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;stages&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;  - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;test
+&lt;&#x2F;span&gt;&lt;span&gt;  - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;deploy
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;test&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;stage&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;test
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;script&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;    - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;rustc --version &amp;amp;&amp;amp; cargo --version
+&lt;&#x2F;span&gt;&lt;span&gt;    - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;cargo test --verbose
+&lt;&#x2F;span&gt;&lt;span&gt;    - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;cargo clippy -- -D warnings
+&lt;&#x2F;span&gt;&lt;span&gt;    - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;cargo fmt -- --check
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;deploy&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;stage&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;deploy
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;script&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;    - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;cargo publish --token $CRATES_IO_TOKEN
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;only&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;    - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;tags
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Guia de CI: &lt;a href=&quot;https:&#x2F;&#x2F;doc.rust-lang.org&#x2F;cargo&#x2F;guide&#x2F;continuous-integration.html&quot;&gt;Cargo e Integração Contínua&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+&lt;h2 id=&quot;referencias&quot;&gt;Referências&lt;&#x2F;h2&gt;
+&lt;p&gt;Para se aprofundar em cada funcionalidade e evitar erros comuns, consulte sempre a documentação oficial do Cargo.&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;doc.rust-lang.org&#x2F;cargo&#x2F;index.html&quot;&gt;Documentação oficial Cargo&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;doc.rust-lang.org&#x2F;cargo&#x2F;reference&#x2F;manifest.html&quot;&gt;Cargo.toml Reference&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;doc.rust-lang.org&#x2F;cargo&#x2F;reference&#x2F;publishing.html&quot;&gt;Publishing on crates.io&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;doc.rust-lang.org&#x2F;cargo&#x2F;guide&#x2F;continuous-integration.html&quot;&gt;Continuous Integration Guide&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;conclusao&quot;&gt;Conclusão&lt;&#x2F;h2&gt;
+&lt;p&gt;Cargo simplifica o desenvolvimento em Rust, desde a criação até à CI. Explore a documentação oficial para mais detalhes e experimente os exemplos para aprofundar o seu conhecimento.&lt;&#x2F;p&gt;
+</description>
+      </item>
+    </channel>
+</rss>

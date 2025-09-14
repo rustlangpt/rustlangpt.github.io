@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <meta content="#ffffff" name="theme-color" />
+  <meta content="#da532c" name="msapplication-TileColor" />
+
+  
+  <link href='&#x2F;icons&#x2F;site.webmanifest' rel="manifest" />
+  
+  
+  <link color="#5bbad5" href='&#x2F;icons&#x2F;safari-pinned-tab.svg' rel="mask-icon" />
+  
+  
+  <link href='&#x2F;icons&#x2F;rustlangpt1_16px.png' rel="icon" sizes="16x16" type="image/png" />
+  
+  
+  <link href='&#x2F;icons&#x2F;rustlangpt1_32px.png' rel="icon" sizes="32x32" type="image/png" />
+  
+  
+  <link href='&#x2F;icons&#x2F;apple-touch-icon.png' rel="apple-touch-icon" sizes="180x180" />
+  
+
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galleria@1.6.1/dist/themes/folio/galleria.folio.min.css" integrity="sha384-+rY0QD+LRnTOquDMzGa9lXU6jIwdiQuwCJQ2cdcW0qeP/0UbjQCZlXnRsUMA+9pH" crossorigin="anonymous">
+  
+
+  
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1.9.1/css/academicons.min.css" integrity="sha384-FIue+PI4SsI9XfHCz8dBLg33b0c1fMJgNU3X//L26FYbGnlSEfWmNT7zgWc2N9b6" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link href="https://rustlangpt.github.io/deep-thought.css" rel="stylesheet" />
+  
+  
+
+  <title>
+    
+RustlangPT | Cargo: O Gestor de Pacotes do Rust
+
+  </title>
+
+  
+  
+  
+
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css" integrity="sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js" integrity="sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx" crossorigin="anonymous"></script>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/mathtex-script-type.min.js" integrity="sha384-jiBVvJ8NGGj5n7kJaiWwWp9AjC+Yh8rhZY3GtAX8yU28azcLgoRo4oukO87g7zDT" crossorigin="anonymous"></script>
+  
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+  
+  
+</head>
+
+<body class="has-background-white">
+  <nav aria-label="section navigation" class="navbar is-light" role="navigation">
+    <div class="container">
+      <div class="navbar-brand">
+        <a class="navbar-item is-size-5 has-text-weight-bold" href="https:&#x2F;&#x2F;rustlangpt.github.io">RustlangPT</a>
+        <a aria-expanded="false" aria-label="menu" class="navbar-burger burger" data-target="navMenu" role="button">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+      <div class="navbar-menu" id="navMenu">
+        <div class="navbar-end has-text-centered">
+          
+          
+          
+          <a class="navbar-item has-text-weight-semibold" href="https:&#x2F;&#x2F;rustlangpt.github.io&#x2F;posts">
+            Blog
+          </a>
+          
+          <a class="navbar-item has-text-weight-semibold" href="https:&#x2F;&#x2F;rustlangpt.github.io&#x2F;recursos">
+            Recursos
+          </a>
+          
+          <a class="navbar-item has-text-weight-semibold" href="https:&#x2F;&#x2F;rustlangpt.github.io&#x2F;acerca">
+            Acerca
+          </a>
+          
+          <a class="navbar-item has-text-weight-semibold" href="https:&#x2F;&#x2F;rustlangpt.github.io&#x2F;eventos">
+            Eventos
+          </a>
+          
+          <a class="navbar-item has-text-weight-semibold" href="https:&#x2F;&#x2F;rustlangpt.github.io&#x2F;tags">
+            Tags
+          </a>
+          
+          
+          
+          <a class="navbar-item" id="nav-search" title="Search" data-target="#search-modal">
+            <span class="icon">
+              <i class="fas fa-search"></i>
+            </span>
+          </a>
+          <a class="navbar-item" id="dark-mode" title="Switch to dark theme">
+            <span class="icon">
+              <i class="fas fa-adjust"></i>
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  
+  
+
+  
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-8 is-offset-2">
+        <article class="box">
+          <h1 class="title">
+            Cargo: O Gestor de Pacotes do Rust
+          </h1>
+          <p class="subtitle">Um guia completo sobre o Cargo: instalação, o ficheiro Cargo.toml, criação de pacotes, gestor de pacotes, gestão de dependencias, Testes e CI&#x2F;CD.</p>
+          <div class="columns is-multiline is-gapless">
+            <div class="column is-8">
+              
+<span class="icon-text has-text-grey">
+  
+  <span class="icon">
+    <i class="fas fa-user"></i>
+  </span>
+  <span>RustLangPT publicado em</span>
+  <span class="icon">
+    <i class="far fa-calendar-alt"></i>
+  </span>
+  <span><time datetime="2025-09-12">12 September, 2025</time></span>
+
+</span>
+
+            </div>
+            <div class="column is-4 has-text-right-desktop">
+              
+<span class="icon-text has-text-grey">
+  <span class="icon">
+    <i class="far fa-clock"></i>
+  </span>
+  <span>5 min,</span>
+  <span class="icon">
+    <i class="fas fa-pencil-alt"></i>
+  </span>
+  <span>927 words</span>
+</span>
+
+            </div>
+            <div class="column">
+              
+            </div>
+            <div class="column has-text-right-desktop">
+              
+              
+<p>
+  Tags:
+  
+  <a class="has-text-info-dark has-text-weight-semibold" href="https://rustlangpt.github.io/tags/cargo/">
+    <span class="icon-text">
+      <span class="icon">
+        <i class="fas fa-tag"></i>
+      </span>
+      <span>cargo</span>
+    </span>
+  </a>
+  
+  <a class="has-text-info-dark has-text-weight-semibold" href="https://rustlangpt.github.io/tags/setup/">
+    <span class="icon-text">
+      <span class="icon">
+        <i class="fas fa-tag"></i>
+      </span>
+      <span>setup</span>
+    </span>
+  </a>
+  
+  <a class="has-text-info-dark has-text-weight-semibold" href="https://rustlangpt.github.io/tags/iniciantes/">
+    <span class="icon-text">
+      <span class="icon">
+        <i class="fas fa-tag"></i>
+      </span>
+      <span>Iniciantes</span>
+    </span>
+  </a>
+  
+</p>
+
+              
+            </div>
+          </div>
+          <div class="content mt-2">
+            <p>Cargo é o gestor de pacotes oficial da linguagem de programação Rust, responsável por tarefas como descarregar dependências, compilar pacotes, criar pacotes distribuíveis e carregá-los para o crates.io, o registo de pacotes da comunidade Rust. Desenvolvido para simplificar o desenvolvimento em Rust, Cargo integra-se perfeitamente com o ecossistema da linguagem, permitindo uma gestão eficiente de projetos.</p>
+<p>Neste artigo, vamos desvendar os segredos do Cargo, desde a sua instalação até às suas funcionalidades mais avançadas, sempre com a <a href="https://doc.rust-lang.org/cargo/">documentação oficial do Cargo</a> como nosso guia.</p>
+<h2 id="processo-de-instalacao">Processo de Instalação</h2>
+<h3 id="instalacao-automatica-com-rustup">Instalação Automática com Rustup</h3>
+<p>O Cargo é instalado automaticamente quando instala o Rust através do rustup. Esta é a forma recomendada e mais simples:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># Instalar Rust e Cargo via rustup
+</span><span style="color:#bf616a;">$</span><span> curl</span><span style="color:#bf616a;"> --proto </span><span>&#39;</span><span style="color:#a3be8c;">=https</span><span>&#39;</span><span style="color:#bf616a;"> --tlsv1</span><span>.2 https://sh.rustup.rs</span><span style="color:#bf616a;"> -sSf </span><span>| </span><span style="color:#bf616a;">sh
+</span><span>
+</span><span style="color:#65737e;"># Verificar instalação
+</span><span style="color:#bf616a;">$</span><span> cargo</span><span style="color:#bf616a;"> --version
+</span><span style="color:#bf616a;">cargo</span><span> 1.75.0 (1d8b05cdd 2023-11-20)
+</span></code></pre>
+<h3 id="verificacao-da-instalacao">Verificação da Instalação</h3>
+<p>Para confirmar que o Cargo está correctamente instalado e configurado:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># Verificar versão do Cargo
+</span><span style="color:#bf616a;">$</span><span> cargo</span><span style="color:#bf616a;"> --version
+</span><span>
+</span><span style="color:#65737e;"># Ver informação detalhada sobre a instalação
+</span><span style="color:#bf616a;">$</span><span> cargo version</span><span style="color:#bf616a;"> --verbose
+</span><span style="color:#bf616a;">cargo</span><span> 1.75.0 (1d8b05cdd 2023-11-20)
+</span><span style="color:#bf616a;">release:</span><span> 1.75.0
+</span><span style="color:#bf616a;">commit-hash:</span><span> 1d8b05cdd2353964c50fe0b8f07a16e4c8caaf15
+</span><span style="color:#bf616a;">commit-date:</span><span> 2023-11-20
+</span><span style="color:#bf616a;">host:</span><span> x86_64-unknown-linux-gnu
+</span><span>
+</span><span style="color:#65737e;"># Testar funcionalidades básicas
+</span><span style="color:#bf616a;">$</span><span> cargo help
+</span></code></pre>
+<h3 id="atualizacao-do-cargo">Atualização do Cargo</h3>
+<p>O Cargo é atualizado automaticamente quando atualiza o Rust:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># Atualizar Rust e Cargo
+</span><span style="color:#bf616a;">$</span><span> rustup update
+</span></code></pre>
+<hr />
+<h2 id="criacao-de-pacotes">Criação de Pacotes</h2>
+<h3 id="criacao-de-um-novo-projeto">Criação de um Novo Projeto</h3>
+<p>O comando <code>cargo new</code> é a forma padrão de criar novos projetos Rust:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># Criar aplicação executável (binary)
+</span><span style="color:#bf616a;">$</span><span> cargo new minha-app
+</span><span style="color:#bf616a;">Created</span><span> binary (application) `</span><span style="color:#bf616a;">minha-app</span><span>` package
+</span><span>
+</span><span style="color:#65737e;"># Criar biblioteca (library)
+</span><span style="color:#bf616a;">$</span><span> cargo new minha-lib</span><span style="color:#bf616a;"> --lib
+</span><span style="color:#bf616a;">Created</span><span> library `</span><span style="color:#bf616a;">minha-lib</span><span>` package
+</span><span>
+</span><span style="color:#65737e;"># Criar projeto no diretório atual
+</span><span style="color:#bf616a;">$</span><span> cargo init
+</span><span>
+</span><span style="color:#65737e;"># Criar com VCS específico, por exemplo o git
+</span><span style="color:#bf616a;">$</span><span> cargo new meu-projeto</span><span style="color:#bf616a;"> --vcs</span><span> git
+</span></code></pre>
+<p>Isto cria uma pasta minha-app com a seguinte estrutura:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">minha-app/
+</span><span style="color:#bf616a;">├──</span><span> src/
+</span><span style="color:#bf616a;">│</span><span>   └── main.rs  (Onde o teu código vai estar)
+</span><span style="color:#bf616a;">└──</span><span> Cargo.toml   (O ficheiro de configuração do teu pacote)
+</span></code></pre>
+<p>No caso da biblioteca, a estrutura é semelhante, mas o ficheiro principal é src/lib.rs.</p>
+<h3 id="estrutura-de-um-projeto-cargo">Estrutura de um Projeto Cargo</h3>
+<p>Um projeto típico criado pelo Cargo tem esta estrutura:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">minha-app/
+</span><span style="color:#bf616a;">├──</span><span> Cargo.toml        </span><span style="color:#65737e;"># Manifest do projeto
+</span><span style="color:#bf616a;">├──</span><span> Cargo.lock        </span><span style="color:#65737e;"># Lock file das dependências
+</span><span style="color:#bf616a;">├──</span><span> src/              </span><span style="color:#65737e;"># Código fonte
+</span><span style="color:#bf616a;">│</span><span>   ├── main.rs       </span><span style="color:#65737e;"># Ponto de entrada (para binários)
+</span><span style="color:#bf616a;">│</span><span>   └── lib.rs        </span><span style="color:#65737e;"># Módulo raiz (para bibliotecas)
+</span><span style="color:#bf616a;">├──</span><span> tests/            </span><span style="color:#65737e;"># Testes de integração
+</span><span style="color:#bf616a;">├──</span><span> examples/         </span><span style="color:#65737e;"># Exemplos de uso
+</span><span style="color:#bf616a;">├──</span><span> benches/          </span><span style="color:#65737e;"># Benchmarks
+</span><span style="color:#bf616a;">└──</span><span> target/           </span><span style="color:#65737e;"># Diretório de build (gerado automaticamente)
+</span></code></pre>
+<h3 id="o-ficheiro-cargo-toml">O Ficheiro Cargo.toml</h3>
+<p>O ficheiro Cargo.toml é a alma do teu projeto Rust. É nele que defines os metadados do teu pacote e, mais importante, as tuas dependências.</p>
+<p>O ficheiro Cargo.toml é o manifesto do projeto, seguindo o formato TOML (exemplo):</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">[package]
+</span><span style="color:#bf616a;">name</span><span> = &quot;</span><span style="color:#a3be8c;">meu_projeto</span><span>&quot;
+</span><span style="color:#bf616a;">version</span><span> = &quot;</span><span style="color:#a3be8c;">0.1.0</span><span>&quot;
+</span><span style="color:#bf616a;">edition</span><span> = &quot;</span><span style="color:#a3be8c;">2021</span><span>&quot;
+</span><span style="color:#bf616a;">authors</span><span> = </span><span style="color:#b48ead;">[</span><span>&quot;</span><span style="color:#a3be8c;">Seu Nome &lt;email@example.com&gt;</span><span>&quot;</span><span style="color:#b48ead;">]
+</span><span style="color:#bf616a;">description</span><span> = &quot;</span><span style="color:#a3be8c;">Uma breve descrição do projeto</span><span>&quot;
+</span><span style="color:#bf616a;">license</span><span> = &quot;</span><span style="color:#a3be8c;">MIT OR Apache-2.0</span><span>&quot;
+</span><span style="color:#bf616a;">repository</span><span> = &quot;</span><span style="color:#a3be8c;">https://github.com/user/projeto</span><span>&quot;
+</span><span style="color:#bf616a;">homepage</span><span> = &quot;</span><span style="color:#a3be8c;">https://projeto.example.com</span><span>&quot;
+</span><span style="color:#bf616a;">documentation</span><span> = &quot;</span><span style="color:#a3be8c;">https://docs.rs/meu_projeto</span><span>&quot;
+</span><span style="color:#bf616a;">readme</span><span> = &quot;</span><span style="color:#a3be8c;">README.md</span><span>&quot;
+</span><span style="color:#bf616a;">keywords</span><span> = </span><span style="color:#b48ead;">[</span><span>&quot;</span><span style="color:#a3be8c;">web</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">api</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">rust</span><span>&quot;</span><span style="color:#b48ead;">]
+</span><span style="color:#bf616a;">categories</span><span> = </span><span style="color:#b48ead;">[</span><span>&quot;</span><span style="color:#a3be8c;">web-programming</span><span>&quot;</span><span style="color:#b48ead;">]
+</span><span>
+</span><span style="color:#bf616a;">[dependencies]
+</span><span style="color:#bf616a;">serde</span><span> = { version = &quot;</span><span style="color:#a3be8c;">1.0</span><span>&quot;, features = </span><span style="color:#b48ead;">[</span><span>&quot;</span><span style="color:#a3be8c;">derive</span><span>&quot;</span><span style="color:#b48ead;">] </span><span>}
+</span><span style="color:#bf616a;">tokio</span><span> = { version = &quot;</span><span style="color:#a3be8c;">1.0</span><span>&quot;, features = </span><span style="color:#b48ead;">[</span><span>&quot;</span><span style="color:#a3be8c;">full</span><span>&quot;</span><span style="color:#b48ead;">] </span><span>}
+</span><span>
+</span><span style="color:#bf616a;">[dev-dependencies]
+</span><span style="color:#bf616a;">criterion</span><span> = &quot;</span><span style="color:#a3be8c;">0.4</span><span>&quot;
+</span><span>
+</span><span style="color:#bf616a;">[build-dependencies]
+</span><span style="color:#bf616a;">cc</span><span> = &quot;</span><span style="color:#a3be8c;">1.0</span><span>&quot;
+</span><span>
+</span></code></pre>
+<p>Para aprenderes mais sobre o formato e as opções do Cargo.toml, a <a href="https://doc.rust-lang.org/cargo/reference/manifest.html">documentação oficial</a> é o teu melhor recurso.</p>
+<hr />
+<h2 id="gestao-de-pacotes">Gestão de Pacotes</h2>
+<p>A gestão de pacotes no Cargo envolve comandos para construir, executar, atualizar e instalar pacotes. Embora a documentação de comandos gerais esteja indexada, focamo-nos em comandos chave para gestão.</p>
+<p>Comandos Principais:</p>
+<ul>
+<li>Construir: <code>cargo build</code> – Compila o pacote atual.</li>
+<li>Executar: <code>cargo run</code> – Compila e executa o binário principal.</li>
+<li>Atualizar Dependências: <code>cargo update</code> – Atualiza as dependências no Cargo.lock.</li>
+<li>Instalar Pacotes Globais: <code>cargo install nome_do_crate</code> – Instala um crate como ferramenta global.</li>
+<li>Procurar Pacotes: <code>cargo search nome</code> – Procura crates no crates.io.</li>
+</ul>
+<h3 id="comandos-fundamentais-de-build">Comandos Fundamentais de Build</h3>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># Compilar o projeto
+</span><span style="color:#bf616a;">$</span><span> cargo build
+</span><span>   </span><span style="color:#bf616a;">Compiling</span><span> minha-app v0.1.0 (/path/to/minha-app)
+</span><span>    </span><span style="color:#bf616a;">Finished</span><span> dev </span><span style="color:#b48ead;">[</span><span>unoptimized + debuginfo</span><span style="color:#b48ead;">]</span><span> target(s) </span><span style="color:#bf616a;">in</span><span> 2.41s
+</span><span>
+</span><span style="color:#65737e;"># Compilar em modo release (otimizado)
+</span><span style="color:#bf616a;">$</span><span> cargo build</span><span style="color:#bf616a;"> --release
+</span><span>
+</span><span style="color:#65737e;"># Compilar e executar
+</span><span style="color:#bf616a;">$</span><span> cargo run
+</span><span>    </span><span style="color:#bf616a;">Finished</span><span> dev </span><span style="color:#b48ead;">[</span><span>unoptimized + debuginfo</span><span style="color:#b48ead;">]</span><span> target(s) </span><span style="color:#bf616a;">in</span><span> 0.0s
+</span><span>     </span><span style="color:#bf616a;">Running </span><span>`</span><span style="color:#bf616a;">target/debug/minha-app</span><span>`
+</span><span style="color:#bf616a;">Hello,</span><span> world!
+</span><span>
+</span><span style="color:#65737e;"># Verificar compilação sem gerar executável
+</span><span style="color:#bf616a;">$</span><span> cargo check
+</span></code></pre>
+<h3 id="gestao-de-builds-e-cache">Gestão de Builds e Cache</h3>
+<p>Em comandos subsequentes <code>$ cargo build</code>, o Cargo não recompila a crate porque não há mudanças no código fonte, dependências ou configurações de build. O Cargo também compila e faz cache das dependências dentro do diretório target/debug/deps.</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># Limpar artefactos de build
+</span><span style="color:#bf616a;">$</span><span> cargo clean
+</span><span>
+</span><span style="color:#65737e;"># Build com informação detalhada
+</span><span style="color:#bf616a;">$</span><span> cargo build</span><span style="color:#bf616a;"> --verbose
+</span><span>
+</span><span style="color:#65737e;"># Build para targets específicos
+</span><span style="color:#bf616a;">$</span><span> cargo build</span><span style="color:#bf616a;"> --target</span><span> x86_64-pc-windows-gnu
+</span></code></pre>
+<h2 id="gestao-de-dependencias">Gestão de Dependências</h2>
+<h3 id="adicionar-dependencias">Adicionar Dependências</h3>
+<p><a href="https://crates.io/">crates.io</a> é o registo central de pacotes da comunidade Rust que serve como local para pesquisar e descarregar pacotes. O cargo está configurado para usá-lo por defeito para encontrar pacotes solicitados. Para depender de uma biblioteca alojada em crates.io, adicione-a ao seu Cargo.toml.</p>
+<h4 id="dependencias-basicas">Dependências Básicas</h4>
+<pre data-lang="toml" style="background-color:#2b303b;color:#c0c5ce;" class="language-toml "><code class="language-toml" data-lang="toml"><span>[dependencies]
+</span><span style="color:#bf616a;">serde </span><span>= &quot;</span><span style="color:#a3be8c;">1.0</span><span>&quot;
+</span><span style="color:#bf616a;">tokio </span><span>= { </span><span style="color:#bf616a;">version </span><span>= &quot;</span><span style="color:#a3be8c;">1.0</span><span>&quot;, </span><span style="color:#bf616a;">features </span><span>= [&quot;</span><span style="color:#a3be8c;">full</span><span>&quot;] }
+</span><span style="color:#bf616a;">reqwest </span><span>= { </span><span style="color:#bf616a;">version </span><span>= &quot;</span><span style="color:#a3be8c;">0.11</span><span>&quot;, </span><span style="color:#bf616a;">features </span><span>= [&quot;</span><span style="color:#a3be8c;">json</span><span>&quot;] }
+</span><span>
+</span><span style="color:#65737e;"># Dependências de desenvolvimento (apenas para testes)
+</span><span>[dev-dependencies]
+</span><span style="color:#bf616a;">tokio-test </span><span>= &quot;</span><span style="color:#a3be8c;">0.4</span><span>&quot;
+</span><span>
+</span><span style="color:#65737e;"># Dependências de build (para build scripts)
+</span><span>[build-dependencies]
+</span><span style="color:#bf616a;">cc </span><span>= &quot;</span><span style="color:#a3be8c;">1.0</span><span>&quot;
+</span></code></pre>
+<h4 id="especificacao-de-versoes">Especificação de Versões</h4>
+<p>A string de versão "1.0.136" é chamada requirement de versão.</p>
+<pre data-lang="toml" style="background-color:#2b303b;color:#c0c5ce;" class="language-toml "><code class="language-toml" data-lang="toml"><span>[dependencies]
+</span><span style="color:#65737e;"># Versão exata
+</span><span style="color:#bf616a;">serde </span><span>= &quot;</span><span style="color:#a3be8c;">=1.0.136</span><span>&quot;
+</span><span>
+</span><span style="color:#65737e;"># Compatibilidade com patch
+</span><span style="color:#bf616a;">serde </span><span>= &quot;</span><span style="color:#a3be8c;">1.0.136</span><span>&quot;  </span><span style="color:#65737e;"># &gt;=1.0.136, &lt;1.1.0
+</span><span>
+</span><span style="color:#65737e;"># Compatibilidade com minor
+</span><span style="color:#bf616a;">serde </span><span>= &quot;</span><span style="color:#a3be8c;">1.*</span><span>&quot;      </span><span style="color:#65737e;"># &gt;=1.0.0, &lt;2.0.0
+</span><span>
+</span><span style="color:#65737e;"># Range de versões
+</span><span style="color:#bf616a;">serde </span><span>= &quot;</span><span style="color:#a3be8c;">&gt;=1.0.100, &lt;1.2.0</span><span>&quot;
+</span><span>
+</span><span style="color:#65737e;"># Versão mais recente
+</span><span style="color:#bf616a;">serde </span><span>= &quot;</span><span style="color:#a3be8c;">*</span><span>&quot;
+</span><span>
+</span><span style="color:#65737e;"># Pre-release
+</span><span style="color:#bf616a;">serde </span><span>= &quot;</span><span style="color:#a3be8c;">1.0.0-alpha</span><span>&quot;
+</span></code></pre>
+<h3 id="comando-cargo-add">Comando cargo add</h3>
+<p>Adicionando via cmds</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># Adicionar dependência
+</span><span style="color:#bf616a;">$</span><span> cargo add serde
+</span><span>    </span><span style="color:#bf616a;">Updating</span><span> crates.io index
+</span><span>      </span><span style="color:#bf616a;">Adding</span><span> serde v1.0.193 to dependencies.
+</span><span>
+</span><span style="color:#65737e;"># Adicionar com features
+</span><span style="color:#bf616a;">$</span><span> cargo add tokio</span><span style="color:#bf616a;"> --features</span><span> full
+</span><span>
+</span><span style="color:#65737e;"># Adicionar dependência de desenvolvimento
+</span><span style="color:#bf616a;">$</span><span> cargo add</span><span style="color:#bf616a;"> --dev</span><span> tokio-test
+</span><span>
+</span><span style="color:#65737e;"># Adicionar dependência opcional
+</span><span style="color:#bf616a;">$</span><span> cargo add</span><span style="color:#bf616a;"> --optional</span><span> serde
+</span></code></pre>
+<h3 id="atualizacao-de-dependencias">Atualização de Dependências</h3>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># Atualizar todas as dependências
+</span><span style="color:#bf616a;">$</span><span> cargo update
+</span><span>
+</span><span style="color:#65737e;"># Atualizar dependência específica
+</span><span style="color:#bf616a;">$</span><span> cargo update serde
+</span><span>
+</span><span style="color:#65737e;"># Atualizar para versão específica
+</span><span style="color:#bf616a;">$</span><span> cargo update serde</span><span style="color:#bf616a;"> --precise</span><span> 1.0.150
+</span></code></pre>
+<h2 id="publicacao-de-pacotes">Publicação de Pacotes</h2>
+<p>Quando a tua biblioteca estiver pronta para ser partilhada com o mundo, o Cargo torna o processo de publicação no crates.io incrivelmente simples.</p>
+<p>Passos que deves seguir:</p>
+<ul>
+<li>Criar uma conta em crates.io.</li>
+<li>Obter token de acesso no crates.io</li>
+<li>Fazer login no terminal.</li>
+<li>Publicar.</li>
+</ul>
+<h3 id="preparacao-para-publicacao">Preparação para Publicação</h3>
+<p>Antes de publicar no crates.io, certifique-se que tem os metadados necessários no Cargo.toml:</p>
+<pre data-lang="toml" style="background-color:#2b303b;color:#c0c5ce;" class="language-toml "><code class="language-toml" data-lang="toml"><span>[package]
+</span><span style="color:#bf616a;">name </span><span>= &quot;</span><span style="color:#a3be8c;">minha-biblioteca</span><span>&quot;
+</span><span style="color:#bf616a;">version </span><span>= &quot;</span><span style="color:#a3be8c;">0.1.0</span><span>&quot;
+</span><span style="color:#bf616a;">edition </span><span>= &quot;</span><span style="color:#a3be8c;">2021</span><span>&quot;
+</span><span style="color:#bf616a;">authors </span><span>= [&quot;</span><span style="color:#a3be8c;">Seu Nome &lt;email@example.com&gt;</span><span>&quot;]
+</span><span style="color:#bf616a;">license </span><span>= &quot;</span><span style="color:#a3be8c;">MIT</span><span>&quot;
+</span><span style="color:#bf616a;">description </span><span>= &quot;</span><span style="color:#a3be8c;">Uma biblioteca útil para demonstração</span><span>&quot;
+</span><span style="color:#bf616a;">homepage </span><span>= &quot;</span><span style="color:#a3be8c;">https://github.com/usuario/minha-biblioteca</span><span>&quot;
+</span><span style="color:#bf616a;">repository </span><span>= &quot;</span><span style="color:#a3be8c;">https://github.com/usuario/minha-biblioteca</span><span>&quot;
+</span><span style="color:#bf616a;">documentation </span><span>= &quot;</span><span style="color:#a3be8c;">https://docs.rs/minha-biblioteca</span><span>&quot;
+</span><span style="color:#bf616a;">readme </span><span>= &quot;</span><span style="color:#a3be8c;">README.md</span><span>&quot;
+</span><span style="color:#bf616a;">keywords </span><span>= [&quot;</span><span style="color:#a3be8c;">rust</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">biblioteca</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">exemplo</span><span>&quot;]
+</span><span style="color:#bf616a;">categories </span><span>= [&quot;</span><span style="color:#a3be8c;">development-tools</span><span>&quot;]
+</span><span>
+</span><span>[dependencies]
+</span><span style="color:#65737e;"># suas dependências aqui
+</span></code></pre>
+<h3 id="criar-conta-no-crates-io">Criar Conta no Crates.io</h3>
+<ol>
+<li>Visite <a href="https://crates.io">crates.io</a> e crie conta via GitHub</li>
+<li>Obtenha o seu API token no Account Settings</li>
+<li>Configure o token localmente no terminal:</li>
+</ol>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> cargo login
+</span><span style="color:#65737e;"># Cole o token quando solicitado
+</span></code></pre>
+<h3 id="processo-de-publicacao">Processo de Publicação</h3>
+<p>Para isso usamos o subcomando 'cargo publish'. Este comando executa os seguintes passos: executa algumas verificações de validação no seu pacote, comprime o seu código fonte num ficheiro '.crate', extrai o ficheiro '.crate' para um diretório temporário e verifica que compila.</p>
+<h4 id="empacotamento-e-verificacao">Empacotamento e Verificação</h4>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># Criar pacote local para verificação
+</span><span style="color:#bf616a;">$</span><span> cargo package
+</span><span>   </span><span style="color:#bf616a;">Packaging</span><span> minha-biblioteca v0.1.0 (/path/to/projeto)
+</span><span>   </span><span style="color:#bf616a;">Verifying</span><span> minha-biblioteca v0.1.0 (/path/to/projeto)
+</span><span>   </span><span style="color:#bf616a;">Compiling</span><span> minha-biblioteca v0.1.0 (/path/to/projeto/target/package/minha-biblioteca-0.1.0)
+</span><span>    </span><span style="color:#bf616a;">Finished</span><span> dev </span><span style="color:#b48ead;">[</span><span>unoptimized + debuginfo</span><span style="color:#b48ead;">]</span><span> target(s) </span><span style="color:#bf616a;">in</span><span> 0.61s
+</span><span>
+</span><span style="color:#65737e;"># Verificar conteúdo do pacote
+</span><span style="color:#bf616a;">$</span><span> cargo package</span><span style="color:#bf616a;"> --list
+</span></code></pre>
+<p>Como bónus adicional, o *.crate será verificado independentemente da árvore fonte atual. Após a criação do *.crate, é desempacotado em target/package e depois construído do zero para garantir que todos os ficheiros necessários estão presentes para que o build tenha sucesso.</p>
+<h4 id="publicacao">Publicação</h4>
+<p>Para a publicação basta fazer o comando <code>cargo publish</code>.</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># Publicar no crates.io
+</span><span style="color:#bf616a;">$</span><span> cargo publish
+</span><span>    </span><span style="color:#bf616a;">Updating</span><span> crates.io index
+</span><span>   </span><span style="color:#bf616a;">Packaging</span><span> minha-biblioteca v0.1.0 (/path/to/projeto)
+</span><span>   </span><span style="color:#bf616a;">Verifying</span><span> minha-biblioteca v0.1.0 (/path/to/projeto)
+</span><span>   </span><span style="color:#bf616a;">Compiling</span><span> minha-biblioteca v0.1.0 (/path/to/projeto/target/package/minha-biblioteca-0.1.0)
+</span><span>    </span><span style="color:#bf616a;">Finished</span><span> dev </span><span style="color:#b48ead;">[</span><span>unoptimized + debuginfo</span><span style="color:#b48ead;">]</span><span> target(s) </span><span style="color:#bf616a;">in</span><span> 0.61s
+</span><span>   </span><span style="color:#bf616a;">Uploading</span><span> minha-biblioteca v0.1.0 (/path/to/projeto)
+</span><span>
+</span><span style="color:#65737e;"># Dry-run para testar sem publicar
+</span><span style="color:#bf616a;">$</span><span> cargo publish</span><span style="color:#bf616a;"> --dry-run
+</span></code></pre>
+<p><strong>Versionamento Semântico</strong></p>
+<p>O Cargo segue o <a href="https://semver.org/">Semantic Versioning</a>:</p>
+<ul>
+<li><strong>MAJOR.MINOR.PATCH</strong> (e.g., 1.2.3)</li>
+<li><strong>MAJOR</strong>: Breaking changes</li>
+<li><strong>MINOR</strong>: Nova funcionalidade (backward compatible)</li>
+<li><strong>PATCH</strong>: Bug fixes</li>
+</ul>
+<p>Se publicar uma versão com problemas:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># Remover versão problemática (impede novos usos)
+</span><span style="color:#bf616a;">$</span><span> cargo yank</span><span style="color:#bf616a;"> --version</span><span> 0.1.1
+</span><span>
+</span><span style="color:#65737e;"># Reverter yank
+</span><span style="color:#bf616a;">$</span><span> cargo yank</span><span style="color:#bf616a;"> --version</span><span> 0.1.1</span><span style="color:#bf616a;"> --undo
+</span></code></pre>
+<h2 id="testes">Testes</h2>
+<p>O Cargo tem  suporte para testes, não precisando de frameworks de terceiros para começar a testar o teu código.</p>
+<p>Tipos de Testes:</p>
+<ul>
+<li>Unitários: Em ficheiros src/ com #[test].</li>
+<li>Integração: Em tests/nome_teste.rs, importando o crate.</li>
+<li>Documentação: Em comentários com /// # Examples.</li>
+</ul>
+<h4 id="testes-unitarios">Testes Unitários</h4>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#65737e;">// src/lib.rs
+</span><span style="color:#b48ead;">pub fn </span><span style="color:#8fa1b3;">add</span><span>(</span><span style="color:#bf616a;">a</span><span>: </span><span style="color:#b48ead;">i32</span><span>, </span><span style="color:#bf616a;">b</span><span>: </span><span style="color:#b48ead;">i32</span><span>) -&gt; </span><span style="color:#b48ead;">i32 </span><span>{
+</span><span>    a + b
+</span><span>}
+</span><span>
+</span><span>#[</span><span style="color:#bf616a;">cfg</span><span>(test)]
+</span><span style="color:#b48ead;">mod </span><span>tests {
+</span><span>    </span><span style="color:#b48ead;">use super</span><span>::*;
+</span><span>
+</span><span>    #[</span><span style="color:#bf616a;">test</span><span>]
+</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">test_add</span><span>() {
+</span><span>        assert_eq!(</span><span style="color:#96b5b4;">add</span><span>(</span><span style="color:#d08770;">2</span><span>, </span><span style="color:#d08770;">2</span><span>), </span><span style="color:#d08770;">4</span><span>);
+</span><span>    }
+</span><span>
+</span><span>}
+</span></code></pre>
+<h4 id="testes-de-integracao">Testes de Integração</h4>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#65737e;">// tests/integration_test.rs
+</span><span style="color:#b48ead;">use </span><span>meu_projeto::add;
+</span><span>
+</span><span>#[</span><span style="color:#bf616a;">test</span><span>]
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">test_integration_add</span><span>() {
+</span><span>    assert_eq!(</span><span style="color:#96b5b4;">add</span><span>(</span><span style="color:#d08770;">5</span><span>, </span><span style="color:#d08770;">5</span><span>), </span><span style="color:#d08770;">10</span><span>);
+</span><span>}
+</span></code></pre>
+<h4 id="doc-tests">Doc Tests</h4>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#65737e;">/// Adiciona dois números.
+</span><span style="color:#65737e;">///
+</span><span style="color:#65737e;">/// # Examples
+</span><span style="color:#65737e;">///
+</span><span style="color:#65737e;">/// ```
+</span><span style="color:#65737e;">/// use meu_projeto::add;
+</span><span style="color:#65737e;">/// 
+</span><span style="color:#65737e;">/// let result = add(2, 3);
+</span><span style="color:#65737e;">/// assert_eq!(result, 5);
+</span><span style="color:#65737e;">/// ```
+</span><span style="color:#b48ead;">pub fn </span><span style="color:#8fa1b3;">add</span><span>(</span><span style="color:#bf616a;">a</span><span>: </span><span style="color:#b48ead;">i32</span><span>, </span><span style="color:#bf616a;">b</span><span>: </span><span style="color:#b48ead;">i32</span><span>) -&gt; </span><span style="color:#b48ead;">i32 </span><span>{
+</span><span>    a + b
+</span><span>}
+</span></code></pre>
+<h3 id="comandos-de-teste">Comandos de Teste</h3>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># Executar todos os testes
+</span><span style="color:#bf616a;">$</span><span> cargo test
+</span><span>   </span><span style="color:#bf616a;">Compiling</span><span> meu_projeto v0.1.0 (/path/to/meu_projeto)
+</span><span>    </span><span style="color:#bf616a;">Finished</span><span> test </span><span style="color:#b48ead;">[</span><span>unoptimized + debuginfo</span><span style="color:#b48ead;">]</span><span> target(s) </span><span style="color:#bf616a;">in</span><span> 0.61s
+</span><span>     </span><span style="color:#bf616a;">Running</span><span> unittests src/lib.rs (target/debug/deps/meu_projeto-...)
+</span><span>     </span><span style="color:#bf616a;">Running</span><span> tests/integration_test.rs (target/debug/deps/integration_test-...)
+</span><span>
+</span><span style="color:#65737e;"># Executar testes específicos
+</span><span style="color:#bf616a;">$</span><span> cargo test test_add
+</span><span>
+</span><span style="color:#65737e;"># Executar testes ignorados
+</span><span style="color:#bf616a;">$</span><span> cargo test -- --ignored
+</span><span>
+</span><span style="color:#65737e;"># Executar testes com output detalhado
+</span><span style="color:#bf616a;">$</span><span> cargo test -- --nocapture
+</span><span>
+</span><span style="color:#65737e;"># Executar testes em série (não paralelo)
+</span><span style="color:#bf616a;">$</span><span> cargo test -- --test-threads=1
+</span><span>
+</span><span style="color:#65737e;"># Executar apenas unit tests
+</span><span style="color:#bf616a;">$</span><span> cargo test</span><span style="color:#bf616a;"> --lib
+</span><span>
+</span><span style="color:#65737e;"># Executar apenas integration tests
+</span><span style="color:#bf616a;">$</span><span> cargo test</span><span style="color:#bf616a;"> --test</span><span> integration_test
+</span><span>
+</span><span style="color:#65737e;"># Executar apenas doc tests
+</span><span style="color:#bf616a;">$</span><span> cargo test</span><span style="color:#bf616a;"> --doc
+</span></code></pre>
+<h3 id="configuracao-de-testes">Configuração de Testes</h3>
+<pre data-lang="toml" style="background-color:#2b303b;color:#c0c5ce;" class="language-toml "><code class="language-toml" data-lang="toml"><span style="color:#65737e;"># Cargo.toml
+</span><span>[dependencies]
+</span><span style="color:#bf616a;">serde </span><span>= { </span><span style="color:#bf616a;">version </span><span>= &quot;</span><span style="color:#a3be8c;">1.0</span><span>&quot;, </span><span style="color:#bf616a;">features </span><span>= [&quot;</span><span style="color:#a3be8c;">derive</span><span>&quot;] }
+</span><span>
+</span><span>[dev-dependencies]
+</span><span style="color:#bf616a;">tokio-test </span><span>= &quot;</span><span style="color:#a3be8c;">0.4</span><span>&quot;
+</span><span style="color:#bf616a;">criterion </span><span>= &quot;</span><span style="color:#a3be8c;">0.5</span><span>&quot;
+</span><span style="color:#bf616a;">proptest </span><span>= &quot;</span><span style="color:#a3be8c;">1.0</span><span>&quot;
+</span><span style="color:#bf616a;">mockall </span><span>= &quot;</span><span style="color:#a3be8c;">0.11</span><span>&quot;
+</span><span style="color:#bf616a;">serial_test </span><span>= &quot;</span><span style="color:#a3be8c;">2.0</span><span>&quot;
+</span><span>
+</span><span style="color:#65737e;"># Configuração específica para testes
+</span><span>[[test]]
+</span><span style="color:#bf616a;">name </span><span>= &quot;</span><span style="color:#a3be8c;">integration</span><span>&quot;
+</span><span style="color:#bf616a;">path </span><span>= &quot;</span><span style="color:#a3be8c;">tests/integration/main.rs</span><span>&quot;
+</span><span style="color:#bf616a;">required-features </span><span>= [&quot;</span><span style="color:#a3be8c;">integration</span><span>&quot;]
+</span></code></pre>
+<h3 id="benchmarks">Benchmarks</h3>
+<p>Para benchmarks, adicione ao Cargo.toml:</p>
+<pre data-lang="toml" style="background-color:#2b303b;color:#c0c5ce;" class="language-toml "><code class="language-toml" data-lang="toml"><span>[dev-dependencies]
+</span><span style="background-color:#bf616a;color:#2b303b;">...</span><span>
+</span><span>
+</span><span>[[bench]]
+</span><span style="color:#bf616a;">name </span><span>= &quot;</span><span style="color:#a3be8c;">meus_benchmarks</span><span>&quot;
+</span><span style="color:#bf616a;">harness </span><span>= </span><span style="color:#d08770;">false
+</span></code></pre>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#65737e;">// benches/benchmark.rs
+</span><span style="color:#b48ead;">use </span><span>criterion::{black_box, criterion_group, criterion_main, Criterion};
+</span><span style="color:#b48ead;">use </span><span>meu_projeto::add;
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">criterion_benchmark</span><span>(</span><span style="color:#bf616a;">c</span><span>: &amp;</span><span style="color:#b48ead;">mut</span><span> Criterion) {
+</span><span>    c.</span><span style="color:#96b5b4;">bench_function</span><span>(&quot;</span><span style="color:#a3be8c;">add 2 + 2</span><span>&quot;, |</span><span style="color:#bf616a;">b</span><span>| b.</span><span style="color:#96b5b4;">iter</span><span>(|| </span><span style="color:#96b5b4;">add</span><span>(</span><span style="color:#96b5b4;">black_box</span><span>(</span><span style="color:#d08770;">2</span><span>), </span><span style="color:#96b5b4;">black_box</span><span>(</span><span style="color:#d08770;">2</span><span>))));
+</span><span>}
+</span><span>
+</span><span>criterion_group!(benches, criterion_benchmark);
+</span><span>criterion_main!(benches);
+</span></code></pre>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># Executar benchmarks
+</span><span style="color:#bf616a;">$</span><span> cargo bench
+</span><span>   </span><span style="color:#bf616a;">Compiling</span><span> meu_projeto v0.1.0 (/path/to/meu_projeto)
+</span><span>    </span><span style="color:#bf616a;">Finished</span><span> bench </span><span style="color:#b48ead;">[</span><span>optimized</span><span style="color:#b48ead;">]</span><span> target(s) </span><span style="color:#bf616a;">in</span><span> 0.88s
+</span><span>     </span><span style="color:#bf616a;">Running</span><span> benches/benchmark.rs (target/release/deps/benchmark-...)
+</span><span style="color:#bf616a;">add</span><span> 2 + 2               time:   </span><span style="color:#b48ead;">[</span><span>0.0000 ns 0.0001 ns 0.0002 ns</span><span style="color:#b48ead;">]
+</span></code></pre>
+<h2 id="continuous-integration">Continuous Integration</h2>
+<h3 id="github-actions">GitHub Actions</h3>
+<p>Verificar as versões mais recentes ajudaria... <code>cargo add</code> ou <code>cargo install</code>. Ao testar as versões mais recentes algumas considerações são: minimizar fatores externos que afetam o desenvolvimento local ou CI, custos de CI, incluindo custos indiretos como se um serviço de CI tem um máximo de runners paralelos, fazendo com que novos jobs sejam serializados quando no máximo.</p>
+<h4 id="configuracao-basica">Configuração Básica</h4>
+<pre data-lang="yaml" style="background-color:#2b303b;color:#c0c5ce;" class="language-yaml "><code class="language-yaml" data-lang="yaml"><span style="color:#65737e;"># .github/workflows/ci.yml
+</span><span style="color:#bf616a;">name</span><span>: </span><span style="color:#a3be8c;">CI
+</span><span>
+</span><span style="color:#d08770;">on</span><span>:
+</span><span>  </span><span style="color:#bf616a;">push</span><span>:
+</span><span>    </span><span style="color:#bf616a;">branches</span><span>: [ </span><span style="color:#a3be8c;">main </span><span>]
+</span><span>  </span><span style="color:#bf616a;">pull_request</span><span>:
+</span><span>    </span><span style="color:#bf616a;">branches</span><span>: [ </span><span style="color:#a3be8c;">main </span><span>]
+</span><span>
+</span><span style="color:#bf616a;">env</span><span>:
+</span><span>  </span><span style="color:#bf616a;">CARGO_TERM_COLOR</span><span>: </span><span style="color:#a3be8c;">always
+</span><span>
+</span><span style="color:#bf616a;">jobs</span><span>:
+</span><span>  </span><span style="color:#bf616a;">test</span><span>:
+</span><span>    </span><span style="color:#bf616a;">runs-on</span><span>: </span><span style="color:#a3be8c;">ubuntu-latest
+</span><span>    </span><span style="color:#bf616a;">strategy</span><span>:
+</span><span>      </span><span style="color:#bf616a;">matrix</span><span>:
+</span><span>        </span><span style="color:#bf616a;">rust-version</span><span>: [</span><span style="color:#a3be8c;">stable</span><span>, </span><span style="color:#a3be8c;">beta</span><span>, </span><span style="color:#a3be8c;">nightly</span><span>]
+</span><span>        
+</span><span>    </span><span style="color:#bf616a;">steps</span><span>:
+</span><span>    - </span><span style="color:#bf616a;">uses</span><span>: </span><span style="color:#a3be8c;">actions/checkout@v4
+</span><span>    
+</span><span>    - </span><span style="color:#bf616a;">name</span><span>: </span><span style="color:#a3be8c;">Install Rust
+</span><span>      </span><span style="color:#bf616a;">uses</span><span>: </span><span style="color:#a3be8c;">dtolnay/rust-toolchain@stable
+</span><span>      </span><span style="color:#bf616a;">with</span><span>:
+</span><span>        </span><span style="color:#bf616a;">toolchain</span><span>: </span><span style="color:#a3be8c;">${{ matrix.rust-version }}
+</span><span>        </span><span style="color:#bf616a;">components</span><span>: </span><span style="color:#a3be8c;">rustfmt, clippy
+</span><span>        
+</span><span>    - </span><span style="color:#bf616a;">name</span><span>: </span><span style="color:#a3be8c;">Cache dependencies
+</span><span>      </span><span style="color:#bf616a;">uses</span><span>: </span><span style="color:#a3be8c;">actions/cache@v3
+</span><span>      </span><span style="color:#bf616a;">with</span><span>:
+</span><span>        </span><span style="color:#bf616a;">path</span><span>: </span><span style="color:#b48ead;">|
+</span><span style="color:#a3be8c;">          ~/.cargo/registry
+</span><span style="color:#a3be8c;">          ~/.cargo/git
+</span><span style="color:#a3be8c;">          target
+</span><span>        </span><span style="color:#bf616a;">key</span><span>: </span><span style="color:#a3be8c;">${{ runner.os }}-cargo-${{ hashFiles(&#39;**/Cargo.lock&#39;) }}
+</span><span>        </span><span style="color:#bf616a;">restore-keys</span><span>: </span><span style="color:#b48ead;">|
+</span><span style="color:#a3be8c;">          ${{ runner.os }}-cargo-
+</span><span style="color:#a3be8c;">          
+</span><span>    - </span><span style="color:#bf616a;">name</span><span>: </span><span style="color:#a3be8c;">Run tests
+</span><span>      </span><span style="color:#bf616a;">run</span><span>: </span><span style="color:#a3be8c;">cargo test --verbose
+</span><span>      
+</span><span>    - </span><span style="color:#bf616a;">name</span><span>: </span><span style="color:#a3be8c;">Check formatting
+</span><span>      </span><span style="color:#bf616a;">run</span><span>: </span><span style="color:#a3be8c;">cargo fmt -- --check
+</span><span>      
+</span><span>    - </span><span style="color:#bf616a;">name</span><span>: </span><span style="color:#a3be8c;">Run clippy
+</span><span>      </span><span style="color:#bf616a;">run</span><span>: </span><span style="color:#a3be8c;">cargo clippy -- -D warnings
+</span></code></pre>
+<h4 id="gitlab-ci">GitLab CI</h4>
+<pre data-lang="yaml" style="background-color:#2b303b;color:#c0c5ce;" class="language-yaml "><code class="language-yaml" data-lang="yaml"><span style="color:#65737e;"># .gitlab-ci.yml
+</span><span style="color:#bf616a;">image</span><span>: </span><span style="color:#a3be8c;">rust:latest
+</span><span>
+</span><span style="color:#bf616a;">variables</span><span>:
+</span><span>  </span><span style="color:#bf616a;">CARGO_HOME</span><span>: </span><span style="color:#a3be8c;">$CI_PROJECT_DIR/cargo
+</span><span>
+</span><span style="color:#bf616a;">cache</span><span>:
+</span><span>  </span><span style="color:#bf616a;">paths</span><span>:
+</span><span>    - </span><span style="color:#a3be8c;">cargo/
+</span><span>    - </span><span style="color:#a3be8c;">target/
+</span><span>
+</span><span style="color:#bf616a;">stages</span><span>:
+</span><span>  - </span><span style="color:#a3be8c;">test
+</span><span>  - </span><span style="color:#a3be8c;">deploy
+</span><span>
+</span><span style="color:#bf616a;">test</span><span>:
+</span><span>  </span><span style="color:#bf616a;">stage</span><span>: </span><span style="color:#a3be8c;">test
+</span><span>  </span><span style="color:#bf616a;">script</span><span>:
+</span><span>    - </span><span style="color:#a3be8c;">rustc --version &amp;&amp; cargo --version
+</span><span>    - </span><span style="color:#a3be8c;">cargo test --verbose
+</span><span>    - </span><span style="color:#a3be8c;">cargo clippy -- -D warnings
+</span><span>    - </span><span style="color:#a3be8c;">cargo fmt -- --check
+</span><span>
+</span><span style="color:#bf616a;">deploy</span><span>:
+</span><span>  </span><span style="color:#bf616a;">stage</span><span>: </span><span style="color:#a3be8c;">deploy
+</span><span>  </span><span style="color:#bf616a;">script</span><span>:
+</span><span>    - </span><span style="color:#a3be8c;">cargo publish --token $CRATES_IO_TOKEN
+</span><span>  </span><span style="color:#bf616a;">only</span><span>:
+</span><span>    - </span><span style="color:#a3be8c;">tags
+</span></code></pre>
+<p>Guia de CI: <a href="https://doc.rust-lang.org/cargo/guide/continuous-integration.html">Cargo e Integração Contínua</a>.</p>
+<hr />
+<h2 id="referencias">Referências</h2>
+<p>Para se aprofundar em cada funcionalidade e evitar erros comuns, consulte sempre a documentação oficial do Cargo.</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/cargo/index.html">Documentação oficial Cargo</a></li>
+<li><a href="https://doc.rust-lang.org/cargo/reference/manifest.html">Cargo.toml Reference</a></li>
+<li><a href="https://doc.rust-lang.org/cargo/reference/publishing.html">Publishing on crates.io</a></li>
+<li><a href="https://doc.rust-lang.org/cargo/guide/continuous-integration.html">Continuous Integration Guide</a></li>
+</ul>
+<h2 id="conclusao">Conclusão</h2>
+<p>Cargo simplifica o desenvolvimento em Rust, desde a criação até à CI. Explore a documentação oficial para mais detalhes e experimente os exemplos para aprofundar o seu conhecimento.</p>
+
+          </div>
+        </article>
+      </div>
+      
+      <div class="column is-2 is-hidden-mobile">
+        <aside class="menu" style="position: sticky; top: 48px">
+          <p class="heading has-text-weight-bold">Contents</p>
+          <ul class="menu-list">
+            
+            <li>
+              <a id="link-processo-de-instalacao" class="toc is-size-7 is-active"
+                href="https://rustlangpt.github.io/posts/cargo/#processo-de-instalacao">
+                Processo de Instalação
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-instalacao-automatica-com-rustup" class="toc is-size-7" href="https://rustlangpt.github.io/posts/cargo/#instalacao-automatica-com-rustup">
+                    Instalação Automática com Rustup
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-verificacao-da-instalacao" class="toc is-size-7" href="https://rustlangpt.github.io/posts/cargo/#verificacao-da-instalacao">
+                    Verificação da Instalação
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-atualizacao-do-cargo" class="toc is-size-7" href="https://rustlangpt.github.io/posts/cargo/#atualizacao-do-cargo">
+                    Atualização do Cargo
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-criacao-de-pacotes" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/cargo/#criacao-de-pacotes">
+                Criação de Pacotes
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-criacao-de-um-novo-projeto" class="toc is-size-7" href="https://rustlangpt.github.io/posts/cargo/#criacao-de-um-novo-projeto">
+                    Criação de um Novo Projeto
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-estrutura-de-um-projeto-cargo" class="toc is-size-7" href="https://rustlangpt.github.io/posts/cargo/#estrutura-de-um-projeto-cargo">
+                    Estrutura de um Projeto Cargo
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-o-ficheiro-cargo-toml" class="toc is-size-7" href="https://rustlangpt.github.io/posts/cargo/#o-ficheiro-cargo-toml">
+                    O Ficheiro Cargo.toml
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-gestao-de-pacotes" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/cargo/#gestao-de-pacotes">
+                Gestão de Pacotes
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-comandos-fundamentais-de-build" class="toc is-size-7" href="https://rustlangpt.github.io/posts/cargo/#comandos-fundamentais-de-build">
+                    Comandos Fundamentais de Build
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-gestao-de-builds-e-cache" class="toc is-size-7" href="https://rustlangpt.github.io/posts/cargo/#gestao-de-builds-e-cache">
+                    Gestão de Builds e Cache
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-gestao-de-dependencias" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/cargo/#gestao-de-dependencias">
+                Gestão de Dependências
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-adicionar-dependencias" class="toc is-size-7" href="https://rustlangpt.github.io/posts/cargo/#adicionar-dependencias">
+                    Adicionar Dependências
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-comando-cargo-add" class="toc is-size-7" href="https://rustlangpt.github.io/posts/cargo/#comando-cargo-add">
+                    Comando cargo add
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-atualizacao-de-dependencias" class="toc is-size-7" href="https://rustlangpt.github.io/posts/cargo/#atualizacao-de-dependencias">
+                    Atualização de Dependências
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-publicacao-de-pacotes" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/cargo/#publicacao-de-pacotes">
+                Publicação de Pacotes
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-preparacao-para-publicacao" class="toc is-size-7" href="https://rustlangpt.github.io/posts/cargo/#preparacao-para-publicacao">
+                    Preparação para Publicação
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-criar-conta-no-crates-io" class="toc is-size-7" href="https://rustlangpt.github.io/posts/cargo/#criar-conta-no-crates-io">
+                    Criar Conta no Crates.io
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-processo-de-publicacao" class="toc is-size-7" href="https://rustlangpt.github.io/posts/cargo/#processo-de-publicacao">
+                    Processo de Publicação
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-testes" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/cargo/#testes">
+                Testes
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-testes-unitarios" class="toc is-size-7" href="https://rustlangpt.github.io/posts/cargo/#testes-unitarios">
+                    Testes Unitários
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-testes-de-integracao" class="toc is-size-7" href="https://rustlangpt.github.io/posts/cargo/#testes-de-integracao">
+                    Testes de Integração
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-doc-tests" class="toc is-size-7" href="https://rustlangpt.github.io/posts/cargo/#doc-tests">
+                    Doc Tests
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-comandos-de-teste" class="toc is-size-7" href="https://rustlangpt.github.io/posts/cargo/#comandos-de-teste">
+                    Comandos de Teste
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-configuracao-de-testes" class="toc is-size-7" href="https://rustlangpt.github.io/posts/cargo/#configuracao-de-testes">
+                    Configuração de Testes
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-benchmarks" class="toc is-size-7" href="https://rustlangpt.github.io/posts/cargo/#benchmarks">
+                    Benchmarks
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-continuous-integration" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/cargo/#continuous-integration">
+                Continuous Integration
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-github-actions" class="toc is-size-7" href="https://rustlangpt.github.io/posts/cargo/#github-actions">
+                    GitHub Actions
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-referencias" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/cargo/#referencias">
+                Referências
+              </a>
+              
+            </li>
+            
+            <li>
+              <a id="link-conclusao" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/cargo/#conclusao">
+                Conclusão
+              </a>
+              
+            </li>
+            
+          </ul>
+        </aside>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+
+  
+  <section class="modal" id="search-modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Search</p>
+      </header>
+      <section class="modal-card-body">
+        <div class="field mb-2">
+          <div class="control">
+            <input class="input" id="search" placeholder="Search this website." type="search" />
+          </div>
+        </div>
+        <div class="search-results">
+          <div class="search-results__items"></div>
+        </div>
+      </section>
+    </div>
+    <button aria-label="close" class="modal-close is-large"></button>
+  </section>
+  
+
+
+  
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <nav class="level">
+              
+          <div class="level-item has-text-centered">
+            <a class="button is-black is-outlined" href="https:&#x2F;&#x2F;rustlangpt.github.io&#x2F;posts&#x2F;conceitos-avancados-rustup&#x2F;">
+              <span class="icon mr-2">
+                <i class="fas fa-arrow-circle-left"></i>
+              </span>
+              Dominando o rustup: indo além do básico
+            </a>
+          </div>
+           
+        </nav>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+  
+
+
+
+
+
+
+  
+  <footer class="footer py-4">
+    <div class="content has-text-centered">
+    <!--
+    <p>
+        Built with
+        <span class="icon-text">
+          <span class="icon">
+            <i class="fas fa-code"></i>
+          </span>
+          <span>code</span>
+        </span>
+        and
+        <span class="icon-text">
+          <span class="icon">
+            <i class="fas fa-heart"></i>
+          </span>
+          <span>love</span>
+        </span>
+      </p>
+    -->
+      <p>
+        Powered by
+        <span class="icon-text">
+          <span class="icon">
+            <i class="fas fa-power-off"></i>
+          </span>
+          <span>zola</span>
+        </span>
+      </p>
+    
+    </div>
+  </footer>
+  
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/galleria@1.6.1/dist/galleria.min.js" integrity="sha384-QSfwGT8/EU536DKdtyP2D6SLlh8zBaZ0cVkwfrwhqzIU9VCfJT00CLVP5t+HAiYg" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/galleria@1.6.1/dist/themes/folio/galleria.folio.min.js" integrity="sha384-DwpKI+deZB267+hPKwiOIc5Y2GKsVL0mR6hgz7GgIu7AgAMYqJwcJKY1YBNfhWcY" crossorigin="anonymous"></script>
+  
+  
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@8.13.5/dist/mermaid.min.js" integrity="sha384-0yWn54pSGtfKCU+skfA69l25VsCw+MZt4LQov3xNRoS7YkAMrFokGgSBnAWSK4pv" crossorigin="anonymous"></script>
+  
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.xkcd@1.1.13/dist/chart.xkcd.min.js" integrity="sha384-xC3h1+IHXK8seA+8KfT79Z4e0GPsznjXBoMa5nd8ooWKplPyXx92NOmljWxLC/cs" crossorigin="anonymous"></script>
+  
+  
+  <script src="https://rustlangpt.github.io/elasticlunr.min.js"></script>
+  <script src="https://rustlangpt.github.io/search_index.en.js"></script><script src="https://rustlangpt.github.io/js/site.js"></script>
+
+  
+
+<script type="text/javascript">
+  const menuBarHeight = document.querySelector("nav.navbar").clientHeight;
+  const tocItems = document.querySelectorAll(".toc");
+  const navSections = new Array(tocItems.length);
+
+  tocItems.forEach((el, i) => {
+    let id = el.getAttribute("id").substring(5);
+    navSections[i] = document.getElementById(id);
+  })
+
+  function isVisible(tocIndex) {
+    const current = navSections[tocIndex];
+    const next = tocIndex < tocItems.length - 1 ? navSections[tocIndex + 1]
+      : document.querySelectorAll("section.section").item(1);
+
+    const c = current.getBoundingClientRect();
+    const n = next.getBoundingClientRect();
+    const h = (window.innerHeight || document.documentElement.clientHeight);
+
+    return (c.top <= h) && (n.top - menuBarHeight >= 0);
+  }
+
+  function activateIfVisible() {
+    for (b = true, i = 0; i < tocItems.length; i++) {
+      if (b && isVisible(i)) {
+        tocItems[i].classList.add('is-active');
+        b = false;
+      } else
+        tocItems[i].classList.remove('is-active');
+    }
+  }
+
+  var isTicking = null;
+  window.addEventListener('scroll', () => {
+    if (!isTicking) {
+      window.requestAnimationFrame(() => {
+        activateIfVisible();
+        isTicking = false;
+      });
+      isTicking = true;
+    }
+  }, false);
+</script>
+
+
+
+
+
+  
+  
+</body>
+
+</html>

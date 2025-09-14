@@ -1,0 +1,805 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+      <title>RustlangPT - rustup</title>
+      <link>https://rustlangpt.github.io</link>
+      <description></description>
+      <generator>Zola</generator>
+      <language>en</language>
+      <atom:link href="https://rustlangpt.github.io/tags/rustup/rss.xml" rel="self" type="application/rss+xml"/>
+      <lastBuildDate>Wed, 10 Sep 2025 00:00:00 +0000</lastBuildDate>
+      <item>
+          <title>Dominando o rustup: indo além do básico</title>
+          <pubDate>Wed, 10 Sep 2025 00:00:00 +0000</pubDate>
+          <author>Unknown</author>
+          <link>https://rustlangpt.github.io/posts/conceitos-avancados-rustup/</link>
+          <guid>https://rustlangpt.github.io/posts/conceitos-avancados-rustup/</guid>
+          <description xml:base="https://rustlangpt.github.io/posts/conceitos-avancados-rustup/">&lt;h2 id=&quot;introducao&quot;&gt;Introdução&lt;&#x2F;h2&gt;
+&lt;p&gt;Se já instalaste o Rust, o mais provável é que tenhas usado o rustup, a ferramenta oficial que simplifica a gestão da linguagem. Mas o rustup é muito mais do que um simples instalador. Ele é a chave para desbloquear o verdadeiro poder do ecossistema Rust, permitindo-te gerir diferentes versões da linguagem, adicionar novas funcionalidades e até compilar para outras plataformas.&lt;&#x2F;p&gt;
+&lt;p&gt;Neste artigo, exploramos conceitos chave como channels, toolchains, components, profiles, proxies, cross-compilation e environment variables. Cada seção inclui explicações, exemplos práticos e referências à documentação oficial do &lt;a href=&quot;https:&#x2F;&#x2F;rust-lang.github.io&#x2F;rustup&#x2F;concepts&#x2F;index.html&quot;&gt;Rustup&lt;&#x2F;a&gt;. Vamos mergulhar nesses tópicos para otimizar seu fluxo de trabalho!&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+&lt;h2 id=&quot;channels-os-canais-de-release-do-rust&quot;&gt;Channels: Os Canais de Release do Rust&lt;&#x2F;h2&gt;
+&lt;h3 id=&quot;conceitos-fundamentais&quot;&gt;Conceitos Fundamentais&lt;&#x2F;h3&gt;
+&lt;p&gt;O Rust é distribuído em três canais de release diferentes: stable, beta, e nightly. Cada canal serve a propósitos específicos no ciclo de desenvolvimento:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Stable&lt;&#x2F;strong&gt;: Releases estáveis são feitas a cada 6 semanas (com releases pontuais ocasionais)&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Beta&lt;&#x2F;strong&gt;: Releases beta são a versão que aparecerá no próximo release estável&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Nightly&lt;&#x2F;strong&gt;: Releases nightly são feitas todas as noites&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;gestao-pratica-de-channels&quot;&gt;Gestão Prática de Channels&lt;&#x2F;h3&gt;
+&lt;h4 id=&quot;instalacao-de-channels-especificos&quot;&gt;Instalação de Channels Específicos&lt;&#x2F;h4&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Instalar channel nightly
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup toolchain install nightly
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Instalar channel beta
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup toolchain install beta
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Instalar version específica do stable
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup toolchain install 1.75.0
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h4 id=&quot;alternancia-entre-channels&quot;&gt;Alternância Entre Channels&lt;&#x2F;h4&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Definir default global
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup default nightly
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;info:&lt;&#x2F;span&gt;&lt;span&gt; using existing install for &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;nightly-x86_64-unknown-linux-gnu&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;info:&lt;&#x2F;span&gt;&lt;span&gt; default toolchain set to &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;nightly-x86_64-unknown-linux-gnu&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Override para projeto específico
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; cd meu-projeto
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup override set beta
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;info:&lt;&#x2F;span&gt;&lt;span&gt; override toolchain for &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&#x2F;home&#x2F;user&#x2F;meu-projeto&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39; set to &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;beta-x86_64-unknown-linux-gnu&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Verificar channel ativo
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup show active-toolchain
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;beta-x86_64-unknown-linux-gnu&lt;&#x2F;span&gt;&lt;span&gt; (overridden by &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&#x2F;home&#x2F;user&#x2F;meu-projeto&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h4 id=&quot;uso-pontual-de-channel&quot;&gt;Uso Pontual de Channel&lt;&#x2F;h4&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Executar cargo com nightly sem mudar default
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup run nightly cargo build
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Executar rustc com beta específico
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup run beta rustc&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --version
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;quando-usar-cada-channel&quot;&gt;Quando Usar Cada Channel&lt;&#x2F;h3&gt;
+&lt;p&gt;&lt;strong&gt;Stable&lt;&#x2F;strong&gt;: Para código de produção, bibliotecas públicas, e projetos que requerem máxima estabilidade.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;Beta&lt;&#x2F;strong&gt;: Para testar compatibilidade com a próxima versão estável antes do lançamento.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;Nightly&lt;&#x2F;strong&gt;: Para experimentar com features experimentais, desenvolvimento de macros procedurais, ou contribuições ao próprio Rust.&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+&lt;h2 id=&quot;toolchains-especificacoes-completas-do-compilador&quot;&gt;Toolchains: Especificações Completas do Compilador&lt;&#x2F;h2&gt;
+&lt;h3 id=&quot;anatomia-de-uma-toolchain&quot;&gt;Anatomia de uma Toolchain&lt;&#x2F;h3&gt;
+&lt;p&gt;Um toolchain é um pacote que inclui o compilador (rustc), o gestor de pacotes (cargo) e outros componentes necessários para o desenvolvimento. O rustup permite-te ter múltiplos toolchains instalados ao mesmo tempo. A sintaxe de um toolchain combina o canal e a plataforma-alvo.&lt;&#x2F;p&gt;
+&lt;p&gt;Uma especificação de toolchain inclui:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Channel ou versão&lt;&#x2F;strong&gt; (stable, beta, nightly, ou versão específica)&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Data&lt;&#x2F;strong&gt; (opcional, para nightly)&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Host platform&lt;&#x2F;strong&gt; (arquitetura e SO onde a toolchain executa)&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;Elas suportam channels oficiais (stable, beta, nightly) e builds customizadas. O nome de uma toolchain segue o formato &lt;code&gt;&amp;lt;channel&amp;gt;[-&amp;lt;date&amp;gt;][-&amp;lt;host&amp;gt;]&lt;&#x2F;code&gt;, onde &lt;channel&gt; pode ser stable, beta, nightly ou uma versão específica (ex.: 1.42.0), &lt;date&gt; é opcional (YYYY-MM-DD para arquivos históricos), e &lt;host&gt; é um triple de target (ex.: x86_64-pc-windows-msvc).&lt;&#x2F;p&gt;
+&lt;h4 id=&quot;exemplos-de-especificacoes-de-toolchain&quot;&gt;Exemplos de Especificações de Toolchain&lt;&#x2F;h4&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Toolchains básicas
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;stable-x86_64-unknown-linux-gnu
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;nightly-x86_64-pc-windows-msvc  
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;beta-aarch64-apple-darwin
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Toolchain com data específica (nightly)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;nightly-2024-01-15-x86_64-unknown-linux-gnu
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Versão específica
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;1.75.0-x86_64-unknown-linux-gnu
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;gestao-avancada-de-toolchains&quot;&gt;Gestão Avançada de Toolchains&lt;&#x2F;h3&gt;
+&lt;h4 id=&quot;instalacao-de-toolchains-especificas&quot;&gt;Instalação de Toolchains Específicas&lt;&#x2F;h4&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Instalar toolchain MSVC no Windows
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup toolchain install stable-x86_64-pc-windows-msvc
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Instalar nightly de data específica
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup toolchain install nightly-2024-01-15
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Instalar toolchain 32-bit numa máquina 64-bit
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup toolchain install stable-i686-unknown-linux-gnu
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h4 id=&quot;toolchains-customizadas&quot;&gt;Toolchains Customizadas&lt;&#x2F;h4&gt;
+&lt;p&gt;O rustup pode gerir builds locais da toolchain Rust para desenvolvedores que trabalham no próprio Rust:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Linkar build local
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup toolchain link my-custom &#x2F;path&#x2F;to&#x2F;my&#x2F;rust&#x2F;build
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Usar toolchain customizada
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup run my-custom rustc&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --version
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h4 id=&quot;listagem-e-gestao&quot;&gt;Listagem e Gestão&lt;&#x2F;h4&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Listar todas as toolchains instaladas
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup toolchain list
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;stable-x86_64-unknown-linux-gnu&lt;&#x2F;span&gt;&lt;span&gt; (default)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;beta-x86_64-unknown-linux-gnu
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;nightly-x86_64-unknown-linux-gnu
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;nightly-2024-01-15-x86_64-unknown-linux-gnu
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Remover toolchain específica
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup toolchain uninstall beta
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Atualizar toolchain específica
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup update nightly
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;hr &#x2F;&gt;
+&lt;h2 id=&quot;components-componentes-modulares-das-toolchains&quot;&gt;Components: Componentes Modulares das Toolchains&lt;&#x2F;h2&gt;
+&lt;h3 id=&quot;conceito-de-components&quot;&gt;Conceito de Components&lt;&#x2F;h3&gt;
+&lt;p&gt;Components são partes modulares de uma toolchain, como o compilador (rustc), o gerenciador de pacotes (cargo) ou ferramentas opcionais (clippy, rustfmt). Alguns são obrigatórios, outros opcionais, e incluem targets (ex.: rust-std para bibliotecas padrão por plataforma). Esta modularidade permite instalar apenas os componentes necessários.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;components-principais&quot;&gt;Components Principais&lt;&#x2F;h3&gt;
+&lt;p&gt;A maioria dos componentes tem um sufixo target-triple, como rustc-x86_64-apple-darwin, para indicar a plataforma para a qual o componente é destinado:&lt;&#x2F;p&gt;
+&lt;h4 id=&quot;components-essenciais&quot;&gt;Components Essenciais&lt;&#x2F;h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;rustc&lt;&#x2F;strong&gt;: O compilador Rust&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;rust-std&lt;&#x2F;strong&gt;: A biblioteca padrão do Rust, com componente separado para cada target suportado&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;cargo&lt;&#x2F;strong&gt;: O build system e package manager&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;rust-docs&lt;&#x2F;strong&gt;: Documentação offline&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h4 id=&quot;components-de-desenvolvimento&quot;&gt;Components de Desenvolvimento&lt;&#x2F;h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;clippy&lt;&#x2F;strong&gt;: Linter avançado&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;rustfmt&lt;&#x2F;strong&gt;: Formatador de código&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;rls&lt;&#x2F;strong&gt; ou &lt;strong&gt;rust-analyzer&lt;&#x2F;strong&gt;: Language server&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;miri&lt;&#x2F;strong&gt;: Interpretador para detecção de undefined behavior&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h4 id=&quot;components-de-target&quot;&gt;Components de Target&lt;&#x2F;h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;rust-std-{target}&lt;&#x2F;strong&gt;: Biblioteca padrão para targets específicos&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;rust-src&lt;&#x2F;strong&gt;: Código fonte para análise avançada&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;gestao-de-components&quot;&gt;Gestão de Components&lt;&#x2F;h3&gt;
+&lt;h4 id=&quot;listar-components-disponiveis&quot;&gt;Listar Components Disponíveis&lt;&#x2F;h4&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Listar todos os components da toolchain ativa
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup component list
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cargo-x86_64-unknown-linux-gnu&lt;&#x2F;span&gt;&lt;span&gt; (installed)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;clippy-x86_64-unknown-linux-gnu
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;llvm-tools-preview-x86_64-unknown-linux-gnu
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;rls-x86_64-unknown-linux-gnu
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;rust-analyzer-x86_64-unknown-linux-gnu
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;rust-docs-x86_64-unknown-linux-gnu&lt;&#x2F;span&gt;&lt;span&gt; (installed)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;rust-src&lt;&#x2F;span&gt;&lt;span&gt; (installed)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;rust-std-x86_64-unknown-linux-gnu&lt;&#x2F;span&gt;&lt;span&gt; (installed)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;rustc-x86_64-unknown-linux-gnu&lt;&#x2F;span&gt;&lt;span&gt; (installed)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;rustfmt-x86_64-unknown-linux-gnu
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h4 id=&quot;instalacao-e-remocao-de-components&quot;&gt;Instalação e Remoção de Components&lt;&#x2F;h4&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Instalar clippy
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup component add clippy
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;info:&lt;&#x2F;span&gt;&lt;span&gt; downloading component &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;clippy&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;info:&lt;&#x2F;span&gt;&lt;span&gt; installing component &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;clippy&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Instalar para toolchain específica
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup component add&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --toolchain&lt;&#x2F;span&gt;&lt;span&gt; nightly rust-src
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Remover component
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup component remove rls
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Instalar múltiplos components
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup component add rustfmt clippy rust-src
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h4 id=&quot;components-por-toolchain&quot;&gt;Components por Toolchain&lt;&#x2F;h4&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Verificar components de toolchain específica
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup component list&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --toolchain&lt;&#x2F;span&gt;&lt;span&gt; nightly
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Instalar component apenas para nightly
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup +nightly component add miri
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;hr &#x2F;&gt;
+&lt;h2 id=&quot;profiles-grupos-predefinidos-de-components&quot;&gt;Profiles: Grupos Predefinidos de Components&lt;&#x2F;h2&gt;
+&lt;h3 id=&quot;conceito-de-profiles&quot;&gt;Conceito de Profiles&lt;&#x2F;h3&gt;
+&lt;p&gt;Para facilitar a escolha de quais components instalar, o rustup tem o conceito de &quot;profiles&quot; que fornecem agrupamentos nomeados de diferentes components.&lt;&#x2F;p&gt;
+&lt;p&gt;Profiles são grupos predefinidos de components para simplificar instalações.&lt;&#x2F;p&gt;
+&lt;p&gt;Existem três tipos:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;minimal (apenas rustc, rust-std, cargo – ideal para CI ou Windows para evitar problemas com docs)&lt;&#x2F;li&gt;
+&lt;li&gt;default (adiciona rust-docs, rustfmt, clippy – recomendado para uso geral)&lt;&#x2F;li&gt;
+&lt;li&gt;complete (todos os components disponíveis – não recomendado, pois pode falhar devido a metadados extensos).&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;gestao-de-profiles&quot;&gt;Gestão de Profiles&lt;&#x2F;h3&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Ver profile atual
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup show profile
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Default&lt;&#x2F;span&gt;&lt;span&gt; host: x86_64-unknown-linux-gnu
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;rustup&lt;&#x2F;span&gt;&lt;span&gt; home:  &#x2F;home&#x2F;user&#x2F;.rustup
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;default&lt;&#x2F;span&gt;&lt;span&gt; profile: default
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Definir profile para futuras instalações
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup set profile minimal
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;info:&lt;&#x2F;span&gt;&lt;span&gt; profile set to &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;minimal&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Instalar nova toolchain com profile minimal
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup toolchain install beta
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;info:&lt;&#x2F;span&gt;&lt;span&gt; syncing channel updates for &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;beta-x86_64-unknown-linux-gnu&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;info:&lt;&#x2F;span&gt;&lt;span&gt; downloading component &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;cargo&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;info:&lt;&#x2F;span&gt;&lt;span&gt; downloading component &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;rust-std&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;info:&lt;&#x2F;span&gt;&lt;span&gt; downloading component &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;rustc&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;info:&lt;&#x2F;span&gt;&lt;span&gt; installing component &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;cargo&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;info:&lt;&#x2F;span&gt;&lt;span&gt; installing component &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;rust-std&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;info:&lt;&#x2F;span&gt;&lt;span&gt; installing component &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;rustc&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Voltar ao profile default
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup set profile default
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Os profiles apenas afetarão toolchains recém-instaladas: como sempre será possível instalar components individuais posteriormente com rustup component add.&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+&lt;h2 id=&quot;proxies-o-sistema-de-redirecionamento&quot;&gt;Proxies: O Sistema de Redirecionamento&lt;&#x2F;h2&gt;
+&lt;h3 id=&quot;como-funcionam-os-proxies&quot;&gt;Como Funcionam os Proxies&lt;&#x2F;h3&gt;
+&lt;p&gt;No contexto do Rustup, proxies referem-se a executáveis proxy instalados em ~&#x2F;.cargo&#x2F;bin, que delegam comandos para a toolchain ativa. Isso permite alternar toolchains sem alterar caminhos manualmente.
+Os executáveis rustc e cargo instalados em ~&#x2F;.cargo&#x2F;bin são proxies que delegam para a toolchain real. Este sistema permite que o mesmo comando execute diferentes versões do compilador dependendo do contexto.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;configuracao-de-proxies&quot;&gt;Configuração de Proxies&lt;&#x2F;h3&gt;
+&lt;p&gt;Os proxies são instalados automaticamente em &lt;code&gt;~&#x2F;.cargo&#x2F;bin&lt;&#x2F;code&gt; e adicionados ao PATH. O comportamento pode ser configurado:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Verificar localização dos proxies
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; which rustc
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;&#x2F;home&#x2F;user&#x2F;.cargo&#x2F;bin&#x2F;rustc
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; which cargo  
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;&#x2F;home&#x2F;user&#x2F;.cargo&#x2F;bin&#x2F;cargo
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Ver para onde o proxy está a redirecionar
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup which rustc
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;&#x2F;home&#x2F;user&#x2F;.rustup&#x2F;toolchains&#x2F;stable-x86_64-unknown-linux-gnu&#x2F;bin&#x2F;rustc
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;proxies-customizados&quot;&gt;Proxies Customizados&lt;&#x2F;h3&gt;
+&lt;p&gt;É possível criar proxies para ferramentas específicas:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Criar proxy para ferramenta específica
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup run nightly which miri
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;&#x2F;home&#x2F;user&#x2F;.rustup&#x2F;toolchains&#x2F;nightly-x86_64-unknown-linux-gnu&#x2F;bin&#x2F;miri
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Usar proxy diretamente
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$ ~&lt;&#x2F;span&gt;&lt;span&gt;&#x2F;.cargo&#x2F;bin&#x2F;cargo +nightly miri test
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;hr &#x2F;&gt;
+&lt;h2 id=&quot;cross-compilation-compilacao-multi-plataforma&quot;&gt;Cross-Compilation: Compilação Multi-Plataforma&lt;&#x2F;h2&gt;
+&lt;h3 id=&quot;conceitos-base&quot;&gt;Conceitos Base&lt;&#x2F;h3&gt;
+&lt;p&gt;O rustc é capaz de gerar código para muitas plataformas. O &quot;target&quot; especifica a plataforma para a qual o código será gerado. Por defeito, cargo e rustc usam a plataforma da toolchain host como target.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;instalacao-de-targets&quot;&gt;Instalação de Targets&lt;&#x2F;h3&gt;
+&lt;p&gt;Quando instalas uma toolchain pela primeira vez, o rustup instala apenas a biblioteca padrão para a tua plataforma host. Para compilar para outras plataformas deves instalar outras plataformas target:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Adicionar target para Android
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup target add arm-linux-androideabi
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;info:&lt;&#x2F;span&gt;&lt;span&gt; downloading component &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;rust-std&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39; for &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;arm-linux-androideabi&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;info:&lt;&#x2F;span&gt;&lt;span&gt; installing component &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;rust-std&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39; for &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;arm-linux-androideabi&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Adicionar target para WebAssembly
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup target add wasm32-unknown-unknown
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Adicionar target para Windows (em Linux)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup target add x86_64-pc-windows-gnu
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;targets-populares&quot;&gt;Targets Populares&lt;&#x2F;h3&gt;
+&lt;h4 id=&quot;mobile&quot;&gt;Mobile&lt;&#x2F;h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;aarch64-apple-ios&lt;&#x2F;code&gt; - iOS 64-bit&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;arm-linux-androideabi&lt;&#x2F;code&gt; - Android ARM&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;aarch64-linux-android&lt;&#x2F;code&gt; - Android ARM64&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h4 id=&quot;webassembly&quot;&gt;WebAssembly&lt;&#x2F;h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;wasm32-unknown-unknown&lt;&#x2F;code&gt; - WebAssembly padrão&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;wasm32-wasi&lt;&#x2F;code&gt; - WebAssembly com WASI&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h4 id=&quot;embedded&quot;&gt;Embedded&lt;&#x2F;h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;thumbv7em-none-eabihf&lt;&#x2F;code&gt; - Cortex-M4&#x2F;M7&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;riscv32imc-unknown-none-elf&lt;&#x2F;code&gt; - RISC-V&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h4 id=&quot;desktop-cross-platform&quot;&gt;Desktop Cross-Platform&lt;&#x2F;h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;x86_64-pc-windows-gnu&lt;&#x2F;code&gt; - Windows 64-bit (MinGW)&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;x86_64-apple-darwin&lt;&#x2F;code&gt; - macOS 64-bit&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;aarch64-apple-darwin&lt;&#x2F;code&gt; - macOS Apple Silicon&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;cross-compilation-na-pratica&quot;&gt;Cross-Compilation na Prática&lt;&#x2F;h3&gt;
+&lt;h4 id=&quot;compilacao-basica&quot;&gt;Compilação Básica&lt;&#x2F;h4&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Compilar para Windows a partir de Linux
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; cargo build&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --target&lt;&#x2F;span&gt;&lt;span&gt; x86_64-pc-windows-gnu
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Compilar para WebAssembly
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; cargo build&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --target&lt;&#x2F;span&gt;&lt;span&gt; wasm32-unknown-unknown
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Compilar para múltiplos targets
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; cargo build&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --target&lt;&#x2F;span&gt;&lt;span&gt; x86_64-pc-windows-gnu&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --target&lt;&#x2F;span&gt;&lt;span&gt; wasm32-unknown-unknown
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h4 id=&quot;configuracao-de-cross-compilation&quot;&gt;Configuração de Cross-Compilation&lt;&#x2F;h4&gt;
+&lt;p&gt;&lt;strong&gt;Cargo.toml&lt;&#x2F;strong&gt;:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;toml&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-toml &quot;&gt;&lt;code class=&quot;language-toml&quot; data-lang=&quot;toml&quot;&gt;&lt;span&gt;[build]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;target &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;wasm32-unknown-unknown&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;[[bin]]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;name &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;my-app&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;path &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;src&#x2F;main.rs&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;strong&gt;.cargo&#x2F;config.toml&lt;&#x2F;strong&gt;:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;toml&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-toml &quot;&gt;&lt;code class=&quot;language-toml&quot; data-lang=&quot;toml&quot;&gt;&lt;span&gt;[build]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;target &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;x86_64-pc-windows-gnu&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;[target.x86_64-pc-windows-gnu]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;linker &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;x86_64-w64-mingw32-gcc&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h4 id=&quot;gestao-de-targets&quot;&gt;Gestão de Targets&lt;&#x2F;h4&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Listar targets instalados
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup target list&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --installed
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;x86_64-unknown-linux-gnu
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;wasm32-unknown-unknown
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;x86_64-pc-windows-gnu
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Listar todos os targets disponíveis
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup target list
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Remover target
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup target remove arm-linux-androideabi
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Instalar target para toolchain específica
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup target add&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --toolchain&lt;&#x2F;span&gt;&lt;span&gt; nightly wasm32-unknown-unknown
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;hr &#x2F;&gt;
+&lt;h2 id=&quot;environment-variables-configuracao-avancada&quot;&gt;Environment Variables: Configuração Avançada&lt;&#x2F;h2&gt;
+&lt;h3 id=&quot;variaveis-de-configuracao-principal&quot;&gt;Variáveis de Configuração Principal&lt;&#x2F;h3&gt;
+&lt;p&gt;O rustup reconhece várias variáveis de ambiente para configuração avançada:&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;RUSTUP_HOME&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Definir diretório personalizado para rustup
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;export &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;RUSTUP_HOME&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&#x2F;custom&#x2F;path&#x2F;rustup
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;strong&gt;CARGO_HOME&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Definir diretório personalizado para cargo
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;export &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;CARGO_HOME&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&#x2F;custom&#x2F;path&#x2F;cargo
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;variaveis-de-comportamento&quot;&gt;Variáveis de Comportamento&lt;&#x2F;h3&gt;
+&lt;p&gt;&lt;strong&gt;RUSTUP_AUTO_INSTALL&lt;&#x2F;strong&gt;
+Quando definida como 1, instala a toolchain ativa quando está ausente. Define este valor como 0 para desativar a instalação automática:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Desativar instalação automática
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;export &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;RUSTUP_AUTO_INSTALL&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;0
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;strong&gt;RUSTUP_TOOLCHAIN&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Forçar toolchain específica
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;export &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;RUSTUP_TOOLCHAIN&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;nightly-2024-01-15
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Verificar resultado
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustc&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --version
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;rustc&lt;&#x2F;span&gt;&lt;span&gt; 1.77.0-nightly (90d6f0acb 2024-01-14)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;variaveis-de-proxy-e-network&quot;&gt;Variáveis de Proxy e Network&lt;&#x2F;h3&gt;
+&lt;p&gt;&lt;strong&gt;RUSTUP_DIST_SERVER&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Usar servidor de distribuição alternativo
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;export &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;RUSTUP_DIST_SERVER&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;https:&#x2F;&#x2F;dev-static.rust-lang.org
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;strong&gt;HTTP_PROXY &#x2F; HTTPS_PROXY&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Configurar proxy para downloads
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;export &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;HTTPS_PROXY&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;http:&#x2F;&#x2F;proxy.company.com:8080
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;export &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;HTTP_PROXY&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;http:&#x2F;&#x2F;proxy.company.com:8080
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;variaveis-de-sistema-avancadas&quot;&gt;Variáveis de Sistema Avançadas&lt;&#x2F;h3&gt;
+&lt;p&gt;&lt;strong&gt;RUSTUP_PERMIT_COPY_RENAME&lt;&#x2F;strong&gt;
+Quando definida, permite ao rustup recorrer à cópia de ficheiros se tentativas de renomear resultarem em erros de cross-device link. Estes erros ocorrem no OverlayFS, que é usado pelo Docker:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Para ambientes Docker
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;export &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;RUSTUP_PERMIT_COPY_RENAME&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;1
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;strong&gt;RUSTUP_HARDLINK_PROXIES&lt;&#x2F;strong&gt;
+Quando definida, o rustup não tentará fazer symlink dos proxies e em vez disso usará sempre hardlinks:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Usar hardlinks em vez de symlinks
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;export &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;RUSTUP_HARDLINK_PROXIES&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;1
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;hr &#x2F;&gt;
+&lt;h2 id=&quot;configuracao-de-projetos-com-rust-toolchain-toml&quot;&gt;Configuração de Projetos com rust-toolchain.toml&lt;&#x2F;h2&gt;
+&lt;h3 id=&quot;ficheiro-de-configuracao-de-projeto&quot;&gt;Ficheiro de Configuração de Projeto&lt;&#x2F;h3&gt;
+&lt;p&gt;Para projetos que requerem configurações específicas, pode criar &lt;code&gt;rust-toolchain.toml&lt;&#x2F;code&gt;:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;toml&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-toml &quot;&gt;&lt;code class=&quot;language-toml&quot; data-lang=&quot;toml&quot;&gt;&lt;span&gt;[toolchain]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;channel &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;nightly-2024-01-15&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;components &lt;&#x2F;span&gt;&lt;span&gt;= [&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;rustfmt&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;clippy&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;rust-src&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;targets &lt;&#x2F;span&gt;&lt;span&gt;= [&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;wasm32-unknown-unknown&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;x86_64-pc-windows-gnu&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;profile &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;default&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;overrides-automaticos&quot;&gt;Overrides Automáticos&lt;&#x2F;h3&gt;
+&lt;p&gt;As configurações de componentes contêm uma lista de componentes adicionais para instalar. Os componentes listados aqui são aditivos com o profile atual:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;toml&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-toml &quot;&gt;&lt;code class=&quot;language-toml&quot; data-lang=&quot;toml&quot;&gt;&lt;span&gt;[toolchain]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;channel &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;stable&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;components &lt;&#x2F;span&gt;&lt;span&gt;= [
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;clippy&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;,
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;rustfmt&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, 
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;rust-analyzer&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;,
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;llvm-tools-preview&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;targets &lt;&#x2F;span&gt;&lt;span&gt;= [
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;wasm32-unknown-unknown&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;,
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;x86_64-apple-darwin&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;,
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;aarch64-apple-darwin&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;]
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;hr &#x2F;&gt;
+&lt;h2 id=&quot;workflows-avancados&quot;&gt;Workflows Avançados&lt;&#x2F;h2&gt;
+&lt;h3 id=&quot;desenvolvimento-multi-target&quot;&gt;Desenvolvimento Multi-Target&lt;&#x2F;h3&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;#!&#x2F;bin&#x2F;bash
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Script para build multi-plataforma
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;TARGETS&lt;&#x2F;span&gt;&lt;span&gt;=(
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;x86_64-unknown-linux-gnu&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;x86_64-pc-windows-gnu&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;x86_64-apple-darwin&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;aarch64-apple-darwin&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;wasm32-unknown-unknown&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;for&lt;&#x2F;span&gt;&lt;span&gt; target &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;in &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;TARGETS[@]&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;do
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;echo &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Building for &lt;&#x2F;span&gt;&lt;span&gt;$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;target&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;...&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;rustup&lt;&#x2F;span&gt;&lt;span&gt; target add &amp;quot;$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;target&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cargo&lt;&#x2F;span&gt;&lt;span&gt; build&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --release --target &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;target&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;done
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;ci-cd-com-rustup&quot;&gt;CI&#x2F;CD com Rustup&lt;&#x2F;h3&gt;
+&lt;pre data-lang=&quot;yaml&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-yaml &quot;&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# .github&#x2F;workflows&#x2F;ci.yml
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;name&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;CI
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;on&lt;&#x2F;span&gt;&lt;span&gt;: [&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;push&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;pull_request&lt;&#x2F;span&gt;&lt;span&gt;]
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;jobs&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;test&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;strategy&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;matrix&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;toolchain&lt;&#x2F;span&gt;&lt;span&gt;: [&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;stable&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;beta&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;nightly&lt;&#x2F;span&gt;&lt;span&gt;]
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;os&lt;&#x2F;span&gt;&lt;span&gt;: [&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;ubuntu-latest&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;windows-latest&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;macos-latest&lt;&#x2F;span&gt;&lt;span&gt;]
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;runs-on&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;${{ matrix.os }}
+&lt;&#x2F;span&gt;&lt;span&gt;    
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;steps&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;      - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;uses&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;actions&#x2F;checkout@v3
+&lt;&#x2F;span&gt;&lt;span&gt;      - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;name&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Install Rust
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;run&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;|
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;          rustup toolchain install ${{ matrix.toolchain }}
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;          rustup default ${{ matrix.toolchain }}
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;          rustup component add clippy rustfmt
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;      
+&lt;&#x2F;span&gt;&lt;span&gt;      - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;name&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Run tests
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;run&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;|
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;          cargo test
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;          cargo clippy -- -D warnings
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;          cargo fmt -- --check
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;profile-de-desenvolvimento-otimizado&quot;&gt;Profile de Desenvolvimento Otimizado&lt;&#x2F;h3&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Setup para desenvolvimento performante
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;rustup&lt;&#x2F;span&gt;&lt;span&gt; set profile minimal
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;rustup&lt;&#x2F;span&gt;&lt;span&gt; toolchain install stable nightly
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;rustup&lt;&#x2F;span&gt;&lt;span&gt; component add&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --toolchain&lt;&#x2F;span&gt;&lt;span&gt; stable rustfmt clippy rust-analyzer
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;rustup&lt;&#x2F;span&gt;&lt;span&gt; component add&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --toolchain&lt;&#x2F;span&gt;&lt;span&gt; nightly rustfmt clippy rust-analyzer rust-src miri
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Alias para comandos frequentes
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;alias &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;rn&lt;&#x2F;span&gt;&lt;span&gt;=&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;rustup run nightly&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;alias &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;rs&lt;&#x2F;span&gt;&lt;span&gt;=&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;rustup run stable&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;alias &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;cb&lt;&#x2F;span&gt;&lt;span&gt;=&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;cargo build&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;alias &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;ct&lt;&#x2F;span&gt;&lt;span&gt;=&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;cargo test&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;alias &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;cc&lt;&#x2F;span&gt;&lt;span&gt;=&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;cargo check&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;hr &#x2F;&gt;
+&lt;h2 id=&quot;troubleshooting-e-otimizacao&quot;&gt;Troubleshooting e Otimização&lt;&#x2F;h2&gt;
+&lt;h3 id=&quot;limpeza-de-espaco&quot;&gt;Limpeza de Espaço&lt;&#x2F;h3&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Ver tamanho ocupado
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; du&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -sh ~&lt;&#x2F;span&gt;&lt;span&gt;&#x2F;.rustup
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;2.5G&lt;&#x2F;span&gt;&lt;span&gt;    &#x2F;home&#x2F;user&#x2F;.rustup
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Limpar cache de downloads
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup self update-data&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --clean
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Remover toolchains antigas
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup toolchain list
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup toolchain uninstall nightly-2023-12-01
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Limpar targets não utilizados
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup target list&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --installed
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup target remove arm-linux-androideabi
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;verificacao-de-integridade&quot;&gt;Verificação de Integridade&lt;&#x2F;h3&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Verificar instalação
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup check
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;info:&lt;&#x2F;span&gt;&lt;span&gt; checking for rustup updates...
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;info:&lt;&#x2F;span&gt;&lt;span&gt; checking for toolchain updates...
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Reinstalar toolchain corrompida  
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup toolchain uninstall stable
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup toolchain install stable
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;performance-de-compilacao&quot;&gt;Performance de Compilação&lt;&#x2F;h3&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Usar lld como linker (mais rápido)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# .cargo&#x2F;config.toml
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;[target.x86_64-unknown-linux-gnu]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;rustflags&lt;&#x2F;span&gt;&lt;span&gt; = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;[&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;-C&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;link-arg=-fuse-ld=lld&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;]
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Configurar número de jobs paralelos
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;export &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;CARGO_BUILD_JOBS&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;8
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Cache de compilação com sccache
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;export &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;RUSTC_WRAPPER&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;sccache
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;hr &#x2F;&gt;
+&lt;h2 id=&quot;conclusao&quot;&gt;Conclusão&lt;&#x2F;h2&gt;
+&lt;p&gt;O rustup é uma ferramenta incrivelmente poderosa que vai muito além da instalação simples do Rust. Dominar seus conceitos avançados - channels, toolchains, components, profiles, proxies, cross-compilation e environment variables - permite criar workflows de desenvolvimento extremamente eficientes e flexíveis.&lt;&#x2F;p&gt;
+&lt;p&gt;Estas funcionalidades tornam o rustup único no ecossistema de linguagens de programação, oferecendo um nível de controlo e flexibilidade que é essencial para projetos sérios de Rust, especialmente aqueles que envolvem multi-plataformas, sistemas embarcados, ou WebAssembly.&lt;&#x2F;p&gt;
+&lt;p&gt;A configuração adequada do rustup pode significar a diferença entre um desenvolvimento frustrante e um workflow fluido e produtivo. Investe tempo a compreender estas funcionalidades - o retorno em produtividade será substancial.&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+&lt;h2 id=&quot;recursos-de-referencia&quot;&gt;Recursos de Referência&lt;&#x2F;h2&gt;
+&lt;h3 id=&quot;documentacao-oficial&quot;&gt;Documentação Oficial&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;rust-lang.github.io&#x2F;rustup&#x2F;concepts&#x2F;index.html&quot;&gt;Rustup Concepts&lt;&#x2F;a&gt; - Documentação completa de conceitos&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;rust-lang.github.io&#x2F;rustup&#x2F;concepts&#x2F;channels.html&quot;&gt;Channels&lt;&#x2F;a&gt; - Detalhes sobre channels&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;rust-lang.github.io&#x2F;rustup&#x2F;concepts&#x2F;toolchains.html&quot;&gt;Toolchains&lt;&#x2F;a&gt; - Especificações de toolchains&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;rust-lang.github.io&#x2F;rustup&#x2F;concepts&#x2F;components.html&quot;&gt;Components&lt;&#x2F;a&gt; - Sistema de componentes&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;rust-lang.github.io&#x2F;rustup&#x2F;concepts&#x2F;profiles.html&quot;&gt;Profiles&lt;&#x2F;a&gt; - Grupos de componentes&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;rust-lang.github.io&#x2F;rustup&#x2F;cross-compilation.html&quot;&gt;Cross-compilation&lt;&#x2F;a&gt; - Guia de cross-compilation&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;rust-lang.github.io&#x2F;rustup&#x2F;environment-variables.html&quot;&gt;Environment Variables&lt;&#x2F;a&gt; - Variáveis de configuração&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;rust-lang.github.io&#x2F;rustup&#x2F;overrides.html&quot;&gt;Overrides&lt;&#x2F;a&gt; - Sistema de overrides por projeto&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;comandos-de-referencia-rapida&quot;&gt;Comandos de Referência Rápida&lt;&#x2F;h3&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Gestão básica
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;rustup&lt;&#x2F;span&gt;&lt;span&gt; show                 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Estado atual
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;rustup&lt;&#x2F;span&gt;&lt;span&gt; update              &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Atualizar tudo
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;rustup&lt;&#x2F;span&gt;&lt;span&gt; self update         &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Atualizar rustup
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Toolchains
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;rustup&lt;&#x2F;span&gt;&lt;span&gt; toolchain list      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Listar toolchains
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;rustup&lt;&#x2F;span&gt;&lt;span&gt; toolchain install   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Instalar toolchain
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;rustup&lt;&#x2F;span&gt;&lt;span&gt; default &amp;lt;toolchain&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Definir padrão
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Components
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;rustup&lt;&#x2F;span&gt;&lt;span&gt; component list      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Listar components
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;rustup&lt;&#x2F;span&gt;&lt;span&gt; component add       &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Instalar component
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Targets  
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;rustup&lt;&#x2F;span&gt;&lt;span&gt; target list         &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Listar targets
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;rustup&lt;&#x2F;span&gt;&lt;span&gt; target add          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Instalar target
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Overrides
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;rustup&lt;&#x2F;span&gt;&lt;span&gt; override set        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Override local
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;rustup&lt;&#x2F;span&gt;&lt;span&gt; override list       &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Listar overrides
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Lembra-te: o rustup é uma ferramenta em constante evolução. Consulta sempre a &lt;a href=&quot;https:&#x2F;&#x2F;rust-lang.github.io&#x2F;rustup&#x2F;&quot;&gt;documentação oficial&lt;&#x2F;a&gt; para as funcionalidades mais recentes e melhores práticas atualizadas.&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Disclaimer&lt;&#x2F;em&gt;&lt;&#x2F;strong&gt;: Artigo elaborado com auxilio a ferramentas de inteligência artificial mas revisto por humanos.&lt;&#x2F;p&gt;
+</description>
+      </item>
+      <item>
+          <title>Instalação do Rust: Guia Completo para Linux, Windows e macOS</title>
+          <pubDate>Tue, 09 Sep 2025 00:00:00 +0000</pubDate>
+          <author>Unknown</author>
+          <link>https://rustlangpt.github.io/posts/instalacao-rust/</link>
+          <guid>https://rustlangpt.github.io/posts/instalacao-rust/</guid>
+          <description xml:base="https://rustlangpt.github.io/posts/instalacao-rust/">&lt;h2 id=&quot;introducao&quot;&gt;Introdução&lt;&#x2F;h2&gt;
+&lt;p&gt;A instalação do Rust é surpreendentemente simples e uniforme em todas as plataformas principais. A linguagem utiliza uma ferramenta chamada &lt;code&gt;rustup&lt;&#x2F;code&gt; que funciona como um instalador e gestor de versões oficial. O rustup é uma ferramenta de linha de comando para gerir versões do Rust e ferramentas associadas, conforme documentado no &lt;a href=&quot;https:&#x2F;&#x2F;doc.rust-lang.org&#x2F;book&#x2F;ch01-01-installation.html&quot;&gt;The Rust Programming Language Book&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;Neste artigo, vamos explorar o processo de instalação do Rust em diferentes sistemas operativos, baseando-nos exclusivamente na documentação oficial para garantir que está sempre atualizado com as melhores práticas.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;o-que-e-o-rustup&quot;&gt;O que é o Rustup?&lt;&#x2F;h2&gt;
+&lt;p&gt;O Rustup instala os binários da linguagem Rust a partir dos canais de lançamento oficiais, permitindo alternar facilmente entre compiladores stable, beta e nightly e mantê-los atualizados. Esta ferramenta:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Gere múltiplas versões&lt;&#x2F;strong&gt; do compilador Rust&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Facilita cross-compilation&lt;&#x2F;strong&gt; com builds binários da biblioteca standard para plataformas comuns&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Funciona em todas as plataformas&lt;&#x2F;strong&gt; que o Rust suporta, incluindo Windows&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Mantém atualizações automáticas&lt;&#x2F;strong&gt; das toolchains&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Para informação detalhada sobre o rustup, consulta &lt;a href=&quot;https:&#x2F;&#x2F;rust-lang.github.io&#x2F;rustup&#x2F;&quot;&gt;The Rustup Book&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;instalacao-no-linux-e-macos&quot;&gt;Instalação no Linux e macOS&lt;&#x2F;h2&gt;
+&lt;h3 id=&quot;pre-requisitos&quot;&gt;Pré-requisitos&lt;&#x2F;h3&gt;
+&lt;p&gt;Antes de instalar o Rust em sistemas Unix-like, é importante garantir que tem as dependências necessárias:&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;Para Linux:&lt;&#x2F;strong&gt;
+Os utilizadores de Linux devem geralmente instalar GCC ou Clang, de acordo com a documentação da sua distribuição. Por exemplo:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Ubuntu&#x2F;Debian
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; sudo apt update
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; sudo apt install build-essential
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Fedora
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; sudo dnf groupinstall &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Development Tools&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; sudo dnf install gcc
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Arch Linux
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; sudo pacman&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -S&lt;&#x2F;span&gt;&lt;span&gt; base-devel
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# openSUSE
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; sudo zypper install&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -t&lt;&#x2F;span&gt;&lt;span&gt; pattern devel_basis
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;strong&gt;Para macOS:&lt;&#x2F;strong&gt;
+No macOS, pode obter um compilador C executando: &lt;code&gt;xcode-select --install&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; xcode-select&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --install
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;processo-de-instalacao&quot;&gt;Processo de Instalação&lt;&#x2F;h3&gt;
+&lt;p&gt;Se estiver a usar Linux ou macOS, abra um terminal e digite o seguinte comando:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; curl&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --proto &lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;=https&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --tlsv1&lt;&#x2F;span&gt;&lt;span&gt;.2&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -sSf&lt;&#x2F;span&gt;&lt;span&gt; https:&#x2F;&#x2F;sh.rustup.rs | &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;sh
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;strong&gt;O que este comando faz:&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;--proto &#x27;=https&#x27;&lt;&#x2F;code&gt;&lt;&#x2F;strong&gt;: Força HTTPS para segurança&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;--tlsv1.2&lt;&#x2F;code&gt;&lt;&#x2F;strong&gt;: Utiliza TLS versão 1.2 ou superior&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;-sSf&lt;&#x2F;code&gt;&lt;&#x2F;strong&gt;: Flags do curl para operação silenciosa com falha em erros HTTP&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;configuracao-do-path&quot;&gt;Configuração do PATH&lt;&#x2F;h3&gt;
+&lt;p&gt;Após a instalação, o rustup instala rustc, cargo, rustup e outras ferramentas padrão no diretório bin do Cargo. No Unix está localizado em $HOME&#x2F;.cargo&#x2F;bin.&lt;&#x2F;p&gt;
+&lt;p&gt;Para ativar o Rust na sessão atual:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; source &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;~&lt;&#x2F;span&gt;&lt;span&gt;&#x2F;.cargo&#x2F;env
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Ou simplesmente reinicie o terminal. O script de instalação automaticamente adiciona o PATH ao seu ficheiro de perfil shell (&lt;code&gt;.bashrc&lt;&#x2F;code&gt;, &lt;code&gt;.zshrc&lt;&#x2F;code&gt;, etc.).&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;verificacao-da-instalacao&quot;&gt;Verificação da Instalação&lt;&#x2F;h3&gt;
+&lt;p&gt;Para verificar se tem o Rust instalado corretamente, abra uma shell e digite esta linha: &lt;code&gt;rustc --version&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustc&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --version
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;rustc&lt;&#x2F;span&gt;&lt;span&gt; 1.75.0 (82e1608df 2023-12-21)
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; cargo&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --version
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cargo&lt;&#x2F;span&gt;&lt;span&gt; 1.75.0 (1d8b05cdd 2023-11-20)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;instalacao-no-windows&quot;&gt;Instalação no Windows&lt;&#x2F;h2&gt;
+&lt;h3 id=&quot;metodos-de-instalacao&quot;&gt;Métodos de Instalação&lt;&#x2F;h3&gt;
+&lt;p&gt;O Windows oferece duas formas principais de instalar o Rust:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Método Recomendado&lt;&#x2F;strong&gt;: Usando o instalador visual&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Método Alternativo&lt;&#x2F;strong&gt;: Via Windows Subsystem for Linux (WSL)&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;Consulta informação adicional &lt;a href=&quot;https:&#x2F;&#x2F;rust-lang.github.io&#x2F;rustup&#x2F;installation&#x2F;windows.html&quot;&gt;aqui&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;metodo-1-instalador-visual-recomendado&quot;&gt;Método 1: Instalador Visual (Recomendado)&lt;&#x2F;h3&gt;
+&lt;p&gt;No Windows, vá a https:&#x2F;&#x2F;www.rust-lang.org&#x2F;tools&#x2F;install e siga as instruções para instalar o Rust.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;Passos detalhados:&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Descarregue o instalador:&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Visite &lt;a href=&quot;https:&#x2F;&#x2F;www.rust-lang.org&#x2F;tools&#x2F;install&quot;&gt;https:&#x2F;&#x2F;www.rust-lang.org&#x2F;tools&#x2F;install&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;Para instalar o Rust, descarregue e execute rustup-init.exe&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Execute o instalador:&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Execute &lt;code&gt;rustup-init.exe&lt;&#x2F;code&gt; como administrador (recomendado)&lt;&#x2F;li&gt;
+&lt;li&gt;Siga as instruções no ecrã&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Instale as ferramentas de desenvolvimento:&lt;&#x2F;strong&gt;
+Em algum momento da instalação, será solicitado que instale o Visual Studio. Isto fornece um linker e as bibliotecas nativas necessárias para compilar programas.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;h3 id=&quot;visual-studio-build-tools&quot;&gt;Visual Studio Build Tools&lt;&#x2F;h3&gt;
+&lt;p&gt;Isto requererá Visual C++ Build Tools 2019 ou equivalente. Pode instalar:&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;Opção 1 - Visual Studio Installer:&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;Descarregue &lt;a href=&quot;https:&#x2F;&#x2F;visualstudio.microsoft.com&#x2F;downloads&#x2F;#build-tools-for-visual-studio-2022&quot;&gt;Visual Studio Build Tools&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;Execute o instalador&lt;&#x2F;li&gt;
+&lt;li&gt;Selecione &quot;C++ build tools&quot;&lt;&#x2F;li&gt;
+&lt;li&gt;Instale os componentes necessários&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;&lt;strong&gt;Opção 2 - Visual Studio Community (Gratuito):&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Inclui todas as ferramentas necessárias&lt;&#x2F;li&gt;
+&lt;li&gt;IDE completa se desejar desenvolver em Windows&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;metodo-2-windows-subsystem-for-linux-wsl&quot;&gt;Método 2: Windows Subsystem for Linux (WSL)&lt;&#x2F;h3&gt;
+&lt;p&gt;Se for utilizador do Windows Subsystem for Linux, execute o seguinte no seu terminal, depois siga as instruções no ecrã para instalar o Rust:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; curl&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --proto &lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;=https&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --tlsv1&lt;&#x2F;span&gt;&lt;span&gt;.2 https:&#x2F;&#x2F;sh.rustup.rs&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -sSf &lt;&#x2F;span&gt;&lt;span&gt;| &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;sh
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;strong&gt;Vantagens do WSL:&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Ambiente Linux completo&lt;&#x2F;li&gt;
+&lt;li&gt;Ferramentas Unix nativas&lt;&#x2F;li&gt;
+&lt;li&gt;Melhor integração com ecosistemas multiplataforma&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;verificacao-no-windows&quot;&gt;Verificação no Windows&lt;&#x2F;h3&gt;
+&lt;p&gt;Após a instalação, verifique usando Command Prompt ou PowerShell:&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;Command Prompt:&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;cmd&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-cmd &quot;&gt;&lt;code class=&quot;language-cmd&quot; data-lang=&quot;cmd&quot;&gt;&lt;span&gt;&amp;gt; rustc --version
+&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; cargo --version
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;strong&gt;PowerShell:&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;powershell&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-powershell &quot;&gt;&lt;code class=&quot;language-powershell&quot; data-lang=&quot;powershell&quot;&gt;&lt;span&gt;PS&amp;gt; rustc --version
+&lt;&#x2F;span&gt;&lt;span&gt;PS&amp;gt; cargo --version
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;configuracao-do-path-no-windows&quot;&gt;Configuração do PATH no Windows&lt;&#x2F;h3&gt;
+&lt;p&gt;Se não vir esta informação, verifique se o Rust está na sua variável de sistema %PATH%:&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;Command Prompt:&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;cmd&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-cmd &quot;&gt;&lt;code class=&quot;language-cmd&quot; data-lang=&quot;cmd&quot;&gt;&lt;span&gt;&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;echo &lt;&#x2F;span&gt;&lt;span&gt;%&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;PATH&lt;&#x2F;span&gt;&lt;span&gt;%
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;strong&gt;PowerShell:&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;powershell&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-powershell &quot;&gt;&lt;code class=&quot;language-powershell&quot; data-lang=&quot;powershell&quot;&gt;&lt;span&gt;PS&amp;gt; echo $&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;env:Path
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;O rustup automaticamente adiciona &lt;code&gt;%USERPROFILE%\.cargo\bin&lt;&#x2F;code&gt; ao PATH.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;gestao-de-versoes-com-rustup&quot;&gt;Gestão de Versões com Rustup&lt;&#x2F;h2&gt;
+&lt;h3 id=&quot;atualizacoes&quot;&gt;Atualizações&lt;&#x2F;h3&gt;
+&lt;p&gt;Uma vez que o Rust está instalado via rustup, atualizar para uma versão recém-lançada é fácil. A partir da sua shell, execute o seguinte script de atualização: &lt;code&gt;rustup update&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup update
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;instalacao-de-toolchains-especificas&quot;&gt;Instalação de Toolchains Específicas&lt;&#x2F;h3&gt;
+&lt;p&gt;O rustup permite instalar diferentes versões do Rust:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Instalar a versão mais recente stable
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup install stable
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Instalar a versão beta
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup install beta
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Instalar a versão nightly
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup install nightly
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Instalar uma versão específica
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup install 1.75.0
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;alternar-entre-versoes&quot;&gt;Alternar Entre Versões&lt;&#x2F;h3&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Definir versão padrão
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup default stable
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Usar versão específica para um projeto
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup override set nightly
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;listar-toolchains-instaladas&quot;&gt;Listar Toolchains Instaladas&lt;&#x2F;h3&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup toolchain list
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;stable-x86_64-unknown-linux-gnu&lt;&#x2F;span&gt;&lt;span&gt; (default)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;beta-x86_64-unknown-linux-gnu
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;nightly-x86_64-unknown-linux-gnu
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;documentacao-local&quot;&gt;Documentação Local&lt;&#x2F;h2&gt;
+&lt;p&gt;A instalação do Rust também inclui uma cópia local da documentação para que possa lê-la offline. Execute &lt;code&gt;rustup doc&lt;&#x2F;code&gt; para abrir a documentação local no seu browser.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup doc
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup doc&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --book      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Abre &amp;quot;The Rust Programming Language&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup doc&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --std       &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Abre documentação da biblioteca standard
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup doc&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --reference &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Abre &amp;quot;The Rust Reference&amp;quot;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;desinstalacao&quot;&gt;Desinstalação&lt;&#x2F;h2&gt;
+&lt;p&gt;Para desinstalar o Rust e rustup, execute o seguinte script de desinstalação a partir da sua shell: &lt;code&gt;rustup self uninstall&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup self uninstall
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;strong&gt;O que remove:&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Todas as toolchains instaladas&lt;&#x2F;li&gt;
+&lt;li&gt;Rustup em si&lt;&#x2F;li&gt;
+&lt;li&gt;Modificações no PATH&lt;&#x2F;li&gt;
+&lt;li&gt;Documentação local&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;configuracao-de-editors-e-ides&quot;&gt;Configuração de Editors e IDEs&lt;&#x2F;h2&gt;
+&lt;h3 id=&quot;visual-studio-code&quot;&gt;Visual Studio Code&lt;&#x2F;h3&gt;
+&lt;p&gt;Para uma experiência de desenvolvimento completa, recomenda-se:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Extensão rust-analyzer:&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Análise de código em tempo real&lt;&#x2F;li&gt;
+&lt;li&gt;Auto-completion inteligente&lt;&#x2F;li&gt;
+&lt;li&gt;Navegação de código avançada&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Extensão CodeLLDB:&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Debugging completo&lt;&#x2F;li&gt;
+&lt;li&gt;Breakpoints e inspeção de variáveis&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;h3 id=&quot;outros-editores-populares&quot;&gt;Outros Editores Populares&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;IntelliJ IDEA&lt;&#x2F;strong&gt;: Plugin IntelliJ Rust&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Vim&#x2F;Neovim&lt;&#x2F;strong&gt;: rust.vim plugin&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Emacs&lt;&#x2F;strong&gt;: rust-mode&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Sublime Text&lt;&#x2F;strong&gt;: Rust Enhanced&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Para uma lista atualizada, consulte &lt;a href=&quot;https:&#x2F;&#x2F;www.rust-lang.org&#x2F;tools&quot;&gt;https:&#x2F;&#x2F;www.rust-lang.org&#x2F;tools&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;verificacao-final-da-instalacao&quot;&gt;Verificação Final da Instalação&lt;&#x2F;h2&gt;
+&lt;p&gt;Execute estes comandos para confirmar que tudo está funcionando:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Verificar versões
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustc&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --version
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; cargo&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --version
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; rustup&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --version
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Criar e testar projeto simples
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; cargo new hello_rust
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; cd hello_rust
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; cargo run
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Se ver &quot;Hello, world!&quot; como output, a instalação foi bem-sucedida!&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;recursos-oficiais-de-referencia&quot;&gt;Recursos Oficiais de Referência&lt;&#x2F;h2&gt;
+&lt;h3 id=&quot;documentacao-principal&quot;&gt;Documentação Principal&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https:&#x2F;&#x2F;doc.rust-lang.org&#x2F;book&#x2F;&quot;&gt;The Rust Programming Language Book&lt;&#x2F;a&gt;&lt;&#x2F;strong&gt; - Guia oficial completo&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https:&#x2F;&#x2F;rust-lang.github.io&#x2F;rustup&#x2F;&quot;&gt;The Rustup Book&lt;&#x2F;a&gt;&lt;&#x2F;strong&gt; - Documentação completa do rustup&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.rust-lang.org&#x2F;tools&#x2F;install&quot;&gt;Rust Installation Page&lt;&#x2F;a&gt;&lt;&#x2F;strong&gt; - Página oficial de instalação&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https:&#x2F;&#x2F;doc.rust-lang.org&#x2F;rustc&#x2F;index.html&quot;&gt;The rustc Book&lt;&#x2F;a&gt;&lt;&#x2F;strong&gt; -  Documentação sobre o compilador para a linguagem.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https:&#x2F;&#x2F;doc.rust-lang.org&#x2F;cargo&#x2F;index.html&quot;&gt;The Cargo Book&lt;&#x2F;a&gt;&lt;&#x2F;strong&gt; - Documentação sobre o gerenciador de pacotes Rust&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;ferramentas-e-utilitarios&quot;&gt;Ferramentas e Utilitários&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https:&#x2F;&#x2F;rustup.rs&#x2F;&quot;&gt;rustup.rs&lt;&#x2F;a&gt;&lt;&#x2F;strong&gt; - Website oficial do rustup&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https:&#x2F;&#x2F;rust-lang.github.io&#x2F;rustup&#x2F;installation&#x2F;other.html&quot;&gt;Other Installation Methods&lt;&#x2F;a&gt;&lt;&#x2F;strong&gt; - Métodos alternativos&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https:&#x2F;&#x2F;rust-lang.github.io&#x2F;rustup&#x2F;installation&#x2F;windows-msvc.html&quot;&gt;Visual Studio Integration&lt;&#x2F;a&gt;&lt;&#x2F;strong&gt; - Guia específico para Windows&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;conclusao&quot;&gt;Conclusão&lt;&#x2F;h2&gt;
+&lt;p&gt;A instalação do Rust é um processo straightforward e bem documentado, graças ao rustup. As garantias de estabilidade do Rust asseguram que todos os exemplos do livro que compilam continuarão a compilar com versões mais recentes do Rust, tornando a linguagem uma escolha sólida para projetos de longo prazo.&lt;&#x2F;p&gt;
+&lt;p&gt;O rustup não é apenas um instalador, mas uma ferramenta completa de gestão de toolchains que torna fácil trabalhar com diferentes versões do Rust, cross-compilation, e manter tudo atualizado. Com uma instalação correta, está pronto para começar a sua jornada com uma das linguagens de programação mais inovadoras e seguras disponíveis hoje.&lt;&#x2F;p&gt;
+&lt;p&gt;Lembre-se de consultar sempre a &lt;a href=&quot;https:&#x2F;&#x2F;doc.rust-lang.org&#x2F;&quot;&gt;documentação oficial&lt;&#x2F;a&gt; para informações mais detalhadas e atualizadas sobre qualquer aspecto do Rust que desejar explorar.&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Disclaimer&lt;&#x2F;em&gt;&lt;&#x2F;strong&gt;: Artigo elaborado com auxilio a ferramentas de inteligência artificial mas revisto por humanos.&lt;&#x2F;p&gt;
+</description>
+      </item>
+    </channel>
+</rss>
