@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <meta content="#ffffff" name="theme-color" />
+  <meta content="#da532c" name="msapplication-TileColor" />
+
+  
+  <link href='&#x2F;icons&#x2F;site.webmanifest' rel="manifest" />
+  
+  
+  <link color="#5bbad5" href='&#x2F;icons&#x2F;safari-pinned-tab.svg' rel="mask-icon" />
+  
+  
+  <link href='&#x2F;icons&#x2F;rustlangpt1_16px.png' rel="icon" sizes="16x16" type="image/png" />
+  
+  
+  <link href='&#x2F;icons&#x2F;rustlangpt1_32px.png' rel="icon" sizes="32x32" type="image/png" />
+  
+  
+  <link href='&#x2F;icons&#x2F;apple-touch-icon.png' rel="apple-touch-icon" sizes="180x180" />
+  
+
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galleria@1.6.1/dist/themes/folio/galleria.folio.min.css" integrity="sha384-+rY0QD+LRnTOquDMzGa9lXU6jIwdiQuwCJQ2cdcW0qeP/0UbjQCZlXnRsUMA+9pH" crossorigin="anonymous">
+  
+
+  
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1.9.1/css/academicons.min.css" integrity="sha384-FIue+PI4SsI9XfHCz8dBLg33b0c1fMJgNU3X//L26FYbGnlSEfWmNT7zgWc2N9b6" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link href="https://rustlangpt.github.io/deep-thought.css" rel="stylesheet" />
+  
+  
+
+  <title>
+    
+RustlangPT | Fundamentos da Linguagem Rust
+
+  </title>
+
+  
+  
+  
+
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css" integrity="sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js" integrity="sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx" crossorigin="anonymous"></script>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/mathtex-script-type.min.js" integrity="sha384-jiBVvJ8NGGj5n7kJaiWwWp9AjC+Yh8rhZY3GtAX8yU28azcLgoRo4oukO87g7zDT" crossorigin="anonymous"></script>
+  
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+  
+  
+</head>
+
+<body class="has-background-white">
+  <nav aria-label="section navigation" class="navbar is-light" role="navigation">
+    <div class="container">
+      <div class="navbar-brand">
+        <a class="navbar-item is-size-5 has-text-weight-bold" href="https:&#x2F;&#x2F;rustlangpt.github.io">RustlangPT</a>
+        <a aria-expanded="false" aria-label="menu" class="navbar-burger burger" data-target="navMenu" role="button">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+      <div class="navbar-menu" id="navMenu">
+        <div class="navbar-end has-text-centered">
+          
+          
+          
+          <a class="navbar-item has-text-weight-semibold" href="https:&#x2F;&#x2F;rustlangpt.github.io&#x2F;posts">
+            Blog
+          </a>
+          
+          <a class="navbar-item has-text-weight-semibold" href="https:&#x2F;&#x2F;rustlangpt.github.io&#x2F;recursos">
+            Recursos
+          </a>
+          
+          <a class="navbar-item has-text-weight-semibold" href="https:&#x2F;&#x2F;rustlangpt.github.io&#x2F;acerca">
+            Acerca
+          </a>
+          
+          <a class="navbar-item has-text-weight-semibold" href="https:&#x2F;&#x2F;rustlangpt.github.io&#x2F;eventos">
+            Eventos
+          </a>
+          
+          <a class="navbar-item has-text-weight-semibold" href="https:&#x2F;&#x2F;rustlangpt.github.io&#x2F;tags">
+            Tags
+          </a>
+          
+          
+          
+          <a class="navbar-item" id="nav-search" title="Search" data-target="#search-modal">
+            <span class="icon">
+              <i class="fas fa-search"></i>
+            </span>
+          </a>
+          <a class="navbar-item" id="dark-mode" title="Switch to dark theme">
+            <span class="icon">
+              <i class="fas fa-adjust"></i>
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  
+  
+
+  
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-8 is-offset-2">
+        <article class="box">
+          <h1 class="title">
+            Fundamentos da Linguagem Rust
+          </h1>
+          <p class="subtitle">Entender os fundamentos da linguagem: literais, variáveis, constantes, tipos de dados, mutabilidade, shadowing e escopo.</p>
+          <div class="columns is-multiline is-gapless">
+            <div class="column is-8">
+              
+<span class="icon-text has-text-grey">
+  
+  <span class="icon">
+    <i class="fas fa-user"></i>
+  </span>
+  <span>RustLangPT publicado em</span>
+  <span class="icon">
+    <i class="far fa-calendar-alt"></i>
+  </span>
+  <span><time datetime="2025-09-17">17 September, 2025</time></span>
+
+</span>
+
+            </div>
+            <div class="column is-4 has-text-right-desktop">
+              
+<span class="icon-text has-text-grey">
+  <span class="icon">
+    <i class="far fa-clock"></i>
+  </span>
+  <span>6 min,</span>
+  <span class="icon">
+    <i class="fas fa-pencil-alt"></i>
+  </span>
+  <span>1063 words</span>
+</span>
+
+            </div>
+            <div class="column">
+              
+            </div>
+            <div class="column has-text-right-desktop">
+              
+              
+<p>
+  Tags:
+  
+  <a class="has-text-info-dark has-text-weight-semibold" href="https://rustlangpt.github.io/tags/fundamentos/">
+    <span class="icon-text">
+      <span class="icon">
+        <i class="fas fa-tag"></i>
+      </span>
+      <span>Fundamentos</span>
+    </span>
+  </a>
+  
+  <a class="has-text-info-dark has-text-weight-semibold" href="https://rustlangpt.github.io/tags/iniciantes/">
+    <span class="icon-text">
+      <span class="icon">
+        <i class="fas fa-tag"></i>
+      </span>
+      <span>Iniciantes</span>
+    </span>
+  </a>
+  
+</p>
+
+              
+            </div>
+          </div>
+          <div class="content mt-2">
+            <p>O Rust é uma linguagem de programação que dá prioridade à segurança, velocidade e concorrência. Para dominar esta linguagem poderosa é essencial compreender os seus fundamentos: como declarar variáveis, trabalhar com diferentes tipos de dados, entender conceitos únicos como mutabilidade, shadowing e scope. Neste artigo, exploraremos estes conceitos fundamentais com exemplos práticos que te ajudarão a construir uma base sólida em Rust.</p>
+<p>Cada tópico inclui explicações claras, exemplos de código e referências à documentação oficial, como o <a href="https://doc.rust-lang.org/stable/book/index.html">The Rust Programming Language</a> e o <a href="https://doc.rust-lang.org/stable/rust-by-example/index.html">Rust by Example</a>.</p>
+<p>Esses conceitos formam a base para escrever código Rust idiomático, ajudando a evitar erros comuns e a entender o modelo de propriedade da linguagem.</p>
+<h2 id="1-literais-em-rust">1. Literais em Rust</h2>
+<p>Literais em Rust são valores fixos escritos diretamente no código, representando dados primitivos como números, strings ou booleanos. Eles são usados para inicializar variáveis ou constantes e podem incluir sufixos para especificar tipos. Por exemplo, literais inteiros podem ser decimais, hexadecimais, octais ou binários, com separadores visuais como underscores para legibilidade.</p>
+<p><strong>Literais Numéricos</strong></p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#65737e;">// Literais inteiros
+</span><span>    </span><span style="color:#b48ead;">let</span><span> decimal = </span><span style="color:#d08770;">98_222</span><span>;        </span><span style="color:#65737e;">// Base 10 com separador visual
+</span><span>    </span><span style="color:#b48ead;">let</span><span> hex = </span><span style="color:#d08770;">0xff</span><span>;              </span><span style="color:#65737e;">// Hexadecimal
+</span><span>    </span><span style="color:#b48ead;">let</span><span> octal = </span><span style="color:#d08770;">0o77</span><span>;            </span><span style="color:#65737e;">// Octal
+</span><span>    </span><span style="color:#b48ead;">let</span><span> binary = </span><span style="color:#d08770;">0b1111_0000</span><span>;    </span><span style="color:#65737e;">// Binário
+</span><span>    </span><span style="color:#b48ead;">let</span><span> byte = </span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">A</span><span>&#39;;             </span><span style="color:#65737e;">// Byte (apenas u8)
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Literais de ponto flutuante
+</span><span>    </span><span style="color:#b48ead;">let</span><span> float1 = </span><span style="color:#d08770;">2.0</span><span>;            </span><span style="color:#65737e;">// f64 por defeito
+</span><span>    </span><span style="color:#b48ead;">let</span><span> float2 = </span><span style="color:#d08770;">3.14159</span><span style="color:#b48ead;">f32</span><span>;     </span><span style="color:#65737e;">// f32 explícito
+</span><span>    </span><span style="color:#b48ead;">let</span><span> scientific = 1e6;        </span><span style="color:#65737e;">// Notação científica
+</span><span>    
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Decimal: </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">, Hex: </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">, Float: </span><span style="color:#d08770;">{}</span><span>&quot;, decimal, hex, float1);
+</span><span>}
+</span></code></pre>
+<p><strong>Literais de Caracteres e Strings</strong></p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#65737e;">// Literais de caracteres
+</span><span>    </span><span style="color:#b48ead;">let</span><span> c = &#39;</span><span style="color:#a3be8c;">z</span><span>&#39;;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> z = &#39;</span><span style="color:#a3be8c;">ℤ</span><span>&#39;;                 </span><span style="color:#65737e;">// Suporte completo Unicode
+</span><span>    </span><span style="color:#b48ead;">let</span><span> heart_eyed_cat = &#39;</span><span style="color:#a3be8c;">😻</span><span>&#39;;
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Literais de string
+</span><span>    </span><span style="color:#b48ead;">let</span><span> hello = &quot;</span><span style="color:#a3be8c;">Olá, mundo!</span><span>&quot;;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> multiline = &quot;</span><span style="color:#a3be8c;">Esta é uma string
+</span><span style="color:#a3be8c;">    que abrange múltiplas linhas</span><span>&quot;;
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Raw strings (sem escape)
+</span><span>    </span><span style="color:#b48ead;">let</span><span> raw = </span><span style="color:#b48ead;">r</span><span>&quot;</span><span style="color:#a3be8c;">C:\Users\nome\Desktop</span><span>&quot;;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> raw_multiline = </span><span style="color:#b48ead;">r</span><span>#&quot;
+</span><span style="color:#a3be8c;">        Esta é uma &quot;raw string&quot;
+</span><span style="color:#a3be8c;">        com aspas duplas dentro
+</span><span style="color:#a3be8c;">    </span><span>&quot;#;
+</span><span>    
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Char: </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">, String: </span><span style="color:#d08770;">{}</span><span>&quot;, c, hello);
+</span><span>}
+</span></code></pre>
+<p><strong>Literais Booleanos</strong></p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> verdadeiro = </span><span style="color:#d08770;">true</span><span>;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> falso = </span><span style="color:#d08770;">false</span><span>;
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Operações booleanas
+</span><span>    </span><span style="color:#b48ead;">let</span><span> resultado = verdadeiro &amp;&amp; !falso;
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Resultado: </span><span style="color:#d08770;">{}</span><span>&quot;, resultado);
+</span><span>}
+</span></code></pre>
+<h2 id="2-variaveis-em-rust">2. Variáveis em Rust</h2>
+<p>Variáveis em Rust são nomes associados a valores armazenados na memória, declaradas com a palavra-chave <code>let</code>. Por padrão, são imutáveis, o que significa que não podem ser alteradas após a atribuição inicial, promovendo código mais seguro e previsível.</p>
+<p><strong>Declaração Básica de Variáveis</strong></p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#65737e;">// Variável imutável (padrão)
+</span><span>    </span><span style="color:#b48ead;">let</span><span> x = </span><span style="color:#d08770;">5</span><span>;
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">O valor de x é: </span><span style="color:#d08770;">{}</span><span>&quot;, x);
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Esta linha causaria um erro de compilação:
+</span><span>    </span><span style="color:#65737e;">// x = 6; // Error: cannot assign twice to immutable variable
+</span><span>}
+</span></code></pre>
+<p><strong>Inferência de Tipos</strong></p>
+<p>O Rust é uma linguagem com tipagem estática, o que significa que o compilador deve saber o tipo de cada variável em tempo de compilação. No entanto, muitas vezes ele consegue inferir o tipo por si próprio, o que torna o código mais conciso.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#65737e;">// O compilador infere o tipo baseado no contexto
+</span><span>    </span><span style="color:#b48ead;">let</span><span> numero = </span><span style="color:#d08770;">42</span><span>;           </span><span style="color:#65737e;">// i32 por defeito
+</span><span>    </span><span style="color:#b48ead;">let</span><span> flutuante = </span><span style="color:#d08770;">3.14</span><span>;      </span><span style="color:#65737e;">// f64 por defeito
+</span><span>    </span><span style="color:#b48ead;">let</span><span> booleano = </span><span style="color:#d08770;">true</span><span>;       </span><span style="color:#65737e;">// bool
+</span><span>    </span><span style="color:#b48ead;">let</span><span> caractere = &#39;</span><span style="color:#a3be8c;">R</span><span>&#39;;       </span><span style="color:#65737e;">// char
+</span><span>    </span><span style="color:#b48ead;">let</span><span> texto = &quot;</span><span style="color:#a3be8c;">Rust</span><span>&quot;;        </span><span style="color:#65737e;">// &amp;str
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Inferência baseada no uso posterior
+</span><span>    </span><span style="color:#b48ead;">let mut</span><span> vec = Vec::new();  </span><span style="color:#65737e;">// Tipo desconhecido inicialmente
+</span><span>    vec.</span><span style="color:#96b5b4;">push</span><span>(</span><span style="color:#d08770;">1</span><span>);               </span><span style="color:#65737e;">// Agora o compilador sabe que é Vec&lt;i32&gt;
+</span><span>    
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Vetor: </span><span style="color:#d08770;">{:?}</span><span>&quot;, vec);
+</span><span>}
+</span></code></pre>
+<p><strong>Anotações de Tipo Explícitas</strong></p>
+<p>Quando a inferência não é suficiente, podemos especificar tipos explicitamente:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> x: </span><span style="color:#b48ead;">i32 </span><span>= </span><span style="color:#d08770;">5</span><span>;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> y: </span><span style="color:#b48ead;">f64 </span><span>= </span><span style="color:#d08770;">3.14159</span><span>;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> z: </span><span style="color:#b48ead;">bool </span><span>= </span><span style="color:#d08770;">true</span><span>;
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Útil em situações ambíguas
+</span><span>    </span><span style="color:#b48ead;">let</span><span> parsed: </span><span style="color:#b48ead;">i32 </span><span>= &quot;</span><span style="color:#a3be8c;">42</span><span>&quot;.</span><span style="color:#96b5b4;">parse</span><span>().</span><span style="color:#96b5b4;">expect</span><span>(&quot;</span><span style="color:#a3be8c;">Não é um número!</span><span>&quot;);
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Ou usando a sintaxe &quot;turbofish&quot;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> parsed2 = &quot;</span><span style="color:#a3be8c;">42</span><span>&quot;.parse::&lt;</span><span style="color:#b48ead;">i32</span><span>&gt;().</span><span style="color:#96b5b4;">expect</span><span>(&quot;</span><span style="color:#a3be8c;">Não é um número!</span><span>&quot;);
+</span><span>    
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Parsed: </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">, Parsed2: </span><span style="color:#d08770;">{}</span><span>&quot;, parsed, parsed2);
+</span><span>}
+</span></code></pre>
+<h2 id="3-constantes">3. Constantes</h2>
+<p>As constantes são semelhantes às variáveis imutáveis, mas com algumas diferenças importantes:</p>
+<ul>
+<li>Tem que ser declaradas com a palavra-chave <code>const</code> em vez de <code>let</code>.</li>
+<li>Necessário anotar o tipo da constante.</li>
+<li>São definidas como uma expressão constante, não como resultado de uma função ou outro valor em tempo de execução.</li>
+</ul>
+<p>Podem ser declaradas em qualquer escopo, incluindo o escopo global.</p>
+<p>Por convenção, os nomes das constantes são escritos em LETRAS_MAIUSCULAS, com sublinhados entre as palavras.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#65737e;">// Constantes são declaradas fora de funções com &#39;const&#39;
+</span><span style="color:#b48ead;">const </span><span style="color:#d08770;">PONTOS_MAXIMOS</span><span>: </span><span style="color:#b48ead;">u32 </span><span>= </span><span style="color:#d08770;">100_000</span><span>;
+</span><span style="color:#b48ead;">const </span><span style="color:#d08770;">PI</span><span>: </span><span style="color:#b48ead;">f64 </span><span>= </span><span style="color:#d08770;">3.14159265359</span><span>;
+</span><span style="color:#b48ead;">const </span><span style="color:#d08770;">HORAS_EM_UMA_SEMANA</span><span>: </span><span style="color:#b48ead;">u32 </span><span>= </span><span style="color:#d08770;">7 </span><span>* </span><span style="color:#d08770;">24</span><span>;
+</span><span>
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    
+</span><span>    
+</span><span>    </span><span style="color:#b48ead;">const </span><span style="color:#d08770;">HORAS_EM_UMA_SEMANA</span><span>: </span><span style="color:#b48ead;">u32 </span><span>= </span><span style="color:#d08770;">7 </span><span>* </span><span style="color:#d08770;">24</span><span>;
+</span><span>
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Pontos máximos: </span><span style="color:#d08770;">{}</span><span>&quot;, </span><span style="color:#d08770;">PONTOS_MAXIMOS</span><span>);
+</span><span>
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Total horas numa semana : </span><span style="color:#d08770;">{}</span><span>&quot;, </span><span style="color:#d08770;">HORAS_EM_UMA_SEMANA</span><span>);
+</span><span>    
+</span><span>
+</span><span>}
+</span></code></pre>
+<p><strong>Diferenças entre Constantes e Variáveis Imutáveis</strong></p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">const </span><span style="color:#d08770;">CONSTANTE_GLOBAL</span><span>: </span><span style="color:#b48ead;">i32 </span><span>= </span><span style="color:#d08770;">100</span><span>;  </span><span style="color:#65737e;">// Avaliada em tempo de compilação
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> imutavel = </span><span style="color:#d08770;">50</span><span>;              </span><span style="color:#65737e;">// Avaliada em tempo de execução
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Constantes podem ser usadas em contextos const
+</span><span>    </span><span style="color:#b48ead;">const </span><span style="color:#d08770;">CONSTANTE_LOCAL</span><span>: </span><span style="color:#b48ead;">i32 </span><span>= </span><span style="color:#d08770;">CONSTANTE_GLOBAL </span><span>* </span><span style="color:#d08770;">2</span><span>;
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Variáveis imutáveis não podem
+</span><span>    </span><span style="color:#65737e;">// const ERRO: i32 = imutavel * 2;  // Erro!
+</span><span>    
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Constante: </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">, Imutável: </span><span style="color:#d08770;">{}</span><span>&quot;, </span><span style="color:#d08770;">CONSTANTE_LOCAL</span><span>, imutavel);
+</span><span>}
+</span></code></pre>
+<h2 id="4-tipos-de-dados">4. Tipos de Dados</h2>
+<p>O Rust possui um sistema de tipos rico e expressivo. Vamos explorar os tipos fundamentais:</p>
+<h3 id="tipos-escalares">Tipos Escalares</h3>
+<p><strong>Tipos Inteiros</strong></p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#65737e;">// Inteiros com sinal
+</span><span>    </span><span style="color:#b48ead;">let</span><span> i8_val: </span><span style="color:#b48ead;">i8 </span><span>= -</span><span style="color:#d08770;">128</span><span>;              </span><span style="color:#65737e;">// -128 a 127
+</span><span>    </span><span style="color:#b48ead;">let</span><span> i16_val: </span><span style="color:#b48ead;">i16 </span><span>= -</span><span style="color:#d08770;">32_768</span><span>;         </span><span style="color:#65737e;">// -32,768 a 32,767
+</span><span>    </span><span style="color:#b48ead;">let</span><span> i32_val: </span><span style="color:#b48ead;">i32 </span><span>= -</span><span style="color:#d08770;">2_147_483_648</span><span>;  </span><span style="color:#65737e;">// Tipo padrão
+</span><span>    </span><span style="color:#b48ead;">let</span><span> i64_val: </span><span style="color:#b48ead;">i64 </span><span>= -</span><span style="color:#d08770;">9_223_372_036_854_775_808</span><span>;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> i128_val: </span><span style="color:#b48ead;">i128 </span><span>= -</span><span style="color:#d08770;">170_141_183_460_469_231_731_687_303_715_884_105_728</span><span>;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> isize_val: </span><span style="color:#b48ead;">isize </span><span>= -</span><span style="color:#d08770;">1000</span><span>;       </span><span style="color:#65737e;">// Depende da arquitetura (32 ou 64 bits)
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Inteiros sem sinal
+</span><span>    </span><span style="color:#b48ead;">let</span><span> u8_val: </span><span style="color:#b48ead;">u8 </span><span>= </span><span style="color:#d08770;">255</span><span>;               </span><span style="color:#65737e;">// 0 a 255
+</span><span>    </span><span style="color:#b48ead;">let</span><span> u16_val: </span><span style="color:#b48ead;">u16 </span><span>= </span><span style="color:#d08770;">65_535</span><span>;          </span><span style="color:#65737e;">// 0 a 65,535
+</span><span>    </span><span style="color:#b48ead;">let</span><span> u32_val: </span><span style="color:#b48ead;">u32 </span><span>= </span><span style="color:#d08770;">4_294_967_295</span><span>;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> u64_val: </span><span style="color:#b48ead;">u64 </span><span>= </span><span style="color:#d08770;">18_446_744_073_709_551_615</span><span>;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> u128_val: </span><span style="color:#b48ead;">u128 </span><span>= </span><span style="color:#d08770;">340_282_366_920_938_463_463_374_607_431_768_211_455</span><span>;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> usize_val: </span><span style="color:#b48ead;">usize </span><span>= </span><span style="color:#d08770;">1000</span><span>;        </span><span style="color:#65737e;">// Para indexação e tamanhos
+</span><span>    
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">i32: </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">, u8: </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">, usize: </span><span style="color:#d08770;">{}</span><span>&quot;, i32_val, u8_val, usize_val);
+</span><span>}
+</span></code></pre>
+<p><strong>Tipos de Vírgula Flutuante</strong></p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> f32_val: </span><span style="color:#b48ead;">f32 </span><span>= </span><span style="color:#d08770;">3.14159</span><span>;     </span><span style="color:#65737e;">// Precisão simples (32 bits)
+</span><span>    </span><span style="color:#b48ead;">let</span><span> f64_val: </span><span style="color:#b48ead;">f64 </span><span>= </span><span style="color:#d08770;">3.141592653589793</span><span>;  </span><span style="color:#65737e;">// Precisão dupla (64 bits) - padrão
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Operações matemáticas
+</span><span>    </span><span style="color:#b48ead;">let</span><span> soma = f32_val + </span><span style="color:#d08770;">1.0</span><span>;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> produto = f64_val * </span><span style="color:#d08770;">2.0</span><span>;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> divisao = f64_val / </span><span style="color:#d08770;">3.0</span><span>;
+</span><span>    
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">f32: </span><span style="color:#d08770;">{:.3}</span><span style="color:#a3be8c;">, f64: {:.10}</span><span>&quot;, f32_val, f64_val);
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Soma: </span><span style="color:#d08770;">{:.3}</span><span style="color:#a3be8c;">, Divisão: {:.10}</span><span>&quot;, soma, divisao);
+</span><span>}
+</span></code></pre>
+<p><strong>Tipo Booleano</strong></p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> verdadeiro = </span><span style="color:#d08770;">true</span><span>;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> falso: </span><span style="color:#b48ead;">bool </span><span>= </span><span style="color:#d08770;">false</span><span>;  </span><span style="color:#65737e;">// Anotação de tipo explícita
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Operações lógicas
+</span><span>    </span><span style="color:#b48ead;">let</span><span> e_logico = verdadeiro &amp;&amp; falso;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> ou_logico = verdadeiro || falso;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> negacao = !verdadeiro;
+</span><span>    
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">AND: </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">, OR: </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">, NOT: </span><span style="color:#d08770;">{}</span><span>&quot;, e_logico, ou_logico, negacao);
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Uso em estruturas de controle
+</span><span>    </span><span style="color:#b48ead;">if</span><span> verdadeiro {
+</span><span>        println!(&quot;</span><span style="color:#a3be8c;">Esta mensagem será impressa!</span><span>&quot;);
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p><strong>Tipo Caracter</strong></p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> c = &#39;</span><span style="color:#a3be8c;">z</span><span>&#39;;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> z = &#39;</span><span style="color:#a3be8c;">ℤ</span><span>&#39;;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> emoji = &#39;</span><span style="color:#a3be8c;">😻</span><span>&#39;;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> chinese = &#39;</span><span style="color:#a3be8c;">中</span><span>&#39;;
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Caracteres ocupam 4 bytes (Unicode Scalar Values)
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Tamanho de char: </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;"> bytes</span><span>&quot;, std::mem::size_of::&lt;</span><span style="color:#b48ead;">char</span><span>&gt;());
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Métodos úteis para caracteres
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">&#39;a&#39; é alfabético: </span><span style="color:#d08770;">{}</span><span>&quot;, &#39;</span><span style="color:#a3be8c;">a</span><span>&#39;.</span><span style="color:#96b5b4;">is_alphabetic</span><span>());
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">&#39;5&#39; é numérico: </span><span style="color:#d08770;">{}</span><span>&quot;, &#39;</span><span style="color:#a3be8c;">5</span><span>&#39;.</span><span style="color:#96b5b4;">is_numeric</span><span>());
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Maiúscula de &#39;r&#39;: </span><span style="color:#d08770;">{}</span><span>&quot;, &#39;</span><span style="color:#a3be8c;">r</span><span>&#39;.</span><span style="color:#96b5b4;">to_uppercase</span><span>().collect::&lt;String&gt;());
+</span><span>}
+</span></code></pre>
+<h3 id="tipos-compostos">Tipos Compostos</h3>
+<p><strong>Tuplas</strong></p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#65737e;">// Tupla com tipos mistos
+</span><span>    </span><span style="color:#b48ead;">let</span><span> tupla: (</span><span style="color:#b48ead;">i32</span><span>, </span><span style="color:#b48ead;">f64</span><span>, </span><span style="color:#b48ead;">u8</span><span>) = (</span><span style="color:#d08770;">500</span><span>, </span><span style="color:#d08770;">6.4</span><span>, </span><span style="color:#d08770;">1</span><span>);
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Desestruturação
+</span><span>    </span><span style="color:#b48ead;">let </span><span>(x, y, z) = tupla;
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">x: </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">, y: </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">, z: </span><span style="color:#d08770;">{}</span><span>&quot;, x, y, z);
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Acesso por índice
+</span><span>    </span><span style="color:#b48ead;">let</span><span> primeiro = tupla.</span><span style="color:#d08770;">0</span><span>;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> segundo = tupla.</span><span style="color:#d08770;">1</span><span>;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> terceiro = tupla.</span><span style="color:#d08770;">2</span><span>;
+</span><span>    
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Elementos: </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">, </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">, </span><span style="color:#d08770;">{}</span><span>&quot;, primeiro, segundo, terceiro);
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Tupla vazia (unit type)
+</span><span>    </span><span style="color:#b48ead;">let</span><span> unit = ();
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Unit type: </span><span style="color:#d08770;">{:?}</span><span>&quot;, unit);
+</span><span>}
+</span></code></pre>
+<p><strong>Arrays</strong></p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#65737e;">// Array com tipo (i32) e tamanho (5) explícitos
+</span><span>    </span><span style="color:#b48ead;">let</span><span> arr: [</span><span style="color:#b48ead;">i32</span><span>; </span><span style="color:#d08770;">5</span><span>] = [</span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">2</span><span>, </span><span style="color:#d08770;">3</span><span>, </span><span style="color:#d08770;">4</span><span>, </span><span style="color:#d08770;">5</span><span>];
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Array inicializado com o mesmo valor
+</span><span>    </span><span style="color:#b48ead;">let</span><span> zeros = [</span><span style="color:#d08770;">0</span><span>; </span><span style="color:#d08770;">10</span><span>];  </span><span style="color:#65737e;">// [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Acesso aos elementos
+</span><span>    </span><span style="color:#b48ead;">let</span><span> primeiro = arr[</span><span style="color:#d08770;">0</span><span>];
+</span><span>    </span><span style="color:#b48ead;">let</span><span> segundo = arr[</span><span style="color:#d08770;">1</span><span>];
+</span><span>    
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Primeiro: </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">, Segundo: </span><span style="color:#d08770;">{}</span><span>&quot;, primeiro, segundo);
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Tamanho do array: </span><span style="color:#d08770;">{}</span><span>&quot;, arr.</span><span style="color:#96b5b4;">len</span><span>());
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Iteração sobre arrays
+</span><span>    </span><span style="color:#b48ead;">for</span><span> elemento in arr.</span><span style="color:#96b5b4;">iter</span><span>() {
+</span><span>        println!(&quot;</span><span style="color:#a3be8c;">Elemento: </span><span style="color:#d08770;">{}</span><span>&quot;, elemento);
+</span><span>    }
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Com índices
+</span><span>    </span><span style="color:#b48ead;">for </span><span>(i, elemento) in arr.</span><span style="color:#96b5b4;">iter</span><span>().</span><span style="color:#96b5b4;">enumerate</span><span>() {
+</span><span>        println!(&quot;</span><span style="color:#a3be8c;">Índice </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">: </span><span style="color:#d08770;">{}</span><span>&quot;, i, elemento);
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<h2 id="5-mutabilidade">5. Mutabilidade</h2>
+<p>A mutabilidade em Rust é explícita e controlada, proporcionando segurança sem sacrificar a flexibilidade.
+Para permitir alteração de valores, usamos a palavra-chave <code>mut</code>:</p>
+<p><strong>Mutabilidade Básica</strong></p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#65737e;">// Variável imutável
+</span><span>    </span><span style="color:#b48ead;">let</span><span> x = </span><span style="color:#d08770;">5</span><span>;
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">x = </span><span style="color:#d08770;">{}</span><span>&quot;, x);
+</span><span>    </span><span style="color:#65737e;">// x = 6;  // Erro de compilação!
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Variável mutável
+</span><span>    </span><span style="color:#b48ead;">let mut</span><span> y = </span><span style="color:#d08770;">5</span><span>;
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">y inicial = </span><span style="color:#d08770;">{}</span><span>&quot;, y);
+</span><span>    y = </span><span style="color:#d08770;">6</span><span>;
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">y modificado = </span><span style="color:#d08770;">{}</span><span>&quot;, y);
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Mutabilidade pode ser removida
+</span><span>    </span><span style="color:#b48ead;">let</span><span> y = y;  </span><span style="color:#65737e;">// y agora é imutável
+</span><span>    </span><span style="color:#65737e;">// y = 7;   // Erro de compilação!
+</span><span>}
+</span></code></pre>
+<p><strong>Mutabilidade de Referências</strong></p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let mut</span><span> s = String::from(&quot;</span><span style="color:#a3be8c;">Olá</span><span>&quot;);
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Referência imutável
+</span><span>    </span><span style="color:#b48ead;">let</span><span> r1 = &amp;s;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> r2 = &amp;s;
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">r1: </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">, r2: </span><span style="color:#d08770;">{}</span><span>&quot;, r1, r2);
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Referência mutável
+</span><span>    </span><span style="color:#b48ead;">let</span><span> r3 = &amp;</span><span style="color:#b48ead;">mut</span><span> s;
+</span><span>    r3.</span><span style="color:#96b5b4;">push_str</span><span>(&quot;</span><span style="color:#a3be8c;">, mundo!</span><span>&quot;);
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">r3: </span><span style="color:#d08770;">{}</span><span>&quot;, r3); 
+</span><span>	r3.</span><span style="color:#96b5b4;">push_str</span><span>(&quot;</span><span style="color:#a3be8c;"> !!! !!!</span><span>&quot;);
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">r3: </span><span style="color:#d08770;">{}</span><span>&quot;, r3);
+</span><span>
+</span><span>    </span><span style="color:#65737e;">// Não podem coexistir referências mutáveis e imutáveis
+</span><span>    </span><span style="color:#65737e;">// let r4 = &amp;s;     // Erro se usado após r3
+</span><span>    </span><span style="color:#65737e;">// println!(&quot;{}&quot;, r4);
+</span><span>}
+</span></code></pre>
+<h2 id="6-shadowing">6. Shadowing</h2>
+<p>O Rust permite declarar uma nova variável com o mesmo nome de uma variável anterior. Este conceito é chamado de shadowing (sombreamento). A nova variável "sombreia" a anterior, o que significa que, a partir desse ponto, o nome refere-se à nova variável.</p>
+<p>Isso difere de mutabilidade, pois cria uma nova variável, permitindo até mudanças de tipo. É útil para transformar valores sem alterar o original.</p>
+<p><strong>Shadowing Básico</strong></p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> x = </span><span style="color:#d08770;">5</span><span>;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> x = x + </span><span style="color:#d08770;">1</span><span>;      </span><span style="color:#65737e;">// Nova variável que sombra a anterior
+</span><span>    </span><span style="color:#b48ead;">let</span><span> x = x * </span><span style="color:#d08770;">2</span><span>;      </span><span style="color:#65737e;">// Outra nova variável
+</span><span>    
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">O valor de x é: </span><span style="color:#d08770;">{}</span><span>&quot;, x);  </span><span style="color:#65737e;">// Imprime: 12
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Shadowing permite mudança de tipo
+</span><span>    </span><span style="color:#b48ead;">let</span><span> espacos = &quot;   &quot;;        </span><span style="color:#65737e;">// &amp;str
+</span><span>    </span><span style="color:#b48ead;">let</span><span> espacos = espacos.</span><span style="color:#96b5b4;">len</span><span>(); </span><span style="color:#65737e;">// usize
+</span><span>    
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Número de espaços: </span><span style="color:#d08770;">{}</span><span>&quot;, espacos);
+</span><span>}
+</span></code></pre>
+<p><em><strong>Shadowing vs. Mutabilidade</strong></em></p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#65737e;">// Com shadowing (permitido)
+</span><span>    </span><span style="color:#b48ead;">let</span><span> name = &quot;</span><span style="color:#a3be8c;">João</span><span>&quot;;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> name = name.</span><span style="color:#96b5b4;">len</span><span>();
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Comprimento do nome: </span><span style="color:#d08770;">{}</span><span>&quot;, name);
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Com mutabilidade (não funcionaria)
+</span><span>    </span><span style="color:#b48ead;">let mut</span><span> name2 = &quot;</span><span style="color:#a3be8c;">Maria</span><span>&quot;;
+</span><span>    </span><span style="color:#65737e;">// name2 = name2.len();  // Erro: tipos incompatíveis!
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Mas isto funciona:
+</span><span>    </span><span style="color:#b48ead;">let mut</span><span> name3 = &quot;</span><span style="color:#a3be8c;">Pedro</span><span>&quot;;
+</span><span>    name3 = &quot;</span><span style="color:#a3be8c;">Paulo</span><span>&quot;;  </span><span style="color:#65737e;">// Mesmo tipo
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Nome modificado: </span><span style="color:#d08770;">{}</span><span>&quot;, name3);
+</span><span>}
+</span></code></pre>
+<p><strong>Shadowing em Diferentes Escopos</strong></p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> x = </span><span style="color:#d08770;">5</span><span>;
+</span><span>    
+</span><span>    {
+</span><span>        </span><span style="color:#b48ead;">let</span><span> x = x * </span><span style="color:#d08770;">2</span><span>;  </span><span style="color:#65737e;">// Sombra x no escopo interior
+</span><span>        println!(&quot;</span><span style="color:#a3be8c;">x no escopo interior: </span><span style="color:#d08770;">{}</span><span>&quot;, x);  </span><span style="color:#65737e;">// 10
+</span><span>        
+</span><span>        </span><span style="color:#b48ead;">let</span><span> x = &quot;</span><span style="color:#a3be8c;">texto</span><span>&quot;;  </span><span style="color:#65737e;">// Outro shadowing, mudando o tipo
+</span><span>        println!(&quot;</span><span style="color:#a3be8c;">x como string: </span><span style="color:#d08770;">{}</span><span>&quot;, x);
+</span><span>    }
+</span><span>    
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">x no escopo principal: </span><span style="color:#d08770;">{}</span><span>&quot;, x);  </span><span style="color:#65737e;">// 5 (valor original)
+</span><span>}
+</span></code></pre>
+<h2 id="7-scope-escopo">7. Scope (Escopo)</h2>
+<p>O escopo determina onde as variáveis são válidas e quando são libertadas da memória e são delimitadas por chaves <code>{}</code>. Variáveis declaradas em um escopo não são acessíveis fora dele, promovendo encapsulamento e gestão de memória.</p>
+<p><strong>Escopo Básico</strong></p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#65737e;">// x não está ainda no escopo
+</span><span>    {
+</span><span>        </span><span style="color:#b48ead;">let</span><span> x = </span><span style="color:#d08770;">5</span><span>;  </span><span style="color:#65737e;">// x entra no escopo
+</span><span>        println!(&quot;</span><span style="color:#a3be8c;">x dentro do bloco: </span><span style="color:#d08770;">{}</span><span>&quot;, x);
+</span><span>    }  </span><span style="color:#65737e;">// x sai de escopo e é destruído
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// println!(&quot;x fora do bloco: {}&quot;, x);  // Erro: x não existe aqui
+</span><span>}
+</span></code></pre>
+<p><strong>Escopo e Ownership</strong></p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> s1 = String::from(&quot;</span><span style="color:#a3be8c;">Olá</span><span>&quot;);  </span><span style="color:#65737e;">// s1 entra no escopo
+</span><span>    
+</span><span>    {
+</span><span>        </span><span style="color:#b48ead;">let</span><span> s2 = String::from(&quot;</span><span style="color:#a3be8c;">mundo</span><span>&quot;);  </span><span style="color:#65737e;">// s2 entra no escopo
+</span><span>        println!(&quot;</span><span style="color:#d08770;">{} {}</span><span>&quot;, s1, s2);       </span><span style="color:#65737e;">// Ambos são válidos aqui
+</span><span>    }  </span><span style="color:#65737e;">// s2 sai de escopo e é libertado
+</span><span>    
+</span><span>    println!(&quot;</span><span style="color:#d08770;">{}</span><span>&quot;, s1);  </span><span style="color:#65737e;">// s1 ainda é válido
+</span><span>}  </span><span style="color:#65737e;">// s1 sai de escopo e é libertado
+</span></code></pre>
+<p><strong>Escopo em Funções</strong></p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">faz_algo</span><span>() -&gt; String {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> s = String::from(&quot;</span><span style="color:#a3be8c;">função</span><span>&quot;);  </span><span style="color:#65737e;">// s entra no escopo
+</span><span>    s  </span><span style="color:#65737e;">// s é movido para o valor de retorno
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">recebe_e_devolve</span><span>(</span><span style="color:#bf616a;">s</span><span>: String) -&gt; String {
+</span><span>    s  </span><span style="color:#65737e;">// s é movido para o valor de retorno
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> s1 = </span><span style="color:#96b5b4;">faz_algo</span><span>();             </span><span style="color:#65737e;">// s1 recebe o valor de retorno
+</span><span>    </span><span style="color:#b48ead;">let</span><span> s2 = String::from(&quot;</span><span style="color:#a3be8c;">main</span><span>&quot;);   </span><span style="color:#65737e;">// s2 entra no escopo
+</span><span>    </span><span style="color:#b48ead;">let</span><span> s3 = </span><span style="color:#96b5b4;">recebe_e_devolve</span><span>(s2);   </span><span style="color:#65737e;">// s2 é movido, s3 entra no escopo
+</span><span>    
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">s1: </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">, s3: </span><span style="color:#d08770;">{}</span><span>&quot;, s1, s3);
+</span><span>    </span><span style="color:#65737e;">// s2 não pode mais ser usado aqui
+</span><span>}  </span><span style="color:#65737e;">// s1 e s3 saem de escopo
+</span></code></pre>
+<p><strong>Escopo com Referências</strong></p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> s1 = String::from(&quot;</span><span style="color:#a3be8c;">Rust</span><span>&quot;);
+</span><span>    
+</span><span>    {
+</span><span>        </span><span style="color:#b48ead;">let</span><span> r = &amp;s1;  </span><span style="color:#65737e;">// r é uma referência válida para s1
+</span><span>        println!(&quot;</span><span style="color:#a3be8c;">Referência: </span><span style="color:#d08770;">{}</span><span>&quot;, r);
+</span><span>    }  </span><span style="color:#65737e;">// r sai de escopo, mas s1 continua válido
+</span><span>    
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">String original: </span><span style="color:#d08770;">{}</span><span>&quot;, s1);
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Referência que não pode &quot;sair&quot; do seu escopo
+</span><span>    </span><span style="color:#65737e;">// let r2;
+</span><span>    </span><span style="color:#65737e;">// {
+</span><span>    </span><span style="color:#65737e;">//     let s2 = String::from(&quot;temporário&quot;);
+</span><span>    </span><span style="color:#65737e;">//     r2 = &amp;s2;  // Erro: s2 seria destruído antes de r2 ser usado
+</span><span>    </span><span style="color:#65737e;">// }
+</span><span>    </span><span style="color:#65737e;">// println!(&quot;{}&quot;, r2);
+</span><span>}
+</span></code></pre>
+<h2 id="8-variaveis-estaticas">8. Variáveis estáticas</h2>
+<p>Em Rust, além de variáveis normais <code>let</code> e constantes <code>const</code>, também existem as variáveis estáticas <code>static</code>.</p>
+<p>Variáveis estáticas são valores imutáveis ou mutáveis que possuem um tempo de vida estático, ou seja, existem durante toda a execução do programa e são armazenados em uma área de memória fixa. Elas são declaradas com a palavra-chave <code>static</code> e, assim como constantes <code>const</code>, requerem anotação de tipo explícita.</p>
+<p>Diferem de constantes porque podem ser mutáveis (com <code>static mut</code>) e são alocadas em uma região de memória diferente, permitindo endereçamento fixo. Variáveis estáticas são úteis para valores globais que precisam ser compartilhados entre funções ou threads, mas seu uso mutável exige cuidados devido à segurança de concorrência.</p>
+<p><strong>Características Principais</strong>:</p>
+<ul>
+<li><strong>Declaração</strong>: Usa static seguido do nome, tipo e valor inicial.</li>
+<li><strong>Imutabilidade por padrão</strong>: Como variáveis normais em Rust, variáveis estáticas são imutáveis, a menos que declaradas com mut.</li>
+<li><strong>Mutabilidade segura</strong>: Variáveis estáticas mutáveis só podem ser modificadas dentro de blocos unsafe devido ao risco de corridas de dados em concorrência.</li>
+<li><strong>Tempo de vida 'static</strong>: Disponíveis durante todo o programa, sem necessidade de gerenciamento manual de memória.</li>
+<li><strong>Inicialização</strong>: Devem ser inicializadas com expressões constantes ou valores computáveis em tempo de compilação.</li>
+</ul>
+<p><strong>Comparação com Constantes</strong>:</p>
+<ul>
+<li><strong>Constantes (const)</strong>: Avaliadas em tempo de compilação, imutáveis, não têm endereço de memória fixo (podem ser inlined), e são usadas para valores fixos como configurações.</li>
+<li><strong>Estáticas (static)</strong>: Têm endereço de memória fixo, podem ser mutáveis (com unsafe), e são ideais para estado global persistente.</li>
+</ul>
+<h2 id="9-dicas-e-melhores-praticas">9. Dicas e Melhores Práticas</h2>
+<p><strong>Convenções de Nomenclatura</strong></p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">const </span><span style="color:#d08770;">PI_VALUE</span><span>: </span><span style="color:#b48ead;">f64 </span><span>= </span><span style="color:#d08770;">3.14159</span><span>;        </span><span style="color:#65737e;">// Constantes em UPPER_SNAKE_CASE
+</span><span style="color:#b48ead;">static </span><span style="color:#d08770;">GLOBAL_COUNTER</span><span>: </span><span style="color:#b48ead;">i32 </span><span>= </span><span style="color:#d08770;">0</span><span>;       </span><span style="color:#65737e;">// Variáveis estáticas em UPPER_SNAKE_CASE
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> user_name = &quot;</span><span style="color:#a3be8c;">João</span><span>&quot;;            </span><span style="color:#65737e;">// Variáveis em snake_case
+</span><span>    </span><span style="color:#b48ead;">let mut</span><span> total_count = </span><span style="color:#d08770;">0</span><span>;           </span><span style="color:#65737e;">// Variáveis mutáveis também em snake_case
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Nomes descritivos
+</span><span>    </span><span style="color:#b48ead;">let</span><span> max_retry_attempts = </span><span style="color:#d08770;">3</span><span>;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> is_connected = </span><span style="color:#d08770;">true</span><span>;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> connection_timeout_ms = </span><span style="color:#d08770;">5000</span><span>;
+</span><span>}
+</span></code></pre>
+<p><strong>Quando Usar Cada Conceito</strong></p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#65737e;">// Use constantes para valores conhecidos em tempo de compilação
+</span><span>    </span><span style="color:#b48ead;">const </span><span style="color:#d08770;">BUFFER_SIZE</span><span>: </span><span style="color:#b48ead;">usize </span><span>= </span><span style="color:#d08770;">1024</span><span>;
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Use variáveis imutáveis por padrão
+</span><span>    </span><span style="color:#b48ead;">let</span><span> data = vec![</span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">2</span><span>, </span><span style="color:#d08770;">3</span><span>, </span><span style="color:#d08770;">4</span><span>, </span><span style="color:#d08770;">5</span><span>];
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Use mut apenas quando necessário
+</span><span>    </span><span style="color:#b48ead;">let mut</span><span> counter = </span><span style="color:#d08770;">0</span><span>;
+</span><span>    </span><span style="color:#b48ead;">for </span><span>_ in data.</span><span style="color:#96b5b4;">iter</span><span>() {
+</span><span>        counter += </span><span style="color:#d08770;">1</span><span>;
+</span><span>    }
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Use shadowing para transformações de tipo
+</span><span>    </span><span style="color:#b48ead;">let</span><span> input = &quot;</span><span style="color:#a3be8c;">42</span><span>&quot;;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> input: </span><span style="color:#b48ead;">i32 </span><span>= input.</span><span style="color:#96b5b4;">parse</span><span>().</span><span style="color:#96b5b4;">expect</span><span>(&quot;</span><span style="color:#a3be8c;">Número inválido</span><span>&quot;);
+</span><span>    </span><span style="color:#b48ead;">let</span><span> input = input * </span><span style="color:#d08770;">2</span><span>;  </span><span style="color:#65737e;">// Transformação final
+</span><span>    
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Resultado: </span><span style="color:#d08770;">{}</span><span>&quot;, input);
+</span><span>}
+</span></code></pre>
+<h2 id="conclusao">Conclusão</h2>
+<p>Os fundamentos que exploramos neste artigo - literais, variáveis, constantes, tipos de dados, mutabilidade, shadowing e scope - formam a base sólida necessária para programar eficientemente em Rust. O sistema de tipos robusto e as regras de ownership do Rust podem parecer restritivos inicialmente, mas proporcionam garantias de segurança que eliminam toda uma classe de bugs comuns.</p>
+<p>A filosofia do Rust de "segurança por defeito" manifesta-se em cada um destes conceitos: variáveis imutáveis por defeito, verificação rigorosa de tipos, e gestão determinística de memória através de scopes bem definidos. Ao dominar estes fundamentos, estarás preparado para explorar conceitos mais avançados como ownership, borrowing, e lifetimes.</p>
+<p>Lembra-te de que a curva de aprendizagem do Rust pode ser íngreme no início, mas os benefícios em termos de performance, segurança e expressividade fazem com que o investimento valha a pena. Continua a praticar com exemplos pequenos e incrementalmente constrói a tua confiança com a linguagem.</p>
+<h2 id="referencias">Referências</h2>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/book/index.html">The Rust Programming Language Book</a></li>
+<li><a href="https://doc.rust-lang.org/stable/rust-by-example/index.html">Rust by Example</a></li>
+<li><a href="https://doc.rust-lang.org/stable/book/ch03-01-variables-and-mutability.html">Variables and Mutability</a></li>
+<li><a href="https://doc.rust-lang.org/stable/book/ch03-02-data-types.html">Data Types</a></li>
+<li><a href="https://doc.rust-lang.org/stable/rust-by-example/primitives.html">Primitive Types</a></li>
+<li><a href="https://doc.rust-lang.org/stable/rust-by-example/variable_bindings.html">Variable Bindings</a></li>
+</ul>
+<hr />
+<p><strong><em>Disclaimer</em></strong>: Artigo elaborado com auxilio a ferramentas de inteligência artificial mas revisto por humanos.</p>
+
+          </div>
+        </article>
+      </div>
+      
+      <div class="column is-2 is-hidden-mobile">
+        <aside class="menu" style="position: sticky; top: 48px">
+          <p class="heading has-text-weight-bold">Contents</p>
+          <ul class="menu-list">
+            
+            <li>
+              <a id="link-1-literais-em-rust" class="toc is-size-7 is-active"
+                href="https://rustlangpt.github.io/posts/var-literal-types-mut-shad/#1-literais-em-rust">
+                1. Literais em Rust
+              </a>
+              
+            </li>
+            
+            <li>
+              <a id="link-2-variaveis-em-rust" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/var-literal-types-mut-shad/#2-variaveis-em-rust">
+                2. Variáveis em Rust
+              </a>
+              
+            </li>
+            
+            <li>
+              <a id="link-3-constantes" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/var-literal-types-mut-shad/#3-constantes">
+                3. Constantes
+              </a>
+              
+            </li>
+            
+            <li>
+              <a id="link-4-tipos-de-dados" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/var-literal-types-mut-shad/#4-tipos-de-dados">
+                4. Tipos de Dados
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-tipos-escalares" class="toc is-size-7" href="https://rustlangpt.github.io/posts/var-literal-types-mut-shad/#tipos-escalares">
+                    Tipos Escalares
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-tipos-compostos" class="toc is-size-7" href="https://rustlangpt.github.io/posts/var-literal-types-mut-shad/#tipos-compostos">
+                    Tipos Compostos
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-5-mutabilidade" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/var-literal-types-mut-shad/#5-mutabilidade">
+                5. Mutabilidade
+              </a>
+              
+            </li>
+            
+            <li>
+              <a id="link-6-shadowing" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/var-literal-types-mut-shad/#6-shadowing">
+                6. Shadowing
+              </a>
+              
+            </li>
+            
+            <li>
+              <a id="link-7-scope-escopo" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/var-literal-types-mut-shad/#7-scope-escopo">
+                7. Scope (Escopo)
+              </a>
+              
+            </li>
+            
+            <li>
+              <a id="link-8-variaveis-estaticas" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/var-literal-types-mut-shad/#8-variaveis-estaticas">
+                8. Variáveis estáticas
+              </a>
+              
+            </li>
+            
+            <li>
+              <a id="link-9-dicas-e-melhores-praticas" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/var-literal-types-mut-shad/#9-dicas-e-melhores-praticas">
+                9. Dicas e Melhores Práticas
+              </a>
+              
+            </li>
+            
+            <li>
+              <a id="link-conclusao" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/var-literal-types-mut-shad/#conclusao">
+                Conclusão
+              </a>
+              
+            </li>
+            
+            <li>
+              <a id="link-referencias" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/var-literal-types-mut-shad/#referencias">
+                Referências
+              </a>
+              
+            </li>
+            
+          </ul>
+        </aside>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+
+  
+  <section class="modal" id="search-modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Search</p>
+      </header>
+      <section class="modal-card-body">
+        <div class="field mb-2">
+          <div class="control">
+            <input class="input" id="search" placeholder="Search this website." type="search" />
+          </div>
+        </div>
+        <div class="search-results">
+          <div class="search-results__items"></div>
+        </div>
+      </section>
+    </div>
+    <button aria-label="close" class="modal-close is-large"></button>
+  </section>
+  
+
+
+  
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <nav class="level">
+              
+          <div class="level-item has-text-centered">
+            <a class="button is-black is-outlined" href="https:&#x2F;&#x2F;rustlangpt.github.io&#x2F;posts&#x2F;cargo&#x2F;">
+              <span class="icon mr-2">
+                <i class="fas fa-arrow-circle-left"></i>
+              </span>
+              Cargo: O Gestor de Pacotes do Rust
+            </a>
+          </div>
+           
+        </nav>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+  
+
+
+
+
+
+
+  
+  <footer class="footer py-4">
+    <div class="content has-text-centered">
+    <!--
+    <p>
+        Built with
+        <span class="icon-text">
+          <span class="icon">
+            <i class="fas fa-code"></i>
+          </span>
+          <span>code</span>
+        </span>
+        and
+        <span class="icon-text">
+          <span class="icon">
+            <i class="fas fa-heart"></i>
+          </span>
+          <span>love</span>
+        </span>
+      </p>
+    -->
+      <p>
+        Powered by
+        <span class="icon-text">
+          <span class="icon">
+            <i class="fas fa-power-off"></i>
+          </span>
+          <span>zola</span>
+        </span>
+      </p>
+    
+    </div>
+  </footer>
+  
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/galleria@1.6.1/dist/galleria.min.js" integrity="sha384-QSfwGT8/EU536DKdtyP2D6SLlh8zBaZ0cVkwfrwhqzIU9VCfJT00CLVP5t+HAiYg" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/galleria@1.6.1/dist/themes/folio/galleria.folio.min.js" integrity="sha384-DwpKI+deZB267+hPKwiOIc5Y2GKsVL0mR6hgz7GgIu7AgAMYqJwcJKY1YBNfhWcY" crossorigin="anonymous"></script>
+  
+  
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@8.13.5/dist/mermaid.min.js" integrity="sha384-0yWn54pSGtfKCU+skfA69l25VsCw+MZt4LQov3xNRoS7YkAMrFokGgSBnAWSK4pv" crossorigin="anonymous"></script>
+  
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.xkcd@1.1.13/dist/chart.xkcd.min.js" integrity="sha384-xC3h1+IHXK8seA+8KfT79Z4e0GPsznjXBoMa5nd8ooWKplPyXx92NOmljWxLC/cs" crossorigin="anonymous"></script>
+  
+  
+  <script src="https://rustlangpt.github.io/elasticlunr.min.js"></script>
+  <script src="https://rustlangpt.github.io/search_index.en.js"></script><script src="https://rustlangpt.github.io/js/site.js"></script>
+
+  
+
+<script type="text/javascript">
+  const menuBarHeight = document.querySelector("nav.navbar").clientHeight;
+  const tocItems = document.querySelectorAll(".toc");
+  const navSections = new Array(tocItems.length);
+
+  tocItems.forEach((el, i) => {
+    let id = el.getAttribute("id").substring(5);
+    navSections[i] = document.getElementById(id);
+  })
+
+  function isVisible(tocIndex) {
+    const current = navSections[tocIndex];
+    const next = tocIndex < tocItems.length - 1 ? navSections[tocIndex + 1]
+      : document.querySelectorAll("section.section").item(1);
+
+    const c = current.getBoundingClientRect();
+    const n = next.getBoundingClientRect();
+    const h = (window.innerHeight || document.documentElement.clientHeight);
+
+    return (c.top <= h) && (n.top - menuBarHeight >= 0);
+  }
+
+  function activateIfVisible() {
+    for (b = true, i = 0; i < tocItems.length; i++) {
+      if (b && isVisible(i)) {
+        tocItems[i].classList.add('is-active');
+        b = false;
+      } else
+        tocItems[i].classList.remove('is-active');
+    }
+  }
+
+  var isTicking = null;
+  window.addEventListener('scroll', () => {
+    if (!isTicking) {
+      window.requestAnimationFrame(() => {
+        activateIfVisible();
+        isTicking = false;
+      });
+      isTicking = true;
+    }
+  }, false);
+</script>
+
+
+
+
+
+  
+  
+</body>
+
+</html>
