@@ -1,0 +1,1485 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <meta content="#ffffff" name="theme-color" />
+  <meta content="#da532c" name="msapplication-TileColor" />
+
+  
+  <link href='&#x2F;icons&#x2F;site.webmanifest' rel="manifest" />
+  
+  
+  <link color="#5bbad5" href='&#x2F;icons&#x2F;safari-pinned-tab.svg' rel="mask-icon" />
+  
+  
+  <link href='&#x2F;icons&#x2F;rustlangpt1_16px.png' rel="icon" sizes="16x16" type="image/png" />
+  
+  
+  <link href='&#x2F;icons&#x2F;rustlangpt1_32px.png' rel="icon" sizes="32x32" type="image/png" />
+  
+  
+  <link href='&#x2F;icons&#x2F;apple-touch-icon.png' rel="apple-touch-icon" sizes="180x180" />
+  
+
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galleria@1.6.1/dist/themes/folio/galleria.folio.min.css" integrity="sha384-+rY0QD+LRnTOquDMzGa9lXU6jIwdiQuwCJQ2cdcW0qeP/0UbjQCZlXnRsUMA+9pH" crossorigin="anonymous">
+  
+
+  
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1.9.1/css/academicons.min.css" integrity="sha384-FIue+PI4SsI9XfHCz8dBLg33b0c1fMJgNU3X//L26FYbGnlSEfWmNT7zgWc2N9b6" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link href="https://rustlangpt.github.io/deep-thought.css" rel="stylesheet" />
+  
+  
+
+  <title>
+    
+RustlangPT | Fluxos no Rust
+
+  </title>
+
+  
+  
+  
+
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css" integrity="sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js" integrity="sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx" crossorigin="anonymous"></script>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/mathtex-script-type.min.js" integrity="sha384-jiBVvJ8NGGj5n7kJaiWwWp9AjC+Yh8rhZY3GtAX8yU28azcLgoRo4oukO87g7zDT" crossorigin="anonymous"></script>
+  
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+  
+  
+</head>
+
+<body class="has-background-white">
+  <nav aria-label="section navigation" class="navbar is-light" role="navigation">
+    <div class="container">
+      <div class="navbar-brand">
+        <a class="navbar-item is-size-5 has-text-weight-bold" href="https:&#x2F;&#x2F;rustlangpt.github.io">RustlangPT</a>
+        <a aria-expanded="false" aria-label="menu" class="navbar-burger burger" data-target="navMenu" role="button">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+      <div class="navbar-menu" id="navMenu">
+        <div class="navbar-end has-text-centered">
+          
+          
+          
+          <a class="navbar-item has-text-weight-semibold" href="https:&#x2F;&#x2F;rustlangpt.github.io&#x2F;posts">
+            Blog
+          </a>
+          
+          <a class="navbar-item has-text-weight-semibold" href="https:&#x2F;&#x2F;rustlangpt.github.io&#x2F;recursos">
+            Recursos
+          </a>
+          
+          <a class="navbar-item has-text-weight-semibold" href="https:&#x2F;&#x2F;rustlangpt.github.io&#x2F;acerca">
+            Acerca
+          </a>
+          
+          <a class="navbar-item has-text-weight-semibold" href="https:&#x2F;&#x2F;rustlangpt.github.io&#x2F;eventos">
+            Eventos
+          </a>
+          
+          <a class="navbar-item has-text-weight-semibold" href="https:&#x2F;&#x2F;rustlangpt.github.io&#x2F;tags">
+            Tags
+          </a>
+          
+          
+          
+          <a class="navbar-item" id="nav-search" title="Search" data-target="#search-modal">
+            <span class="icon">
+              <i class="fas fa-search"></i>
+            </span>
+          </a>
+          <a class="navbar-item" id="dark-mode" title="Switch to dark theme">
+            <span class="icon">
+              <i class="fas fa-adjust"></i>
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  
+  
+
+  
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-8 is-offset-2">
+        <article class="box">
+          <h1 class="title">
+            Fluxos no Rust
+          </h1>
+          <p class="subtitle">Controlo de fluxos em Rust: Condicionais, Loops e Pattern Matching.</p>
+          <div class="columns is-multiline is-gapless">
+            <div class="column is-8">
+              
+<span class="icon-text has-text-grey">
+  
+  <span class="icon">
+    <i class="fas fa-user"></i>
+  </span>
+  <span>RustLangPT publicado em</span>
+  <span class="icon">
+    <i class="far fa-calendar-alt"></i>
+  </span>
+  <span><time datetime="2025-09-21">21 September, 2025</time></span>
+
+</span>
+
+            </div>
+            <div class="column is-4 has-text-right-desktop">
+              
+<span class="icon-text has-text-grey">
+  <span class="icon">
+    <i class="far fa-clock"></i>
+  </span>
+  <span>5 min,</span>
+  <span class="icon">
+    <i class="fas fa-pencil-alt"></i>
+  </span>
+  <span>851 words</span>
+</span>
+
+            </div>
+            <div class="column">
+              
+            </div>
+            <div class="column has-text-right-desktop">
+              
+              
+<p>
+  Tags:
+  
+  <a class="has-text-info-dark has-text-weight-semibold" href="https://rustlangpt.github.io/tags/fundamentos/">
+    <span class="icon-text">
+      <span class="icon">
+        <i class="fas fa-tag"></i>
+      </span>
+      <span>Fundamentos</span>
+    </span>
+  </a>
+  
+  <a class="has-text-info-dark has-text-weight-semibold" href="https://rustlangpt.github.io/tags/iniciantes/">
+    <span class="icon-text">
+      <span class="icon">
+        <i class="fas fa-tag"></i>
+      </span>
+      <span>Iniciantes</span>
+    </span>
+  </a>
+  
+  <a class="has-text-info-dark has-text-weight-semibold" href="https://rustlangpt.github.io/tags/fluxos/">
+    <span class="icon-text">
+      <span class="icon">
+        <i class="fas fa-tag"></i>
+      </span>
+      <span>Fluxos</span>
+    </span>
+  </a>
+  
+</p>
+
+              
+            </div>
+          </div>
+          <div class="content mt-2">
+            <p>O controlo de fluxo é fundamental em qualquer linguagem de programação, determinando como o código é executado com base em condições e iterações.</p>
+<p>Rust oferece uma variedade de estruturas de controlo e iteração que permitem escrever código expressivo, seguro e eficiente. Neste artigo, vamos explorar:</p>
+<ul>
+<li><code>if</code>, <code>else</code>, <code>else if</code></li>
+<li><code>loop</code>, <code>while</code>, <code>for</code>, <code>for_each</code></li>
+<li><code>if let</code>, <code>while let</code></li>
+<li><code>match</code></li>
+</ul>
+<p>Neste artigo, exploraremos algumas estruturas de controlo do Rust com exemplos práticos que demonstram a elegância e poder desta linguagem.</p>
+<p>Cada tópico inclui explicações, exemplos práticos e referências à documentação oficial, como o <a href="https://doc.rust-lang.org/stable/book/index.html">The Rust Programming Language</a> e o <a href="https://doc.rust-lang.org/stable/rust-by-example/index.html">Rust by Example</a>.</p>
+<p>Vamos mergulhar nesses elementos para ajudar-te a escrever código Rust mais eficiente.</p>
+<h2 id="1-expressoes-condicionais-if-else-else-if">1. Expressões Condicionais: <code>if</code>, <code>else</code>, <code>else if</code></h2>
+<p>Em Rust, <code>if</code> é uma expressão, não apenas uma declaração, o que significa que pode retornar valores. Esta característica torna o código mais conciso e expressivo.</p>
+<p>As expressões <code>if</code> em Rust permitem ramificação condicional baseada em valores booleanos. Elas começam com <code>if</code> seguido de uma condição (que deve ser do tipo <code>bool</code>), um bloco de código e, opcionalmente, <code>else</code> para o caso falso ou <code>else if</code> para condições múltiplas. Diferente de algumas linguagens, Rust não converte automaticamente valores não-booleanos para <code>bool</code>.</p>
+<h3 id="condicional-basico">Condicional Básico</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> numero = </span><span style="color:#d08770;">7</span><span>;
+</span><span>    
+</span><span>    </span><span style="color:#b48ead;">if</span><span> numero &lt; </span><span style="color:#d08770;">5 </span><span>{
+</span><span>        println!(&quot;</span><span style="color:#a3be8c;">O número é menor que 5</span><span>&quot;);
+</span><span>    } </span><span style="color:#b48ead;">else if</span><span> numero == </span><span style="color:#d08770;">5 </span><span>{
+</span><span>        println!(&quot;</span><span style="color:#a3be8c;">O número é igual a 5</span><span>&quot;);
+</span><span>    } </span><span style="color:#b48ead;">else </span><span>{
+</span><span>        println!(&quot;</span><span style="color:#a3be8c;">O número é maior que 5</span><span>&quot;);
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>O Rust não permite que valores não booleanos sejam usados em contextos <code>if</code>. A condição tem de ser um <code>bool</code>. Além disso, o Rust permite usar <code>if</code> em expressões, o que significa que podes atribuir o resultado de um bloco <code>if</code> a uma variável.</p>
+<h3 id="if-como-expressao">if como Expressão</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> condicao = </span><span style="color:#d08770;">true</span><span>;
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// if como expressão para atribuir valores
+</span><span>    </span><span style="color:#b48ead;">let</span><span> numero = </span><span style="color:#b48ead;">if</span><span> condicao { </span><span style="color:#d08770;">5 </span><span>} </span><span style="color:#b48ead;">else </span><span>{ </span><span style="color:#d08770;">6 </span><span>};
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">O valor é: </span><span style="color:#d08770;">{}</span><span>&quot;, numero);
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Exemplo mais complexo
+</span><span>    </span><span style="color:#b48ead;">let</span><span> temperatura = </span><span style="color:#d08770;">25</span><span>;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> estado = </span><span style="color:#b48ead;">if</span><span> temperatura &gt; </span><span style="color:#d08770;">30 </span><span>{
+</span><span>        &quot;</span><span style="color:#a3be8c;">quente</span><span>&quot;
+</span><span>    } </span><span style="color:#b48ead;">else if</span><span> temperatura &gt; </span><span style="color:#d08770;">20 </span><span>{
+</span><span>        &quot;</span><span style="color:#a3be8c;">agradável</span><span>&quot;
+</span><span>    } </span><span style="color:#b48ead;">else if</span><span> temperatura &gt; </span><span style="color:#d08770;">10 </span><span>{
+</span><span>        &quot;</span><span style="color:#a3be8c;">fresco</span><span>&quot;
+</span><span>    } </span><span style="color:#b48ead;">else </span><span>{
+</span><span>        &quot;</span><span style="color:#a3be8c;">frio</span><span>&quot;
+</span><span>    };
+</span><span>    
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">O tempo está </span><span style="color:#d08770;">{}</span><span>&quot;, estado);
+</span><span>}
+</span></code></pre>
+<h3 id="condicionais-com-multiplas-expressoes">Condicionais com múltiplas Expressões</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> pontuacao = </span><span style="color:#d08770;">95</span><span>;
+</span><span>    
+</span><span>    </span><span style="color:#b48ead;">let</span><span> classificacao = </span><span style="color:#b48ead;">if</span><span> pontuacao &gt;= </span><span style="color:#d08770;">90 </span><span>{
+</span><span>        println!(&quot;</span><span style="color:#a3be8c;">Excelente performance!</span><span>&quot;);
+</span><span>        &quot;</span><span style="color:#a3be8c;">A</span><span>&quot;
+</span><span>    } </span><span style="color:#b48ead;">else if</span><span> pontuacao &gt;= </span><span style="color:#d08770;">75 </span><span>{
+</span><span>        println!(&quot;</span><span style="color:#a3be8c;">Boa performance!</span><span>&quot;);
+</span><span>        &quot;</span><span style="color:#a3be8c;">B</span><span>&quot;
+</span><span>    } </span><span style="color:#b48ead;">else if</span><span> pontuacao &gt;= </span><span style="color:#d08770;">50 </span><span>{
+</span><span>        println!(&quot;</span><span style="color:#a3be8c;">Performance satisfatória</span><span>&quot;);
+</span><span>        &quot;</span><span style="color:#a3be8c;">C</span><span>&quot;
+</span><span>    } </span><span style="color:#b48ead;">else </span><span>{
+</span><span>        println!(&quot;</span><span style="color:#a3be8c;">Necessita melhorar</span><span>&quot;);
+</span><span>        &quot;</span><span style="color:#a3be8c;">F</span><span>&quot;
+</span><span>    };
+</span><span>    
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Classificação: </span><span style="color:#d08770;">{}</span><span>&quot;, classificacao);
+</span><span>}
+</span></code></pre>
+<h2 id="2-loop-infinito">2. Loop Infinito</h2>
+<p>O <code>loop</code> é o mais simples: ele cria um ciclo infinito que continua a ser executado até que uses a palavra-chave <code>break</code> para sair. Podes até retornar um valor do loop.</p>
+<h3 id="loop-basico">Loop Básico</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let mut</span><span> contador = </span><span style="color:#d08770;">0</span><span>;
+</span><span>    
+</span><span>    </span><span style="color:#b48ead;">loop </span><span>{
+</span><span>        contador += </span><span style="color:#d08770;">1</span><span>;
+</span><span>        println!(&quot;</span><span style="color:#a3be8c;">Contador: </span><span style="color:#d08770;">{}</span><span>&quot;, contador);
+</span><span>        
+</span><span>        </span><span style="color:#b48ead;">if</span><span> contador == </span><span style="color:#d08770;">5 </span><span>{
+</span><span>            </span><span style="color:#b48ead;">break</span><span>;
+</span><span>        }
+</span><span>    }
+</span><span>    
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Loop terminado!</span><span>&quot;);
+</span><span>}
+</span></code></pre>
+<h3 id="loop-como-expressao">Loop como Expressão</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let mut</span><span> contador = </span><span style="color:#d08770;">0</span><span>;
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Loop pode retornar valores
+</span><span>    </span><span style="color:#b48ead;">let</span><span> resultado = </span><span style="color:#b48ead;">loop </span><span>{
+</span><span>        contador += </span><span style="color:#d08770;">1</span><span>;
+</span><span>        
+</span><span>        </span><span style="color:#b48ead;">if</span><span> contador == </span><span style="color:#d08770;">10 </span><span>{
+</span><span>            </span><span style="color:#b48ead;">break</span><span> contador * </span><span style="color:#d08770;">2</span><span>;  </span><span style="color:#65737e;">// Retorna valor ao parar
+</span><span>        }
+</span><span>    };
+</span><span>    
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Resultado: </span><span style="color:#d08770;">{}</span><span>&quot;, resultado);  </span><span style="color:#65737e;">// 20
+</span><span>}
+</span></code></pre>
+<h3 id="loops-aninhados-com-labels">Loops Aninhados com Labels</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let mut</span><span> count = </span><span style="color:#d08770;">0</span><span>;
+</span><span>    
+</span><span>    &#39;outer: </span><span style="color:#b48ead;">loop </span><span>{
+</span><span>        println!(&quot;</span><span style="color:#a3be8c;">count = </span><span style="color:#d08770;">{}</span><span>&quot;, count);
+</span><span>        </span><span style="color:#b48ead;">let mut</span><span> remaining = </span><span style="color:#d08770;">10</span><span>;
+</span><span>        
+</span><span>        </span><span style="color:#b48ead;">loop </span><span>{
+</span><span>            println!(&quot;</span><span style="color:#a3be8c;">remaining = </span><span style="color:#d08770;">{}</span><span>&quot;, remaining);
+</span><span>            </span><span style="color:#b48ead;">if</span><span> remaining == </span><span style="color:#d08770;">9 </span><span>{
+</span><span>                </span><span style="color:#b48ead;">break</span><span>;  </span><span style="color:#65737e;">// Pára apenas o loop interno
+</span><span>            }
+</span><span>            </span><span style="color:#b48ead;">if</span><span> count == </span><span style="color:#d08770;">2 </span><span>{
+</span><span>                </span><span style="color:#b48ead;">break &#39;outer</span><span>;  </span><span style="color:#65737e;">// Pára o loop externo usando label
+</span><span>            }
+</span><span>            remaining -= </span><span style="color:#d08770;">1</span><span>;
+</span><span>        }
+</span><span>        
+</span><span>        count += </span><span style="color:#d08770;">1</span><span>;
+</span><span>    }
+</span><span>    
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Loops terminados!</span><span>&quot;);
+</span><span>}
+</span></code></pre>
+<h2 id="3-while-loop">3. While Loop</h2>
+<p>O <code>while</code> executa enquanto uma condição for verdadeira.</p>
+<h3 id="while-basico">While Básico</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let mut</span><span> numero = </span><span style="color:#d08770;">3</span><span>;
+</span><span>    
+</span><span>    </span><span style="color:#b48ead;">while</span><span> numero != </span><span style="color:#d08770;">0 </span><span>{
+</span><span>        println!(&quot;</span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">!</span><span>&quot;, numero);
+</span><span>        numero -= </span><span style="color:#d08770;">1</span><span>;
+</span><span>    }
+</span><span>    
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">FIM!!!</span><span>&quot;);
+</span><span>}
+</span></code></pre>
+<h3 id="while-com-condicoes-complexas">While com Condições Complexas</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let mut</span><span> x = </span><span style="color:#d08770;">1</span><span>;
+</span><span>    </span><span style="color:#b48ead;">let mut</span><span> y = </span><span style="color:#d08770;">1</span><span>;
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Sequência de Fibonacci até 100
+</span><span>    </span><span style="color:#b48ead;">while</span><span> y &lt; </span><span style="color:#d08770;">100 </span><span>{
+</span><span>        println!(&quot;</span><span style="color:#d08770;">{}</span><span>&quot;, y);
+</span><span>        </span><span style="color:#b48ead;">let</span><span> temp = x + y;
+</span><span>        x = y;
+</span><span>        y = temp;
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<h3 id="while-para-processamento-de-dados">While para Processamento de Dados</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let mut</span><span> numeros = vec![</span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">2</span><span>, </span><span style="color:#d08770;">3</span><span>, </span><span style="color:#d08770;">4</span><span>, </span><span style="color:#d08770;">5</span><span>, </span><span style="color:#d08770;">6</span><span>, </span><span style="color:#d08770;">7</span><span>, </span><span style="color:#d08770;">8</span><span>, </span><span style="color:#d08770;">9</span><span>, </span><span style="color:#d08770;">10</span><span>];
+</span><span>    
+</span><span>    </span><span style="color:#b48ead;">while let </span><span>Some(numero) = numeros.</span><span style="color:#96b5b4;">pop</span><span>() {
+</span><span>        </span><span style="color:#b48ead;">if</span><span> numero % </span><span style="color:#d08770;">2 </span><span>== </span><span style="color:#d08770;">0 </span><span>{
+</span><span>            println!(&quot;</span><span style="color:#a3be8c;">Número par encontrado: </span><span style="color:#d08770;">{}</span><span>&quot;, numero);
+</span><span>        }
+</span><span>    }
+</span><span>    
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Vetor processado completamente</span><span>&quot;);
+</span><span>}
+</span></code></pre>
+<h2 id="4-for-loop">4. For Loop</h2>
+<p>O <code>for</code> em Rust é usado principalmente para iterar sobre coleções e ranges.</p>
+<h3 id="for-com-ranges">For com Ranges</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#65737e;">// Range exclusivo (1 a 4)
+</span><span>    </span><span style="color:#b48ead;">for</span><span> numero in </span><span style="color:#d08770;">1</span><span>..</span><span style="color:#d08770;">5 </span><span>{
+</span><span>        println!(&quot;</span><span style="color:#a3be8c;">Número: </span><span style="color:#d08770;">{}</span><span>&quot;, numero);
+</span><span>    }
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Range inclusivo (1 a 5)
+</span><span>    </span><span style="color:#b48ead;">for</span><span> numero in </span><span style="color:#d08770;">1</span><span>..=</span><span style="color:#d08770;">5 </span><span>{
+</span><span>        println!(&quot;</span><span style="color:#a3be8c;">Inclusivo: </span><span style="color:#d08770;">{}</span><span>&quot;, numero);
+</span><span>    }
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Countdown usando rev()
+</span><span>    </span><span style="color:#b48ead;">for</span><span> numero in (</span><span style="color:#d08770;">1</span><span>..</span><span style="color:#d08770;">4</span><span>).</span><span style="color:#96b5b4;">rev</span><span>() {
+</span><span>        println!(&quot;</span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">!</span><span>&quot;, numero);
+</span><span>    }
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">FIM!!!</span><span>&quot;);
+</span><span>}
+</span></code></pre>
+<h3 id="for-com-arrays-e-vetores">For com Arrays e Vetores</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> array = [</span><span style="color:#d08770;">10</span><span>, </span><span style="color:#d08770;">20</span><span>, </span><span style="color:#d08770;">30</span><span>, </span><span style="color:#d08770;">40</span><span>, </span><span style="color:#d08770;">50</span><span>];
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Iteração por valor
+</span><span>    </span><span style="color:#b48ead;">for</span><span> elemento in array {
+</span><span>        println!(&quot;</span><span style="color:#a3be8c;">Valor: </span><span style="color:#d08770;">{}</span><span>&quot;, elemento);
+</span><span>    }
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Iteração por referência (mais eficiente)
+</span><span>    </span><span style="color:#b48ead;">for</span><span> elemento in &amp;array {
+</span><span>        println!(&quot;</span><span style="color:#a3be8c;">Referência: </span><span style="color:#d08770;">{}</span><span>&quot;, elemento);
+</span><span>    }
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Iteração com índices
+</span><span>    </span><span style="color:#b48ead;">for </span><span>(indice, valor) in array.</span><span style="color:#96b5b4;">iter</span><span>().</span><span style="color:#96b5b4;">enumerate</span><span>() {
+</span><span>        println!(&quot;</span><span style="color:#a3be8c;">Índice </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">: </span><span style="color:#d08770;">{}</span><span>&quot;, indice, valor);
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<h3 id="for-com-vetores-mutaveis">For com Vetores Mutáveis</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let mut</span><span> numeros = vec![</span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">2</span><span>, </span><span style="color:#d08770;">3</span><span>, </span><span style="color:#d08770;">4</span><span>, </span><span style="color:#d08770;">5</span><span>];
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Modificar elementos por referência mutável
+</span><span>    </span><span style="color:#b48ead;">for</span><span> numero in &amp;</span><span style="color:#b48ead;">mut</span><span> numeros {
+</span><span>        *numero *= </span><span style="color:#d08770;">2</span><span>;
+</span><span>    }
+</span><span>    
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Números dobrados: </span><span style="color:#d08770;">{:?}</span><span>&quot;, numeros);
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Consumir o vetor (mover ownership)
+</span><span>    </span><span style="color:#b48ead;">for</span><span> numero in numeros {
+</span><span>        println!(&quot;</span><span style="color:#a3be8c;">Consumindo: </span><span style="color:#d08770;">{}</span><span>&quot;, numero);
+</span><span>    }
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// numeros não pode mais ser usado aqui
+</span><span>}
+</span></code></pre>
+<h2 id="5-iteradores-e-foreach">5. Iteradores e Foreach</h2>
+<p>Rust não tem uma palavra-chave <code>foreach</code> explícita, mas o método <code>for_each</code> nos iteradores oferece funcionalidade similar.</p>
+<h3 id="usando-for-each-com-closures">Usando for_each com Closures</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> numeros = vec![</span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">2</span><span>, </span><span style="color:#d08770;">3</span><span>, </span><span style="color:#d08770;">4</span><span>, </span><span style="color:#d08770;">5</span><span>];
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// for_each com closure
+</span><span>    numeros.</span><span style="color:#96b5b4;">iter</span><span>().</span><span style="color:#96b5b4;">for_each</span><span>(|</span><span style="color:#bf616a;">numero</span><span>| {
+</span><span>        println!(&quot;</span><span style="color:#a3be8c;">Número: </span><span style="color:#d08770;">{}</span><span>&quot;, numero);
+</span><span>    });
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Processamento mais complexo
+</span><span>    numeros
+</span><span>        .</span><span style="color:#96b5b4;">iter</span><span>()
+</span><span>        .</span><span style="color:#96b5b4;">filter</span><span>(|&amp;&amp;</span><span style="color:#bf616a;">x</span><span>| x % </span><span style="color:#d08770;">2 </span><span>== </span><span style="color:#d08770;">0</span><span>)
+</span><span>        .</span><span style="color:#96b5b4;">for_each</span><span>(|</span><span style="color:#bf616a;">numero</span><span>| println!(&quot;</span><span style="color:#a3be8c;">Número par: </span><span style="color:#d08770;">{}</span><span>&quot;, numero));
+</span><span>}
+</span></code></pre>
+<h3 id="iteradores-com-map-filter-e-collect">Iteradores com map, filter e collect</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> numeros = vec![</span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">2</span><span>, </span><span style="color:#d08770;">3</span><span>, </span><span style="color:#d08770;">4</span><span>, </span><span style="color:#d08770;">5</span><span>, </span><span style="color:#d08770;">6</span><span>, </span><span style="color:#d08770;">7</span><span>, </span><span style="color:#d08770;">8</span><span>, </span><span style="color:#d08770;">9</span><span>, </span><span style="color:#d08770;">10</span><span>];
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Processamento funcional
+</span><span>    </span><span style="color:#b48ead;">let</span><span> quadrados_pares: Vec&lt;</span><span style="color:#b48ead;">i32</span><span>&gt; = numeros
+</span><span>        .</span><span style="color:#96b5b4;">iter</span><span>()
+</span><span>        .</span><span style="color:#96b5b4;">filter</span><span>(|&amp;&amp;</span><span style="color:#bf616a;">x</span><span>| x % </span><span style="color:#d08770;">2 </span><span>== </span><span style="color:#d08770;">0</span><span>)
+</span><span>        .</span><span style="color:#96b5b4;">map</span><span>(|</span><span style="color:#bf616a;">x</span><span>| x * x)
+</span><span>        .</span><span style="color:#96b5b4;">collect</span><span>();
+</span><span>    
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Quadrados dos números pares: </span><span style="color:#d08770;">{:?}</span><span>&quot;, quadrados_pares);
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// for_each no final da cadeia
+</span><span>    numeros
+</span><span>        .</span><span style="color:#96b5b4;">iter</span><span>()
+</span><span>        .</span><span style="color:#96b5b4;">enumerate</span><span>()
+</span><span>        .</span><span style="color:#96b5b4;">filter</span><span>(|(_, &amp;</span><span style="color:#bf616a;">valor</span><span>)| valor &gt; </span><span style="color:#d08770;">5</span><span>)
+</span><span>        .</span><span style="color:#96b5b4;">for_each</span><span>(|(</span><span style="color:#bf616a;">indice</span><span>, </span><span style="color:#bf616a;">valor</span><span>)| {
+</span><span>            println!(&quot;</span><span style="color:#a3be8c;">Índice </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">: valor </span><span style="color:#d08770;">{}</span><span>&quot;, indice, valor);
+</span><span>        });
+</span><span>}
+</span></code></pre>
+<h2 id="6-if-let">6. if let</h2>
+<p>O <code>if let</code> é uma forma concisa de combinar <code>if</code> e <code>let</code> para pattern matching simples.
+É útil para extrair valores de enums como Option ou Result.</p>
+<h3 id="if-let-basico">if let Básico</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> some_number = Some(</span><span style="color:#d08770;">7</span><span>);
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Forma verbosa com match
+</span><span>    </span><span style="color:#b48ead;">match</span><span> some_number {
+</span><span>        Some(x) </span><span style="color:#b48ead;">if</span><span> x &lt; </span><span style="color:#d08770;">10 </span><span>=&gt; println!(&quot;</span><span style="color:#a3be8c;">Número pequeno: </span><span style="color:#d08770;">{}</span><span>&quot;, x),
+</span><span>        _ =&gt; {},
+</span><span>    }
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Forma concisa com if let
+</span><span>    </span><span style="color:#b48ead;">if let </span><span>Some(x) = some_number {
+</span><span>        </span><span style="color:#b48ead;">if</span><span> x &lt; </span><span style="color:#d08770;">10 </span><span>{
+</span><span>            println!(&quot;</span><span style="color:#a3be8c;">Número pequeno: </span><span style="color:#d08770;">{}</span><span>&quot;, x);
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<h3 id="if-let-com-enums">if let com Enums</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>#[</span><span style="color:#bf616a;">derive</span><span>(Debug)]
+</span><span style="color:#b48ead;">enum </span><span>Cor {
+</span><span>    Vermelho,
+</span><span>    Verde,
+</span><span>    Azul,
+</span><span>    Personalizada(</span><span style="color:#b48ead;">u8</span><span>, </span><span style="color:#b48ead;">u8</span><span>, </span><span style="color:#b48ead;">u8</span><span>),
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> cor = Cor::Personalizada(</span><span style="color:#d08770;">255</span><span>, </span><span style="color:#d08770;">0</span><span>, </span><span style="color:#d08770;">128</span><span>);
+</span><span>    
+</span><span>    </span><span style="color:#b48ead;">if let </span><span>Cor::Personalizada(r, g, b) = cor {
+</span><span>        println!(&quot;</span><span style="color:#a3be8c;">Cor RGB: (</span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">, </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">, </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">)</span><span>&quot;, r, g, b);
+</span><span>    } </span><span style="color:#b48ead;">else </span><span>{
+</span><span>        println!(&quot;</span><span style="color:#a3be8c;">Cor básica: </span><span style="color:#d08770;">{:?}</span><span>&quot;, cor);
+</span><span>    }
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Comparação com match
+</span><span>    </span><span style="color:#b48ead;">let</span><span> outra_cor = Cor::Verde;
+</span><span>    </span><span style="color:#b48ead;">if let </span><span>Cor::Verde = outra_cor {
+</span><span>        println!(&quot;</span><span style="color:#a3be8c;">É verde!</span><span>&quot;);
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<h3 id="if-let-com-else">if let com else</h3>
+<p>ˋlet elseˋ é uma feature  que permite desestruturar padrões e divergir (como ˋreturnˋ ou ˋpanic!ˋ) se não houver match, simplificando tratamento de erros.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> opcional: Option&lt;</span><span style="color:#b48ead;">i32</span><span>&gt; = Some(</span><span style="color:#d08770;">42</span><span>);
+</span><span>    
+</span><span>    </span><span style="color:#b48ead;">if let </span><span>Some(valor) = opcional {
+</span><span>        println!(&quot;</span><span style="color:#a3be8c;">Valor encontrado: </span><span style="color:#d08770;">{}</span><span>&quot;, valor);
+</span><span>    } </span><span style="color:#b48ead;">else </span><span>{
+</span><span>        println!(&quot;</span><span style="color:#a3be8c;">Nenhum valor encontrado</span><span>&quot;);
+</span><span>    }
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Múltiplas condições
+</span><span>    </span><span style="color:#b48ead;">let</span><span> resultado: Result&lt;</span><span style="color:#b48ead;">i32</span><span>, &amp;</span><span style="color:#b48ead;">str</span><span>&gt; = Ok(</span><span style="color:#d08770;">100</span><span>);
+</span><span>    
+</span><span>    </span><span style="color:#b48ead;">if let </span><span>Ok(valor) = resultado {
+</span><span>        </span><span style="color:#b48ead;">if</span><span> valor &gt; </span><span style="color:#d08770;">50 </span><span>{
+</span><span>            println!(&quot;</span><span style="color:#a3be8c;">Valor alto: </span><span style="color:#d08770;">{}</span><span>&quot;, valor);
+</span><span>        } </span><span style="color:#b48ead;">else </span><span>{
+</span><span>            println!(&quot;</span><span style="color:#a3be8c;">Valor baixo: </span><span style="color:#d08770;">{}</span><span>&quot;, valor);
+</span><span>        }
+</span><span>    } </span><span style="color:#b48ead;">else </span><span>{
+</span><span>        println!(&quot;</span><span style="color:#a3be8c;">Erro no resultado</span><span>&quot;);
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<h2 id="7-while-let">7. while let</h2>
+<p>O <code>while let</code> combina <code>while</code> e pattern matching para loops condicionais, útil para iterar sobre estruturas como queues ou options.</p>
+<h3 id="while-let-com-option">while let com Option</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let mut</span><span> pilha = vec![</span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">2</span><span>, </span><span style="color:#d08770;">3</span><span>, </span><span style="color:#d08770;">4</span><span>, </span><span style="color:#d08770;">5</span><span>];
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Processa enquanto há elementos na pilha
+</span><span>    </span><span style="color:#b48ead;">while let </span><span>Some(topo) = pilha.</span><span style="color:#96b5b4;">pop</span><span>() {
+</span><span>        println!(&quot;</span><span style="color:#a3be8c;">Processando: </span><span style="color:#d08770;">{}</span><span>&quot;, topo);
+</span><span>    }
+</span><span>    
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Pilha vazia!</span><span>&quot;);
+</span><span>}
+</span></code></pre>
+<h3 id="while-let-com-iterator">while let com Iterator</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> numeros = vec![</span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">2</span><span>, </span><span style="color:#d08770;">3</span><span>, </span><span style="color:#d08770;">4</span><span>, </span><span style="color:#d08770;">5</span><span>];
+</span><span>    </span><span style="color:#b48ead;">let mut</span><span> iter = numeros.</span><span style="color:#96b5b4;">iter</span><span>();
+</span><span>    
+</span><span>    </span><span style="color:#b48ead;">while let </span><span>Some(numero) = iter.</span><span style="color:#96b5b4;">next</span><span>() {
+</span><span>        println!(&quot;</span><span style="color:#a3be8c;">Número: </span><span style="color:#d08770;">{}</span><span>&quot;, numero);
+</span><span>        
+</span><span>        </span><span style="color:#65737e;">// Condição de parada personalizada
+</span><span>        </span><span style="color:#b48ead;">if </span><span>*numero == </span><span style="color:#d08770;">3 </span><span>{
+</span><span>            println!(&quot;</span><span style="color:#a3be8c;">Parando na iteração 3</span><span>&quot;);
+</span><span>            </span><span style="color:#b48ead;">break</span><span>;
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<h3 id="while-let-com-result">while let com Result</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>std::collections::VecDeque;
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">processar_numero</span><span>(</span><span style="color:#bf616a;">n</span><span>: </span><span style="color:#b48ead;">i32</span><span>) -&gt; Result&lt;</span><span style="color:#b48ead;">i32</span><span>, String&gt; {
+</span><span>    </span><span style="color:#b48ead;">if</span><span> n &gt; </span><span style="color:#d08770;">0 </span><span>{
+</span><span>        Ok(n * </span><span style="color:#d08770;">2</span><span>)
+</span><span>    } </span><span style="color:#b48ead;">else </span><span>{
+</span><span>        Err(&quot;</span><span style="color:#a3be8c;">Número inválido</span><span>&quot;.</span><span style="color:#96b5b4;">to_string</span><span>())
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let mut</span><span> fila = VecDeque::from([</span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">2</span><span>, -</span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">3</span><span>, </span><span style="color:#d08770;">4</span><span>]);
+</span><span>    
+</span><span>    </span><span style="color:#b48ead;">while let </span><span>Some(numero) = fila.</span><span style="color:#96b5b4;">pop_front</span><span>() {
+</span><span>        </span><span style="color:#b48ead;">match </span><span style="color:#96b5b4;">processar_numero</span><span>(numero) {
+</span><span>            Ok(resultado) =&gt; println!(&quot;</span><span style="color:#a3be8c;">Resultado: </span><span style="color:#d08770;">{}</span><span>&quot;, resultado),
+</span><span>            Err(erro) =&gt; {
+</span><span>                println!(&quot;</span><span style="color:#a3be8c;">Erro: </span><span style="color:#d08770;">{}</span><span>&quot;, erro);
+</span><span>                </span><span style="color:#b48ead;">break</span><span>;  </span><span style="color:#65737e;">// Para no primeiro erro
+</span><span>            }
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<h2 id="8-pattern-matching-com-match">8. Pattern Matching com match</h2>
+<p>O <code>match</code> é uma das funcionalidades mais poderosas de Rust. É uma forma de controlo de fluxo que permite comparar um valor com uma série de padrões e executar um código diferente para cada um. O <code>match</code>  é exaustivo, o que significa que o compilador garante que todos os casos possíveis são tratados.</p>
+<h3 id="exemplo-basico">Exemplo básico</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> cor = &quot;</span><span style="color:#a3be8c;">azul</span><span>&quot;;
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">match</span><span> cor {
+</span><span>        &quot;</span><span style="color:#a3be8c;">vermelho</span><span>&quot; =&gt; println!(&quot;</span><span style="color:#a3be8c;">A cor é vermelho!</span><span>&quot;),
+</span><span>        &quot;</span><span style="color:#a3be8c;">azul</span><span>&quot; =&gt; println!(&quot;</span><span style="color:#a3be8c;">A cor é azul!</span><span>&quot;),
+</span><span>        &quot;</span><span style="color:#a3be8c;">verde</span><span>&quot; =&gt; println!(&quot;</span><span style="color:#a3be8c;">A cor é verde!</span><span>&quot;),
+</span><span>        _ =&gt; println!(&quot;</span><span style="color:#a3be8c;">Outra cor</span><span>&quot;),
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#65737e;">// match como expressão
+</span><span>    </span><span style="color:#b48ead;">let</span><span> numero = </span><span style="color:#d08770;">2</span><span>;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> texto = </span><span style="color:#b48ead;">match</span><span> numero {
+</span><span>        </span><span style="color:#d08770;">1 </span><span>=&gt; &quot;</span><span style="color:#a3be8c;">um</span><span>&quot;,
+</span><span>        </span><span style="color:#d08770;">2 </span><span>=&gt; &quot;</span><span style="color:#a3be8c;">dois</span><span>&quot;,
+</span><span>        </span><span style="color:#d08770;">3 </span><span>=&gt; &quot;</span><span style="color:#a3be8c;">três</span><span>&quot;,
+</span><span>        _ =&gt; &quot;</span><span style="color:#a3be8c;">outro</span><span>&quot;,
+</span><span>    };
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Número em texto: </span><span style="color:#d08770;">{}</span><span>&quot;, texto);
+</span><span>}
+</span><span>
+</span></code></pre>
+<h3 id="match-basico-com-enums">Match Básico com Enums</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>#[</span><span style="color:#bf616a;">derive</span><span>(Debug)]
+</span><span style="color:#b48ead;">enum </span><span>Moeda {
+</span><span>    Penny,
+</span><span>    Nickel,
+</span><span>    Dime,
+</span><span>    Quarter,
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">valor_moeda</span><span>(</span><span style="color:#bf616a;">moeda</span><span>: Moeda) -&gt; </span><span style="color:#b48ead;">u8 </span><span>{
+</span><span>    </span><span style="color:#b48ead;">match</span><span> moeda {
+</span><span>        Moeda::Penny =&gt; </span><span style="color:#d08770;">1</span><span>,
+</span><span>        Moeda::Nickel =&gt; </span><span style="color:#d08770;">5</span><span>,
+</span><span>        Moeda::Dime =&gt; </span><span style="color:#d08770;">10</span><span>,
+</span><span>        Moeda::Quarter =&gt; </span><span style="color:#d08770;">25</span><span>,
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> moeda = Moeda::Quarter;
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Valor da moeda: </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;"> centavos</span><span>&quot;, </span><span style="color:#96b5b4;">valor_moeda</span><span>(moeda));
+</span><span>}
+</span></code></pre>
+<h3 id="match-com-option-e-result">Match com Option e Result</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">dividir</span><span>(</span><span style="color:#bf616a;">x</span><span>: </span><span style="color:#b48ead;">f64</span><span>, </span><span style="color:#bf616a;">y</span><span>: </span><span style="color:#b48ead;">f64</span><span>) -&gt; Result&lt;</span><span style="color:#b48ead;">f64</span><span>, String&gt; {
+</span><span>    </span><span style="color:#b48ead;">if</span><span> y != </span><span style="color:#d08770;">0.0 </span><span>{
+</span><span>        Ok(x / y)
+</span><span>    } </span><span style="color:#b48ead;">else </span><span>{
+</span><span>        Err(&quot;</span><span style="color:#a3be8c;">Divisão por zero</span><span>&quot;.</span><span style="color:#96b5b4;">to_string</span><span>())
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> resultado = </span><span style="color:#96b5b4;">dividir</span><span>(</span><span style="color:#d08770;">10.0</span><span>, </span><span style="color:#d08770;">3.0</span><span>);
+</span><span>    
+</span><span>    </span><span style="color:#b48ead;">match</span><span> resultado {
+</span><span>        Ok(valor) =&gt; println!(&quot;</span><span style="color:#a3be8c;">Resultado: </span><span style="color:#d08770;">{:.2}</span><span>&quot;, valor),
+</span><span>        Err(erro) =&gt; println!(&quot;</span><span style="color:#a3be8c;">Erro: </span><span style="color:#d08770;">{}</span><span>&quot;, erro),
+</span><span>    }
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Match com Option
+</span><span>    </span><span style="color:#b48ead;">let</span><span> opcional: Option&lt;</span><span style="color:#b48ead;">i32</span><span>&gt; = Some(</span><span style="color:#d08770;">42</span><span>);
+</span><span>    
+</span><span>    </span><span style="color:#b48ead;">match</span><span> opcional {
+</span><span>        Some(valor) </span><span style="color:#b48ead;">if</span><span> valor &gt; </span><span style="color:#d08770;">40 </span><span>=&gt; println!(&quot;</span><span style="color:#a3be8c;">Valor alto: </span><span style="color:#d08770;">{}</span><span>&quot;, valor),
+</span><span>        Some(valor) =&gt; println!(&quot;</span><span style="color:#a3be8c;">Valor: </span><span style="color:#d08770;">{}</span><span>&quot;, valor),
+</span><span>        None =&gt; println!(&quot;</span><span style="color:#a3be8c;">Nenhum valor</span><span>&quot;),
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<h3 id="match-com-guards-e-ranges">Match com Guards e Ranges</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> numero = </span><span style="color:#d08770;">13</span><span>;
+</span><span>    
+</span><span>    </span><span style="color:#b48ead;">match</span><span> numero {
+</span><span>        </span><span style="color:#d08770;">1 </span><span>=&gt; println!(&quot;</span><span style="color:#a3be8c;">Um</span><span>&quot;),
+</span><span>        </span><span style="color:#d08770;">2 </span><span>| </span><span style="color:#d08770;">3 </span><span>| </span><span style="color:#d08770;">5 </span><span>| </span><span style="color:#d08770;">7 </span><span>| </span><span style="color:#d08770;">11 </span><span>=&gt; println!(&quot;</span><span style="color:#a3be8c;">Número primo pequeno</span><span>&quot;),
+</span><span>        </span><span style="color:#d08770;">13</span><span>..=</span><span style="color:#d08770;">19 </span><span>=&gt; println!(&quot;</span><span style="color:#a3be8c;">Teen</span><span>&quot;),
+</span><span>        n </span><span style="color:#b48ead;">if</span><span> n % </span><span style="color:#d08770;">2 </span><span>== </span><span style="color:#d08770;">0 </span><span>=&gt; println!(&quot;</span><span style="color:#a3be8c;">Número par: </span><span style="color:#d08770;">{}</span><span>&quot;, n),
+</span><span>        _ =&gt; println!(&quot;</span><span style="color:#a3be8c;">Outro número: </span><span style="color:#d08770;">{}</span><span>&quot;, numero),
+</span><span>    }
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Match com tuplas
+</span><span>    </span><span style="color:#b48ead;">let</span><span> ponto = (</span><span style="color:#d08770;">3</span><span>, </span><span style="color:#d08770;">5</span><span>);
+</span><span>    
+</span><span>    </span><span style="color:#b48ead;">match</span><span> ponto {
+</span><span>        (</span><span style="color:#d08770;">0</span><span>, </span><span style="color:#d08770;">0</span><span>) =&gt; println!(&quot;</span><span style="color:#a3be8c;">Origem</span><span>&quot;),
+</span><span>        (</span><span style="color:#d08770;">0</span><span>, y) =&gt; println!(&quot;</span><span style="color:#a3be8c;">No eixo Y: </span><span style="color:#d08770;">{}</span><span>&quot;, y),
+</span><span>        (x, </span><span style="color:#d08770;">0</span><span>) =&gt; println!(&quot;</span><span style="color:#a3be8c;">No eixo X: </span><span style="color:#d08770;">{}</span><span>&quot;, x),
+</span><span>        (x, y) </span><span style="color:#b48ead;">if</span><span> x == y =&gt; println!(&quot;</span><span style="color:#a3be8c;">Diagonal: (</span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">, </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">)</span><span>&quot;, x, y),
+</span><span>        (x, y) =&gt; println!(&quot;</span><span style="color:#a3be8c;">Ponto qualquer: (</span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">, </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">)</span><span>&quot;, x, y),
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<h3 id="match-com-structs-e-destructuring">Match com Structs e Destructuring</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">struct </span><span>Pessoa {
+</span><span>    </span><span style="color:#bf616a;">nome</span><span>: String,
+</span><span>    </span><span style="color:#bf616a;">idade</span><span>: </span><span style="color:#b48ead;">u8</span><span>,
+</span><span>    </span><span style="color:#bf616a;">cidade</span><span>: String,
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> pessoa = Pessoa {
+</span><span>        nome: &quot;</span><span style="color:#a3be8c;">João</span><span>&quot;.</span><span style="color:#96b5b4;">to_string</span><span>(),
+</span><span>        idade: </span><span style="color:#d08770;">25</span><span>,
+</span><span>        cidade: &quot;</span><span style="color:#a3be8c;">Lisboa</span><span>&quot;.</span><span style="color:#96b5b4;">to_string</span><span>(),
+</span><span>    };
+</span><span>    
+</span><span>    </span><span style="color:#b48ead;">match</span><span> pessoa {
+</span><span>        Pessoa { idade: </span><span style="color:#d08770;">0</span><span>..=</span><span style="color:#d08770;">17</span><span>, .. } =&gt; {
+</span><span>            println!(&quot;</span><span style="color:#a3be8c;">Menor de idade</span><span>&quot;);
+</span><span>        },
+</span><span>        Pessoa { idade: </span><span style="color:#d08770;">18</span><span>..=</span><span style="color:#d08770;">64</span><span>, nome, cidade } =&gt; {
+</span><span>            println!(&quot;</span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;"> é adulto e vive em </span><span style="color:#d08770;">{}</span><span>&quot;, nome, cidade);
+</span><span>        },
+</span><span>        Pessoa { idade: </span><span style="color:#d08770;">65</span><span>.., nome, .. } =&gt; {
+</span><span>            println!(&quot;</span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;"> é sénior</span><span>&quot;, nome);
+</span><span>        },
+</span><span>    }
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Match com arrays
+</span><span>    </span><span style="color:#b48ead;">let</span><span> array = [</span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">2</span><span>, </span><span style="color:#d08770;">3</span><span>, </span><span style="color:#d08770;">4</span><span>];
+</span><span>    
+</span><span>    </span><span style="color:#b48ead;">match</span><span> array {
+</span><span>        [</span><span style="color:#d08770;">1</span><span>, segundo, .., ultimo] =&gt; {
+</span><span>            println!(&quot;</span><span style="color:#a3be8c;">Começa com 1, segundo: </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">, último: </span><span style="color:#d08770;">{}</span><span>&quot;, segundo, ultimo);
+</span><span>        },
+</span><span>        [primeiro, .., </span><span style="color:#d08770;">4</span><span>] =&gt; {
+</span><span>            println!(&quot;</span><span style="color:#a3be8c;">Termina com 4, primeiro: </span><span style="color:#d08770;">{}</span><span>&quot;, primeiro);
+</span><span>        },
+</span><span>        _ =&gt; println!(&quot;</span><span style="color:#a3be8c;">Outro padrão</span><span>&quot;),
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<h2 id="9-exemplos-praticos-complexos">9. Exemplos Práticos Complexos</h2>
+<h3 id="sistema-de-processamento-de-comandos">Sistema de Processamento de Comandos</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>#[</span><span style="color:#bf616a;">derive</span><span>(Debug)]
+</span><span style="color:#b48ead;">enum </span><span>Comando {
+</span><span>    Mover { x: </span><span style="color:#b48ead;">i32</span><span>, y: </span><span style="color:#b48ead;">i32 </span><span>},
+</span><span>    Escrever(String),
+</span><span>    Mudar { cor: String },
+</span><span>    Sair,
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">processar_comando</span><span>(</span><span style="color:#bf616a;">comando</span><span>: Comando) {
+</span><span>    </span><span style="color:#b48ead;">match</span><span> comando {
+</span><span>        Comando::Mover { x, y } =&gt; {
+</span><span>            println!(&quot;</span><span style="color:#a3be8c;">Movendo para posição (</span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">, </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">)</span><span>&quot;, x, y);
+</span><span>        },
+</span><span>        Comando::Escrever(texto) =&gt; {
+</span><span>            println!(&quot;</span><span style="color:#a3be8c;">Escrevendo: </span><span style="color:#d08770;">{}</span><span>&quot;, texto);
+</span><span>        },
+</span><span>        Comando::Mudar { cor } =&gt; {
+</span><span>            println!(&quot;</span><span style="color:#a3be8c;">Mudando cor para: </span><span style="color:#d08770;">{}</span><span>&quot;, cor);
+</span><span>        },
+</span><span>        Comando::Sair =&gt; {
+</span><span>            println!(&quot;</span><span style="color:#a3be8c;">Saindo do programa...</span><span>&quot;);
+</span><span>        },
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> comandos = vec![
+</span><span>        Comando::Mover { x: </span><span style="color:#d08770;">10</span><span>, y: </span><span style="color:#d08770;">20 </span><span>},
+</span><span>        Comando::Escrever(&quot;</span><span style="color:#a3be8c;">Olá, mundo!</span><span>&quot;.</span><span style="color:#96b5b4;">to_string</span><span>()),
+</span><span>        Comando::Mudar { cor: &quot;</span><span style="color:#a3be8c;">azul</span><span>&quot;.</span><span style="color:#96b5b4;">to_string</span><span>() },
+</span><span>        Comando::Sair,
+</span><span>    ];
+</span><span>    
+</span><span>    </span><span style="color:#b48ead;">for</span><span> comando in comandos {
+</span><span>        </span><span style="color:#96b5b4;">processar_comando</span><span>(comando);
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<h3 id="parser-de-expressoes-simples">Parser de Expressões Simples</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>#[</span><span style="color:#bf616a;">derive</span><span>(Debug)]
+</span><span style="color:#b48ead;">enum </span><span>Expressao {
+</span><span>    Numero(</span><span style="color:#b48ead;">f64</span><span>),
+</span><span>    Soma(Box&lt;Expressao&gt;, Box&lt;Expressao&gt;),
+</span><span>    Multiplicacao(Box&lt;Expressao&gt;, Box&lt;Expressao&gt;),
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">avaliar</span><span>(</span><span style="color:#bf616a;">expr</span><span>: &amp;Expressao) -&gt; </span><span style="color:#b48ead;">f64 </span><span>{
+</span><span>    </span><span style="color:#b48ead;">match</span><span> expr {
+</span><span>        Expressao::Numero(n) =&gt; *n,
+</span><span>        Expressao::Soma(esq, dir) =&gt; </span><span style="color:#96b5b4;">avaliar</span><span>(esq) + </span><span style="color:#96b5b4;">avaliar</span><span>(dir),
+</span><span>        Expressao::Multiplicacao(esq, dir) =&gt; </span><span style="color:#96b5b4;">avaliar</span><span>(esq) * </span><span style="color:#96b5b4;">avaliar</span><span>(dir),
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#65737e;">// Representa: (2 + 3) * 4
+</span><span>    </span><span style="color:#b48ead;">let</span><span> expr = Expressao::Multiplicacao(
+</span><span>        Box::new(Expressao::Soma(
+</span><span>            Box::new(Expressao::Numero(</span><span style="color:#d08770;">2.0</span><span>)),
+</span><span>            Box::new(Expressao::Numero(</span><span style="color:#d08770;">3.0</span><span>)),
+</span><span>        )),
+</span><span>        Box::new(Expressao::Numero(</span><span style="color:#d08770;">4.0</span><span>)),
+</span><span>    );
+</span><span>    
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Resultado: </span><span style="color:#d08770;">{}</span><span>&quot;, </span><span style="color:#96b5b4;">avaliar</span><span>(&amp;expr));  </span><span style="color:#65737e;">// 20.0
+</span><span>}
+</span></code></pre>
+<h3 id="sistema-de-estados-com-loops">Sistema de Estados com Loops</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>#[</span><span style="color:#bf616a;">derive</span><span>(Debug, PartialEq)]
+</span><span style="color:#b48ead;">enum </span><span>Estado {
+</span><span>    Menu,
+</span><span>    Jogando,
+</span><span>    Pausa,
+</span><span>    GameOver,
+</span><span>    Sair,
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let mut</span><span> estado_atual = Estado::Menu;
+</span><span>    </span><span style="color:#b48ead;">let mut</span><span> pontuacao = </span><span style="color:#d08770;">0</span><span>;
+</span><span>    
+</span><span>    </span><span style="color:#b48ead;">loop </span><span>{
+</span><span>        </span><span style="color:#b48ead;">match</span><span> estado_atual {
+</span><span>            Estado::Menu =&gt; {
+</span><span>                println!(&quot;</span><span style="color:#a3be8c;">=== MENU PRINCIPAL ===</span><span>&quot;);
+</span><span>                println!(&quot;</span><span style="color:#a3be8c;">1. Jogar</span><span>&quot;);
+</span><span>                println!(&quot;</span><span style="color:#a3be8c;">2. Sair</span><span>&quot;);
+</span><span>                
+</span><span>                </span><span style="color:#65737e;">// Simulação de input do utilizador
+</span><span>                </span><span style="color:#b48ead;">let</span><span> escolha = </span><span style="color:#d08770;">1</span><span>; </span><span style="color:#65737e;">// Em uma aplicação real, iria ler input
+</span><span>                
+</span><span>                estado_atual = </span><span style="color:#b48ead;">match</span><span> escolha {
+</span><span>                    </span><span style="color:#d08770;">1 </span><span>=&gt; Estado::Jogando,
+</span><span>                    </span><span style="color:#d08770;">2 </span><span>=&gt; Estado::Sair,
+</span><span>                    _ =&gt; Estado::Menu,
+</span><span>                };
+</span><span>            },
+</span><span>            
+</span><span>            Estado::Jogando =&gt; {
+</span><span>                println!(&quot;</span><span style="color:#a3be8c;">Jogando... Pontuação: </span><span style="color:#d08770;">{}</span><span>&quot;, pontuacao);
+</span><span>                pontuacao += </span><span style="color:#d08770;">10</span><span>;
+</span><span>                
+</span><span>                </span><span style="color:#65737e;">// Condições de jogo
+</span><span>                </span><span style="color:#b48ead;">if</span><span> pontuacao &gt;= </span><span style="color:#d08770;">100 </span><span>{
+</span><span>                    estado_atual = Estado::GameOver;
+</span><span>                } </span><span style="color:#b48ead;">else if</span><span> pontuacao == </span><span style="color:#d08770;">50 </span><span>{
+</span><span>                    estado_atual = Estado::Pausa;
+</span><span>                }
+</span><span>            },
+</span><span>            
+</span><span>            Estado::Pausa =&gt; {
+</span><span>                println!(&quot;</span><span style="color:#a3be8c;">Jogo pausado. Continuar? (1=Sim, 2=Menu)</span><span>&quot;);
+</span><span>                </span><span style="color:#b48ead;">let</span><span> escolha = </span><span style="color:#d08770;">1</span><span>; </span><span style="color:#65737e;">// Simulado
+</span><span>                
+</span><span>                estado_atual = </span><span style="color:#b48ead;">if</span><span> escolha == </span><span style="color:#d08770;">1 </span><span>{
+</span><span>                    Estado::Jogando
+</span><span>                } </span><span style="color:#b48ead;">else </span><span>{
+</span><span>                    Estado::Menu
+</span><span>                };
+</span><span>            },
+</span><span>            
+</span><span>            Estado::GameOver =&gt; {
+</span><span>                println!(&quot;</span><span style="color:#a3be8c;">Game Over! Pontuação final: </span><span style="color:#d08770;">{}</span><span>&quot;, pontuacao);
+</span><span>                pontuacao = </span><span style="color:#d08770;">0</span><span>;
+</span><span>                estado_atual = Estado::Menu;
+</span><span>            },
+</span><span>            
+</span><span>            Estado::Sair =&gt; {
+</span><span>                println!(&quot;</span><span style="color:#a3be8c;">Obrigado por jogar!</span><span>&quot;);
+</span><span>                </span><span style="color:#b48ead;">break</span><span>;
+</span><span>            },
+</span><span>        }
+</span><span>        
+</span><span>        </span><span style="color:#65737e;">// Simula delay
+</span><span>        std::thread::sleep(std::time::Duration::from_millis(</span><span style="color:#d08770;">500</span><span>));
+</span><span>        
+</span><span>        </span><span style="color:#65737e;">// Condição de saída de emergência para o exemplo
+</span><span>        </span><span style="color:#b48ead;">if</span><span> pontuacao &gt; </span><span style="color:#d08770;">100 </span><span>{
+</span><span>            </span><span style="color:#b48ead;">break</span><span>;
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<h2 id="10-dicas-e-melhores-praticas">10. Dicas e Melhores Práticas</h2>
+<h3 id="preferencias-de-utilizacao">Preferências de Utilização</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> opcao = Some(</span><span style="color:#d08770;">42</span><span>);
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Bom: Use if let para casos simples
+</span><span>    </span><span style="color:#b48ead;">if let </span><span>Some(valor) = opcao {
+</span><span>        println!(&quot;</span><span style="color:#a3be8c;">Valor: </span><span style="color:#d08770;">{}</span><span>&quot;, valor);
+</span><span>    }
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Evite: match desnecessariamente verboso para casos simples
+</span><span>    </span><span style="color:#65737e;">// match opcao {
+</span><span>    </span><span style="color:#65737e;">//     Some(valor) =&gt; println!(&quot;Valor: {}&quot;, valor),
+</span><span>    </span><span style="color:#65737e;">//     None =&gt; {},
+</span><span>    </span><span style="color:#65737e;">// }
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Bom: Use match para casos complexos
+</span><span>    </span><span style="color:#b48ead;">let</span><span> resultado: Result&lt;</span><span style="color:#b48ead;">i32</span><span>, &amp;</span><span style="color:#b48ead;">str</span><span>&gt; = Ok(</span><span style="color:#d08770;">100</span><span>);
+</span><span>    
+</span><span>    </span><span style="color:#b48ead;">let</span><span> status = </span><span style="color:#b48ead;">match</span><span> resultado {
+</span><span>        Ok(valor) </span><span style="color:#b48ead;">if</span><span> valor &gt; </span><span style="color:#d08770;">50 </span><span>=&gt; &quot;</span><span style="color:#a3be8c;">Alto</span><span>&quot;,
+</span><span>        Ok(valor) </span><span style="color:#b48ead;">if</span><span> valor &gt; </span><span style="color:#d08770;">0 </span><span>=&gt; &quot;</span><span style="color:#a3be8c;">Baixo</span><span>&quot;,
+</span><span>        Ok(_) =&gt; &quot;</span><span style="color:#a3be8c;">Zero ou negativo</span><span>&quot;,
+</span><span>        Err(_) =&gt; &quot;</span><span style="color:#a3be8c;">Erro</span><span>&quot;,
+</span><span>    };
+</span><span>    
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Status: </span><span style="color:#d08770;">{}</span><span>&quot;, status);
+</span><span>}
+</span></code></pre>
+<h3 id="evitar-armadilhas-comuns">Evitar armadilhas comuns</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#65737e;">// Bom: Iteração eficiente
+</span><span>    </span><span style="color:#b48ead;">let</span><span> numeros = vec![</span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">2</span><span>, </span><span style="color:#d08770;">3</span><span>, </span><span style="color:#d08770;">4</span><span>, </span><span style="color:#d08770;">5</span><span>];
+</span><span>    
+</span><span>    </span><span style="color:#b48ead;">for</span><span> numero in &amp;numeros {  </span><span style="color:#65737e;">// Empresta, não move
+</span><span>        println!(&quot;</span><span style="color:#d08770;">{}</span><span>&quot;, numero);
+</span><span>    }
+</span><span>    </span><span style="color:#65737e;">// numeros ainda pode ser usado aqui
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Evite: Iteração que consome
+</span><span>    </span><span style="color:#65737e;">// for numero in numeros {  // Move o vetor
+</span><span>    </span><span style="color:#65737e;">//     println!(&quot;{}&quot;, numero);
+</span><span>    </span><span style="color:#65737e;">// }
+</span><span>    </span><span style="color:#65737e;">// numeros não pode mais ser usado
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Bom: Use ranges em vez de índices quando possível
+</span><span>    </span><span style="color:#b48ead;">for</span><span> i in </span><span style="color:#d08770;">0</span><span>..</span><span style="color:#d08770;">5 </span><span>{
+</span><span>        println!(&quot;</span><span style="color:#a3be8c;">Índice: </span><span style="color:#d08770;">{}</span><span>&quot;, i);
+</span><span>    }
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Melhor ainda: Use enumerate quando precisar de Índices
+</span><span>    </span><span style="color:#b48ead;">for </span><span>(i, valor) in numeros.</span><span style="color:#96b5b4;">iter</span><span>().</span><span style="color:#96b5b4;">enumerate</span><span>() {
+</span><span>        println!(&quot;</span><span style="color:#a3be8c;">Índice </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">: </span><span style="color:#d08770;">{}</span><span>&quot;, i, valor);
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<h3 id="tratamento-de-erros-elegante">Tratamento de Erros Elegante</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">processar_dados</span><span>(</span><span style="color:#bf616a;">dados</span><span>: &amp;[</span><span style="color:#b48ead;">i32</span><span>]) -&gt; Result&lt;</span><span style="color:#b48ead;">i32</span><span>, String&gt; {
+</span><span>    </span><span style="color:#b48ead;">if</span><span> dados.</span><span style="color:#96b5b4;">is_empty</span><span>() {
+</span><span>        </span><span style="color:#b48ead;">return </span><span>Err(&quot;</span><span style="color:#a3be8c;">Dados vazios</span><span>&quot;.</span><span style="color:#96b5b4;">to_string</span><span>());
+</span><span>    }
+</span><span>    
+</span><span>    </span><span style="color:#b48ead;">let</span><span> soma = dados.</span><span style="color:#96b5b4;">iter</span><span>().sum::&lt;</span><span style="color:#b48ead;">i32</span><span>&gt;();
+</span><span>    
+</span><span>    </span><span style="color:#b48ead;">if</span><span> soma &lt; </span><span style="color:#d08770;">0 </span><span>{
+</span><span>        Err(&quot;</span><span style="color:#a3be8c;">Soma negativa</span><span>&quot;.</span><span style="color:#96b5b4;">to_string</span><span>())
+</span><span>    } </span><span style="color:#b48ead;">else </span><span>{
+</span><span>        Ok(soma)
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> datasets = vec![
+</span><span>        vec![</span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">2</span><span>, </span><span style="color:#d08770;">3</span><span>, </span><span style="color:#d08770;">4</span><span>, </span><span style="color:#d08770;">5</span><span>],
+</span><span>        vec![-</span><span style="color:#d08770;">1</span><span>, -</span><span style="color:#d08770;">2</span><span>, -</span><span style="color:#d08770;">3</span><span>],
+</span><span>        vec![],
+</span><span>        vec![</span><span style="color:#d08770;">10</span><span>, </span><span style="color:#d08770;">20</span><span>, </span><span style="color:#d08770;">30</span><span>],
+</span><span>    ];
+</span><span>    
+</span><span>    </span><span style="color:#b48ead;">for </span><span>(i, dados) in datasets.</span><span style="color:#96b5b4;">iter</span><span>().</span><span style="color:#96b5b4;">enumerate</span><span>() {
+</span><span>        </span><span style="color:#b48ead;">match </span><span style="color:#96b5b4;">processar_dados</span><span>(dados) {
+</span><span>            Ok(resultado) =&gt; println!(&quot;</span><span style="color:#a3be8c;">Dataset </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">: soma = </span><span style="color:#d08770;">{}</span><span>&quot;, i, resultado),
+</span><span>            Err(erro) =&gt; println!(&quot;</span><span style="color:#a3be8c;">Dataset </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">: erro = </span><span style="color:#d08770;">{}</span><span>&quot;, i, erro),
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<h2 id="conclusao">Conclusão</h2>
+<p>O controlo de fluxo em Rust combina familiaridade com inovação. Enquanto construções como <code>if</code>, <code>while</code> e <code>for</code> são reconhecíveis para programadores vindos de outras linguagens, o Rust adiciona características poderosas como pattern matching com <code>match</code>, expressões condicionais, e construções concisas como <code>if let</code> e <code>while let</code>.</p>
+<p>O sistema de pattern matching do Rust é particularmente poderoso, permitindo código expressivo e seguro através da verificações de exaustividade. As expressões condicionais tornam o código mais funcional, enquanto os iteradores oferecem uma abordagem elegante para processamento de dados.</p>
+<p>Dominar estas construções é essencial para escrever código Rust idiomático e eficiente. A combinação de segurança em tempo de compilação, expressividade e performance faz do sistema de controlo de fluxo do Rust uma das suas características mais distintivas.</p>
+<p>Pratica com exemplos progressivamente mais complexos, e rapidamente descobrirás que o controlo de fluxo em Rust não apenas previne erros comuns, mas também encoraja padrões de código mais limpos e sustentáveis.</p>
+<h2 id="referencias">Referências</h2>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/book/ch03-05-control-flow.html">Control Flow</a></li>
+<li><a href="https://doc.rust-lang.org/stable/rust-by-example/flow_control.html">Flow of Control</a></li>
+<li><a href="https://doc.rust-lang.org/stable/rust-by-example/flow_control/if_let.html">if let</a></li>
+<li><a href="https://doc.rust-lang.org/stable/rust-by-example/flow_control/while_let.html">while let</a></li>
+<li><a href="https://doc.rust-lang.org/stable/rust-by-example/flow_control/match.html">match</a></li>
+<li><a href="https://doc.rust-lang.org/stable/rust-by-example/flow_control/loop.html">Loops</a></li>
+<li><a href="https://doc.rust-lang.org/stable/book/ch18-03-pattern-syntax.html">Pattern Syntax</a></li>
+</ul>
+<hr />
+<p><strong><em>Disclaimer</em></strong>: Artigo elaborado com auxilio a ferramentas de inteligência artificial mas revisto por humanos.</p>
+
+          </div>
+        </article>
+      </div>
+      
+      <div class="column is-2 is-hidden-mobile">
+        <aside class="menu" style="position: sticky; top: 48px">
+          <p class="heading has-text-weight-bold">Contents</p>
+          <ul class="menu-list">
+            
+            <li>
+              <a id="link-1-expressoes-condicionais-if-else-else-if" class="toc is-size-7 is-active"
+                href="https://rustlangpt.github.io/posts/fluxos/#1-expressoes-condicionais-if-else-else-if">
+                1. Expressões Condicionais: if, else, else if
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-condicional-basico" class="toc is-size-7" href="https://rustlangpt.github.io/posts/fluxos/#condicional-basico">
+                    Condicional Básico
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-if-como-expressao" class="toc is-size-7" href="https://rustlangpt.github.io/posts/fluxos/#if-como-expressao">
+                    if como Expressão
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-condicionais-com-multiplas-expressoes" class="toc is-size-7" href="https://rustlangpt.github.io/posts/fluxos/#condicionais-com-multiplas-expressoes">
+                    Condicionais com múltiplas Expressões
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-2-loop-infinito" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/fluxos/#2-loop-infinito">
+                2. Loop Infinito
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-loop-basico" class="toc is-size-7" href="https://rustlangpt.github.io/posts/fluxos/#loop-basico">
+                    Loop Básico
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-loop-como-expressao" class="toc is-size-7" href="https://rustlangpt.github.io/posts/fluxos/#loop-como-expressao">
+                    Loop como Expressão
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-loops-aninhados-com-labels" class="toc is-size-7" href="https://rustlangpt.github.io/posts/fluxos/#loops-aninhados-com-labels">
+                    Loops Aninhados com Labels
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-3-while-loop" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/fluxos/#3-while-loop">
+                3. While Loop
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-while-basico" class="toc is-size-7" href="https://rustlangpt.github.io/posts/fluxos/#while-basico">
+                    While Básico
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-while-com-condicoes-complexas" class="toc is-size-7" href="https://rustlangpt.github.io/posts/fluxos/#while-com-condicoes-complexas">
+                    While com Condições Complexas
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-while-para-processamento-de-dados" class="toc is-size-7" href="https://rustlangpt.github.io/posts/fluxos/#while-para-processamento-de-dados">
+                    While para Processamento de Dados
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-4-for-loop" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/fluxos/#4-for-loop">
+                4. For Loop
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-for-com-ranges" class="toc is-size-7" href="https://rustlangpt.github.io/posts/fluxos/#for-com-ranges">
+                    For com Ranges
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-for-com-arrays-e-vetores" class="toc is-size-7" href="https://rustlangpt.github.io/posts/fluxos/#for-com-arrays-e-vetores">
+                    For com Arrays e Vetores
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-for-com-vetores-mutaveis" class="toc is-size-7" href="https://rustlangpt.github.io/posts/fluxos/#for-com-vetores-mutaveis">
+                    For com Vetores Mutáveis
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-5-iteradores-e-foreach" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/fluxos/#5-iteradores-e-foreach">
+                5. Iteradores e Foreach
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-usando-for-each-com-closures" class="toc is-size-7" href="https://rustlangpt.github.io/posts/fluxos/#usando-for-each-com-closures">
+                    Usando for_each com Closures
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-iteradores-com-map-filter-e-collect" class="toc is-size-7" href="https://rustlangpt.github.io/posts/fluxos/#iteradores-com-map-filter-e-collect">
+                    Iteradores com map, filter e collect
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-6-if-let" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/fluxos/#6-if-let">
+                6. if let
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-if-let-basico" class="toc is-size-7" href="https://rustlangpt.github.io/posts/fluxos/#if-let-basico">
+                    if let Básico
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-if-let-com-enums" class="toc is-size-7" href="https://rustlangpt.github.io/posts/fluxos/#if-let-com-enums">
+                    if let com Enums
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-if-let-com-else" class="toc is-size-7" href="https://rustlangpt.github.io/posts/fluxos/#if-let-com-else">
+                    if let com else
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-7-while-let" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/fluxos/#7-while-let">
+                7. while let
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-while-let-com-option" class="toc is-size-7" href="https://rustlangpt.github.io/posts/fluxos/#while-let-com-option">
+                    while let com Option
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-while-let-com-iterator" class="toc is-size-7" href="https://rustlangpt.github.io/posts/fluxos/#while-let-com-iterator">
+                    while let com Iterator
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-while-let-com-result" class="toc is-size-7" href="https://rustlangpt.github.io/posts/fluxos/#while-let-com-result">
+                    while let com Result
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-8-pattern-matching-com-match" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/fluxos/#8-pattern-matching-com-match">
+                8. Pattern Matching com match
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-exemplo-basico" class="toc is-size-7" href="https://rustlangpt.github.io/posts/fluxos/#exemplo-basico">
+                    Exemplo básico
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-match-basico-com-enums" class="toc is-size-7" href="https://rustlangpt.github.io/posts/fluxos/#match-basico-com-enums">
+                    Match Básico com Enums
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-match-com-option-e-result" class="toc is-size-7" href="https://rustlangpt.github.io/posts/fluxos/#match-com-option-e-result">
+                    Match com Option e Result
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-match-com-guards-e-ranges" class="toc is-size-7" href="https://rustlangpt.github.io/posts/fluxos/#match-com-guards-e-ranges">
+                    Match com Guards e Ranges
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-match-com-structs-e-destructuring" class="toc is-size-7" href="https://rustlangpt.github.io/posts/fluxos/#match-com-structs-e-destructuring">
+                    Match com Structs e Destructuring
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-9-exemplos-praticos-complexos" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/fluxos/#9-exemplos-praticos-complexos">
+                9. Exemplos Práticos Complexos
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-sistema-de-processamento-de-comandos" class="toc is-size-7" href="https://rustlangpt.github.io/posts/fluxos/#sistema-de-processamento-de-comandos">
+                    Sistema de Processamento de Comandos
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-parser-de-expressoes-simples" class="toc is-size-7" href="https://rustlangpt.github.io/posts/fluxos/#parser-de-expressoes-simples">
+                    Parser de Expressões Simples
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-sistema-de-estados-com-loops" class="toc is-size-7" href="https://rustlangpt.github.io/posts/fluxos/#sistema-de-estados-com-loops">
+                    Sistema de Estados com Loops
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-10-dicas-e-melhores-praticas" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/fluxos/#10-dicas-e-melhores-praticas">
+                10. Dicas e Melhores Práticas
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-preferencias-de-utilizacao" class="toc is-size-7" href="https://rustlangpt.github.io/posts/fluxos/#preferencias-de-utilizacao">
+                    Preferências de Utilização
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-evitar-armadilhas-comuns" class="toc is-size-7" href="https://rustlangpt.github.io/posts/fluxos/#evitar-armadilhas-comuns">
+                    Evitar armadilhas comuns
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-tratamento-de-erros-elegante" class="toc is-size-7" href="https://rustlangpt.github.io/posts/fluxos/#tratamento-de-erros-elegante">
+                    Tratamento de Erros Elegante
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-conclusao" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/fluxos/#conclusao">
+                Conclusão
+              </a>
+              
+            </li>
+            
+            <li>
+              <a id="link-referencias" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/fluxos/#referencias">
+                Referências
+              </a>
+              
+            </li>
+            
+          </ul>
+        </aside>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+
+  
+  <section class="modal" id="search-modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Search</p>
+      </header>
+      <section class="modal-card-body">
+        <div class="field mb-2">
+          <div class="control">
+            <input class="input" id="search" placeholder="Search this website." type="search" />
+          </div>
+        </div>
+        <div class="search-results">
+          <div class="search-results__items"></div>
+        </div>
+      </section>
+    </div>
+    <button aria-label="close" class="modal-close is-large"></button>
+  </section>
+  
+
+
+  
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <nav class="level">
+              
+          <div class="level-item has-text-centered">
+            <a class="button is-black is-outlined" href="https:&#x2F;&#x2F;rustlangpt.github.io&#x2F;posts&#x2F;var-literal-types-mut-shad&#x2F;">
+              <span class="icon mr-2">
+                <i class="fas fa-arrow-circle-left"></i>
+              </span>
+              Fundamentos da Linguagem Rust
+            </a>
+          </div>
+           
+        </nav>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+  
+
+
+
+
+
+
+  
+  <footer class="footer py-4">
+    <div class="content has-text-centered">
+    <!--
+    <p>
+        Built with
+        <span class="icon-text">
+          <span class="icon">
+            <i class="fas fa-code"></i>
+          </span>
+          <span>code</span>
+        </span>
+        and
+        <span class="icon-text">
+          <span class="icon">
+            <i class="fas fa-heart"></i>
+          </span>
+          <span>love</span>
+        </span>
+      </p>
+    -->
+      <p>
+        Powered by
+        <span class="icon-text">
+          <span class="icon">
+            <i class="fas fa-power-off"></i>
+          </span>
+          <span>zola</span>
+        </span>
+      </p>
+    
+    </div>
+  </footer>
+  
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/galleria@1.6.1/dist/galleria.min.js" integrity="sha384-QSfwGT8/EU536DKdtyP2D6SLlh8zBaZ0cVkwfrwhqzIU9VCfJT00CLVP5t+HAiYg" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/galleria@1.6.1/dist/themes/folio/galleria.folio.min.js" integrity="sha384-DwpKI+deZB267+hPKwiOIc5Y2GKsVL0mR6hgz7GgIu7AgAMYqJwcJKY1YBNfhWcY" crossorigin="anonymous"></script>
+  
+  
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@8.13.5/dist/mermaid.min.js" integrity="sha384-0yWn54pSGtfKCU+skfA69l25VsCw+MZt4LQov3xNRoS7YkAMrFokGgSBnAWSK4pv" crossorigin="anonymous"></script>
+  
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.xkcd@1.1.13/dist/chart.xkcd.min.js" integrity="sha384-xC3h1+IHXK8seA+8KfT79Z4e0GPsznjXBoMa5nd8ooWKplPyXx92NOmljWxLC/cs" crossorigin="anonymous"></script>
+  
+  
+  <script src="https://rustlangpt.github.io/elasticlunr.min.js"></script>
+  <script src="https://rustlangpt.github.io/search_index.en.js"></script><script src="https://rustlangpt.github.io/js/site.js"></script>
+
+  
+
+<script type="text/javascript">
+  const menuBarHeight = document.querySelector("nav.navbar").clientHeight;
+  const tocItems = document.querySelectorAll(".toc");
+  const navSections = new Array(tocItems.length);
+
+  tocItems.forEach((el, i) => {
+    let id = el.getAttribute("id").substring(5);
+    navSections[i] = document.getElementById(id);
+  })
+
+  function isVisible(tocIndex) {
+    const current = navSections[tocIndex];
+    const next = tocIndex < tocItems.length - 1 ? navSections[tocIndex + 1]
+      : document.querySelectorAll("section.section").item(1);
+
+    const c = current.getBoundingClientRect();
+    const n = next.getBoundingClientRect();
+    const h = (window.innerHeight || document.documentElement.clientHeight);
+
+    return (c.top <= h) && (n.top - menuBarHeight >= 0);
+  }
+
+  function activateIfVisible() {
+    for (b = true, i = 0; i < tocItems.length; i++) {
+      if (b && isVisible(i)) {
+        tocItems[i].classList.add('is-active');
+        b = false;
+      } else
+        tocItems[i].classList.remove('is-active');
+    }
+  }
+
+  var isTicking = null;
+  window.addEventListener('scroll', () => {
+    if (!isTicking) {
+      window.requestAnimationFrame(() => {
+        activateIfVisible();
+        isTicking = false;
+      });
+      isTicking = true;
+    }
+  }, false);
+</script>
+
+
+
+
+
+  
+  
+</body>
+
+</html>

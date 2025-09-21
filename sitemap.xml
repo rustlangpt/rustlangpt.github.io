@@ -27,9 +27,6 @@
         <lastmod>2025-09-06</lastmod>
     </url>
     <url>
-        <loc>https://rustlangpt.github.io/posts/cargo-avancado/</loc>
-    </url>
-    <url>
         <loc>https://rustlangpt.github.io/posts/cargo/</loc>
         <lastmod>2025-09-12</lastmod>
     </url>
@@ -38,11 +35,18 @@
         <lastmod>2025-09-10</lastmod>
     </url>
     <url>
+        <loc>https://rustlangpt.github.io/posts/fluxos/</loc>
+        <lastmod>2025-09-21</lastmod>
+    </url>
+    <url>
         <loc>https://rustlangpt.github.io/posts/instalacao-rust/</loc>
         <lastmod>2025-09-09</lastmod>
     </url>
     <url>
         <loc>https://rustlangpt.github.io/posts/page/1/</loc>
+    </url>
+    <url>
+        <loc>https://rustlangpt.github.io/posts/page/2/</loc>
     </url>
     <url>
         <loc>https://rustlangpt.github.io/posts/var-literal-types-mut-shad/</loc>
@@ -90,6 +94,12 @@
     </url>
     <url>
         <loc>https://rustlangpt.github.io/tags/comunidade/page/1/</loc>
+    </url>
+    <url>
+        <loc>https://rustlangpt.github.io/tags/fluxos/</loc>
+    </url>
+    <url>
+        <loc>https://rustlangpt.github.io/tags/fluxos/page/1/</loc>
     </url>
     <url>
         <loc>https://rustlangpt.github.io/tags/fundamentos/</loc>
