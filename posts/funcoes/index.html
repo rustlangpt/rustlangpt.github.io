@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <meta content="#ffffff" name="theme-color" />
+  <meta content="#da532c" name="msapplication-TileColor" />
+
+  
+  <link href='&#x2F;icons&#x2F;site.webmanifest' rel="manifest" />
+  
+  
+  <link color="#5bbad5" href='&#x2F;icons&#x2F;safari-pinned-tab.svg' rel="mask-icon" />
+  
+  
+  <link href='&#x2F;icons&#x2F;rustlangpt1_16px.png' rel="icon" sizes="16x16" type="image/png" />
+  
+  
+  <link href='&#x2F;icons&#x2F;rustlangpt1_32px.png' rel="icon" sizes="32x32" type="image/png" />
+  
+  
+  <link href='&#x2F;icons&#x2F;apple-touch-icon.png' rel="apple-touch-icon" sizes="180x180" />
+  
+
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galleria@1.6.1/dist/themes/folio/galleria.folio.min.css" integrity="sha384-+rY0QD+LRnTOquDMzGa9lXU6jIwdiQuwCJQ2cdcW0qeP/0UbjQCZlXnRsUMA+9pH" crossorigin="anonymous">
+  
+
+  
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1.9.1/css/academicons.min.css" integrity="sha384-FIue+PI4SsI9XfHCz8dBLg33b0c1fMJgNU3X//L26FYbGnlSEfWmNT7zgWc2N9b6" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link href="https://rustlangpt.github.io/deep-thought.css" rel="stylesheet" />
+  
+  
+
+  <title>
+    
+RustlangPT | Fundamentos da Linguagem Rust: Expressões, Statements e Funções.
+
+  </title>
+
+  
+  
+  
+
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css" integrity="sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js" integrity="sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx" crossorigin="anonymous"></script>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/mathtex-script-type.min.js" integrity="sha384-jiBVvJ8NGGj5n7kJaiWwWp9AjC+Yh8rhZY3GtAX8yU28azcLgoRo4oukO87g7zDT" crossorigin="anonymous"></script>
+  
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+  
+  
+</head>
+
+<body class="has-background-white">
+  <nav aria-label="section navigation" class="navbar is-light" role="navigation">
+    <div class="container">
+      <div class="navbar-brand">
+        <a class="navbar-item is-size-5 has-text-weight-bold" href="https:&#x2F;&#x2F;rustlangpt.github.io">RustlangPT</a>
+        <a aria-expanded="false" aria-label="menu" class="navbar-burger burger" data-target="navMenu" role="button">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+      <div class="navbar-menu" id="navMenu">
+        <div class="navbar-end has-text-centered">
+          
+          
+          
+          <a class="navbar-item has-text-weight-semibold" href="https:&#x2F;&#x2F;rustlangpt.github.io&#x2F;posts">
+            Blog
+          </a>
+          
+          <a class="navbar-item has-text-weight-semibold" href="https:&#x2F;&#x2F;rustlangpt.github.io&#x2F;recursos">
+            Recursos
+          </a>
+          
+          <a class="navbar-item has-text-weight-semibold" href="https:&#x2F;&#x2F;rustlangpt.github.io&#x2F;acerca">
+            Acerca
+          </a>
+          
+          <a class="navbar-item has-text-weight-semibold" href="https:&#x2F;&#x2F;rustlangpt.github.io&#x2F;eventos">
+            Eventos
+          </a>
+          
+          <a class="navbar-item has-text-weight-semibold" href="https:&#x2F;&#x2F;rustlangpt.github.io&#x2F;tags">
+            Tags
+          </a>
+          
+          
+          
+          <a class="navbar-item" id="nav-search" title="Search" data-target="#search-modal">
+            <span class="icon">
+              <i class="fas fa-search"></i>
+            </span>
+          </a>
+          <a class="navbar-item" id="dark-mode" title="Switch to dark theme">
+            <span class="icon">
+              <i class="fas fa-adjust"></i>
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  
+  
+
+  
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-8 is-offset-2">
+        <article class="box">
+          <h1 class="title">
+            Fundamentos da Linguagem Rust: Expressões, Statements e Funções.
+          </h1>
+          <p class="subtitle">Vamos distinguir: Expressões, Statements e Funções.</p>
+          <div class="columns is-multiline is-gapless">
+            <div class="column is-8">
+              
+<span class="icon-text has-text-grey">
+  
+  <span class="icon">
+    <i class="fas fa-user"></i>
+  </span>
+  <span>RustLangPT publicado em</span>
+  <span class="icon">
+    <i class="far fa-calendar-alt"></i>
+  </span>
+  <span><time datetime="2025-09-27">27 September, 2025</time></span>
+
+</span>
+
+            </div>
+            <div class="column is-4 has-text-right-desktop">
+              
+<span class="icon-text has-text-grey">
+  <span class="icon">
+    <i class="far fa-clock"></i>
+  </span>
+  <span>3 min,</span>
+  <span class="icon">
+    <i class="fas fa-pencil-alt"></i>
+  </span>
+  <span>495 words</span>
+</span>
+
+            </div>
+            <div class="column">
+              
+            </div>
+            <div class="column has-text-right-desktop">
+              
+              
+<p>
+  Tags:
+  
+  <a class="has-text-info-dark has-text-weight-semibold" href="https://rustlangpt.github.io/tags/fundamentos/">
+    <span class="icon-text">
+      <span class="icon">
+        <i class="fas fa-tag"></i>
+      </span>
+      <span>Fundamentos</span>
+    </span>
+  </a>
+  
+  <a class="has-text-info-dark has-text-weight-semibold" href="https://rustlangpt.github.io/tags/iniciantes/">
+    <span class="icon-text">
+      <span class="icon">
+        <i class="fas fa-tag"></i>
+      </span>
+      <span>Iniciantes</span>
+    </span>
+  </a>
+  
+  <a class="has-text-info-dark has-text-weight-semibold" href="https://rustlangpt.github.io/tags/funcoes/">
+    <span class="icon-text">
+      <span class="icon">
+        <i class="fas fa-tag"></i>
+      </span>
+      <span>Funções</span>
+    </span>
+  </a>
+  
+</p>
+
+              
+            </div>
+          </div>
+          <div class="content mt-2">
+            <p>Rust é uma linguagem que se distingue pela sua abordagem única à programação de sistemas, combinando performance com segurança. Um dos aspectos fundamentais que todo o programador Rust deve dominar é a distinção entre <strong>expressões</strong>, <strong>statements</strong> e a definição de <strong>funções</strong>. Neste artigo, vamos explorar estes conceitos em profundidade, com exemplos práticos que demonstram como utilizá-los eficazmente.</p>
+<h2 id="expressoes-vs-statements-a-diferenca-fundamental">Expressões vs Statements: A diferença fundamental</h2>
+<p>Em Rust, existe uma distinção clara entre expressões e statements, conceito que é fundamental para compreender como a linguagem funciona.</p>
+<h3 id="expressoes">Expressões</h3>
+<p>Uma <strong>expressão</strong> é qualquer código que avalia para obter um valor. Em Rust, quase tudo é uma expressão, incluindo blocos de código, chamadas de função, operações matemáticas, e muito mais.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#65737e;">// Expressões simples
+</span><span style="color:#b48ead;">let</span><span> x = </span><span style="color:#d08770;">5</span><span>;          </span><span style="color:#65737e;">// 5 é uma expressão
+</span><span style="color:#b48ead;">let</span><span> y = x + </span><span style="color:#d08770;">1</span><span>;      </span><span style="color:#65737e;">// x + 1  em si é uma expressão
+</span><span style="color:#b48ead;">let</span><span> z = {           </span><span style="color:#65737e;">// Este bloco é uma expressão
+</span><span>    </span><span style="color:#b48ead;">let</span><span> a = </span><span style="color:#d08770;">3</span><span>;
+</span><span>    a + </span><span style="color:#d08770;">1           </span><span style="color:#65737e;">// Note: sem ponto e vírgula!
+</span><span>};                  </span><span style="color:#65737e;">// z = 4
+</span><span>
+</span><span style="color:#65737e;">// Expressões condicionais
+</span><span style="color:#b48ead;">let</span><span> numero = </span><span style="color:#b48ead;">if </span><span style="color:#d08770;">true </span><span>{ </span><span style="color:#d08770;">42 </span><span>} </span><span style="color:#b48ead;">else </span><span>{ </span><span style="color:#d08770;">0 </span><span>};
+</span><span>
+</span><span style="color:#65737e;">// Expressões de match
+</span><span style="color:#b48ead;">let</span><span> valor = </span><span style="color:#b48ead;">match</span><span> x {
+</span><span>    </span><span style="color:#d08770;">1 </span><span>=&gt; &quot;</span><span style="color:#a3be8c;">um</span><span>&quot;,
+</span><span>    </span><span style="color:#d08770;">2 </span><span>=&gt; &quot;</span><span style="color:#a3be8c;">dois</span><span>&quot;,
+</span><span>    _ =&gt; &quot;</span><span style="color:#a3be8c;">outro</span><span>&quot;
+</span><span>};
+</span></code></pre>
+<p><strong>Ponto crucial</strong>: Expressões não terminam com ponto e vírgula. Se adicionarmos um ponto e vírgula, transformamos a expressão num statement.</p>
+<h3 id="statements">Statements</h3>
+<p>Um <strong>statement</strong> é uma instrução que executa uma ação mas não retorna um valor. Em Rust, existem dois tipos principais de statements:</p>
+<ol>
+<li><strong>Declaration statements</strong> - declarações de variáveis e funções</li>
+<li><strong>Expression statements</strong> - expressões seguidas de ponto e vírgula</li>
+</ol>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#65737e;">// Declaration statements
+</span><span style="color:#b48ead;">let</span><span> x = </span><span style="color:#d08770;">5</span><span>;                    </span><span style="color:#65737e;">// Declaração de variável x e a respectiva atribuição
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">minha_funcao</span><span>() {}          </span><span style="color:#65737e;">// Declaração de função 
+</span><span>
+</span><span style="color:#65737e;">// Expression statements
+</span><span>x + </span><span style="color:#d08770;">1</span><span>;                        </span><span style="color:#65737e;">// Expressão + ponto e vírgula = statement
+</span><span>println!(&quot;</span><span style="color:#a3be8c;">Hello, world!</span><span>&quot;);    </span><span style="color:#65737e;">// Macro call statement
+</span></code></pre>
+<h3 id="exemplo-pratico-blocos-de-codigo">Exemplo Prático: Blocos de Código</h3>
+<p>Os blocos de código em Rust são expressões quando não terminam com ponto e vírgula:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> resultado = {
+</span><span>        </span><span style="color:#b48ead;">let</span><span> a = </span><span style="color:#d08770;">10</span><span>;
+</span><span>        </span><span style="color:#b48ead;">let</span><span> b = </span><span style="color:#d08770;">20</span><span>;
+</span><span>        a + b        </span><span style="color:#65737e;">// Expressão: retorna 30
+</span><span>    };
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Resultado: </span><span style="color:#d08770;">{}</span><span>&quot;, resultado); </span><span style="color:#65737e;">// Output: Resultado: 30
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">let</span><span> sem_retorno = {
+</span><span>        </span><span style="color:#b48ead;">let</span><span> a = </span><span style="color:#d08770;">10</span><span>;
+</span><span>        </span><span style="color:#b48ead;">let</span><span> b = </span><span style="color:#d08770;">20</span><span>;
+</span><span>        a + b;       </span><span style="color:#65737e;">// Statement: não retorna valor
+</span><span>    };
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Sem retorno: </span><span style="color:#d08770;">{:?}</span><span>&quot;, sem_retorno); </span><span style="color:#65737e;">// Output: Sem retorno: ()
+</span><span>}
+</span></code></pre>
+<h2 id="funcoes-em-rust-definicao-e-estrutura">Funções em Rust: Definição e Estrutura</h2>
+<p>As funções em Rust seguem uma sintaxe específica e têm características únicas que as tornam poderosas e seguras.</p>
+<h3 id="sintaxe-basica-das-funcoes">Sintaxe Básica das Funções</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">nome_da_funcao</span><span>(</span><span style="color:#bf616a;">parametro1</span><span>: tipo1, </span><span style="color:#bf616a;">parametro2</span><span>: tipo2) -&gt; tipo_retorno {
+</span><span>    </span><span style="color:#65737e;">// corpo da função
+</span><span>    expressao_de_retorno
+</span><span>}
+</span></code></pre>
+<h3 id="exemplos-de-funcoes">Exemplos de Funções</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#65737e;">// Função simples sem parâmetros
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">saudacao</span><span>() {
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Olá, mundo!</span><span>&quot;);
+</span><span>}
+</span><span>
+</span><span style="color:#65737e;">// Função com parâmetros
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">somar</span><span>(</span><span style="color:#bf616a;">a</span><span>: </span><span style="color:#b48ead;">i32</span><span>, </span><span style="color:#bf616a;">b</span><span>: </span><span style="color:#b48ead;">i32</span><span>) -&gt; </span><span style="color:#b48ead;">i32 </span><span>{
+</span><span>    a + b  </span><span style="color:#65737e;">// Expressão de retorno (sem ponto e vírgula)
+</span><span>}
+</span><span>
+</span><span style="color:#65737e;">// Função com múltiplos statements e uma expressão final
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">calcular_area_retangulo</span><span>(</span><span style="color:#bf616a;">largura</span><span>: </span><span style="color:#b48ead;">f64</span><span>, </span><span style="color:#bf616a;">altura</span><span>: </span><span style="color:#b48ead;">f64</span><span>) -&gt; </span><span style="color:#b48ead;">f64 </span><span>{
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Calculando área do retângulo...</span><span>&quot;);  </span><span style="color:#65737e;">// Statement
+</span><span>    </span><span style="color:#b48ead;">let</span><span> area = largura * altura;                   </span><span style="color:#65737e;">// Statement
+</span><span>    area  </span><span style="color:#65737e;">// Expressão de retorno
+</span><span>}
+</span><span>
+</span><span style="color:#65737e;">// Função com return explícito
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">verificar_par</span><span>(</span><span style="color:#bf616a;">numero</span><span>: </span><span style="color:#b48ead;">i32</span><span>) -&gt; </span><span style="color:#b48ead;">bool </span><span>{
+</span><span>    </span><span style="color:#b48ead;">if</span><span> numero % </span><span style="color:#d08770;">2 </span><span>== </span><span style="color:#d08770;">0 </span><span>{
+</span><span>        </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">true</span><span>;  </span><span style="color:#65737e;">// Return explícito
+</span><span>    }
+</span><span>    </span><span style="color:#d08770;">false  </span><span style="color:#65737e;">// Expressão de retorno implícita
+</span><span>}
+</span></code></pre>
+<h3 id="funcoes-como-expressoes">Funções como Expressões</h3>
+<p>Em Rust, as chamadas de função são expressões e podem ser usadas em qualquer lugar onde uma expressão é esperada:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">multiplicar</span><span>(</span><span style="color:#bf616a;">x</span><span>: </span><span style="color:#b48ead;">i32</span><span>, </span><span style="color:#bf616a;">y</span><span>: </span><span style="color:#b48ead;">i32</span><span>) -&gt; </span><span style="color:#b48ead;">i32 </span><span>{
+</span><span>    x * y
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#65737e;">// Usando função como expressão em diferentes contextos
+</span><span>    </span><span style="color:#b48ead;">let</span><span> resultado = </span><span style="color:#96b5b4;">multiplicar</span><span>(</span><span style="color:#d08770;">5</span><span>, </span><span style="color:#d08770;">3</span><span>);
+</span><span>    
+</span><span>    </span><span style="color:#b48ead;">let</span><span> condicional = </span><span style="color:#b48ead;">if </span><span style="color:#96b5b4;">multiplicar</span><span>(</span><span style="color:#d08770;">2</span><span>, </span><span style="color:#d08770;">3</span><span>) &gt; </span><span style="color:#d08770;">5 </span><span>{
+</span><span>        &quot;</span><span style="color:#a3be8c;">maior</span><span>&quot;
+</span><span>    } </span><span style="color:#b48ead;">else </span><span>{
+</span><span>        &quot;</span><span style="color:#a3be8c;">menor ou igual</span><span>&quot;
+</span><span>    };
+</span><span>    
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Resultado: </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">, Condição: </span><span style="color:#d08770;">{}</span><span>&quot;, resultado, condicional);
+</span><span>}
+</span></code></pre>
+<h3 id="funcoes-aninhadas">Funções aninhadas</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">outer</span><span>() -&gt; </span><span style="color:#b48ead;">i32 </span><span>{
+</span><span>    </span><span style="color:#65737e;">// Função aninhada
+</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">inner</span><span>() -&gt; </span><span style="color:#b48ead;">i32 </span><span>{
+</span><span>        </span><span style="color:#d08770;">42
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#96b5b4;">inner</span><span>() </span><span style="color:#65737e;">// Chamada da função aninhada
+</span><span>}
+</span><span>
+</span><span>println!(&quot;</span><span style="color:#a3be8c;">Valor retornado: </span><span style="color:#d08770;">{}</span><span>&quot;, </span><span style="color:#96b5b4;">outer</span><span>());
+</span></code></pre>
+<h2 id="exemplos-avancados-combinando-conceitos">Exemplos Avançados: Combinando conceitos.</h2>
+<h3 id="funcao-que-retorna-uma-closure">Função que retorna uma Closure</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">criar_multiplicador</span><span>(</span><span style="color:#bf616a;">fator</span><span>: </span><span style="color:#b48ead;">i32</span><span>) -&gt; impl Fn(</span><span style="color:#b48ead;">i32</span><span>) -&gt; </span><span style="color:#b48ead;">i32 </span><span>{  
+</span><span>    </span><span style="color:#65737e;">// Esta é uma higher-order function - uma função que retorna outra função.
+</span><span>    </span><span style="color:#65737e;">// impl Fn - retorna algo que implementa o trait Fn (uma closure)
+</span><span>    </span><span style="color:#65737e;">// (i32) -&gt; i32 - a closure retornada aceita um i32 e retorna um i32
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">move </span><span>|x| x * fator  </span><span style="color:#65737e;">// Expressão que retorna uma closure 
+</span><span>    </span><span style="color:#65737e;">// move - palavra-chave crucial que força a closure a tomar ownership das variáveis capturadas
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> multiplicar_por_3 = </span><span style="color:#96b5b4;">criar_multiplicador</span><span>(</span><span style="color:#d08770;">3</span><span>);
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">5 * 3 = </span><span style="color:#d08770;">{}</span><span>&quot;, </span><span style="color:#96b5b4;">multiplicar_por_3</span><span>(</span><span style="color:#d08770;">5</span><span>)); </span><span style="color:#65737e;">// Output: 5 * 3 = 15
+</span><span>}
+</span></code></pre>
+<h3 id="funcoes-com-pattern-matching">Funções com Pattern Matching</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">enum </span><span>Operacao {
+</span><span>    Soma(</span><span style="color:#b48ead;">i32</span><span>, </span><span style="color:#b48ead;">i32</span><span>),
+</span><span>    Multiplicacao(</span><span style="color:#b48ead;">i32</span><span>, </span><span style="color:#b48ead;">i32</span><span>),
+</span><span>    Divisao(</span><span style="color:#b48ead;">i32</span><span>, </span><span style="color:#b48ead;">i32</span><span>),
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">executar_operacao</span><span>(</span><span style="color:#bf616a;">op</span><span>: Operacao) -&gt; Result&lt;</span><span style="color:#b48ead;">i32</span><span>, String&gt; {
+</span><span>    </span><span style="color:#b48ead;">match</span><span> op {  </span><span style="color:#65737e;">// Match é uma expressão
+</span><span>        Operacao::Soma(a, b) =&gt; Ok(a + b),
+</span><span>        Operacao::Multiplicacao(a, b) =&gt; Ok(a * b),
+</span><span>        Operacao::Divisao(a, b) =&gt; {
+</span><span>            </span><span style="color:#b48ead;">if</span><span> b == </span><span style="color:#d08770;">0 </span><span>{
+</span><span>                Err(&quot;</span><span style="color:#a3be8c;">Divisão por zero não é permitida</span><span>&quot;.</span><span style="color:#96b5b4;">to_string</span><span>())
+</span><span>            } </span><span style="color:#b48ead;">else </span><span>{
+</span><span>                Ok(a / b)
+</span><span>            }
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<h3 id="funcao-recursiva">Função Recursiva</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">fibonacci</span><span>(</span><span style="color:#bf616a;">n</span><span>: </span><span style="color:#b48ead;">u32</span><span>) -&gt; </span><span style="color:#b48ead;">u64 </span><span>{
+</span><span>    </span><span style="color:#b48ead;">match</span><span> n {
+</span><span>        </span><span style="color:#d08770;">0 </span><span>=&gt; </span><span style="color:#d08770;">0</span><span>,
+</span><span>        </span><span style="color:#d08770;">1 </span><span>=&gt; </span><span style="color:#d08770;">1</span><span>,
+</span><span>        _ =&gt; </span><span style="color:#96b5b4;">fibonacci</span><span>(n - </span><span style="color:#d08770;">1</span><span>) + </span><span style="color:#96b5b4;">fibonacci</span><span>(n - </span><span style="color:#d08770;">2</span><span>)  </span><span style="color:#65737e;">// Expressão recursiva
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#65737e;">// Versão otimizada com iteração
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">fibonacci_iterativo</span><span>(</span><span style="color:#bf616a;">n</span><span>: </span><span style="color:#b48ead;">u32</span><span>) -&gt; </span><span style="color:#b48ead;">u64 </span><span>{
+</span><span>    </span><span style="color:#b48ead;">if</span><span> n &lt;= </span><span style="color:#d08770;">1 </span><span>{
+</span><span>        </span><span style="color:#b48ead;">return</span><span> n as </span><span style="color:#b48ead;">u64</span><span>;
+</span><span>    }
+</span><span>    
+</span><span>    </span><span style="color:#b48ead;">let mut</span><span> a = </span><span style="color:#d08770;">0</span><span>;
+</span><span>    </span><span style="color:#b48ead;">let mut</span><span> b = </span><span style="color:#d08770;">1</span><span>;
+</span><span>    
+</span><span>    </span><span style="color:#b48ead;">for </span><span>_ in </span><span style="color:#d08770;">2</span><span>..=n {
+</span><span>        </span><span style="color:#b48ead;">let</span><span> temp = a + b;
+</span><span>        a = b;
+</span><span>        b = temp;
+</span><span>    }
+</span><span>    
+</span><span>    b  </span><span style="color:#65737e;">// Expressão de retorno
+</span><span>}
+</span></code></pre>
+<h2 id="caracteristicas-especiais-das-funcoes-em-rust">Características Especiais das Funções em Rust</h2>
+<h3 id="tipo-unit">Tipo Unit <code>()</code></h3>
+<p>Quando uma função não retorna um valor explícito, ela retorna o tipo unit <code>()</code>:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">imprimir_mensagem</span><span>(</span><span style="color:#bf616a;">msg</span><span>: &amp;</span><span style="color:#b48ead;">str</span><span>) {
+</span><span>    println!(&quot;</span><span style="color:#d08770;">{}</span><span>&quot;, msg);
+</span><span>    </span><span style="color:#65737e;">// Retorna implicitamente ()
+</span><span>}
+</span><span>
+</span><span style="color:#65737e;">// Equivalente a:
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">imprimir_mensagem_explicita</span><span>(</span><span style="color:#bf616a;">msg</span><span>: &amp;</span><span style="color:#b48ead;">str</span><span>) -&gt; () {
+</span><span>    println!(&quot;</span><span style="color:#d08770;">{}</span><span>&quot;, msg);
+</span><span>}
+</span></code></pre>
+<h3 id="funcoes-com-lifetimes">Funções com Lifetimes</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">maior_string</span><span>&lt;</span><span style="color:#b48ead;">&#39;a</span><span>&gt;(</span><span style="color:#bf616a;">s1</span><span>: &amp;</span><span style="color:#b48ead;">&#39;a str</span><span>, </span><span style="color:#bf616a;">s2</span><span>: &amp;</span><span style="color:#b48ead;">&#39;a str</span><span>) -&gt; &amp;</span><span style="color:#b48ead;">&#39;a str </span><span>{
+</span><span>    </span><span style="color:#b48ead;">if</span><span> s1.</span><span style="color:#96b5b4;">len</span><span>() &gt; s2.</span><span style="color:#96b5b4;">len</span><span>() {
+</span><span>        s1
+</span><span>    } </span><span style="color:#b48ead;">else </span><span>{
+</span><span>        s2
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> string1 = &quot;</span><span style="color:#a3be8c;">Rust</span><span>&quot;;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> string2 = &quot;</span><span style="color:#a3be8c;">Programming</span><span>&quot;;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> resultado = </span><span style="color:#96b5b4;">maior_string</span><span>(string1, string2);
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Maior string: </span><span style="color:#d08770;">{}</span><span>&quot;, resultado);
+</span><span>}
+</span></code></pre>
+<h3 id="funcoes-genericas">Funções Genéricas</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">comparar</span><span>&lt;T: PartialOrd&gt;(</span><span style="color:#bf616a;">a</span><span>: T, </span><span style="color:#bf616a;">b</span><span>: T) -&gt; T {
+</span><span>    </span><span style="color:#b48ead;">if</span><span> a &gt; b {
+</span><span>        a
+</span><span>    } </span><span style="color:#b48ead;">else </span><span>{
+</span><span>        b
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Maior entre 5 e 10: </span><span style="color:#d08770;">{}</span><span>&quot;, </span><span style="color:#96b5b4;">comparar</span><span>(</span><span style="color:#d08770;">5</span><span>, </span><span style="color:#d08770;">10</span><span>));
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Maior entre &#39;a&#39; e &#39;z&#39;: </span><span style="color:#d08770;">{}</span><span>&quot;, </span><span style="color:#96b5b4;">comparar</span><span>(&#39;</span><span style="color:#a3be8c;">a</span><span>&#39;, &#39;</span><span style="color:#a3be8c;">z</span><span>&#39;));
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Maior entre 3.14 e 2.71: </span><span style="color:#d08770;">{}</span><span>&quot;, </span><span style="color:#96b5b4;">comparar</span><span>(</span><span style="color:#d08770;">3.14</span><span>, </span><span style="color:#d08770;">2.71</span><span>));
+</span><span>}
+</span></code></pre>
+<h2 id="boas-praticas-e-padroes-comuns">Boas Práticas e Padrões Comuns</h2>
+<h3 id="1-usar-expressoes-quando-possivel">1. Usar Expressões Quando Possível</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#65737e;">// Evitar - desnecessariamente verboso
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">classificar_numero_ruim</span><span>(</span><span style="color:#bf616a;">n</span><span>: </span><span style="color:#b48ead;">i32</span><span>) -&gt; &amp;</span><span style="color:#b48ead;">&#39;static str </span><span>{
+</span><span>    </span><span style="color:#b48ead;">if</span><span> n &gt; </span><span style="color:#d08770;">0 </span><span>{
+</span><span>        </span><span style="color:#b48ead;">return </span><span>&quot;</span><span style="color:#a3be8c;">positivo</span><span>&quot;;
+</span><span>    } </span><span style="color:#b48ead;">else if</span><span> n &lt; </span><span style="color:#d08770;">0 </span><span>{
+</span><span>        </span><span style="color:#b48ead;">return </span><span>&quot;</span><span style="color:#a3be8c;">negativo</span><span>&quot;;
+</span><span>    } </span><span style="color:#b48ead;">else </span><span>{
+</span><span>        </span><span style="color:#b48ead;">return </span><span>&quot;</span><span style="color:#a3be8c;">zero</span><span>&quot;;
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#65737e;">// Preferir - mais idiomático
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">classificar_numero_bom</span><span>(</span><span style="color:#bf616a;">n</span><span>: </span><span style="color:#b48ead;">i32</span><span>) -&gt; &amp;</span><span style="color:#b48ead;">&#39;static str </span><span>{
+</span><span>    </span><span style="color:#b48ead;">if</span><span> n &gt; </span><span style="color:#d08770;">0 </span><span>{
+</span><span>        &quot;</span><span style="color:#a3be8c;">positivo</span><span>&quot;
+</span><span>    } </span><span style="color:#b48ead;">else if</span><span> n &lt; </span><span style="color:#d08770;">0 </span><span>{
+</span><span>        &quot;</span><span style="color:#a3be8c;">negativo</span><span>&quot;
+</span><span>    } </span><span style="color:#b48ead;">else </span><span>{
+</span><span>        &quot;</span><span style="color:#a3be8c;">zero</span><span>&quot;
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<h3 id="2-documentar-funcoes-complexas">2. Documentar Funções Complexas</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#65737e;">/// Calcula o fatorial de um número usando iteração
+</span><span style="color:#65737e;">/// 
+</span><span style="color:#65737e;">/// # Argumentos
+</span><span style="color:#65737e;">/// 
+</span><span style="color:#65737e;">/// * `n` - Um inteiro não-negativo
+</span><span style="color:#65737e;">/// 
+</span><span style="color:#65737e;">/// # Retorno
+</span><span style="color:#65737e;">/// 
+</span><span style="color:#65737e;">/// Retorna o fatorial de `n` ou `None` se `n` for muito grande
+</span><span style="color:#65737e;">/// 
+</span><span style="color:#65737e;">/// # Exemplos
+</span><span style="color:#65737e;">/// 
+</span><span style="color:#65737e;">/// ```
+</span><span style="color:#65737e;">/// assert_eq!(fatorial(5), Some(120));
+</span><span style="color:#65737e;">/// assert_eq!(fatorial(0), Some(1));
+</span><span style="color:#65737e;">/// ```
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">fatorial</span><span>(</span><span style="color:#bf616a;">n</span><span>: </span><span style="color:#b48ead;">u32</span><span>) -&gt; Option&lt;</span><span style="color:#b48ead;">u64</span><span>&gt; {
+</span><span>    </span><span style="color:#b48ead;">match</span><span> n {
+</span><span>        </span><span style="color:#d08770;">0 </span><span>=&gt; Some(</span><span style="color:#d08770;">1</span><span>),
+</span><span>        </span><span style="color:#d08770;">1</span><span>..=</span><span style="color:#d08770;">20 </span><span>=&gt; {
+</span><span>            </span><span style="color:#b48ead;">let mut</span><span> resultado = </span><span style="color:#d08770;">1</span><span>;
+</span><span>            </span><span style="color:#b48ead;">for</span><span> i in </span><span style="color:#d08770;">2</span><span>..=n {
+</span><span>                resultado *= i as </span><span style="color:#b48ead;">u64</span><span>;
+</span><span>            }
+</span><span>            Some(resultado)
+</span><span>        }
+</span><span>        _ =&gt; None,  </span><span style="color:#65737e;">// Número muito grande
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<h3 id="3-usar-pattern-matching-efetivamente">3. Usar Pattern Matching Efetivamente</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">processar_resultado</span><span>&lt;T, E&gt;(</span><span style="color:#bf616a;">resultado</span><span>: Result&lt;T, E&gt;) -&gt; String 
+</span><span style="color:#b48ead;">where 
+</span><span>    T: std::fmt::Display,
+</span><span>    E: std::fmt::Display,
+</span><span>{
+</span><span>    </span><span style="color:#b48ead;">match</span><span> resultado {
+</span><span>        Ok(valor) =&gt; format!(&quot;</span><span style="color:#a3be8c;">Sucesso: </span><span style="color:#d08770;">{}</span><span>&quot;, valor),
+</span><span>        Err(erro) =&gt; format!(&quot;</span><span style="color:#a3be8c;">Erro: </span><span style="color:#d08770;">{}</span><span>&quot;, erro),
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<h2 id="conclusao">Conclusão</h2>
+<p>A compreensão da diferença entre expressões e statements, juntamente com o domínio da definição de funções, é fundamental para escrever código Rust idiomático e eficiente. As expressões proporcionam uma forma concisa de retornar valores, enquanto os statements executam ações. As funções em Rust, por sua vez, oferecem um sistema robusto e flexível para organizar código, com suporte a generics, lifetimes e pattern matching.</p>
+<p>Estes conceitos são a base sobre a qual se constrói o conhecimento mais avançado em Rust, incluindo ownership, borrowing e o sistema de tipos. Dominar estes fundamentos permitirá que escrevas código mais expressivo, seguro e performante.</p>
+<h2 id="referencias">Referências</h2>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/book/ch03-03-how-functions-work.html">The Rust Programming Language - Functions</a></li>
+<li><a href="https://doc.rust-lang.org/stable/book/ch03-03-how-functions-work.html#statements-and-expressions">The Rust Programming Language - Statements and Expressions</a></li>
+<li><a href="https://doc.rust-lang.org/stable/rust-by-example/fn.html">Rust by Example - Functions</a></li>
+<li><a href="https://doc.rust-lang.org/stable/rust-by-example/expression.html">Rust by Example - Expressions</a></li>
+</ul>
+<hr />
+<p><strong><em>Disclaimer</em></strong>: Artigo elaborado com auxilio a ferramentas de inteligência artificial mas revisto por humanos.</p>
+
+          </div>
+        </article>
+      </div>
+      
+      <div class="column is-2 is-hidden-mobile">
+        <aside class="menu" style="position: sticky; top: 48px">
+          <p class="heading has-text-weight-bold">Contents</p>
+          <ul class="menu-list">
+            
+            <li>
+              <a id="link-expressoes-vs-statements-a-diferenca-fundamental" class="toc is-size-7 is-active"
+                href="https://rustlangpt.github.io/posts/funcoes/#expressoes-vs-statements-a-diferenca-fundamental">
+                Expressões vs Statements: A diferença fundamental
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-expressoes" class="toc is-size-7" href="https://rustlangpt.github.io/posts/funcoes/#expressoes">
+                    Expressões
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-statements" class="toc is-size-7" href="https://rustlangpt.github.io/posts/funcoes/#statements">
+                    Statements
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-exemplo-pratico-blocos-de-codigo" class="toc is-size-7" href="https://rustlangpt.github.io/posts/funcoes/#exemplo-pratico-blocos-de-codigo">
+                    Exemplo Prático: Blocos de Código
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-funcoes-em-rust-definicao-e-estrutura" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/funcoes/#funcoes-em-rust-definicao-e-estrutura">
+                Funções em Rust: Definição e Estrutura
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-sintaxe-basica-das-funcoes" class="toc is-size-7" href="https://rustlangpt.github.io/posts/funcoes/#sintaxe-basica-das-funcoes">
+                    Sintaxe Básica das Funções
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-exemplos-de-funcoes" class="toc is-size-7" href="https://rustlangpt.github.io/posts/funcoes/#exemplos-de-funcoes">
+                    Exemplos de Funções
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-funcoes-como-expressoes" class="toc is-size-7" href="https://rustlangpt.github.io/posts/funcoes/#funcoes-como-expressoes">
+                    Funções como Expressões
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-funcoes-aninhadas" class="toc is-size-7" href="https://rustlangpt.github.io/posts/funcoes/#funcoes-aninhadas">
+                    Funções aninhadas
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-exemplos-avancados-combinando-conceitos" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/funcoes/#exemplos-avancados-combinando-conceitos">
+                Exemplos Avançados: Combinando conceitos.
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-funcao-que-retorna-uma-closure" class="toc is-size-7" href="https://rustlangpt.github.io/posts/funcoes/#funcao-que-retorna-uma-closure">
+                    Função que retorna uma Closure
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-funcoes-com-pattern-matching" class="toc is-size-7" href="https://rustlangpt.github.io/posts/funcoes/#funcoes-com-pattern-matching">
+                    Funções com Pattern Matching
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-funcao-recursiva" class="toc is-size-7" href="https://rustlangpt.github.io/posts/funcoes/#funcao-recursiva">
+                    Função Recursiva
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-caracteristicas-especiais-das-funcoes-em-rust" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/funcoes/#caracteristicas-especiais-das-funcoes-em-rust">
+                Características Especiais das Funções em Rust
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-tipo-unit" class="toc is-size-7" href="https://rustlangpt.github.io/posts/funcoes/#tipo-unit">
+                    Tipo Unit ()
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-funcoes-com-lifetimes" class="toc is-size-7" href="https://rustlangpt.github.io/posts/funcoes/#funcoes-com-lifetimes">
+                    Funções com Lifetimes
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-funcoes-genericas" class="toc is-size-7" href="https://rustlangpt.github.io/posts/funcoes/#funcoes-genericas">
+                    Funções Genéricas
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-boas-praticas-e-padroes-comuns" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/funcoes/#boas-praticas-e-padroes-comuns">
+                Boas Práticas e Padrões Comuns
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-1-usar-expressoes-quando-possivel" class="toc is-size-7" href="https://rustlangpt.github.io/posts/funcoes/#1-usar-expressoes-quando-possivel">
+                    1. Usar Expressões Quando Possível
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-2-documentar-funcoes-complexas" class="toc is-size-7" href="https://rustlangpt.github.io/posts/funcoes/#2-documentar-funcoes-complexas">
+                    2. Documentar Funções Complexas
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-3-usar-pattern-matching-efetivamente" class="toc is-size-7" href="https://rustlangpt.github.io/posts/funcoes/#3-usar-pattern-matching-efetivamente">
+                    3. Usar Pattern Matching Efetivamente
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-conclusao" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/funcoes/#conclusao">
+                Conclusão
+              </a>
+              
+            </li>
+            
+            <li>
+              <a id="link-referencias" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/funcoes/#referencias">
+                Referências
+              </a>
+              
+            </li>
+            
+          </ul>
+        </aside>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+
+  
+  <section class="modal" id="search-modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Search</p>
+      </header>
+      <section class="modal-card-body">
+        <div class="field mb-2">
+          <div class="control">
+            <input class="input" id="search" placeholder="Search this website." type="search" />
+          </div>
+        </div>
+        <div class="search-results">
+          <div class="search-results__items"></div>
+        </div>
+      </section>
+    </div>
+    <button aria-label="close" class="modal-close is-large"></button>
+  </section>
+  
+
+
+  
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <nav class="level">
+              
+          <div class="level-item has-text-centered">
+            <a class="button is-black is-outlined" href="https:&#x2F;&#x2F;rustlangpt.github.io&#x2F;posts&#x2F;fluxos&#x2F;">
+              <span class="icon mr-2">
+                <i class="fas fa-arrow-circle-left"></i>
+              </span>
+              Fluxos no Rust
+            </a>
+          </div>
+           
+        </nav>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+  
+
+
+
+
+
+
+  
+  <footer class="footer py-4">
+    <div class="content has-text-centered">
+    <!--
+    <p>
+        Built with
+        <span class="icon-text">
+          <span class="icon">
+            <i class="fas fa-code"></i>
+          </span>
+          <span>code</span>
+        </span>
+        and
+        <span class="icon-text">
+          <span class="icon">
+            <i class="fas fa-heart"></i>
+          </span>
+          <span>love</span>
+        </span>
+      </p>
+    -->
+      <p>
+        Powered by
+        <span class="icon-text">
+          <span class="icon">
+            <i class="fas fa-power-off"></i>
+          </span>
+          <span>zola</span>
+        </span>
+      </p>
+    
+    </div>
+  </footer>
+  
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/galleria@1.6.1/dist/galleria.min.js" integrity="sha384-QSfwGT8/EU536DKdtyP2D6SLlh8zBaZ0cVkwfrwhqzIU9VCfJT00CLVP5t+HAiYg" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/galleria@1.6.1/dist/themes/folio/galleria.folio.min.js" integrity="sha384-DwpKI+deZB267+hPKwiOIc5Y2GKsVL0mR6hgz7GgIu7AgAMYqJwcJKY1YBNfhWcY" crossorigin="anonymous"></script>
+  
+  
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@8.13.5/dist/mermaid.min.js" integrity="sha384-0yWn54pSGtfKCU+skfA69l25VsCw+MZt4LQov3xNRoS7YkAMrFokGgSBnAWSK4pv" crossorigin="anonymous"></script>
+  
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.xkcd@1.1.13/dist/chart.xkcd.min.js" integrity="sha384-xC3h1+IHXK8seA+8KfT79Z4e0GPsznjXBoMa5nd8ooWKplPyXx92NOmljWxLC/cs" crossorigin="anonymous"></script>
+  
+  
+  <script src="https://rustlangpt.github.io/elasticlunr.min.js"></script>
+  <script src="https://rustlangpt.github.io/search_index.en.js"></script><script src="https://rustlangpt.github.io/js/site.js"></script>
+
+  
+
+<script type="text/javascript">
+  const menuBarHeight = document.querySelector("nav.navbar").clientHeight;
+  const tocItems = document.querySelectorAll(".toc");
+  const navSections = new Array(tocItems.length);
+
+  tocItems.forEach((el, i) => {
+    let id = el.getAttribute("id").substring(5);
+    navSections[i] = document.getElementById(id);
+  })
+
+  function isVisible(tocIndex) {
+    const current = navSections[tocIndex];
+    const next = tocIndex < tocItems.length - 1 ? navSections[tocIndex + 1]
+      : document.querySelectorAll("section.section").item(1);
+
+    const c = current.getBoundingClientRect();
+    const n = next.getBoundingClientRect();
+    const h = (window.innerHeight || document.documentElement.clientHeight);
+
+    return (c.top <= h) && (n.top - menuBarHeight >= 0);
+  }
+
+  function activateIfVisible() {
+    for (b = true, i = 0; i < tocItems.length; i++) {
+      if (b && isVisible(i)) {
+        tocItems[i].classList.add('is-active');
+        b = false;
+      } else
+        tocItems[i].classList.remove('is-active');
+    }
+  }
+
+  var isTicking = null;
+  window.addEventListener('scroll', () => {
+    if (!isTicking) {
+      window.requestAnimationFrame(() => {
+        activateIfVisible();
+        isTicking = false;
+      });
+      isTicking = true;
+    }
+  }, false);
+</script>
+
+
+
+
+
+  
+  
+</body>
+
+</html>

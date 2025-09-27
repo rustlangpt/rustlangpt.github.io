@@ -7,7 +7,323 @@
       <generator>Zola</generator>
       <language>en</language>
       <atom:link href="https://rustlangpt.github.io/rss.xml" rel="self" type="application/rss+xml"/>
-      <lastBuildDate>Sun, 21 Sep 2025 00:00:00 +0000</lastBuildDate>
+      <lastBuildDate>Sat, 27 Sep 2025 00:00:00 +0000</lastBuildDate>
+      <item>
+          <title>Fundamentos da Linguagem Rust: Expressões, Statements e Funções.</title>
+          <pubDate>Sat, 27 Sep 2025 00:00:00 +0000</pubDate>
+          <author>RustlangPT</author>
+          <link>https://rustlangpt.github.io/posts/funcoes/</link>
+          <guid>https://rustlangpt.github.io/posts/funcoes/</guid>
+          <description xml:base="https://rustlangpt.github.io/posts/funcoes/">&lt;p&gt;Rust é uma linguagem que se distingue pela sua abordagem única à programação de sistemas, combinando performance com segurança. Um dos aspectos fundamentais que todo o programador Rust deve dominar é a distinção entre &lt;strong&gt;expressões&lt;&#x2F;strong&gt;, &lt;strong&gt;statements&lt;&#x2F;strong&gt; e a definição de &lt;strong&gt;funções&lt;&#x2F;strong&gt;. Neste artigo, vamos explorar estes conceitos em profundidade, com exemplos práticos que demonstram como utilizá-los eficazmente.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;expressoes-vs-statements-a-diferenca-fundamental&quot;&gt;Expressões vs Statements: A diferença fundamental&lt;&#x2F;h2&gt;
+&lt;p&gt;Em Rust, existe uma distinção clara entre expressões e statements, conceito que é fundamental para compreender como a linguagem funciona.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;expressoes&quot;&gt;Expressões&lt;&#x2F;h3&gt;
+&lt;p&gt;Uma &lt;strong&gt;expressão&lt;&#x2F;strong&gt; é qualquer código que avalia para obter um valor. Em Rust, quase tudo é uma expressão, incluindo blocos de código, chamadas de função, operações matemáticas, e muito mais.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Expressões simples
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; x = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;5&lt;&#x2F;span&gt;&lt;span&gt;;          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; 5 é uma expressão
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; y = x + &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; x + 1  em si é uma expressão
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; z = {           &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Este bloco é uma expressão
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; a = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;3&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    a + &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1           &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Note: sem ponto e vírgula!
+&lt;&#x2F;span&gt;&lt;span&gt;};                  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; z = 4
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Expressões condicionais
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; numero = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;true &lt;&#x2F;span&gt;&lt;span&gt;{ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;42 &lt;&#x2F;span&gt;&lt;span&gt;} &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;else &lt;&#x2F;span&gt;&lt;span&gt;{ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0 &lt;&#x2F;span&gt;&lt;span&gt;};
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Expressões de match
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; valor = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;match&lt;&#x2F;span&gt;&lt;span&gt; x {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1 &lt;&#x2F;span&gt;&lt;span&gt;=&amp;gt; &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;um&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;,
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2 &lt;&#x2F;span&gt;&lt;span&gt;=&amp;gt; &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;dois&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;,
+&lt;&#x2F;span&gt;&lt;span&gt;    _ =&amp;gt; &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;outro&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;};
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;strong&gt;Ponto crucial&lt;&#x2F;strong&gt;: Expressões não terminam com ponto e vírgula. Se adicionarmos um ponto e vírgula, transformamos a expressão num statement.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;statements&quot;&gt;Statements&lt;&#x2F;h3&gt;
+&lt;p&gt;Um &lt;strong&gt;statement&lt;&#x2F;strong&gt; é uma instrução que executa uma ação mas não retorna um valor. Em Rust, existem dois tipos principais de statements:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Declaration statements&lt;&#x2F;strong&gt; - declarações de variáveis e funções&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Expression statements&lt;&#x2F;strong&gt; - expressões seguidas de ponto e vírgula&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Declaration statements
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; x = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;5&lt;&#x2F;span&gt;&lt;span&gt;;                    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Declaração de variável x e a respectiva atribuição
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;minha_funcao&lt;&#x2F;span&gt;&lt;span&gt;() {}          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Declaração de função 
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Expression statements
+&lt;&#x2F;span&gt;&lt;span&gt;x + &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;;                        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Expressão + ponto e vírgula = statement
+&lt;&#x2F;span&gt;&lt;span&gt;println!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Hello, world!&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;);    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Macro call statement
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;exemplo-pratico-blocos-de-codigo&quot;&gt;Exemplo Prático: Blocos de Código&lt;&#x2F;h3&gt;
+&lt;p&gt;Os blocos de código em Rust são expressões quando não terminam com ponto e vírgula:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;main&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; resultado = {
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; a = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;10&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; b = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;20&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;        a + b        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Expressão: retorna 30
+&lt;&#x2F;span&gt;&lt;span&gt;    };
+&lt;&#x2F;span&gt;&lt;span&gt;    println!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Resultado: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;{}&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, resultado); &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Output: Resultado: 30
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; sem_retorno = {
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; a = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;10&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; b = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;20&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;        a + b;       &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Statement: não retorna valor
+&lt;&#x2F;span&gt;&lt;span&gt;    };
+&lt;&#x2F;span&gt;&lt;span&gt;    println!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Sem retorno: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;{:?}&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, sem_retorno); &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Output: Sem retorno: ()
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;funcoes-em-rust-definicao-e-estrutura&quot;&gt;Funções em Rust: Definição e Estrutura&lt;&#x2F;h2&gt;
+&lt;p&gt;As funções em Rust seguem uma sintaxe específica e têm características únicas que as tornam poderosas e seguras.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;sintaxe-basica-das-funcoes&quot;&gt;Sintaxe Básica das Funções&lt;&#x2F;h3&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;nome_da_funcao&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;parametro1&lt;&#x2F;span&gt;&lt;span&gt;: tipo1, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;parametro2&lt;&#x2F;span&gt;&lt;span&gt;: tipo2) -&amp;gt; tipo_retorno {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; corpo da função
+&lt;&#x2F;span&gt;&lt;span&gt;    expressao_de_retorno
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;exemplos-de-funcoes&quot;&gt;Exemplos de Funções&lt;&#x2F;h3&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Função simples sem parâmetros
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;saudacao&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;    println!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Olá, mundo!&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Função com parâmetros
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;somar&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;a&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;i32&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;b&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;i32&lt;&#x2F;span&gt;&lt;span&gt;) -&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;i32 &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    a + b  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Expressão de retorno (sem ponto e vírgula)
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Função com múltiplos statements e uma expressão final
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;calcular_area_retangulo&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;largura&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;f64&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;altura&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;f64&lt;&#x2F;span&gt;&lt;span&gt;) -&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;f64 &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    println!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Calculando área do retângulo...&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;);  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Statement
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; area = largura * altura;                   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Statement
+&lt;&#x2F;span&gt;&lt;span&gt;    area  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Expressão de retorno
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Função com return explícito
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;verificar_par&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;numero&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;i32&lt;&#x2F;span&gt;&lt;span&gt;) -&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;bool &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if&lt;&#x2F;span&gt;&lt;span&gt; numero % &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2 &lt;&#x2F;span&gt;&lt;span&gt;== &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0 &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;true&lt;&#x2F;span&gt;&lt;span&gt;;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Return explícito
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;false  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Expressão de retorno implícita
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;funcoes-como-expressoes&quot;&gt;Funções como Expressões&lt;&#x2F;h3&gt;
+&lt;p&gt;Em Rust, as chamadas de função são expressões e podem ser usadas em qualquer lugar onde uma expressão é esperada:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;multiplicar&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;x&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;i32&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;y&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;i32&lt;&#x2F;span&gt;&lt;span&gt;) -&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;i32 &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    x * y
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;main&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Usando função como expressão em diferentes contextos
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; resultado = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;multiplicar&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;5&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;3&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;    
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; condicional = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;multiplicar&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;3&lt;&#x2F;span&gt;&lt;span&gt;) &amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;5 &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;        &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;maior&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;    } &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;else &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;        &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;menor ou igual&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;    };
+&lt;&#x2F;span&gt;&lt;span&gt;    
+&lt;&#x2F;span&gt;&lt;span&gt;    println!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Resultado: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;{}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;, Condição: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;{}&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, resultado, condicional);
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;funcoes-aninhadas&quot;&gt;Funções aninhadas&lt;&#x2F;h3&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;outer&lt;&#x2F;span&gt;&lt;span&gt;() -&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;i32 &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Função aninhada
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;inner&lt;&#x2F;span&gt;&lt;span&gt;() -&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;i32 &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;42
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;inner&lt;&#x2F;span&gt;&lt;span&gt;() &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Chamada da função aninhada
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;println!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Valor retornado: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;{}&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;outer&lt;&#x2F;span&gt;&lt;span&gt;());
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;exemplos-avancados-combinando-conceitos&quot;&gt;Exemplos Avançados: Combinando conceitos.&lt;&#x2F;h2&gt;
+&lt;h3 id=&quot;funcao-que-retorna-uma-closure&quot;&gt;Função que retorna uma Closure&lt;&#x2F;h3&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;criar_multiplicador&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;fator&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;i32&lt;&#x2F;span&gt;&lt;span&gt;) -&amp;gt; impl Fn(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;i32&lt;&#x2F;span&gt;&lt;span&gt;) -&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;i32 &lt;&#x2F;span&gt;&lt;span&gt;{  
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Esta é uma higher-order function - uma função que retorna outra função.
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; impl Fn - retorna algo que implementa o trait Fn (uma closure)
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; (i32) -&amp;gt; i32 - a closure retornada aceita um i32 e retorna um i32
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;move &lt;&#x2F;span&gt;&lt;span&gt;|x| x * fator  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Expressão que retorna uma closure 
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; move - palavra-chave crucial que força a closure a tomar ownership das variáveis capturadas
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;main&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; multiplicar_por_3 = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;criar_multiplicador&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;3&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;    println!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;5 * 3 = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;{}&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;multiplicar_por_3&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;5&lt;&#x2F;span&gt;&lt;span&gt;)); &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Output: 5 * 3 = 15
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;funcoes-com-pattern-matching&quot;&gt;Funções com Pattern Matching&lt;&#x2F;h3&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;enum &lt;&#x2F;span&gt;&lt;span&gt;Operacao {
+&lt;&#x2F;span&gt;&lt;span&gt;    Soma(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;i32&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;i32&lt;&#x2F;span&gt;&lt;span&gt;),
+&lt;&#x2F;span&gt;&lt;span&gt;    Multiplicacao(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;i32&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;i32&lt;&#x2F;span&gt;&lt;span&gt;),
+&lt;&#x2F;span&gt;&lt;span&gt;    Divisao(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;i32&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;i32&lt;&#x2F;span&gt;&lt;span&gt;),
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;executar_operacao&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;op&lt;&#x2F;span&gt;&lt;span&gt;: Operacao) -&amp;gt; Result&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;i32&lt;&#x2F;span&gt;&lt;span&gt;, String&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;match&lt;&#x2F;span&gt;&lt;span&gt; op {  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Match é uma expressão
+&lt;&#x2F;span&gt;&lt;span&gt;        Operacao::Soma(a, b) =&amp;gt; Ok(a + b),
+&lt;&#x2F;span&gt;&lt;span&gt;        Operacao::Multiplicacao(a, b) =&amp;gt; Ok(a * b),
+&lt;&#x2F;span&gt;&lt;span&gt;        Operacao::Divisao(a, b) =&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if&lt;&#x2F;span&gt;&lt;span&gt; b == &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0 &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;                Err(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Divisão por zero não é permitida&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;to_string&lt;&#x2F;span&gt;&lt;span&gt;())
+&lt;&#x2F;span&gt;&lt;span&gt;            } &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;else &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;                Ok(a &#x2F; b)
+&lt;&#x2F;span&gt;&lt;span&gt;            }
+&lt;&#x2F;span&gt;&lt;span&gt;        }
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;funcao-recursiva&quot;&gt;Função Recursiva&lt;&#x2F;h3&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;fibonacci&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;n&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;u32&lt;&#x2F;span&gt;&lt;span&gt;) -&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;u64 &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;match&lt;&#x2F;span&gt;&lt;span&gt; n {
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0 &lt;&#x2F;span&gt;&lt;span&gt;=&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1 &lt;&#x2F;span&gt;&lt;span&gt;=&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;        _ =&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;fibonacci&lt;&#x2F;span&gt;&lt;span&gt;(n - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;) + &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;fibonacci&lt;&#x2F;span&gt;&lt;span&gt;(n - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span&gt;)  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Expressão recursiva
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Versão otimizada com iteração
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;fibonacci_iterativo&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;n&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;u32&lt;&#x2F;span&gt;&lt;span&gt;) -&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;u64 &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if&lt;&#x2F;span&gt;&lt;span&gt; n &amp;lt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1 &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span&gt; n as &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;u64&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;    
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let mut&lt;&#x2F;span&gt;&lt;span&gt; a = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let mut&lt;&#x2F;span&gt;&lt;span&gt; b = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;for &lt;&#x2F;span&gt;&lt;span&gt;_ in &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span&gt;..=n {
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; temp = a + b;
+&lt;&#x2F;span&gt;&lt;span&gt;        a = b;
+&lt;&#x2F;span&gt;&lt;span&gt;        b = temp;
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;    
+&lt;&#x2F;span&gt;&lt;span&gt;    b  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Expressão de retorno
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;caracteristicas-especiais-das-funcoes-em-rust&quot;&gt;Características Especiais das Funções em Rust&lt;&#x2F;h2&gt;
+&lt;h3 id=&quot;tipo-unit&quot;&gt;Tipo Unit &lt;code&gt;()&lt;&#x2F;code&gt;&lt;&#x2F;h3&gt;
+&lt;p&gt;Quando uma função não retorna um valor explícito, ela retorna o tipo unit &lt;code&gt;()&lt;&#x2F;code&gt;:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;imprimir_mensagem&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;msg&lt;&#x2F;span&gt;&lt;span&gt;: &amp;amp;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;str&lt;&#x2F;span&gt;&lt;span&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;    println!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;{}&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, msg);
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Retorna implicitamente ()
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Equivalente a:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;imprimir_mensagem_explicita&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;msg&lt;&#x2F;span&gt;&lt;span&gt;: &amp;amp;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;str&lt;&#x2F;span&gt;&lt;span&gt;) -&amp;gt; () {
+&lt;&#x2F;span&gt;&lt;span&gt;    println!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;{}&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, msg);
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;funcoes-com-lifetimes&quot;&gt;Funções com Lifetimes&lt;&#x2F;h3&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;maior_string&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;&amp;#39;a&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;s1&lt;&#x2F;span&gt;&lt;span&gt;: &amp;amp;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;&amp;#39;a str&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;s2&lt;&#x2F;span&gt;&lt;span&gt;: &amp;amp;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;&amp;#39;a str&lt;&#x2F;span&gt;&lt;span&gt;) -&amp;gt; &amp;amp;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;&amp;#39;a str &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if&lt;&#x2F;span&gt;&lt;span&gt; s1.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;len&lt;&#x2F;span&gt;&lt;span&gt;() &amp;gt; s2.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;len&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;        s1
+&lt;&#x2F;span&gt;&lt;span&gt;    } &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;else &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;        s2
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;main&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; string1 = &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Rust&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; string2 = &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Programming&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; resultado = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;maior_string&lt;&#x2F;span&gt;&lt;span&gt;(string1, string2);
+&lt;&#x2F;span&gt;&lt;span&gt;    println!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Maior string: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;{}&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, resultado);
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;funcoes-genericas&quot;&gt;Funções Genéricas&lt;&#x2F;h3&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;comparar&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;T: PartialOrd&amp;gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;a&lt;&#x2F;span&gt;&lt;span&gt;: T, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;b&lt;&#x2F;span&gt;&lt;span&gt;: T) -&amp;gt; T {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if&lt;&#x2F;span&gt;&lt;span&gt; a &amp;gt; b {
+&lt;&#x2F;span&gt;&lt;span&gt;        a
+&lt;&#x2F;span&gt;&lt;span&gt;    } &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;else &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;        b
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;main&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;    println!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Maior entre 5 e 10: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;{}&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;comparar&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;5&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;10&lt;&#x2F;span&gt;&lt;span&gt;));
+&lt;&#x2F;span&gt;&lt;span&gt;    println!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Maior entre &amp;#39;a&amp;#39; e &amp;#39;z&amp;#39;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;{}&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;comparar&lt;&#x2F;span&gt;&lt;span&gt;(&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;a&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;, &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;z&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;));
+&lt;&#x2F;span&gt;&lt;span&gt;    println!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Maior entre 3.14 e 2.71: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;{}&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;comparar&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;3.14&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2.71&lt;&#x2F;span&gt;&lt;span&gt;));
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;boas-praticas-e-padroes-comuns&quot;&gt;Boas Práticas e Padrões Comuns&lt;&#x2F;h2&gt;
+&lt;h3 id=&quot;1-usar-expressoes-quando-possivel&quot;&gt;1. Usar Expressões Quando Possível&lt;&#x2F;h3&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Evitar - desnecessariamente verboso
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;classificar_numero_ruim&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;n&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;i32&lt;&#x2F;span&gt;&lt;span&gt;) -&amp;gt; &amp;amp;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;&amp;#39;static str &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if&lt;&#x2F;span&gt;&lt;span&gt; n &amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0 &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;positivo&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;;
+&lt;&#x2F;span&gt;&lt;span&gt;    } &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;else if&lt;&#x2F;span&gt;&lt;span&gt; n &amp;lt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0 &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;negativo&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;;
+&lt;&#x2F;span&gt;&lt;span&gt;    } &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;else &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;zero&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;;
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Preferir - mais idiomático
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;classificar_numero_bom&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;n&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;i32&lt;&#x2F;span&gt;&lt;span&gt;) -&amp;gt; &amp;amp;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;&amp;#39;static str &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if&lt;&#x2F;span&gt;&lt;span&gt; n &amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0 &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;        &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;positivo&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;    } &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;else if&lt;&#x2F;span&gt;&lt;span&gt; n &amp;lt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0 &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;        &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;negativo&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;    } &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;else &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;        &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;zero&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;2-documentar-funcoes-complexas&quot;&gt;2. Documentar Funções Complexas&lt;&#x2F;h3&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F;&#x2F; Calcula o fatorial de um número usando iteração
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F;&#x2F; 
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F;&#x2F; # Argumentos
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F;&#x2F; 
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F;&#x2F; * `n` - Um inteiro não-negativo
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F;&#x2F; 
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F;&#x2F; # Retorno
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F;&#x2F; 
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F;&#x2F; Retorna o fatorial de `n` ou `None` se `n` for muito grande
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F;&#x2F; 
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F;&#x2F; # Exemplos
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F;&#x2F; 
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F;&#x2F; ```
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F;&#x2F; assert_eq!(fatorial(5), Some(120));
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F;&#x2F; assert_eq!(fatorial(0), Some(1));
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F;&#x2F; ```
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;fatorial&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;n&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;u32&lt;&#x2F;span&gt;&lt;span&gt;) -&amp;gt; Option&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;u64&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;match&lt;&#x2F;span&gt;&lt;span&gt; n {
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0 &lt;&#x2F;span&gt;&lt;span&gt;=&amp;gt; Some(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;),
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;..=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;20 &lt;&#x2F;span&gt;&lt;span&gt;=&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let mut&lt;&#x2F;span&gt;&lt;span&gt; resultado = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;for&lt;&#x2F;span&gt;&lt;span&gt; i in &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span&gt;..=n {
+&lt;&#x2F;span&gt;&lt;span&gt;                resultado *= i as &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;u64&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;            }
+&lt;&#x2F;span&gt;&lt;span&gt;            Some(resultado)
+&lt;&#x2F;span&gt;&lt;span&gt;        }
+&lt;&#x2F;span&gt;&lt;span&gt;        _ =&amp;gt; None,  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Número muito grande
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;3-usar-pattern-matching-efetivamente&quot;&gt;3. Usar Pattern Matching Efetivamente&lt;&#x2F;h3&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;processar_resultado&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;T, E&amp;gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;resultado&lt;&#x2F;span&gt;&lt;span&gt;: Result&amp;lt;T, E&amp;gt;) -&amp;gt; String 
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;where 
+&lt;&#x2F;span&gt;&lt;span&gt;    T: std::fmt::Display,
+&lt;&#x2F;span&gt;&lt;span&gt;    E: std::fmt::Display,
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;match&lt;&#x2F;span&gt;&lt;span&gt; resultado {
+&lt;&#x2F;span&gt;&lt;span&gt;        Ok(valor) =&amp;gt; format!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Sucesso: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;{}&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, valor),
+&lt;&#x2F;span&gt;&lt;span&gt;        Err(erro) =&amp;gt; format!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Erro: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;{}&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, erro),
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;conclusao&quot;&gt;Conclusão&lt;&#x2F;h2&gt;
+&lt;p&gt;A compreensão da diferença entre expressões e statements, juntamente com o domínio da definição de funções, é fundamental para escrever código Rust idiomático e eficiente. As expressões proporcionam uma forma concisa de retornar valores, enquanto os statements executam ações. As funções em Rust, por sua vez, oferecem um sistema robusto e flexível para organizar código, com suporte a generics, lifetimes e pattern matching.&lt;&#x2F;p&gt;
+&lt;p&gt;Estes conceitos são a base sobre a qual se constrói o conhecimento mais avançado em Rust, incluindo ownership, borrowing e o sistema de tipos. Dominar estes fundamentos permitirá que escrevas código mais expressivo, seguro e performante.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;referencias&quot;&gt;Referências&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;doc.rust-lang.org&#x2F;stable&#x2F;book&#x2F;ch03-03-how-functions-work.html&quot;&gt;The Rust Programming Language - Functions&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;doc.rust-lang.org&#x2F;stable&#x2F;book&#x2F;ch03-03-how-functions-work.html#statements-and-expressions&quot;&gt;The Rust Programming Language - Statements and Expressions&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;doc.rust-lang.org&#x2F;stable&#x2F;rust-by-example&#x2F;fn.html&quot;&gt;Rust by Example - Functions&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;doc.rust-lang.org&#x2F;stable&#x2F;rust-by-example&#x2F;expression.html&quot;&gt;Rust by Example - Expressions&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;hr &#x2F;&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Disclaimer&lt;&#x2F;em&gt;&lt;&#x2F;strong&gt;: Artigo elaborado com auxilio a ferramentas de inteligência artificial mas revisto por humanos.&lt;&#x2F;p&gt;
+</description>
+      </item>
       <item>
           <title>Fluxos no Rust</title>
           <pubDate>Sun, 21 Sep 2025 00:00:00 +0000</pubDate>

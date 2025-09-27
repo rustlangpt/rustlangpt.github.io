@@ -39,6 +39,10 @@
         <lastmod>2025-09-21</lastmod>
     </url>
     <url>
+        <loc>https://rustlangpt.github.io/posts/funcoes/</loc>
+        <lastmod>2025-09-27</lastmod>
+    </url>
+    <url>
         <loc>https://rustlangpt.github.io/posts/instalacao-rust/</loc>
         <lastmod>2025-09-09</lastmod>
     </url>
@@ -100,6 +104,12 @@
     </url>
     <url>
         <loc>https://rustlangpt.github.io/tags/fluxos/page/1/</loc>
+    </url>
+    <url>
+        <loc>https://rustlangpt.github.io/tags/funcoes/</loc>
+    </url>
+    <url>
+        <loc>https://rustlangpt.github.io/tags/funcoes/page/1/</loc>
     </url>
     <url>
         <loc>https://rustlangpt.github.io/tags/fundamentos/</loc>
