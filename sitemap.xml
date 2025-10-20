@@ -31,12 +31,24 @@
         <lastmod>2025-09-12</lastmod>
     </url>
     <url>
+        <loc>https://rustlangpt.github.io/posts/closures/</loc>
+        <lastmod>2025-10-02</lastmod>
+    </url>
+    <url>
         <loc>https://rustlangpt.github.io/posts/conceitos-avancados-rustup/</loc>
         <lastmod>2025-09-10</lastmod>
     </url>
     <url>
+        <loc>https://rustlangpt.github.io/posts/conversoes/</loc>
+        <lastmod>2025-10-20</lastmod>
+    </url>
+    <url>
         <loc>https://rustlangpt.github.io/posts/fluxos/</loc>
         <lastmod>2025-09-21</lastmod>
+    </url>
+    <url>
+        <loc>https://rustlangpt.github.io/posts/funcoes/</loc>
+        <lastmod>2025-09-27</lastmod>
     </url>
     <url>
         <loc>https://rustlangpt.github.io/posts/instalacao-rust/</loc>
@@ -44,9 +56,6 @@
     </url>
     <url>
         <loc>https://rustlangpt.github.io/posts/page/1/</loc>
-    </url>
-    <url>
-        <loc>https://rustlangpt.github.io/posts/page/2/</loc>
     </url>
     <url>
         <loc>https://rustlangpt.github.io/posts/var-literal-types-mut-shad/</loc>
@@ -90,16 +99,34 @@
         <loc>https://rustlangpt.github.io/tags/cargo/page/1/</loc>
     </url>
     <url>
+        <loc>https://rustlangpt.github.io/tags/closures/</loc>
+    </url>
+    <url>
+        <loc>https://rustlangpt.github.io/tags/closures/page/1/</loc>
+    </url>
+    <url>
         <loc>https://rustlangpt.github.io/tags/comunidade/</loc>
     </url>
     <url>
         <loc>https://rustlangpt.github.io/tags/comunidade/page/1/</loc>
     </url>
     <url>
+        <loc>https://rustlangpt.github.io/tags/conversoes-tipos/</loc>
+    </url>
+    <url>
+        <loc>https://rustlangpt.github.io/tags/conversoes-tipos/page/1/</loc>
+    </url>
+    <url>
         <loc>https://rustlangpt.github.io/tags/fluxos/</loc>
     </url>
     <url>
         <loc>https://rustlangpt.github.io/tags/fluxos/page/1/</loc>
+    </url>
+    <url>
+        <loc>https://rustlangpt.github.io/tags/funcoes/</loc>
+    </url>
+    <url>
+        <loc>https://rustlangpt.github.io/tags/funcoes/page/1/</loc>
     </url>
     <url>
         <loc>https://rustlangpt.github.io/tags/fundamentos/</loc>
@@ -112,6 +139,12 @@
     </url>
     <url>
         <loc>https://rustlangpt.github.io/tags/iniciantes/page/1/</loc>
+    </url>
+    <url>
+        <loc>https://rustlangpt.github.io/tags/intermedio/</loc>
+    </url>
+    <url>
+        <loc>https://rustlangpt.github.io/tags/intermedio/page/1/</loc>
     </url>
     <url>
         <loc>https://rustlangpt.github.io/tags/linux/</loc>

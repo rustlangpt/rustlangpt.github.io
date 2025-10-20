@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <meta content="#ffffff" name="theme-color" />
+  <meta content="#da532c" name="msapplication-TileColor" />
+
+  
+  <link href='&#x2F;icons&#x2F;site.webmanifest' rel="manifest" />
+  
+  
+  <link color="#5bbad5" href='&#x2F;icons&#x2F;safari-pinned-tab.svg' rel="mask-icon" />
+  
+  
+  <link href='&#x2F;icons&#x2F;rustlangpt1_16px.png' rel="icon" sizes="16x16" type="image/png" />
+  
+  
+  <link href='&#x2F;icons&#x2F;rustlangpt1_32px.png' rel="icon" sizes="32x32" type="image/png" />
+  
+  
+  <link href='&#x2F;icons&#x2F;apple-touch-icon.png' rel="apple-touch-icon" sizes="180x180" />
+  
+
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galleria@1.6.1/dist/themes/folio/galleria.folio.min.css" integrity="sha384-+rY0QD+LRnTOquDMzGa9lXU6jIwdiQuwCJQ2cdcW0qeP/0UbjQCZlXnRsUMA+9pH" crossorigin="anonymous">
+  
+
+  
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1.9.1/css/academicons.min.css" integrity="sha384-FIue+PI4SsI9XfHCz8dBLg33b0c1fMJgNU3X//L26FYbGnlSEfWmNT7zgWc2N9b6" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link href="https://rustlangpt.github.io/deep-thought.css" rel="stylesheet" />
+  
+  
+
+  <title>
+    
+RustlangPT | Conversão de Tipos em Rust: Guia Completo.
+
+  </title>
+
+  
+  
+  
+
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css" integrity="sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js" integrity="sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx" crossorigin="anonymous"></script>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/mathtex-script-type.min.js" integrity="sha384-jiBVvJ8NGGj5n7kJaiWwWp9AjC+Yh8rhZY3GtAX8yU28azcLgoRo4oukO87g7zDT" crossorigin="anonymous"></script>
+  
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+  
+  
+</head>
+
+<body class="has-background-white">
+  <nav aria-label="section navigation" class="navbar is-light" role="navigation">
+    <div class="container">
+      <div class="navbar-brand">
+        <a class="navbar-item is-size-5 has-text-weight-bold" href="https:&#x2F;&#x2F;rustlangpt.github.io">RustlangPT</a>
+        <a aria-expanded="false" aria-label="menu" class="navbar-burger burger" data-target="navMenu" role="button">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+      <div class="navbar-menu" id="navMenu">
+        <div class="navbar-end has-text-centered">
+          
+          
+          
+          <a class="navbar-item has-text-weight-semibold" href="https:&#x2F;&#x2F;rustlangpt.github.io&#x2F;posts">
+            Blog
+          </a>
+          
+          <a class="navbar-item has-text-weight-semibold" href="https:&#x2F;&#x2F;rustlangpt.github.io&#x2F;recursos">
+            Recursos
+          </a>
+          
+          <a class="navbar-item has-text-weight-semibold" href="https:&#x2F;&#x2F;rustlangpt.github.io&#x2F;acerca">
+            Acerca
+          </a>
+          
+          <a class="navbar-item has-text-weight-semibold" href="https:&#x2F;&#x2F;rustlangpt.github.io&#x2F;eventos">
+            Eventos
+          </a>
+          
+          <a class="navbar-item has-text-weight-semibold" href="https:&#x2F;&#x2F;rustlangpt.github.io&#x2F;tags">
+            Tags
+          </a>
+          
+          
+          
+          <a class="navbar-item" id="nav-search" title="Search" data-target="#search-modal">
+            <span class="icon">
+              <i class="fas fa-search"></i>
+            </span>
+          </a>
+          <a class="navbar-item" id="dark-mode" title="Switch to dark theme">
+            <span class="icon">
+              <i class="fas fa-adjust"></i>
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  
+  
+
+  
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-8 is-offset-2">
+        <article class="box">
+          <h1 class="title">
+            Conversão de Tipos em Rust: Guia Completo.
+          </h1>
+          <p class="subtitle">Conversão de Tipos Primitivos, Conversão Dinâmica com Traits, Conversão de Strings, Casting Avançado e Tipos Genéricos e casos particulares.</p>
+          <div class="columns is-multiline is-gapless">
+            <div class="column is-8">
+              
+<span class="icon-text has-text-grey">
+  
+  <span class="icon">
+    <i class="fas fa-user"></i>
+  </span>
+  <span>RustLangPT publicado em</span>
+  <span class="icon">
+    <i class="far fa-calendar-alt"></i>
+  </span>
+  <span><time datetime="2025-10-20">20 October, 2025</time></span>
+
+</span>
+
+            </div>
+            <div class="column is-4 has-text-right-desktop">
+              
+<span class="icon-text has-text-grey">
+  <span class="icon">
+    <i class="far fa-clock"></i>
+  </span>
+  <span>5 min,</span>
+  <span class="icon">
+    <i class="fas fa-pencil-alt"></i>
+  </span>
+  <span>870 words</span>
+</span>
+
+            </div>
+            <div class="column">
+              
+            </div>
+            <div class="column has-text-right-desktop">
+              
+              
+<p>
+  Tags:
+  
+  <a class="has-text-info-dark has-text-weight-semibold" href="https://rustlangpt.github.io/tags/fundamentos/">
+    <span class="icon-text">
+      <span class="icon">
+        <i class="fas fa-tag"></i>
+      </span>
+      <span>Fundamentos</span>
+    </span>
+  </a>
+  
+  <a class="has-text-info-dark has-text-weight-semibold" href="https://rustlangpt.github.io/tags/intermedio/">
+    <span class="icon-text">
+      <span class="icon">
+        <i class="fas fa-tag"></i>
+      </span>
+      <span>Intermédio</span>
+    </span>
+  </a>
+  
+  <a class="has-text-info-dark has-text-weight-semibold" href="https://rustlangpt.github.io/tags/conversoes-tipos/">
+    <span class="icon-text">
+      <span class="icon">
+        <i class="fas fa-tag"></i>
+      </span>
+      <span>Conversões Tipos</span>
+    </span>
+  </a>
+  
+</p>
+
+              
+            </div>
+          </div>
+          <div class="content mt-2">
+            <p>A conversão de tipos é uma operação fundamental em qualquer linguagem de programação e o Rust oferece múltiplas formas de realizar essas conversões de maneira segura e explícita. Neste artigo, vamos explorar os diferentes mecanismos de conversão disponíveis em Rust, desde conversões simples entre tipos primitivos até conversões genéricas mais complexas.</p>
+<h2 id="1-conversao-de-tipos-primitivos">1. Conversão de Tipos Primitivos</h2>
+<p>Rust é uma linguagem fortemente tipada que não realiza conversões implícitas entre tipos numéricos, mesmo quando parecem "óbvias". Isso previne bugs subtis e comportamentos inesperados.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> a: </span><span style="color:#b48ead;">u8 </span><span>= </span><span style="color:#d08770;">10</span><span>;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> b: </span><span style="color:#b48ead;">u16 </span><span>= </span><span style="color:#d08770;">20</span><span>;
+</span><span>    </span><span style="color:#65737e;">// let c = a + b; // ERRO: tipos diferentes
+</span><span>    </span><span style="color:#b48ead;">let</span><span> c = (a as </span><span style="color:#b48ead;">u16</span><span>) + b; </span><span style="color:#65737e;">// casting explícito
+</span><span>    println!(&quot;</span><span style="color:#d08770;">{}</span><span>&quot;, c); </span><span style="color:#65737e;">// imprime: 30
+</span><span>}
+</span></code></pre>
+<h3 id="1-1-casting-com-as">1.1 Casting com <code>as</code></h3>
+<p>A forma mais direta de converter entre tipos primitivos é usando a palavra-chave <code>as</code>:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> decimal: </span><span style="color:#b48ead;">f32 </span><span>= </span><span style="color:#d08770;">65.4321</span><span>;
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Conversão explícita usando &#39;as&#39;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> inteiro = decimal as </span><span style="color:#b48ead;">u8</span><span>;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> caractere = inteiro as </span><span style="color:#b48ead;">char</span><span>;
+</span><span>    
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Decimal: </span><span style="color:#d08770;">{}</span><span>&quot;, decimal);
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Inteiro: </span><span style="color:#d08770;">{}</span><span>&quot;, inteiro);
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Caractere: </span><span style="color:#d08770;">{}</span><span>&quot;, caractere);
+</span><span>}
+</span></code></pre>
+<p><strong>Atenção:</strong> O casting com <code>as</code> pode ser perigoso, pois:</p>
+<ul>
+<li>Trunca valores (sem arredondamento)</li>
+<li>Pode causar overflow silencioso</li>
+<li>Não verifica se a conversão faz sentido</li>
+</ul>
+<p><strong>Regra</strong>: use as para conversões explícitas entre tipos primitivos (integrais e floats). Não há coerção implícita; todo cast é explícito e bem definido em Rust.</p>
+<p><strong>Comportamentos importantes</strong>:</p>
+<ul>
+<li>Conversão entre inteiros de tamanhos diferentes trunca ou preserva bits conforme necessário (comportamento definido, não indefinido como em C).</li>
+<li>Casting de floats para inteiros usa <em>saturating cast</em> desde Rust 1.45: valores além dos limites resultam no limite correspondente; NaN fica 0.</li>
+<li>Conversões entre signed/unsigned mantêm os bits subjacentes; interpretar o sinal depende da representação.</li>
+</ul>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#65737e;">// Exemplo de truncamento
+</span><span>    </span><span style="color:#b48ead;">let</span><span> pi: </span><span style="color:#b48ead;">f32 </span><span>= </span><span style="color:#d08770;">3.14159</span><span>;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> truncado = pi as </span><span style="color:#b48ead;">i32</span><span>;
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Truncado: </span><span style="color:#d08770;">{}</span><span>&quot;, truncado); </span><span style="color:#65737e;">// Imprime: 3
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Exemplo de overflow
+</span><span>    </span><span style="color:#b48ead;">let</span><span> valor_grande: </span><span style="color:#b48ead;">u32 </span><span>= </span><span style="color:#d08770;">1000</span><span>;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> overflow = valor_grande as </span><span style="color:#b48ead;">u8</span><span>;
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Overflow: </span><span style="color:#d08770;">{}</span><span>&quot;, overflow); </span><span style="color:#65737e;">// Imprime: 232 (1000 % 256)
+</span><span>
+</span><span>}
+</span></code></pre>
+<p><strong>Aviso</strong>: <code>as</code> é uma ferramenta poderosa e potencialmente perigosa; prefira <code>From/Into</code> para conversões infalíveis entre tipos onde fizer sentido e <code>TryFrom</code> para as falíveis</p>
+<p>Para mais detalhes sobre casting, consulte a <a href="https://doc.rust-lang.org/rust-by-example/types/cast.html">documentação oficial sobre cast</a>.</p>
+<h2 id="2-conversao-com-from-e-into">2. Conversão com <code>From</code> e <code>Into</code></h2>
+<p>Os traits <code>From</code> e <code>Into</code> fazem parte do sistema de conversão idiomático do Rust.</p>
+<p>Estes são os métodos preferidos para conversões com perdas ou potenciais erros.</p>
+<p><code>From</code> e <code>Into</code>:</p>
+<ul>
+<li><code>From&lt;T&gt;</code> converte de <code>T</code> para outro tipo.</li>
+<li><code>Into&lt;T&gt;</code> é automaticamente implementado para qualquer tipo que implemente <code>From</code>.</li>
+</ul>
+<p>Quando implementa <code>From</code>, <code>Into</code> é automaticamente disponibilizado.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> num = </span><span style="color:#d08770;">10</span><span>;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> texto = String::from(&quot;</span><span style="color:#a3be8c;">Rust</span><span>&quot;); </span><span style="color:#65737e;">// cria a partir de &amp;str
+</span><span>    </span><span style="color:#b48ead;">let</span><span> string_via_into: String = &quot;</span><span style="color:#a3be8c;">Olá</span><span>&quot;.</span><span style="color:#96b5b4;">into</span><span>(); </span><span style="color:#65737e;">// equivalente
+</span><span>    println!(&quot;</span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;"> e </span><span style="color:#d08770;">{}</span><span>&quot;, texto, string_via_into);
+</span><span>}
+</span></code></pre>
+<h3 id="2-1-trait-from">2.1 Trait <code>From</code></h3>
+<p>O trait <code>From</code> permite criar um tipo a partir de outro:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> numero = </span><span style="color:#d08770;">42</span><span>;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> texto = String::from(&quot;</span><span style="color:#a3be8c;">42</span><span>&quot;);
+</span><span>    </span><span style="color:#b48ead;">let</span><span> convertido: </span><span style="color:#b48ead;">i32 </span><span>= </span><span style="color:#b48ead;">i32</span><span>::from_str_radix(&amp;texto, </span><span style="color:#d08770;">10</span><span>).</span><span style="color:#96b5b4;">unwrap</span><span>();
+</span><span>    println!(&quot;</span><span style="color:#d08770;">{}</span><span>&quot;, convertido);
+</span><span>}
+</span></code></pre>
+<p>Exemplo com estruturas.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>std::convert::From;
+</span><span>
+</span><span>#[</span><span style="color:#bf616a;">derive</span><span>(Debug)]
+</span><span style="color:#b48ead;">struct </span><span>Metros(</span><span style="color:#b48ead;">u32</span><span>);
+</span><span>
+</span><span style="color:#b48ead;">impl </span><span>From&lt;</span><span style="color:#b48ead;">u32</span><span>&gt; </span><span style="color:#b48ead;">for </span><span>Metros {
+</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">from</span><span>(</span><span style="color:#bf616a;">valor</span><span>: </span><span style="color:#b48ead;">u32</span><span>) -&gt; </span><span style="color:#b48ead;">Self </span><span>{
+</span><span>        Metros(valor)
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> distancia = Metros::from(</span><span style="color:#d08770;">100</span><span>);
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Distância: </span><span style="color:#d08770;">{:?}</span><span>&quot;, distancia);
+</span><span>}
+</span></code></pre>
+<p>Outro exemplo:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>
+</span><span style="color:#65737e;">// Exemplo: Criar uma Struct &#39;Pessoa&#39; a partir de uma &#39;String&#39;
+</span><span style="color:#b48ead;">struct </span><span>Pessoa {
+</span><span>    </span><span style="color:#bf616a;">nome</span><span>: String,
+</span><span>    </span><span style="color:#bf616a;">idade</span><span>: </span><span style="color:#b48ead;">u8</span><span>,
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">impl </span><span>From&lt;String&gt; </span><span style="color:#b48ead;">for </span><span>Pessoa {
+</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">from</span><span>(</span><span style="color:#bf616a;">s</span><span>: String) -&gt; </span><span style="color:#b48ead;">Self </span><span>{
+</span><span>        </span><span style="color:#b48ead;">let</span><span> partes: Vec&lt;&amp;</span><span style="color:#b48ead;">str</span><span>&gt; = s.</span><span style="color:#96b5b4;">split</span><span>(&#39;</span><span style="color:#a3be8c;">,</span><span>&#39;).</span><span style="color:#96b5b4;">collect</span><span>();
+</span><span>        Pessoa {
+</span><span>            nome: partes[</span><span style="color:#d08770;">0</span><span>].</span><span style="color:#96b5b4;">to_string</span><span>(),
+</span><span>            idade: partes[</span><span style="color:#d08770;">1</span><span>].</span><span style="color:#96b5b4;">parse</span><span>().</span><span style="color:#96b5b4;">unwrap_or</span><span>(</span><span style="color:#d08770;">0</span><span>),
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> dados = &quot;</span><span style="color:#a3be8c;">Alice,30</span><span>&quot;.</span><span style="color:#96b5b4;">to_string</span><span>();
+</span><span>    </span><span style="color:#65737e;">// Usa Pessoa::from(dados)
+</span><span>    </span><span style="color:#b48ead;">let</span><span> alice = Pessoa::from(dados);
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Pessoa: </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;"> (</span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;"> anos)</span><span>&quot;, alice.nome, alice.idade);
+</span><span>}
+</span><span>
+</span></code></pre>
+<p>Outro exemplo:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">struct </span><span>Ponto {
+</span><span>    </span><span style="color:#bf616a;">x</span><span>: </span><span style="color:#b48ead;">i32</span><span>,
+</span><span>    </span><span style="color:#bf616a;">y</span><span>: </span><span style="color:#b48ead;">i32</span><span>,
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">impl </span><span>From&lt;(</span><span style="color:#b48ead;">i32</span><span>, </span><span style="color:#b48ead;">i32</span><span>)&gt; </span><span style="color:#b48ead;">for </span><span>Ponto {
+</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">from</span><span>(</span><span style="color:#bf616a;">tuple</span><span>: (</span><span style="color:#bf616a;">i32</span><span>, </span><span style="color:#bf616a;">i32</span><span>)) -&gt; </span><span style="color:#b48ead;">Self </span><span>{
+</span><span>        Ponto { x: tuple.</span><span style="color:#d08770;">0</span><span>, y: tuple.</span><span style="color:#d08770;">1 </span><span>}
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> tuple = (</span><span style="color:#d08770;">10</span><span>, </span><span style="color:#d08770;">20</span><span>);
+</span><span>    </span><span style="color:#b48ead;">let</span><span> ponto = Ponto::from(tuple);
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Ponto: (</span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">, </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">)</span><span>&quot;, ponto.x, ponto.y);
+</span><span>}
+</span><span>
+</span></code></pre>
+<h3 id="2-2-trait-into">2.2 Trait <code>Into</code></h3>
+<p>O trait <code>Into</code> é o inverso de <code>From</code>. Quando você implementa <code>From</code>, automaticamente ganha a implementação de <code>Into</code>:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> num_inteiro: </span><span style="color:#b48ead;">i32 </span><span>= </span><span style="color:#d08770;">5</span><span>;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> num_obj: Numero = num_inteiro.</span><span style="color:#96b5b4;">into</span><span>();
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Convertido: </span><span style="color:#d08770;">{:?}</span><span>&quot;, num_obj);
+</span><span>}
+</span></code></pre>
+<p><strong>Vantagem:</strong> <code>Into</code> é útil em funções genéricas:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">processar_numero</span><span>&lt;T: Into&lt;Numero&gt;&gt;(</span><span style="color:#bf616a;">n</span><span>: T) {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> numero = n.</span><span style="color:#96b5b4;">into</span><span>();
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Processando: </span><span style="color:#d08770;">{:?}</span><span>&quot;, numero);
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#96b5b4;">processar_numero</span><span>(</span><span style="color:#d08770;">42</span><span style="color:#b48ead;">i32</span><span>); </span><span style="color:#65737e;">// Conversão automática
+</span><span>}
+</span></code></pre>
+<p>Mais um exemplo.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>#[</span><span style="color:#bf616a;">derive</span><span>(Debug)]
+</span><span style="color:#b48ead;">struct </span><span>Ponto {
+</span><span>    </span><span style="color:#bf616a;">x</span><span>: </span><span style="color:#b48ead;">i32</span><span>,
+</span><span>    </span><span style="color:#bf616a;">y</span><span>: </span><span style="color:#b48ead;">i32</span><span>,
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">impl </span><span>From&lt;(</span><span style="color:#b48ead;">i32</span><span>, </span><span style="color:#b48ead;">i32</span><span>)&gt; </span><span style="color:#b48ead;">for </span><span>Ponto {
+</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">from</span><span>(</span><span style="color:#bf616a;">tupla</span><span>: (</span><span style="color:#bf616a;">i32</span><span>, </span><span style="color:#bf616a;">i32</span><span>)) -&gt; </span><span style="color:#b48ead;">Self </span><span>{
+</span><span>        Ponto { x: tupla.</span><span style="color:#d08770;">0</span><span>, y: tupla.</span><span style="color:#d08770;">1 </span><span>}
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> p: Ponto = (</span><span style="color:#d08770;">3</span><span>, </span><span style="color:#d08770;">4</span><span>).</span><span style="color:#96b5b4;">into</span><span>();  </span><span style="color:#65737e;">// Conversão genérica
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Ponto: </span><span style="color:#d08770;">{:?}</span><span>&quot;, p);  </span><span style="color:#65737e;">// Saída: Ponto: Ponto { x: 3, y: 4 }
+</span><span>}
+</span></code></pre>
+<p>Mais informações em <a href="https://doc.rust-lang.org/rust-by-example/conversion/from_into.html">From e Into</a>.</p>
+<h2 id="3-conversao-com-possibilidade-de-falha-tryfrom-e-tryinto">3. Conversão com possibilidade de falha <code>TryFrom</code> e <code>TryInto</code></h2>
+<p>Nem todas as conversões são garantidas de sucesso. Para casos onde a conversão pode falhar, Rust oferece <code>TryFrom</code> e <code>TryInto</code>. Estes devolvem um Result&lt;T, E&gt;.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>std::convert::TryFrom;
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> valor: Result&lt;</span><span style="color:#b48ead;">u8</span><span>, _&gt; = </span><span style="color:#b48ead;">u8</span><span>::try_from(</span><span style="color:#d08770;">300</span><span>);
+</span><span>    </span><span style="color:#b48ead;">match</span><span> valor {
+</span><span>        Ok(v) =&gt; println!(&quot;</span><span style="color:#a3be8c;">Valor convertido: </span><span style="color:#d08770;">{}</span><span>&quot;, v),
+</span><span>        Err(e) =&gt; println!(&quot;</span><span style="color:#a3be8c;">Erro: </span><span style="color:#d08770;">{:?}</span><span>&quot;, e),
+</span><span>    }
+</span><span>}
+</span><span>
+</span></code></pre>
+<p>Outro exemplo com <code>structs</code> e <code>enums</code>:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>std::convert::TryFrom;
+</span><span style="color:#b48ead;">use </span><span>std::convert::TryInto;
+</span><span>
+</span><span>#[</span><span style="color:#bf616a;">derive</span><span>(Debug, PartialEq)]
+</span><span style="color:#b48ead;">struct </span><span>NumeroPositivo(</span><span style="color:#b48ead;">i32</span><span>);
+</span><span>
+</span><span>#[</span><span style="color:#bf616a;">derive</span><span>(Debug)]
+</span><span style="color:#b48ead;">enum </span><span>ErroConversao {
+</span><span>    NumeroNegativo,
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">impl </span><span>TryFrom&lt;</span><span style="color:#b48ead;">i32</span><span>&gt; </span><span style="color:#b48ead;">for </span><span>NumeroPositivo {
+</span><span>    </span><span style="color:#b48ead;">type </span><span>Error = ErroConversao;
+</span><span>    
+</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">try_from</span><span>(</span><span style="color:#bf616a;">valor</span><span>: </span><span style="color:#b48ead;">i32</span><span>) -&gt; Result&lt;</span><span style="color:#b48ead;">Self</span><span>, </span><span style="color:#b48ead;">Self::</span><span>Error&gt; {
+</span><span>        </span><span style="color:#b48ead;">if</span><span> valor &gt;= </span><span style="color:#d08770;">0 </span><span>{
+</span><span>            Ok(NumeroPositivo(valor))
+</span><span>        } </span><span style="color:#b48ead;">else </span><span>{
+</span><span>            Err(ErroConversao::NumeroNegativo)
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#65737e;">// Conversão bem-sucedida
+</span><span>    </span><span style="color:#b48ead;">let</span><span> sucesso: Result&lt;NumeroPositivo, _&gt; = NumeroPositivo::try_from(</span><span style="color:#d08770;">10</span><span>);
+</span><span>    println!(&quot;</span><span style="color:#d08770;">{:?}</span><span>&quot;, sucesso); </span><span style="color:#65737e;">// Ok(NumeroPositivo(10))
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Conversão que falha
+</span><span>    </span><span style="color:#b48ead;">let</span><span> falha: Result&lt;NumeroPositivo, _&gt; = NumeroPositivo::try_from(-</span><span style="color:#d08770;">5</span><span>);
+</span><span>    println!(&quot;</span><span style="color:#d08770;">{:?}</span><span>&quot;, falha); </span><span style="color:#65737e;">// Err(NumeroNegativo)
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Usando TryInto
+</span><span>    </span><span style="color:#b48ead;">let</span><span> tentativa: Result&lt;NumeroPositivo, _&gt; = </span><span style="color:#d08770;">42.</span><span style="color:#96b5b4;">try_into</span><span>();
+</span><span>    </span><span style="color:#b48ead;">match</span><span> tentativa {
+</span><span>        Ok(n) =&gt; println!(&quot;</span><span style="color:#a3be8c;">Convertido: </span><span style="color:#d08770;">{:?}</span><span>&quot;, n),
+</span><span>        Err(e) =&gt; println!(&quot;</span><span style="color:#a3be8c;">Erro: </span><span style="color:#d08770;">{:?}</span><span>&quot;, e),
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Mais um exemplo:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>std::convert::TryFrom;
+</span><span>
+</span><span>#[</span><span style="color:#bf616a;">derive</span><span>(Debug)]
+</span><span style="color:#b48ead;">struct </span><span>Idade(</span><span style="color:#b48ead;">u8</span><span>);
+</span><span>
+</span><span style="color:#b48ead;">impl </span><span>TryFrom&lt;</span><span style="color:#b48ead;">i32</span><span>&gt; </span><span style="color:#b48ead;">for </span><span>Idade {
+</span><span>    </span><span style="color:#b48ead;">type </span><span>Error = &amp;</span><span style="color:#b48ead;">&#39;static str</span><span>;
+</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">try_from</span><span>(</span><span style="color:#bf616a;">valor</span><span>: </span><span style="color:#b48ead;">i32</span><span>) -&gt; Result&lt;</span><span style="color:#b48ead;">Self</span><span>, </span><span style="color:#b48ead;">Self::</span><span>Error&gt; {
+</span><span>        </span><span style="color:#b48ead;">if</span><span> valor &gt;= </span><span style="color:#d08770;">0 </span><span>&amp;&amp; valor &lt;= </span><span style="color:#d08770;">150 </span><span>{
+</span><span>            Ok(Idade(valor as </span><span style="color:#b48ead;">u8</span><span>))
+</span><span>        } </span><span style="color:#b48ead;">else </span><span>{
+</span><span>            Err(&quot;</span><span style="color:#a3be8c;">Idade inválida</span><span>&quot;)
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">match </span><span>Idade::try_from(</span><span style="color:#d08770;">25</span><span>) {
+</span><span>        Ok(idade) =&gt; println!(&quot;</span><span style="color:#a3be8c;">Idade válida: </span><span style="color:#d08770;">{:?}</span><span>&quot;, idade),
+</span><span>        Err(e) =&gt; println!(&quot;</span><span style="color:#a3be8c;">Erro: </span><span style="color:#d08770;">{}</span><span>&quot;, e),
+</span><span>    }
+</span><span>}
+</span><span>
+</span></code></pre>
+<p>Essa abordagem é especialmente útil para conversões entre tipos numéricos que podem causar overflow:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>std::convert::TryInto;
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> valor_grande: </span><span style="color:#b48ead;">i32 </span><span>= </span><span style="color:#d08770;">1000</span><span>;
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Conversão segura de i32 para i8
+</span><span>    </span><span style="color:#b48ead;">let</span><span> resultado: Result&lt;</span><span style="color:#b48ead;">i8</span><span>, _&gt; = valor_grande.</span><span style="color:#96b5b4;">try_into</span><span>();
+</span><span>    
+</span><span>    </span><span style="color:#b48ead;">match</span><span> resultado {
+</span><span>        Ok(v) =&gt; println!(&quot;</span><span style="color:#a3be8c;">Convertido: </span><span style="color:#d08770;">{}</span><span>&quot;, v),
+</span><span>        Err(_) =&gt; println!(&quot;</span><span style="color:#a3be8c;">Valor muito grande para i8!</span><span>&quot;),
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Documentação completa: <a href="https://doc.rust-lang.org/rust-by-example/conversion/try_from_try_into.html">TryFrom e TryInto</a>.</p>
+<h2 id="4-conversao-de-e-para-strings">4. Conversão de e para Strings</h2>
+<p>Trabalhar com strings é uma das operações mais comuns. Rust oferece várias formas de converter entre strings e outros tipos.</p>
+<h3 id="4-1-convertendo-para-string">4.1 Convertendo para String</h3>
+<h4 id="str-string">str → String</h4>
+<p>Construa String a partir de &amp;str com String::from ou to_string().</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">let</span><span> s_literal: &amp;</span><span style="color:#b48ead;">str </span><span>= &quot;</span><span style="color:#a3be8c;">olá</span><span>&quot;;
+</span><span style="color:#b48ead;">let</span><span> s_string: String = String::from(s_literal);
+</span><span style="color:#b48ead;">let</span><span> s2 = s_literal.</span><span style="color:#96b5b4;">to_string</span><span>();
+</span></code></pre>
+<h4 id="string-str">String → &amp;str</h4>
+<p>Obtenha &amp;str usando &amp;my_string ou my_string.as_str().</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">let</span><span> owned = String::from(&quot;</span><span style="color:#a3be8c;">texto</span><span>&quot;);
+</span><span style="color:#b48ead;">let</span><span> slice: &amp;</span><span style="color:#b48ead;">str </span><span>= &amp;owned;
+</span></code></pre>
+<p>Para conversões que consomem String e produzem outros tipos, implementar From<String> ou TryFrom<String> é idiomático quando apropriado.</p>
+<h4 id="usando-to-string">Usando <code>to_string()</code></h4>
+<p>Qualquer tipo que implemente o trait <code>Display</code> pode usar <code>to_string()</code>:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> inteiro = </span><span style="color:#d08770;">42</span><span>;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> flutuante = </span><span style="color:#d08770;">3.14159</span><span>;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> booleano = </span><span style="color:#d08770;">true</span><span>;
+</span><span>    
+</span><span>    </span><span style="color:#b48ead;">let</span><span> str_inteiro = inteiro.</span><span style="color:#96b5b4;">to_string</span><span>();
+</span><span>    </span><span style="color:#b48ead;">let</span><span> str_flutuante = flutuante.</span><span style="color:#96b5b4;">to_string</span><span>();
+</span><span>    </span><span style="color:#b48ead;">let</span><span> str_booleano = booleano.</span><span style="color:#96b5b4;">to_string</span><span>();
+</span><span>    
+</span><span>    println!(&quot;</span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">, </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">, </span><span style="color:#d08770;">{}</span><span>&quot;, str_inteiro, str_flutuante, str_booleano);
+</span><span>}
+</span></code></pre>
+<h4 id="usando-format">Usando <code>format!</code></h4>
+<p>A macro <code>format!</code> oferece mais controle sobre a formatação:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> nome = &quot;</span><span style="color:#a3be8c;">Rust</span><span>&quot;;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> versao = </span><span style="color:#d08770;">1.70</span><span>;
+</span><span>    
+</span><span>    </span><span style="color:#b48ead;">let</span><span> mensagem = format!(&quot;</span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;"> versão </span><span style="color:#d08770;">{:.1}</span><span>&quot;, nome, versao);
+</span><span>    println!(&quot;</span><span style="color:#d08770;">{}</span><span>&quot;, mensagem); </span><span style="color:#65737e;">// Rust versão 1.7
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Formatação de números
+</span><span>    </span><span style="color:#b48ead;">let</span><span> numero = </span><span style="color:#d08770;">255</span><span>;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> hex = format!(&quot;</span><span style="color:#d08770;">{:X}</span><span>&quot;, numero);
+</span><span>    </span><span style="color:#b48ead;">let</span><span> binario = format!(&quot;</span><span style="color:#d08770;">{:b}</span><span>&quot;, numero);
+</span><span>    
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Hexadecimal: </span><span style="color:#d08770;">{}</span><span>&quot;, hex); </span><span style="color:#65737e;">// FF
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Binário: </span><span style="color:#d08770;">{}</span><span>&quot;, binario);  </span><span style="color:#65737e;">// 11111111
+</span><span>}
+</span></code></pre>
+<h3 id="4-2-convertendo-de-string">4.2 Convertendo de String</h3>
+<h4 id="usando-parse">Usando <code>parse()</code></h4>
+<p>O método <code>parse()</code> converte strings em outros tipos:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> str_numero = &quot;</span><span style="color:#a3be8c;">42</span><span>&quot;;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> numero: </span><span style="color:#b48ead;">i32 </span><span>= str_numero.</span><span style="color:#96b5b4;">parse</span><span>().</span><span style="color:#96b5b4;">unwrap</span><span>();
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Número parseado: </span><span style="color:#d08770;">{}</span><span>&quot;, numero);
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Com tratamento de erro
+</span><span>    </span><span style="color:#b48ead;">let</span><span> str_invalida = &quot;</span><span style="color:#a3be8c;">não é número</span><span>&quot;;
+</span><span>    </span><span style="color:#b48ead;">match</span><span> str_invalida.parse::&lt;</span><span style="color:#b48ead;">i32</span><span>&gt;() {
+</span><span>        Ok(n) =&gt; println!(&quot;</span><span style="color:#a3be8c;">Convertido: </span><span style="color:#d08770;">{}</span><span>&quot;, n),
+</span><span>        Err(e) =&gt; println!(&quot;</span><span style="color:#a3be8c;">Erro ao converter: </span><span style="color:#d08770;">{}</span><span>&quot;, e),
+</span><span>    }
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Parseando diferentes tipos       
+</span><span>    </span><span style="color:#b48ead;">let</span><span> flutuante: </span><span style="color:#b48ead;">f64 </span><span>= &quot;</span><span style="color:#a3be8c;">3.14</span><span>&quot;.</span><span style="color:#96b5b4;">parse</span><span>().</span><span style="color:#96b5b4;">unwrap</span><span>();
+</span><span>    </span><span style="color:#b48ead;">let</span><span> booleano: </span><span style="color:#b48ead;">bool </span><span>= &quot;</span><span style="color:#a3be8c;">true</span><span>&quot;.</span><span style="color:#96b5b4;">parse</span><span>().</span><span style="color:#96b5b4;">unwrap</span><span>();
+</span><span>    
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Float: </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">, Bool: </span><span style="color:#d08770;">{}</span><span>&quot;, flutuante, booleano);
+</span><span>}
+</span></code></pre>
+<h4 id="implementando-fromstr">Implementando <code>FromStr</code></h4>
+<p>Para tipos personalizados, você pode implementar o trait <code>FromStr</code>:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>std::str::FromStr;
+</span><span style="color:#b48ead;">use </span><span>std::num::ParseIntError;
+</span><span>
+</span><span>#[</span><span style="color:#bf616a;">derive</span><span>(Debug, PartialEq)]
+</span><span style="color:#b48ead;">struct </span><span>Ponto {
+</span><span>    </span><span style="color:#bf616a;">x</span><span>: </span><span style="color:#b48ead;">i32</span><span>,
+</span><span>    </span><span style="color:#bf616a;">y</span><span>: </span><span style="color:#b48ead;">i32</span><span>,
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">impl </span><span>FromStr </span><span style="color:#b48ead;">for </span><span>Ponto {
+</span><span>    </span><span style="color:#b48ead;">type </span><span>Err = ParseIntError;
+</span><span>    
+</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">from_str</span><span>(</span><span style="color:#bf616a;">s</span><span>: &amp;</span><span style="color:#b48ead;">str</span><span>) -&gt; Result&lt;</span><span style="color:#b48ead;">Self</span><span>, </span><span style="color:#b48ead;">Self::</span><span>Err&gt; {
+</span><span>        </span><span style="color:#b48ead;">let</span><span> coords: Vec&lt;&amp;</span><span style="color:#b48ead;">str</span><span>&gt; = s.</span><span style="color:#96b5b4;">trim_matches</span><span>(|</span><span style="color:#bf616a;">p</span><span>| p == &#39;</span><span style="color:#a3be8c;">(</span><span>&#39; || p == &#39;</span><span style="color:#a3be8c;">)</span><span>&#39;)
+</span><span>                                  .</span><span style="color:#96b5b4;">split</span><span>(&#39;</span><span style="color:#a3be8c;">,</span><span>&#39;)
+</span><span>                                  .</span><span style="color:#96b5b4;">collect</span><span>();
+</span><span>        
+</span><span>        </span><span style="color:#b48ead;">let</span><span> x = coords[</span><span style="color:#d08770;">0</span><span>].parse::&lt;</span><span style="color:#b48ead;">i32</span><span>&gt;()?;
+</span><span>        </span><span style="color:#b48ead;">let</span><span> y = coords[</span><span style="color:#d08770;">1</span><span>].parse::&lt;</span><span style="color:#b48ead;">i32</span><span>&gt;()?;
+</span><span>        
+</span><span>        Ok(Ponto { x, y })
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> ponto: Ponto = &quot;</span><span style="color:#a3be8c;">(10,20)</span><span>&quot;.</span><span style="color:#96b5b4;">parse</span><span>().</span><span style="color:#96b5b4;">unwrap</span><span>();
+</span><span>    println!(&quot;</span><span style="color:#d08770;">{:?}</span><span>&quot;, ponto); </span><span style="color:#65737e;">// Ponto { x: 10, y: 20 }
+</span><span>}
+</span></code></pre>
+<p>Mais exemplos em <a href="https://doc.rust-lang.org/rust-by-example/conversion/string.html">String Conversion</a>.</p>
+<h2 id="5-conversao-de-tipos-genericos">5. Conversão de Tipos Genéricos</h2>
+<p>Rust permite criar funções e structs genéricas que podem trabalhar com múltiplos tipos, incluindo conversões.</p>
+<h3 id="5-1-funcoes-genericas-com-conversao">5.1 Funções Genéricas com Conversão</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>std::fmt::Display;
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">imprimir_como_string</span><span>&lt;T: Display&gt;(</span><span style="color:#bf616a;">valor</span><span>: T) {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> string = valor.</span><span style="color:#96b5b4;">to_string</span><span>();
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Como string: </span><span style="color:#d08770;">{}</span><span>&quot;, string);
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">converter_e_processar</span><span>&lt;T, U&gt;(</span><span style="color:#bf616a;">valor</span><span>: T) -&gt; U
+</span><span style="color:#b48ead;">where
+</span><span>    T: Into&lt;U&gt;,
+</span><span>{
+</span><span>    valor.</span><span style="color:#96b5b4;">into</span><span>()
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#96b5b4;">imprimir_como_string</span><span>(</span><span style="color:#d08770;">42</span><span>);
+</span><span>    </span><span style="color:#96b5b4;">imprimir_como_string</span><span>(</span><span style="color:#d08770;">3.14</span><span>);
+</span><span>    </span><span style="color:#96b5b4;">imprimir_como_string</span><span>(&quot;</span><span style="color:#a3be8c;">Olá</span><span>&quot;);
+</span><span>    
+</span><span>    </span><span style="color:#b48ead;">let</span><span> num: Numero = </span><span style="color:#96b5b4;">converter_e_processar</span><span>(</span><span style="color:#d08770;">100</span><span style="color:#b48ead;">i32</span><span>);
+</span><span>    println!(&quot;</span><span style="color:#d08770;">{:?}</span><span>&quot;, num);
+</span><span>}
+</span></code></pre>
+<h3 id="5-2-conversoes-com-lifetimes">5.2 Conversões com Lifetimes</h3>
+<p>Quando trabalhamos com referências, precisamos considerar lifetimes:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">struct </span><span>Container&lt;</span><span style="color:#b48ead;">&#39;a</span><span>&gt; {
+</span><span>    </span><span style="color:#bf616a;">dados</span><span>: &amp;</span><span style="color:#b48ead;">&#39;a str</span><span>,
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">impl</span><span>&lt;</span><span style="color:#b48ead;">&#39;a</span><span>&gt; From&lt;&amp;</span><span style="color:#b48ead;">&#39;a str</span><span>&gt; </span><span style="color:#b48ead;">for </span><span>Container&lt;</span><span style="color:#b48ead;">&#39;a</span><span>&gt; {
+</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">from</span><span>(</span><span style="color:#bf616a;">s</span><span>: &amp;</span><span style="color:#b48ead;">&#39;a str</span><span>) -&gt; </span><span style="color:#b48ead;">Self </span><span>{
+</span><span>        Container { dados: s }
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> texto = &quot;</span><span style="color:#a3be8c;">Dados importantes</span><span>&quot;;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> container = Container::from(texto);
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Container: </span><span style="color:#d08770;">{}</span><span>&quot;, container.dados);
+</span><span>}
+</span></code></pre>
+<h2 id="6-conversoes-particulares">6. Conversões Particulares</h2>
+<h3 id="6-1-conversao-entre-colecoes">6.1 Conversão entre Coleções</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#65737e;">// Vec para array (com tamanho conhecido)
+</span><span>    </span><span style="color:#b48ead;">let</span><span> vec = vec![</span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">2</span><span>, </span><span style="color:#d08770;">3</span><span>, </span><span style="color:#d08770;">4</span><span>, </span><span style="color:#d08770;">5</span><span>];
+</span><span>    </span><span style="color:#b48ead;">let</span><span> array: [</span><span style="color:#b48ead;">i32</span><span>; </span><span style="color:#d08770;">5</span><span>] = vec.</span><span style="color:#96b5b4;">try_into</span><span>().</span><span style="color:#96b5b4;">unwrap</span><span>();
+</span><span>    println!(&quot;</span><span style="color:#d08770;">{:?}</span><span>&quot;, array);
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// String para Vec&lt;u8&gt;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> texto = String::from(&quot;</span><span style="color:#a3be8c;">Rust</span><span>&quot;);
+</span><span>    </span><span style="color:#b48ead;">let</span><span> bytes: Vec&lt;</span><span style="color:#b48ead;">u8</span><span>&gt; = texto.</span><span style="color:#96b5b4;">into_bytes</span><span>();
+</span><span>    println!(&quot;</span><span style="color:#d08770;">{:?}</span><span>&quot;, bytes);
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Vec&lt;u8&gt; para String
+</span><span>    </span><span style="color:#b48ead;">let</span><span> bytes = vec![</span><span style="color:#d08770;">82</span><span>, </span><span style="color:#d08770;">117</span><span>, </span><span style="color:#d08770;">115</span><span>, </span><span style="color:#d08770;">116</span><span>];
+</span><span>    </span><span style="color:#b48ead;">let</span><span> texto = String::from_utf8(bytes).</span><span style="color:#96b5b4;">unwrap</span><span>();
+</span><span>    println!(&quot;</span><span style="color:#d08770;">{}</span><span>&quot;, texto); </span><span style="color:#65737e;">// Rust
+</span><span>}
+</span></code></pre>
+<h3 id="6-2-conversao-entre-option-e-result">6.2 Conversão entre <code>Option</code> e <code>Result</code></h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#65737e;">// Option para Result
+</span><span>    </span><span style="color:#b48ead;">let</span><span> some_value: Option&lt;</span><span style="color:#b48ead;">i32</span><span>&gt; = Some(</span><span style="color:#d08770;">42</span><span>);
+</span><span>    </span><span style="color:#b48ead;">let</span><span> result: Result&lt;</span><span style="color:#b48ead;">i32</span><span>, &amp;</span><span style="color:#b48ead;">str</span><span>&gt; = some_value.</span><span style="color:#96b5b4;">ok_or</span><span>(&quot;</span><span style="color:#a3be8c;">Valor ausente</span><span>&quot;);
+</span><span>    println!(&quot;</span><span style="color:#d08770;">{:?}</span><span>&quot;, result); </span><span style="color:#65737e;">// Ok(42)
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Result para Option
+</span><span>    </span><span style="color:#b48ead;">let</span><span> result: Result&lt;</span><span style="color:#b48ead;">i32</span><span>, &amp;</span><span style="color:#b48ead;">str</span><span>&gt; = Ok(</span><span style="color:#d08770;">10</span><span>);
+</span><span>    </span><span style="color:#b48ead;">let</span><span> option: Option&lt;</span><span style="color:#b48ead;">i32</span><span>&gt; = result.</span><span style="color:#96b5b4;">ok</span><span>();
+</span><span>    println!(&quot;</span><span style="color:#d08770;">{:?}</span><span>&quot;, option); </span><span style="color:#65737e;">// Some(10)
+</span><span>}
+</span></code></pre>
+<h3 id="6-3-conversao-de-referencias">6.3 Conversão de Referências</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>std::borrow::Cow;
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">processar_texto</span><span>(</span><span style="color:#bf616a;">texto</span><span>: &amp;</span><span style="color:#b48ead;">str</span><span>) -&gt; Cow&lt;</span><span style="color:#b48ead;">str</span><span>&gt; {
+</span><span>    </span><span style="color:#b48ead;">if</span><span> texto.</span><span style="color:#96b5b4;">contains</span><span>(&quot;</span><span style="color:#a3be8c;">Rust</span><span>&quot;) {
+</span><span>        </span><span style="color:#65737e;">// Retorna uma referência emprestada
+</span><span>        Cow::Borrowed(texto)
+</span><span>    } </span><span style="color:#b48ead;">else </span><span>{
+</span><span>        </span><span style="color:#65737e;">// Retorna uma String própria
+</span><span>        Cow::Owned(format!(&quot;</span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;"> com Rust</span><span>&quot;, texto))
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> t1 = &quot;</span><span style="color:#a3be8c;">Programação Rust</span><span>&quot;;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> t2 = &quot;</span><span style="color:#a3be8c;">Programação</span><span>&quot;;
+</span><span>    
+</span><span>    println!(&quot;</span><span style="color:#d08770;">{}</span><span>&quot;, </span><span style="color:#96b5b4;">processar_texto</span><span>(t1)); </span><span style="color:#65737e;">// Emprestado
+</span><span>    println!(&quot;</span><span style="color:#d08770;">{}</span><span>&quot;, </span><span style="color:#96b5b4;">processar_texto</span><span>(t2)); </span><span style="color:#65737e;">// Owned
+</span><span>}
+</span></code></pre>
+<h2 id="7-boas-praticas">7. Boas Práticas</h2>
+<ol>
+<li><strong>Prefira <code>From</code>/<code>Into</code> sobre <code>as</code></strong>: São mais seguros e idiomáticos</li>
+<li><strong>Use <code>TryFrom</code>/<code>TryInto</code> para conversões que podem falhar</strong>: Sempre melhor que <code>unwrap()</code> em produção</li>
+<li><strong>Seja explícito</strong>: Rust não faz conversões implícitas por motivos de segurança</li>
+<li><strong>Implemente traits de conversão para seus tipos</strong>: Facilita a integração com o ecossistema Rust</li>
+<li><strong>Documente comportamentos de conversão</strong>: Especialmente quando há perda de dados ou transformações</li>
+</ol>
+<h2 id="8-resumo">8. Resumo</h2>
+<p>Rust oferece um sistema robusto de conversão de tipos:</p>
+<ul>
+<li><strong><code>as</code></strong>: Casting direto (use com cuidado)</li>
+<li><strong><code>From</code>/<code>Into</code></strong>: Conversões infalíveis e idiomáticas</li>
+<li><strong><code>TryFrom</code>/<code>TryInto</code></strong>: Conversões que podem falhar</li>
+<li><strong><code>parse()</code>/<code>FromStr</code></strong>: Para conversões de strings</li>
+<li><strong><code>to_string()</code>/<code>format!</code></strong>: Para conversões para strings</li>
+</ul>
+<hr />
+<p>Entender o sistema de conversão de tipos em Rust é essencial para escrever código seguro e idiomático. Ao escolher a abordagem correta para cada situação, estás a aproveitar todo o poder do sistema de tipos do Rust enquanto mantens o teu código limpo e confiável.</p>
+<h2 id="referencias">Referências</h2>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/rust-by-example/conversion.html">Rust By Example - Conversion</a></li>
+<li><a href="https://doc.rust-lang.org/rust-by-example/types/cast.html">Rust By Example - Cast</a></li>
+<li><a href="https://doc.rust-lang.org/rust-by-example/conversion/from_into.html">From e Into</a></li>
+<li><a href="https://doc.rust-lang.org/rust-by-example/conversion/try_from_try_into.html">TryFrom e TryInto</a></li>
+<li><a href="https://doc.rust-lang.org/rust-by-example/conversion/string.html">String Conversion</a></li>
+<li><a href="https://google.github.io/comprehensive-rust/pt-BR/std-traits/casting.html">Comprehensive Rust - Casting</a></li>
+</ul>
+<hr />
+<p><strong><em>Disclaimer</em></strong>: Artigo elaborado com auxilio a ferramentas de inteligência artificial mas revisto por humanos.</p>
+
+          </div>
+        </article>
+      </div>
+      
+      <div class="column is-2 is-hidden-mobile">
+        <aside class="menu" style="position: sticky; top: 48px">
+          <p class="heading has-text-weight-bold">Contents</p>
+          <ul class="menu-list">
+            
+            <li>
+              <a id="link-1-conversao-de-tipos-primitivos" class="toc is-size-7 is-active"
+                href="https://rustlangpt.github.io/posts/conversoes/#1-conversao-de-tipos-primitivos">
+                1. Conversão de Tipos Primitivos
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-1-1-casting-com-as" class="toc is-size-7" href="https://rustlangpt.github.io/posts/conversoes/#1-1-casting-com-as">
+                    1.1 Casting com as
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-2-conversao-com-from-e-into" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/conversoes/#2-conversao-com-from-e-into">
+                2. Conversão com From e Into
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-2-1-trait-from" class="toc is-size-7" href="https://rustlangpt.github.io/posts/conversoes/#2-1-trait-from">
+                    2.1 Trait From
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-2-2-trait-into" class="toc is-size-7" href="https://rustlangpt.github.io/posts/conversoes/#2-2-trait-into">
+                    2.2 Trait Into
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-3-conversao-com-possibilidade-de-falha-tryfrom-e-tryinto" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/conversoes/#3-conversao-com-possibilidade-de-falha-tryfrom-e-tryinto">
+                3. Conversão com possibilidade de falha TryFrom e TryInto
+              </a>
+              
+            </li>
+            
+            <li>
+              <a id="link-4-conversao-de-e-para-strings" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/conversoes/#4-conversao-de-e-para-strings">
+                4. Conversão de e para Strings
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-4-1-convertendo-para-string" class="toc is-size-7" href="https://rustlangpt.github.io/posts/conversoes/#4-1-convertendo-para-string">
+                    4.1 Convertendo para String
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-4-2-convertendo-de-string" class="toc is-size-7" href="https://rustlangpt.github.io/posts/conversoes/#4-2-convertendo-de-string">
+                    4.2 Convertendo de String
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-5-conversao-de-tipos-genericos" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/conversoes/#5-conversao-de-tipos-genericos">
+                5. Conversão de Tipos Genéricos
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-5-1-funcoes-genericas-com-conversao" class="toc is-size-7" href="https://rustlangpt.github.io/posts/conversoes/#5-1-funcoes-genericas-com-conversao">
+                    5.1 Funções Genéricas com Conversão
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-5-2-conversoes-com-lifetimes" class="toc is-size-7" href="https://rustlangpt.github.io/posts/conversoes/#5-2-conversoes-com-lifetimes">
+                    5.2 Conversões com Lifetimes
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-6-conversoes-particulares" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/conversoes/#6-conversoes-particulares">
+                6. Conversões Particulares
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-6-1-conversao-entre-colecoes" class="toc is-size-7" href="https://rustlangpt.github.io/posts/conversoes/#6-1-conversao-entre-colecoes">
+                    6.1 Conversão entre Coleções
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-6-2-conversao-entre-option-e-result" class="toc is-size-7" href="https://rustlangpt.github.io/posts/conversoes/#6-2-conversao-entre-option-e-result">
+                    6.2 Conversão entre Option e Result
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-6-3-conversao-de-referencias" class="toc is-size-7" href="https://rustlangpt.github.io/posts/conversoes/#6-3-conversao-de-referencias">
+                    6.3 Conversão de Referências
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-7-boas-praticas" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/conversoes/#7-boas-praticas">
+                7. Boas Práticas
+              </a>
+              
+            </li>
+            
+            <li>
+              <a id="link-8-resumo" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/conversoes/#8-resumo">
+                8. Resumo
+              </a>
+              
+            </li>
+            
+            <li>
+              <a id="link-referencias" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/conversoes/#referencias">
+                Referências
+              </a>
+              
+            </li>
+            
+          </ul>
+        </aside>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+
+  
+  <section class="modal" id="search-modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Search</p>
+      </header>
+      <section class="modal-card-body">
+        <div class="field mb-2">
+          <div class="control">
+            <input class="input" id="search" placeholder="Search this website." type="search" />
+          </div>
+        </div>
+        <div class="search-results">
+          <div class="search-results__items"></div>
+        </div>
+      </section>
+    </div>
+    <button aria-label="close" class="modal-close is-large"></button>
+  </section>
+  
+
+
+  
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <nav class="level">
+              
+          <div class="level-item has-text-centered">
+            <a class="button is-black is-outlined" href="https:&#x2F;&#x2F;rustlangpt.github.io&#x2F;posts&#x2F;closures&#x2F;">
+              <span class="icon mr-2">
+                <i class="fas fa-arrow-circle-left"></i>
+              </span>
+              Closures em Rust
+            </a>
+          </div>
+           
+        </nav>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+  
+
+
+
+
+
+
+  
+  <footer class="footer py-4">
+    <div class="content has-text-centered">
+    <!--
+    <p>
+        Built with
+        <span class="icon-text">
+          <span class="icon">
+            <i class="fas fa-code"></i>
+          </span>
+          <span>code</span>
+        </span>
+        and
+        <span class="icon-text">
+          <span class="icon">
+            <i class="fas fa-heart"></i>
+          </span>
+          <span>love</span>
+        </span>
+      </p>
+    -->
+      <p>
+        Powered by
+        <span class="icon-text">
+          <span class="icon">
+            <i class="fas fa-power-off"></i>
+          </span>
+          <span>zola</span>
+        </span>
+      </p>
+    
+    </div>
+  </footer>
+  
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/galleria@1.6.1/dist/galleria.min.js" integrity="sha384-QSfwGT8/EU536DKdtyP2D6SLlh8zBaZ0cVkwfrwhqzIU9VCfJT00CLVP5t+HAiYg" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/galleria@1.6.1/dist/themes/folio/galleria.folio.min.js" integrity="sha384-DwpKI+deZB267+hPKwiOIc5Y2GKsVL0mR6hgz7GgIu7AgAMYqJwcJKY1YBNfhWcY" crossorigin="anonymous"></script>
+  
+  
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@8.13.5/dist/mermaid.min.js" integrity="sha384-0yWn54pSGtfKCU+skfA69l25VsCw+MZt4LQov3xNRoS7YkAMrFokGgSBnAWSK4pv" crossorigin="anonymous"></script>
+  
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.xkcd@1.1.13/dist/chart.xkcd.min.js" integrity="sha384-xC3h1+IHXK8seA+8KfT79Z4e0GPsznjXBoMa5nd8ooWKplPyXx92NOmljWxLC/cs" crossorigin="anonymous"></script>
+  
+  
+  <script src="https://rustlangpt.github.io/elasticlunr.min.js"></script>
+  <script src="https://rustlangpt.github.io/search_index.en.js"></script><script src="https://rustlangpt.github.io/js/site.js"></script>
+
+  
+
+<script type="text/javascript">
+  const menuBarHeight = document.querySelector("nav.navbar").clientHeight;
+  const tocItems = document.querySelectorAll(".toc");
+  const navSections = new Array(tocItems.length);
+
+  tocItems.forEach((el, i) => {
+    let id = el.getAttribute("id").substring(5);
+    navSections[i] = document.getElementById(id);
+  })
+
+  function isVisible(tocIndex) {
+    const current = navSections[tocIndex];
+    const next = tocIndex < tocItems.length - 1 ? navSections[tocIndex + 1]
+      : document.querySelectorAll("section.section").item(1);
+
+    const c = current.getBoundingClientRect();
+    const n = next.getBoundingClientRect();
+    const h = (window.innerHeight || document.documentElement.clientHeight);
+
+    return (c.top <= h) && (n.top - menuBarHeight >= 0);
+  }
+
+  function activateIfVisible() {
+    for (b = true, i = 0; i < tocItems.length; i++) {
+      if (b && isVisible(i)) {
+        tocItems[i].classList.add('is-active');
+        b = false;
+      } else
+        tocItems[i].classList.remove('is-active');
+    }
+  }
+
+  var isTicking = null;
+  window.addEventListener('scroll', () => {
+    if (!isTicking) {
+      window.requestAnimationFrame(() => {
+        activateIfVisible();
+        isTicking = false;
+      });
+      isTicking = true;
+    }
+  }, false);
+</script>
+
+
+
+
+
+  
+  
+</body>
+
+</html>

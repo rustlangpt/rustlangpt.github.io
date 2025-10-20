@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <meta content="#ffffff" name="theme-color" />
+  <meta content="#da532c" name="msapplication-TileColor" />
+
+  
+  <link href='&#x2F;icons&#x2F;site.webmanifest' rel="manifest" />
+  
+  
+  <link color="#5bbad5" href='&#x2F;icons&#x2F;safari-pinned-tab.svg' rel="mask-icon" />
+  
+  
+  <link href='&#x2F;icons&#x2F;rustlangpt1_16px.png' rel="icon" sizes="16x16" type="image/png" />
+  
+  
+  <link href='&#x2F;icons&#x2F;rustlangpt1_32px.png' rel="icon" sizes="32x32" type="image/png" />
+  
+  
+  <link href='&#x2F;icons&#x2F;apple-touch-icon.png' rel="apple-touch-icon" sizes="180x180" />
+  
+
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galleria@1.6.1/dist/themes/folio/galleria.folio.min.css" integrity="sha384-+rY0QD+LRnTOquDMzGa9lXU6jIwdiQuwCJQ2cdcW0qeP/0UbjQCZlXnRsUMA+9pH" crossorigin="anonymous">
+  
+
+  
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1.9.1/css/academicons.min.css" integrity="sha384-FIue+PI4SsI9XfHCz8dBLg33b0c1fMJgNU3X//L26FYbGnlSEfWmNT7zgWc2N9b6" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link href="https://rustlangpt.github.io/deep-thought.css" rel="stylesheet" />
+  
+  
+
+  <title>
+    
+RustlangPT | Closures em Rust
+
+  </title>
+
+  
+  
+  
+
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css" integrity="sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js" integrity="sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx" crossorigin="anonymous"></script>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/mathtex-script-type.min.js" integrity="sha384-jiBVvJ8NGGj5n7kJaiWwWp9AjC+Yh8rhZY3GtAX8yU28azcLgoRo4oukO87g7zDT" crossorigin="anonymous"></script>
+  
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+  
+  
+</head>
+
+<body class="has-background-white">
+  <nav aria-label="section navigation" class="navbar is-light" role="navigation">
+    <div class="container">
+      <div class="navbar-brand">
+        <a class="navbar-item is-size-5 has-text-weight-bold" href="https:&#x2F;&#x2F;rustlangpt.github.io">RustlangPT</a>
+        <a aria-expanded="false" aria-label="menu" class="navbar-burger burger" data-target="navMenu" role="button">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+      <div class="navbar-menu" id="navMenu">
+        <div class="navbar-end has-text-centered">
+          
+          
+          
+          <a class="navbar-item has-text-weight-semibold" href="https:&#x2F;&#x2F;rustlangpt.github.io&#x2F;posts">
+            Blog
+          </a>
+          
+          <a class="navbar-item has-text-weight-semibold" href="https:&#x2F;&#x2F;rustlangpt.github.io&#x2F;recursos">
+            Recursos
+          </a>
+          
+          <a class="navbar-item has-text-weight-semibold" href="https:&#x2F;&#x2F;rustlangpt.github.io&#x2F;acerca">
+            Acerca
+          </a>
+          
+          <a class="navbar-item has-text-weight-semibold" href="https:&#x2F;&#x2F;rustlangpt.github.io&#x2F;eventos">
+            Eventos
+          </a>
+          
+          <a class="navbar-item has-text-weight-semibold" href="https:&#x2F;&#x2F;rustlangpt.github.io&#x2F;tags">
+            Tags
+          </a>
+          
+          
+          
+          <a class="navbar-item" id="nav-search" title="Search" data-target="#search-modal">
+            <span class="icon">
+              <i class="fas fa-search"></i>
+            </span>
+          </a>
+          <a class="navbar-item" id="dark-mode" title="Switch to dark theme">
+            <span class="icon">
+              <i class="fas fa-adjust"></i>
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  
+  
+
+  
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-8 is-offset-2">
+        <article class="box">
+          <h1 class="title">
+            Closures em Rust
+          </h1>
+          <p class="subtitle">Um guia completo com Closures.</p>
+          <div class="columns is-multiline is-gapless">
+            <div class="column is-8">
+              
+<span class="icon-text has-text-grey">
+  
+  <span class="icon">
+    <i class="fas fa-user"></i>
+  </span>
+  <span>RustLangPT publicado em</span>
+  <span class="icon">
+    <i class="far fa-calendar-alt"></i>
+  </span>
+  <span><time datetime="2025-10-02">02 October, 2025</time></span>
+
+</span>
+
+            </div>
+            <div class="column is-4 has-text-right-desktop">
+              
+<span class="icon-text has-text-grey">
+  <span class="icon">
+    <i class="far fa-clock"></i>
+  </span>
+  <span>3 min,</span>
+  <span class="icon">
+    <i class="fas fa-pencil-alt"></i>
+  </span>
+  <span>558 words</span>
+</span>
+
+            </div>
+            <div class="column">
+              
+            </div>
+            <div class="column has-text-right-desktop">
+              
+              
+<p>
+  Tags:
+  
+  <a class="has-text-info-dark has-text-weight-semibold" href="https://rustlangpt.github.io/tags/fundamentos/">
+    <span class="icon-text">
+      <span class="icon">
+        <i class="fas fa-tag"></i>
+      </span>
+      <span>Fundamentos</span>
+    </span>
+  </a>
+  
+  <a class="has-text-info-dark has-text-weight-semibold" href="https://rustlangpt.github.io/tags/avancado/">
+    <span class="icon-text">
+      <span class="icon">
+        <i class="fas fa-tag"></i>
+      </span>
+      <span>Avançado</span>
+    </span>
+  </a>
+  
+  <a class="has-text-info-dark has-text-weight-semibold" href="https://rustlangpt.github.io/tags/closures/">
+    <span class="icon-text">
+      <span class="icon">
+        <i class="fas fa-tag"></i>
+      </span>
+      <span>Closures</span>
+    </span>
+  </a>
+  
+</p>
+
+              
+            </div>
+          </div>
+          <div class="content mt-2">
+            <p>As closures são uma das funcionalidades mais poderosas e expressivas da linguagem Rust, permitindo criar funções anônimas que podem capturar valores do seu ambiente circundante. Este artigo explora em profundidade como funcionam as closures em Rust, desde conceitos básicos até técnicas avançadas.</p>
+<h2 id="o-que-sao-closures">O que são Closures?</h2>
+<p>Closures em Rust são funções anónimas que podem ser armazenadas em variáveis ou passadas como argumentos para outras funções. Elas destacam-se pela capacidade de capturar valores do escopo em que são definidas, permitindo reutilização de código e personalização de comportamentos de forma eficiente. Diferente de funções regulares, closures podem referenciar variáveis do ambiente externo, tornando-as ideais para cenários como callbacks, iterações ou threads.</p>
+<p>A sintaxe das closures em Rust é mais concisa do que a das funções normais:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>|parâmetros| -&gt; tipo_retorno { corpo } 
+</span><span>
+</span><span>ou 
+</span><span>
+</span><span style="color:#b48ead;">let </span><span style="color:#8fa1b3;">closure </span><span>= |</span><span style="color:#bf616a;">param1</span><span>, </span><span style="color:#bf616a;">param2</span><span>| {
+</span><span>    </span><span style="color:#65737e;">// corpo da closure
+</span><span>};
+</span></code></pre>
+<p>Repara nas barras verticais (| |) que envolvem os parâmetros. As closures são muitas vezes concisas o suficiente para que o Rust infira os tipos dos parâmetros e do valor de retorno, mas podem ser anotados explicitamente para clareza</p>
+<h2 id="sintaxe-e-exemplos-basicos">Sintaxe e Exemplos Básicos</h2>
+<h3 id="closure-simples">Closure Simples</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#65737e;">// Closure sem parâmetros
+</span><span>    </span><span style="color:#b48ead;">let </span><span style="color:#8fa1b3;">saudacao </span><span>= || println!(&quot;</span><span style="color:#a3be8c;">Olá, mundo!</span><span>&quot;);
+</span><span>    </span><span style="color:#96b5b4;">saudacao</span><span>(); </span><span style="color:#65737e;">// Olá, mundo!
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Closure com um parâmetro
+</span><span>    </span><span style="color:#b48ead;">let </span><span style="color:#8fa1b3;">quadrado </span><span>= |</span><span style="color:#bf616a;">x</span><span>| x * x;
+</span><span>    println!(&quot;</span><span style="color:#d08770;">{}</span><span>&quot;, </span><span style="color:#96b5b4;">quadrado</span><span>(</span><span style="color:#d08770;">5</span><span>)); </span><span style="color:#65737e;">// 25
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Closure com múltiplos parâmetros e tipo explícito
+</span><span>    </span><span style="color:#b48ead;">let</span><span> soma: </span><span style="color:#b48ead;">fn</span><span>(</span><span style="color:#b48ead;">i32</span><span>, </span><span style="color:#b48ead;">i32</span><span>) -&gt; </span><span style="color:#b48ead;">i32 </span><span>= |</span><span style="color:#bf616a;">a</span><span>, </span><span style="color:#bf616a;">b</span><span>| a + b;
+</span><span>    println!(&quot;</span><span style="color:#d08770;">{}</span><span>&quot;, </span><span style="color:#96b5b4;">soma</span><span>(</span><span style="color:#d08770;">3</span><span>, </span><span style="color:#d08770;">4</span><span>)); </span><span style="color:#65737e;">// 7
+</span><span>}
+</span></code></pre>
+<h3 id="inferencia-de-tipos">Inferência de Tipos</h3>
+<p>O Rust possui um sistema poderoso de inferência de tipos para closures:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#65737e;">// O tipo é inferido baseado no uso
+</span><span>    </span><span style="color:#b48ead;">let </span><span style="color:#8fa1b3;">dobrar </span><span>= |</span><span style="color:#bf616a;">x</span><span>| x * </span><span style="color:#d08770;">2</span><span>;
+</span><span>    println!(&quot;</span><span style="color:#d08770;">{}</span><span>&quot;, </span><span style="color:#96b5b4;">dobrar</span><span>(</span><span style="color:#d08770;">5</span><span>)); </span><span style="color:#65737e;">// 10
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Múltiplas linhas com chaves
+</span><span>    </span><span style="color:#b48ead;">let </span><span style="color:#8fa1b3;">processar </span><span>= |</span><span style="color:#bf616a;">nome</span><span>: &amp;</span><span style="color:#b48ead;">str</span><span>| {
+</span><span>        </span><span style="color:#b48ead;">let</span><span> nome_maiusculo = nome.</span><span style="color:#96b5b4;">to_uppercase</span><span>();
+</span><span>        format!(&quot;</span><span style="color:#a3be8c;">Processando: </span><span style="color:#d08770;">{}</span><span>&quot;, nome_maiusculo)
+</span><span>    };
+</span><span>    
+</span><span>    println!(&quot;</span><span style="color:#d08770;">{}</span><span>&quot;, </span><span style="color:#96b5b4;">processar</span><span>(&quot;</span><span style="color:#a3be8c;">rust</span><span>&quot;)); </span><span style="color:#65737e;">// Processando: RUST
+</span><span>
+</span><span>    </span><span style="color:#65737e;">//Se necessário, você pode explicitamente anotar os tipos:
+</span><span>    </span><span style="color:#b48ead;">let </span><span style="color:#8fa1b3;">diferente </span><span>= |</span><span style="color:#bf616a;">x</span><span>: </span><span style="color:#b48ead;">i32</span><span>, </span><span style="color:#bf616a;">y</span><span>: </span><span style="color:#b48ead;">i32</span><span>| x != y;
+</span><span>    println!(&quot;</span><span style="color:#d08770;">{}</span><span>&quot;, </span><span style="color:#96b5b4;">diferente</span><span>(</span><span style="color:#d08770;">1</span><span>,</span><span style="color:#d08770;">2</span><span>)); </span><span style="color:#65737e;">// -&gt; bool
+</span><span>
+</span><span>}
+</span></code></pre>
+<h2 id="capturando-o-ambiente">Capturando o Ambiente</h2>
+<p>A principal diferença entre closures e funções é a capacidade de capturar variáveis do ambiente.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> multiplicador = </span><span style="color:#d08770;">3</span><span>; </span><span style="color:#65737e;">// Variável definida no escopo principal
+</span><span>    </span><span style="color:#b48ead;">let</span><span> nome = String::from(&quot;</span><span style="color:#a3be8c;">Rust</span><span>&quot;);
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Capturando por referência imutável 
+</span><span>    </span><span style="color:#b48ead;">let </span><span style="color:#8fa1b3;">multiplicar </span><span>= |</span><span style="color:#bf616a;">x</span><span>| x * multiplicador;
+</span><span>    println!(&quot;</span><span style="color:#d08770;">{}</span><span>&quot;, </span><span style="color:#96b5b4;">multiplicar</span><span>(</span><span style="color:#d08770;">4</span><span>)); </span><span style="color:#65737e;">// 12
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Capturando String por referência
+</span><span>    </span><span style="color:#b48ead;">let </span><span style="color:#8fa1b3;">saudar </span><span>= |</span><span style="color:#bf616a;">pessoa</span><span>| format!(&quot;</span><span style="color:#a3be8c;">Olá, </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">! Bem-vindo ao </span><span style="color:#d08770;">{}</span><span>&quot;, pessoa, nome);
+</span><span>    println!(&quot;</span><span style="color:#d08770;">{}</span><span>&quot;, </span><span style="color:#96b5b4;">saudar</span><span>(&quot;</span><span style="color:#a3be8c;">João</span><span>&quot;)); </span><span style="color:#65737e;">// Olá, João! Bem-vindo ao Rust
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// O nome ainda pode ser usado aqui
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Linguagem: </span><span style="color:#d08770;">{}</span><span>&quot;, nome);
+</span><span>}
+</span></code></pre>
+<p>Quando a closure multiplicar é definida, ela "fecha-se" sobre o valor de multiplicador.</p>
+<h2 id="tipos-de-captura">Tipos de Captura</h2>
+<p>Closures podem capturar variáveis do ambiente externo de três formas seguindo a hierarquia de ownership:</p>
+<ul>
+<li>por referência (&amp;),</li>
+<li>por referência mutável (&amp;mut),</li>
+<li>ou por movimento de posse (move semantics).</li>
+</ul>
+<h3 id="1-por-referencia-imutavel-t">1. Por Referência Imutável (&amp;T)</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> lista = vec![</span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">2</span><span>, </span><span style="color:#d08770;">3</span><span>, </span><span style="color:#d08770;">4</span><span>, </span><span style="color:#d08770;">5</span><span>];
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Captura por referência imutável (padrão quando possível)
+</span><span>    </span><span style="color:#b48ead;">let </span><span style="color:#8fa1b3;">encontrar </span><span>= |</span><span style="color:#bf616a;">valor</span><span>| lista.</span><span style="color:#96b5b4;">iter</span><span>().</span><span style="color:#96b5b4;">find</span><span>(|&amp;&amp;</span><span style="color:#bf616a;">x</span><span>| x == valor);
+</span><span>    
+</span><span>    println!(&quot;</span><span style="color:#d08770;">{:?}</span><span>&quot;, </span><span style="color:#96b5b4;">encontrar</span><span>(</span><span style="color:#d08770;">3</span><span>)); </span><span style="color:#65737e;">// Some(3)
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Lista original: </span><span style="color:#d08770;">{:?}</span><span>&quot;, lista); </span><span style="color:#65737e;">// Lista ainda disponível
+</span><span>}
+</span></code></pre>
+<h3 id="2-por-referencia-mutavel-mut-t">2. Por Referência Mutável (&amp;mut T)</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let mut</span><span> contador = </span><span style="color:#d08770;">0</span><span>;
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Captura por referência mutável
+</span><span>    </span><span style="color:#b48ead;">let mut </span><span style="color:#8fa1b3;">incrementar </span><span>= || {
+</span><span>        contador += </span><span style="color:#d08770;">1</span><span>;
+</span><span>        contador
+</span><span>    };
+</span><span>    
+</span><span>    println!(&quot;</span><span style="color:#d08770;">{}</span><span>&quot;, </span><span style="color:#96b5b4;">incrementar</span><span>()); </span><span style="color:#65737e;">// 1
+</span><span>    println!(&quot;</span><span style="color:#d08770;">{}</span><span>&quot;, </span><span style="color:#96b5b4;">incrementar</span><span>()); </span><span style="color:#65737e;">// 2
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// contador ainda pode ser usado
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Contador final: </span><span style="color:#d08770;">{}</span><span>&quot;, contador); </span><span style="color:#65737e;">// 2
+</span><span>}
+</span></code></pre>
+<h3 id="3-por-valor-t-move">3. Por Valor (T) - Move</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> nome = String::from(&quot;</span><span style="color:#a3be8c;">Rust</span><span>&quot;);
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Usando &#39;move&#39; para forçar captura por valor
+</span><span>    </span><span style="color:#b48ead;">let</span><span> closure_com_move = </span><span style="color:#b48ead;">move </span><span>|saudacao| {
+</span><span>        format!(&quot;</span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">, </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">!</span><span>&quot;, saudacao, nome)
+</span><span>    };
+</span><span>    
+</span><span>    println!(&quot;</span><span style="color:#d08770;">{}</span><span>&quot;, </span><span style="color:#96b5b4;">closure_com_move</span><span>(&quot;</span><span style="color:#a3be8c;">Olá</span><span>&quot;)); </span><span style="color:#65737e;">// Olá, Rust!
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// nome não pode mais ser usado aqui - foi movido para a closure
+</span><span>    </span><span style="color:#65737e;">// println!(&quot;{}&quot;, nome); // Erro de compilação
+</span><span>}
+</span></code></pre>
+<h2 id="traits-de-closure-fn-fnmut-e-fnonce">Traits de Closure: Fn, FnMut e FnOnce</h2>
+<p>Todas as closures implementam pelo menos uma das três traits funcionais:</p>
+<h3 id="fnonce">FnOnce</h3>
+<p>Closures que podem ser chamadas apenas uma vez:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">chamar_uma_vez</span><span>&lt;F&gt;(</span><span style="color:#bf616a;">f</span><span>: F) 
+</span><span style="color:#b48ead;">where
+</span><span>    F: FnOnce() -&gt; String
+</span><span>{
+</span><span>    println!(&quot;</span><span style="color:#d08770;">{}</span><span>&quot;, </span><span style="color:#96b5b4;">f</span><span>());
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> nome = String::from(&quot;</span><span style="color:#a3be8c;">Rust</span><span>&quot;);
+</span><span>    </span><span style="color:#b48ead;">let</span><span> closure = </span><span style="color:#b48ead;">move </span><span>|| nome; </span><span style="color:#65737e;">// Move o String
+</span><span>    
+</span><span>    </span><span style="color:#96b5b4;">chamar_uma_vez</span><span>(closure);
+</span><span>    </span><span style="color:#65737e;">// closure não pode ser chamada novamente
+</span><span>}
+</span></code></pre>
+<h3 id="fnmut">FnMut</h3>
+<p>Closures que podem mudar o ambiente capturado:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">chamar_varias_vezes</span><span>&lt;F&gt;(</span><span style="color:#b48ead;">mut </span><span style="color:#bf616a;">f</span><span>: F) 
+</span><span style="color:#b48ead;">where
+</span><span>    F: FnMut() -&gt; </span><span style="color:#b48ead;">i32
+</span><span>{
+</span><span>    </span><span style="color:#b48ead;">for </span><span>_ in </span><span style="color:#d08770;">0</span><span>..</span><span style="color:#d08770;">3 </span><span>{
+</span><span>        println!(&quot;</span><span style="color:#d08770;">{}</span><span>&quot;, </span><span style="color:#96b5b4;">f</span><span>());
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let mut</span><span> contador = </span><span style="color:#d08770;">0</span><span>;
+</span><span>    </span><span style="color:#b48ead;">let </span><span style="color:#8fa1b3;">incrementar </span><span>= || {
+</span><span>        contador += </span><span style="color:#d08770;">1</span><span>;
+</span><span>        contador
+</span><span>    };
+</span><span>    
+</span><span>    </span><span style="color:#96b5b4;">chamar_varias_vezes</span><span>(incrementar); </span><span style="color:#65737e;">// 1, 2, 3
+</span><span>}
+</span></code></pre>
+<h3 id="fn">Fn</h3>
+<p>Closures que não modificam o ambiente capturado:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">aplicar_multiplas_vezes</span><span>&lt;F&gt;(</span><span style="color:#bf616a;">f</span><span>: F, </span><span style="color:#bf616a;">valor</span><span>: </span><span style="color:#b48ead;">i32</span><span>) -&gt; Vec&lt;</span><span style="color:#b48ead;">i32</span><span>&gt;
+</span><span style="color:#b48ead;">where
+</span><span>    F: Fn(</span><span style="color:#b48ead;">i32</span><span>) -&gt; </span><span style="color:#b48ead;">i32
+</span><span>{
+</span><span>    (</span><span style="color:#d08770;">0</span><span>..</span><span style="color:#d08770;">5</span><span>).</span><span style="color:#96b5b4;">map</span><span>(|_| </span><span style="color:#96b5b4;">f</span><span>(valor)).</span><span style="color:#96b5b4;">collect</span><span>()
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> multiplicador = </span><span style="color:#d08770;">3</span><span>;
+</span><span>    </span><span style="color:#b48ead;">let </span><span style="color:#8fa1b3;">multiplicar </span><span>= |</span><span style="color:#bf616a;">x</span><span>| x * multiplicador;
+</span><span>    
+</span><span>    </span><span style="color:#b48ead;">let</span><span> resultados = </span><span style="color:#96b5b4;">aplicar_multiplas_vezes</span><span>(multiplicar, </span><span style="color:#d08770;">4</span><span>);
+</span><span>    println!(&quot;</span><span style="color:#d08770;">{:?}</span><span>&quot;, resultados); </span><span style="color:#65737e;">// [12, 12, 12, 12, 12]
+</span><span>}
+</span></code></pre>
+<h2 id="closures-como-parametros">Closures como Parâmetros</h2>
+<h3 id="usando-generics-com-bounds">Usando Generics com Bounds</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">processar_numeros</span><span>&lt;F&gt;(</span><span style="color:#bf616a;">numeros</span><span>: &amp;[</span><span style="color:#b48ead;">i32</span><span>], </span><span style="color:#bf616a;">operacao</span><span>: F) -&gt; Vec&lt;</span><span style="color:#b48ead;">i32</span><span>&gt;
+</span><span style="color:#b48ead;">where
+</span><span>    F: Fn(</span><span style="color:#b48ead;">i32</span><span>) -&gt; </span><span style="color:#b48ead;">i32
+</span><span>{
+</span><span>    numeros.</span><span style="color:#96b5b4;">iter</span><span>().</span><span style="color:#96b5b4;">map</span><span>(|&amp;</span><span style="color:#bf616a;">x</span><span>| </span><span style="color:#96b5b4;">operacao</span><span>(x)).</span><span style="color:#96b5b4;">collect</span><span>()
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> numeros = vec![</span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">2</span><span>, </span><span style="color:#d08770;">3</span><span>, </span><span style="color:#d08770;">4</span><span>, </span><span style="color:#d08770;">5</span><span>];
+</span><span>    
+</span><span>    </span><span style="color:#b48ead;">let</span><span> dobrados = </span><span style="color:#96b5b4;">processar_numeros</span><span>(&amp;numeros, |</span><span style="color:#bf616a;">x</span><span>| x * </span><span style="color:#d08770;">2</span><span>);
+</span><span>    </span><span style="color:#b48ead;">let</span><span> quadrados = </span><span style="color:#96b5b4;">processar_numeros</span><span>(&amp;numeros, |</span><span style="color:#bf616a;">x</span><span>| x * x);
+</span><span>    
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Dobrados: </span><span style="color:#d08770;">{:?}</span><span>&quot;, dobrados); </span><span style="color:#65737e;">// [2, 4, 6, 8, 10]
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Quadrados: </span><span style="color:#d08770;">{:?}</span><span>&quot;, quadrados); </span><span style="color:#65737e;">// [1, 4, 9, 16, 25]
+</span><span>}
+</span></code></pre>
+<h3 id="usando-box">Usando Box<dyn Fn></h3>
+<p>Para casos onde você precisa armazenar closures com diferentes tipos:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> operacoes: Vec&lt;Box&lt;dyn Fn(</span><span style="color:#b48ead;">i32</span><span>) -&gt; </span><span style="color:#b48ead;">i32</span><span>&gt;&gt; = vec![
+</span><span>        Box::new(|</span><span style="color:#bf616a;">x</span><span>| x + </span><span style="color:#d08770;">1</span><span>),
+</span><span>        Box::new(|</span><span style="color:#bf616a;">x</span><span>| x * </span><span style="color:#d08770;">2</span><span>),
+</span><span>        Box::new(|</span><span style="color:#bf616a;">x</span><span>| x * x),
+</span><span>    ];
+</span><span>    
+</span><span>    </span><span style="color:#b48ead;">let</span><span> valor = </span><span style="color:#d08770;">5</span><span>;
+</span><span>    </span><span style="color:#b48ead;">for </span><span>(i, operacao) in operacoes.</span><span style="color:#96b5b4;">iter</span><span>().</span><span style="color:#96b5b4;">enumerate</span><span>() {
+</span><span>        println!(&quot;</span><span style="color:#a3be8c;">Operação </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">: </span><span style="color:#d08770;">{}</span><span>&quot;, i, </span><span style="color:#96b5b4;">operacao</span><span>(valor));
+</span><span>    }
+</span><span>    </span><span style="color:#65737e;">// Operação 0: 6
+</span><span>    </span><span style="color:#65737e;">// Operação 1: 10  
+</span><span>    </span><span style="color:#65737e;">// Operação 2: 25
+</span><span>}
+</span></code></pre>
+<h2 id="closures-retornando-closures">Closures Retornando Closures</h2>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">criar_multiplicador</span><span>(</span><span style="color:#bf616a;">fator</span><span>: </span><span style="color:#b48ead;">i32</span><span>) -&gt; impl Fn(</span><span style="color:#b48ead;">i32</span><span>) -&gt; </span><span style="color:#b48ead;">i32 </span><span>{
+</span><span>    </span><span style="color:#b48ead;">move </span><span>|x| x * fator
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> multiplicar_por_3 = </span><span style="color:#96b5b4;">criar_multiplicador</span><span>(</span><span style="color:#d08770;">3</span><span>);
+</span><span>    </span><span style="color:#b48ead;">let</span><span> multiplicar_por_5 = </span><span style="color:#96b5b4;">criar_multiplicador</span><span>(</span><span style="color:#d08770;">5</span><span>);
+</span><span>    
+</span><span>    println!(&quot;</span><span style="color:#d08770;">{}</span><span>&quot;, </span><span style="color:#96b5b4;">multiplicar_por_3</span><span>(</span><span style="color:#d08770;">4</span><span>)); </span><span style="color:#65737e;">// 12
+</span><span>    println!(&quot;</span><span style="color:#d08770;">{}</span><span>&quot;, </span><span style="color:#96b5b4;">multiplicar_por_5</span><span>(</span><span style="color:#d08770;">4</span><span>)); </span><span style="color:#65737e;">// 20
+</span><span>}
+</span></code></pre>
+<h2 id="casos-de-uso-praticos">Casos de Uso Práticos</h2>
+<h3 id="1-programacao-funcional-com-iterators">1. Programação Funcional com Iterators</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> numeros = vec![</span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">2</span><span>, </span><span style="color:#d08770;">3</span><span>, </span><span style="color:#d08770;">4</span><span>, </span><span style="color:#d08770;">5</span><span>, </span><span style="color:#d08770;">6</span><span>, </span><span style="color:#d08770;">7</span><span>, </span><span style="color:#d08770;">8</span><span>, </span><span style="color:#d08770;">9</span><span>, </span><span style="color:#d08770;">10</span><span>];
+</span><span>    
+</span><span>    </span><span style="color:#b48ead;">let</span><span> resultado: Vec&lt;</span><span style="color:#b48ead;">i32</span><span>&gt; = numeros
+</span><span>        .</span><span style="color:#96b5b4;">iter</span><span>()
+</span><span>        .</span><span style="color:#96b5b4;">filter</span><span>(|&amp;&amp;</span><span style="color:#bf616a;">x</span><span>| x % </span><span style="color:#d08770;">2 </span><span>== </span><span style="color:#d08770;">0</span><span>)  </span><span style="color:#65737e;">// Filtrar pares
+</span><span>        .</span><span style="color:#96b5b4;">map</span><span>(|&amp;</span><span style="color:#bf616a;">x</span><span>| x * x)           </span><span style="color:#65737e;">// Elevar ao quadrado
+</span><span>        .</span><span style="color:#96b5b4;">collect</span><span>();
+</span><span>    
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Quadrados dos números pares: </span><span style="color:#d08770;">{:?}</span><span>&quot;, resultado);
+</span><span>    </span><span style="color:#65737e;">// [4, 16, 36, 64, 100]
+</span><span>}
+</span></code></pre>
+<h3 id="2-event-handling">2. Event Handling</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">struct </span><span>EventProcessor {
+</span><span>    </span><span style="color:#bf616a;">handlers</span><span>: Vec&lt;Box&lt;dyn Fn(&amp;</span><span style="color:#b48ead;">str</span><span>)&gt;&gt;,
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">impl </span><span>EventProcessor {
+</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">new</span><span>() -&gt; </span><span style="color:#b48ead;">Self </span><span>{
+</span><span>        EventProcessor {
+</span><span>            handlers: Vec::new(),
+</span><span>        }
+</span><span>    }
+</span><span>    
+</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">adicionar_handler</span><span>&lt;F&gt;(&amp;</span><span style="color:#b48ead;">mut </span><span style="color:#bf616a;">self</span><span>, </span><span style="color:#bf616a;">handler</span><span>: F)
+</span><span>    </span><span style="color:#b48ead;">where
+</span><span>        F: Fn(&amp;</span><span style="color:#b48ead;">str</span><span>) + </span><span style="color:#b48ead;">&#39;static
+</span><span>    {
+</span><span>        </span><span style="color:#bf616a;">self</span><span>.handlers.</span><span style="color:#96b5b4;">push</span><span>(Box::new(handler));
+</span><span>    }
+</span><span>    
+</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">processar_evento</span><span>(&amp;</span><span style="color:#bf616a;">self</span><span>, </span><span style="color:#bf616a;">evento</span><span>: &amp;</span><span style="color:#b48ead;">str</span><span>) {
+</span><span>        </span><span style="color:#b48ead;">for</span><span> handler in &amp;</span><span style="color:#bf616a;">self</span><span>.handlers {
+</span><span>            </span><span style="color:#96b5b4;">handler</span><span>(evento);
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let mut</span><span> processor = EventProcessor::new();
+</span><span>    
+</span><span>    processor.</span><span style="color:#96b5b4;">adicionar_handler</span><span>(|</span><span style="color:#bf616a;">evento</span><span>| {
+</span><span>        println!(&quot;</span><span style="color:#a3be8c;">Log: </span><span style="color:#d08770;">{}</span><span>&quot;, evento);
+</span><span>    });
+</span><span>    
+</span><span>    processor.</span><span style="color:#96b5b4;">adicionar_handler</span><span>(|</span><span style="color:#bf616a;">evento</span><span>| {
+</span><span>        </span><span style="color:#b48ead;">if</span><span> evento.</span><span style="color:#96b5b4;">contains</span><span>(&quot;</span><span style="color:#a3be8c;">erro</span><span>&quot;) {
+</span><span>            println!(&quot;</span><span style="color:#a3be8c;">ALERTA: </span><span style="color:#d08770;">{}</span><span>&quot;, evento);
+</span><span>        }
+</span><span>    });
+</span><span>    
+</span><span>    processor.</span><span style="color:#96b5b4;">processar_evento</span><span>(&quot;</span><span style="color:#a3be8c;">usuário logado</span><span>&quot;);
+</span><span>    processor.</span><span style="color:#96b5b4;">processar_evento</span><span>(&quot;</span><span style="color:#a3be8c;">erro de conexão</span><span>&quot;);
+</span><span>}
+</span></code></pre>
+<h3 id="3-configuration-builder-pattern">3. Configuration Builder Pattern</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">struct </span><span>Config {
+</span><span>    </span><span style="color:#bf616a;">timeout</span><span>: </span><span style="color:#b48ead;">u64</span><span>,
+</span><span>    </span><span style="color:#bf616a;">retries</span><span>: </span><span style="color:#b48ead;">u32</span><span>,
+</span><span>    </span><span style="color:#bf616a;">debug</span><span>: </span><span style="color:#b48ead;">bool</span><span>,
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">impl </span><span>Config {
+</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">new</span><span>() -&gt; </span><span style="color:#b48ead;">Self </span><span>{
+</span><span>        Config {
+</span><span>            timeout: </span><span style="color:#d08770;">30</span><span>,
+</span><span>            retries: </span><span style="color:#d08770;">3</span><span>,
+</span><span>            debug: </span><span style="color:#d08770;">false</span><span>,
+</span><span>        }
+</span><span>    }
+</span><span>    
+</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">configurar</span><span>&lt;F&gt;(</span><span style="color:#b48ead;">mut </span><span style="color:#bf616a;">self</span><span>, </span><span style="color:#bf616a;">configurador</span><span>: F) -&gt; </span><span style="color:#b48ead;">Self
+</span><span>    </span><span style="color:#b48ead;">where
+</span><span>        F: FnOnce(&amp;</span><span style="color:#b48ead;">mut</span><span> Config)
+</span><span>    {
+</span><span>        </span><span style="color:#96b5b4;">configurador</span><span>(&amp;</span><span style="color:#b48ead;">mut </span><span style="color:#bf616a;">self</span><span>);
+</span><span>        </span><span style="color:#bf616a;">self
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> config = Config::new()
+</span><span>        .</span><span style="color:#96b5b4;">configurar</span><span>(|</span><span style="color:#bf616a;">c</span><span>| {
+</span><span>            c.timeout = </span><span style="color:#d08770;">60</span><span>;
+</span><span>            c.debug = </span><span style="color:#d08770;">true</span><span>;
+</span><span>        })
+</span><span>        .</span><span style="color:#96b5b4;">configurar</span><span>(|</span><span style="color:#bf616a;">c</span><span>| c.retries = </span><span style="color:#d08770;">5</span><span>);
+</span><span>    
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Config: timeout=</span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">, retries=</span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">, debug=</span><span style="color:#d08770;">{}</span><span>&quot;, 
+</span><span>             config.timeout, config.retries, config.debug);
+</span><span>}
+</span></code></pre>
+<h2 id="consideracoes-de-performance">Considerações de Performance</h2>
+<h3 id="closures-vs-funcoes">Closures vs Funções</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">funcao_normal</span><span>(</span><span style="color:#bf616a;">x</span><span>: </span><span style="color:#b48ead;">i32</span><span>) -&gt; </span><span style="color:#b48ead;">i32 </span><span>{
+</span><span>    x * </span><span style="color:#d08770;">2
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let </span><span style="color:#8fa1b3;">closure_simples </span><span>= |</span><span style="color:#bf616a;">x</span><span>: </span><span style="color:#b48ead;">i32</span><span>| x * </span><span style="color:#d08770;">2</span><span>;
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Ambas são igualmente eficientes quando não capturam ambiente
+</span><span>    </span><span style="color:#b48ead;">let</span><span> numeros = vec![</span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">2</span><span>, </span><span style="color:#d08770;">3</span><span>, </span><span style="color:#d08770;">4</span><span>, </span><span style="color:#d08770;">5</span><span>];
+</span><span>    
+</span><span>    </span><span style="color:#b48ead;">let</span><span> com_funcao: Vec&lt;</span><span style="color:#b48ead;">i32</span><span>&gt; = numeros.</span><span style="color:#96b5b4;">iter</span><span>().</span><span style="color:#96b5b4;">map</span><span>(|&amp;</span><span style="color:#bf616a;">x</span><span>| </span><span style="color:#96b5b4;">funcao_normal</span><span>(x)).</span><span style="color:#96b5b4;">collect</span><span>();
+</span><span>    </span><span style="color:#b48ead;">let</span><span> com_closure: Vec&lt;</span><span style="color:#b48ead;">i32</span><span>&gt; = numeros.</span><span style="color:#96b5b4;">iter</span><span>().</span><span style="color:#96b5b4;">map</span><span>(|&amp;</span><span style="color:#bf616a;">x</span><span>| </span><span style="color:#96b5b4;">closure_simples</span><span>(x)).</span><span style="color:#96b5b4;">collect</span><span>();
+</span><span>}
+</span></code></pre>
+<h3 id="evitando-alocacoes-desnecessarias">Evitando Alocações Desnecessárias</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> multiplicador = </span><span style="color:#d08770;">2</span><span>;
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Eficiente - captura por referência
+</span><span>    </span><span style="color:#b48ead;">let </span><span style="color:#8fa1b3;">closure_ref </span><span>= |</span><span style="color:#bf616a;">x</span><span>| x * multiplicador;
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Menos eficiente se não necessário - força move
+</span><span>    </span><span style="color:#b48ead;">let</span><span> closure_move = </span><span style="color:#b48ead;">move </span><span>|x| x * multiplicador;
+</span><span>    
+</span><span>    println!(&quot;</span><span style="color:#d08770;">{}</span><span>&quot;, </span><span style="color:#96b5b4;">closure_ref</span><span>(</span><span style="color:#d08770;">5</span><span>));
+</span><span>    println!(&quot;</span><span style="color:#d08770;">{}</span><span>&quot;, </span><span style="color:#96b5b4;">closure_move</span><span>(</span><span style="color:#d08770;">5</span><span>));
+</span><span>}
+</span></code></pre>
+<h2 id="closures-avancadas">Closures Avançadas</h2>
+<h3 id="higher-order-functions">Higher-Order Functions</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">compor</span><span>&lt;F, G, A, B, C&gt;(</span><span style="color:#bf616a;">f</span><span>: F, </span><span style="color:#bf616a;">g</span><span>: G) -&gt; impl Fn(A) -&gt; C
+</span><span style="color:#b48ead;">where
+</span><span>    F: Fn(A) -&gt; B,
+</span><span>    G: Fn(B) -&gt; C,
+</span><span>{
+</span><span>    </span><span style="color:#b48ead;">move </span><span>|x| </span><span style="color:#96b5b4;">g</span><span>(</span><span style="color:#96b5b4;">f</span><span>(x))
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let </span><span style="color:#8fa1b3;">adicionar_um </span><span>= |</span><span style="color:#bf616a;">x</span><span>: </span><span style="color:#b48ead;">i32</span><span>| x + </span><span style="color:#d08770;">1</span><span>;
+</span><span>    </span><span style="color:#b48ead;">let </span><span style="color:#8fa1b3;">multiplicar_dois </span><span>= |</span><span style="color:#bf616a;">x</span><span>: </span><span style="color:#b48ead;">i32</span><span>| x * </span><span style="color:#d08770;">2</span><span>;
+</span><span>    
+</span><span>    </span><span style="color:#b48ead;">let</span><span> composta = </span><span style="color:#96b5b4;">compor</span><span>(adicionar_um, multiplicar_dois);
+</span><span>    
+</span><span>    println!(&quot;</span><span style="color:#d08770;">{}</span><span>&quot;, </span><span style="color:#96b5b4;">composta</span><span>(</span><span style="color:#d08770;">5</span><span>)); </span><span style="color:#65737e;">// (5 + 1) * 2 = 12
+</span><span>}
+</span></code></pre>
+<h3 id="lazy-evaluation">Lazy Evaluation</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">struct </span><span>LazyValue&lt;T, F&gt;
+</span><span>where
+</span><span>    F: FnOnce() -&gt; T,
+</span><span>{
+</span><span>    value: Option&lt;T&gt;,
+</span><span>    init: Option&lt;F&gt;,
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">impl</span><span>&lt;T, F&gt; LazyValue&lt;T, F&gt;
+</span><span style="color:#b48ead;">where
+</span><span>    F: FnOnce() -&gt; T,
+</span><span>{
+</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">new</span><span>(</span><span style="color:#bf616a;">init</span><span>: F) -&gt; </span><span style="color:#b48ead;">Self </span><span>{
+</span><span>        LazyValue {
+</span><span>            value: None,
+</span><span>            init: Some(init),
+</span><span>        }
+</span><span>    }
+</span><span>    
+</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">get</span><span>(&amp;</span><span style="color:#b48ead;">mut </span><span style="color:#bf616a;">self</span><span>) -&gt; &amp;T {
+</span><span>        </span><span style="color:#b48ead;">if </span><span style="color:#bf616a;">self</span><span>.value.</span><span style="color:#96b5b4;">is_none</span><span>() {
+</span><span>            </span><span style="color:#b48ead;">let</span><span> init = </span><span style="color:#bf616a;">self</span><span>.init.</span><span style="color:#96b5b4;">take</span><span>().</span><span style="color:#96b5b4;">unwrap</span><span>();
+</span><span>            </span><span style="color:#bf616a;">self</span><span>.value = Some(</span><span style="color:#96b5b4;">init</span><span>());
+</span><span>        }
+</span><span>        </span><span style="color:#bf616a;">self</span><span>.value.</span><span style="color:#96b5b4;">as_ref</span><span>().</span><span style="color:#96b5b4;">unwrap</span><span>()
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let mut</span><span> lazy = LazyValue::new(|| {
+</span><span>        println!(&quot;</span><span style="color:#a3be8c;">Calculando valor caro...</span><span>&quot;);
+</span><span>        </span><span style="color:#96b5b4;">expensive_calculation</span><span>()
+</span><span>    });
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Valor só é calculado quando necessário
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Resultado: </span><span style="color:#d08770;">{}</span><span>&quot;, lazy.</span><span style="color:#96b5b4;">get</span><span>());
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Resultado (cached): </span><span style="color:#d08770;">{}</span><span>&quot;, lazy.</span><span style="color:#96b5b4;">get</span><span>());
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">expensive_calculation</span><span>() -&gt; </span><span style="color:#b48ead;">i32 </span><span>{
+</span><span>    </span><span style="color:#65737e;">// Simula cálculo caro
+</span><span>    </span><span style="color:#d08770;">1000
+</span><span>}
+</span></code></pre>
+<h2 id="dicas-e-melhores-praticas">Dicas e Melhores Práticas</h2>
+<h3 id="1-prefira-captura-por-referencia">1. Prefira Captura por Referência</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> dados = vec![</span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">2</span><span>, </span><span style="color:#d08770;">3</span><span>, </span><span style="color:#d08770;">4</span><span>, </span><span style="color:#d08770;">5</span><span>];
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Bom - captura por referência quando possível
+</span><span>    </span><span style="color:#b48ead;">let </span><span style="color:#8fa1b3;">processador </span><span>= |</span><span style="color:#bf616a;">filtro</span><span>| {
+</span><span>        dados.</span><span style="color:#96b5b4;">iter</span><span>().</span><span style="color:#96b5b4;">filter</span><span>(|&amp;&amp;</span><span style="color:#bf616a;">x</span><span>| x &gt; filtro).</span><span style="color:#96b5b4;">count</span><span>()
+</span><span>    };
+</span><span>    
+</span><span>    println!(&quot;</span><span style="color:#d08770;">{}</span><span>&quot;, </span><span style="color:#96b5b4;">processador</span><span>(</span><span style="color:#d08770;">2</span><span>));
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Dados ainda disponíveis: </span><span style="color:#d08770;">{:?}</span><span>&quot;, dados);
+</span><span>}
+</span></code></pre>
+<h3 id="2-use-move-quando-necessario">2. Use <code>move</code> Quando Necessário</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>std::thread;
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> dados = vec![</span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">2</span><span>, </span><span style="color:#d08770;">3</span><span>, </span><span style="color:#d08770;">4</span><span>, </span><span style="color:#d08770;">5</span><span>];
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// Necessário usar move para passar ownership para thread
+</span><span>    </span><span style="color:#b48ead;">let</span><span> handle = thread::spawn(</span><span style="color:#b48ead;">move </span><span>|| {
+</span><span>        dados.</span><span style="color:#96b5b4;">iter</span><span>().sum::&lt;</span><span style="color:#b48ead;">i32</span><span>&gt;()
+</span><span>    });
+</span><span>    
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Soma: </span><span style="color:#d08770;">{}</span><span>&quot;, handle.</span><span style="color:#96b5b4;">join</span><span>().</span><span style="color:#96b5b4;">unwrap</span><span>());
+</span><span>}
+</span></code></pre>
+<h3 id="3-considere-o-lifetime-das-closures">3. Considere o Lifetime das Closures</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">criar_closure_com_lifetime</span><span>&lt;</span><span style="color:#b48ead;">&#39;a</span><span>&gt;(</span><span style="color:#bf616a;">texto</span><span>: &amp;</span><span style="color:#b48ead;">&#39;a str</span><span>) -&gt; impl Fn() -&gt; &amp;</span><span style="color:#b48ead;">&#39;a str </span><span>{
+</span><span>    </span><span style="color:#b48ead;">move </span><span>|| texto
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> texto = String::from(&quot;</span><span style="color:#a3be8c;">Hello, Rust!</span><span>&quot;);
+</span><span>    </span><span style="color:#b48ead;">let</span><span> closure = </span><span style="color:#96b5b4;">criar_closure_com_lifetime</span><span>(&amp;texto);
+</span><span>    
+</span><span>    println!(&quot;</span><span style="color:#d08770;">{}</span><span>&quot;, </span><span style="color:#96b5b4;">closure</span><span>());
+</span><span>}
+</span></code></pre>
+<h2 id="debugging-e-testing">Debugging e Testing</h2>
+<h3 id="testando-closures">Testando Closures</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>#[</span><span style="color:#bf616a;">cfg</span><span>(test)]
+</span><span style="color:#b48ead;">mod </span><span>tests {
+</span><span>    </span><span style="color:#b48ead;">use super</span><span>::*;
+</span><span>    
+</span><span>    #[</span><span style="color:#bf616a;">test</span><span>]
+</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">test_closure_comportamento</span><span>() {
+</span><span>        </span><span style="color:#b48ead;">let</span><span> multiplicador = </span><span style="color:#d08770;">3</span><span>;
+</span><span>        </span><span style="color:#b48ead;">let </span><span style="color:#8fa1b3;">closure </span><span>= |</span><span style="color:#bf616a;">x</span><span>| x * multiplicador;
+</span><span>        
+</span><span>        assert_eq!(</span><span style="color:#96b5b4;">closure</span><span>(</span><span style="color:#d08770;">4</span><span>), </span><span style="color:#d08770;">12</span><span>);
+</span><span>        assert_eq!(</span><span style="color:#96b5b4;">closure</span><span>(</span><span style="color:#d08770;">0</span><span>), </span><span style="color:#d08770;">0</span><span>);
+</span><span>        assert_eq!(</span><span style="color:#96b5b4;">closure</span><span>(-</span><span style="color:#d08770;">2</span><span>), -</span><span style="color:#d08770;">6</span><span>);
+</span><span>    }
+</span><span>    
+</span><span>    #[</span><span style="color:#bf616a;">test</span><span>]
+</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">test_closure_com_captura</span><span>() {
+</span><span>        </span><span style="color:#b48ead;">let mut</span><span> contador = </span><span style="color:#d08770;">0</span><span>;
+</span><span>        </span><span style="color:#b48ead;">let mut </span><span style="color:#8fa1b3;">incrementar </span><span>= || {
+</span><span>            contador += </span><span style="color:#d08770;">1</span><span>;
+</span><span>            contador
+</span><span>        };
+</span><span>        
+</span><span>        assert_eq!(</span><span style="color:#96b5b4;">incrementar</span><span>(), </span><span style="color:#d08770;">1</span><span>);
+</span><span>        assert_eq!(</span><span style="color:#96b5b4;">incrementar</span><span>(), </span><span style="color:#d08770;">2</span><span>);
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<h2 id="conclusao">Conclusão</h2>
+<p>As closures são uma ferramenta fundamental em Rust, oferecendo uma maneira elegante e eficiente de criar código funcional e expressivo. Elas combinam a flexibilidade das funções anônimas com o sistema de ownership do Rust, permitindo captura segura de variáveis do ambiente.</p>
+<p>Os pontos principais a lembrar são:</p>
+<ul>
+<li>Closures podem capturar por referência imutável, referência mutável ou por valor</li>
+<li>O sistema de traits (Fn, FnMut, FnOnce) garante uso seguro e eficiente</li>
+<li>São especialmente úteis com iterators e programação funcional</li>
+<li>O compilador otimiza closures de forma similar a funções normais quando possível</li>
+</ul>
+<p>Para aprofundar seus conhecimentos, consulte:</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/rust-by-example/fn/closures.html">Rust by Example - Closures</a></li>
+<li><a href="https://doc.rust-lang.org/stable/book/ch13-01-closures.html">The Rust Programming Language - Closures</a></li>
+<li><a href="https://doc.rust-lang.org/stable/book/ch20-04-advanced-functions-and-closures.html">Advanced Functions and Closures</a></li>
+</ul>
+<p>Com este conhecimento, você pode aproveitar todo o poder das closures para escrever código Rust mais expressivo, funcional e eficiente!</p>
+<hr />
+<p><strong><em>Disclaimer</em></strong>: Artigo elaborado com auxilio a ferramentas de inteligência artificial mas revisto por humanos.</p>
+
+          </div>
+        </article>
+      </div>
+      
+      <div class="column is-2 is-hidden-mobile">
+        <aside class="menu" style="position: sticky; top: 48px">
+          <p class="heading has-text-weight-bold">Contents</p>
+          <ul class="menu-list">
+            
+            <li>
+              <a id="link-o-que-sao-closures" class="toc is-size-7 is-active"
+                href="https://rustlangpt.github.io/posts/closures/#o-que-sao-closures">
+                O que são Closures?
+              </a>
+              
+            </li>
+            
+            <li>
+              <a id="link-sintaxe-e-exemplos-basicos" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/closures/#sintaxe-e-exemplos-basicos">
+                Sintaxe e Exemplos Básicos
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-closure-simples" class="toc is-size-7" href="https://rustlangpt.github.io/posts/closures/#closure-simples">
+                    Closure Simples
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-inferencia-de-tipos" class="toc is-size-7" href="https://rustlangpt.github.io/posts/closures/#inferencia-de-tipos">
+                    Inferência de Tipos
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-capturando-o-ambiente" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/closures/#capturando-o-ambiente">
+                Capturando o Ambiente
+              </a>
+              
+            </li>
+            
+            <li>
+              <a id="link-tipos-de-captura" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/closures/#tipos-de-captura">
+                Tipos de Captura
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-1-por-referencia-imutavel-t" class="toc is-size-7" href="https://rustlangpt.github.io/posts/closures/#1-por-referencia-imutavel-t">
+                    1. Por Referência Imutável (&amp;T)
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-2-por-referencia-mutavel-mut-t" class="toc is-size-7" href="https://rustlangpt.github.io/posts/closures/#2-por-referencia-mutavel-mut-t">
+                    2. Por Referência Mutável (&amp;mut T)
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-3-por-valor-t-move" class="toc is-size-7" href="https://rustlangpt.github.io/posts/closures/#3-por-valor-t-move">
+                    3. Por Valor (T) - Move
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-traits-de-closure-fn-fnmut-e-fnonce" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/closures/#traits-de-closure-fn-fnmut-e-fnonce">
+                Traits de Closure: Fn, FnMut e FnOnce
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-fnonce" class="toc is-size-7" href="https://rustlangpt.github.io/posts/closures/#fnonce">
+                    FnOnce
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-fnmut" class="toc is-size-7" href="https://rustlangpt.github.io/posts/closures/#fnmut">
+                    FnMut
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-fn" class="toc is-size-7" href="https://rustlangpt.github.io/posts/closures/#fn">
+                    Fn
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-closures-como-parametros" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/closures/#closures-como-parametros">
+                Closures como Parâmetros
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-usando-generics-com-bounds" class="toc is-size-7" href="https://rustlangpt.github.io/posts/closures/#usando-generics-com-bounds">
+                    Usando Generics com Bounds
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-usando-box" class="toc is-size-7" href="https://rustlangpt.github.io/posts/closures/#usando-box">
+                    Usando Box
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-closures-retornando-closures" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/closures/#closures-retornando-closures">
+                Closures Retornando Closures
+              </a>
+              
+            </li>
+            
+            <li>
+              <a id="link-casos-de-uso-praticos" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/closures/#casos-de-uso-praticos">
+                Casos de Uso Práticos
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-1-programacao-funcional-com-iterators" class="toc is-size-7" href="https://rustlangpt.github.io/posts/closures/#1-programacao-funcional-com-iterators">
+                    1. Programação Funcional com Iterators
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-2-event-handling" class="toc is-size-7" href="https://rustlangpt.github.io/posts/closures/#2-event-handling">
+                    2. Event Handling
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-3-configuration-builder-pattern" class="toc is-size-7" href="https://rustlangpt.github.io/posts/closures/#3-configuration-builder-pattern">
+                    3. Configuration Builder Pattern
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-consideracoes-de-performance" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/closures/#consideracoes-de-performance">
+                Considerações de Performance
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-closures-vs-funcoes" class="toc is-size-7" href="https://rustlangpt.github.io/posts/closures/#closures-vs-funcoes">
+                    Closures vs Funções
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-evitando-alocacoes-desnecessarias" class="toc is-size-7" href="https://rustlangpt.github.io/posts/closures/#evitando-alocacoes-desnecessarias">
+                    Evitando Alocações Desnecessárias
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-closures-avancadas" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/closures/#closures-avancadas">
+                Closures Avançadas
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-higher-order-functions" class="toc is-size-7" href="https://rustlangpt.github.io/posts/closures/#higher-order-functions">
+                    Higher-Order Functions
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-lazy-evaluation" class="toc is-size-7" href="https://rustlangpt.github.io/posts/closures/#lazy-evaluation">
+                    Lazy Evaluation
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-dicas-e-melhores-praticas" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/closures/#dicas-e-melhores-praticas">
+                Dicas e Melhores Práticas
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-1-prefira-captura-por-referencia" class="toc is-size-7" href="https://rustlangpt.github.io/posts/closures/#1-prefira-captura-por-referencia">
+                    1. Prefira Captura por Referência
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-2-use-move-quando-necessario" class="toc is-size-7" href="https://rustlangpt.github.io/posts/closures/#2-use-move-quando-necessario">
+                    2. Use move Quando Necessário
+                  </a>
+                </li>
+                
+                <li>
+                  <a id="link-3-considere-o-lifetime-das-closures" class="toc is-size-7" href="https://rustlangpt.github.io/posts/closures/#3-considere-o-lifetime-das-closures">
+                    3. Considere o Lifetime das Closures
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-debugging-e-testing" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/closures/#debugging-e-testing">
+                Debugging e Testing
+              </a>
+              
+              <ul>
+                
+                <li>
+                  <a id="link-testando-closures" class="toc is-size-7" href="https://rustlangpt.github.io/posts/closures/#testando-closures">
+                    Testando Closures
+                  </a>
+                </li>
+                
+              </ul>
+              
+            </li>
+            
+            <li>
+              <a id="link-conclusao" class="toc is-size-7 "
+                href="https://rustlangpt.github.io/posts/closures/#conclusao">
+                Conclusão
+              </a>
+              
+            </li>
+            
+          </ul>
+        </aside>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+
+  
+  <section class="modal" id="search-modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Search</p>
+      </header>
+      <section class="modal-card-body">
+        <div class="field mb-2">
+          <div class="control">
+            <input class="input" id="search" placeholder="Search this website." type="search" />
+          </div>
+        </div>
+        <div class="search-results">
+          <div class="search-results__items"></div>
+        </div>
+      </section>
+    </div>
+    <button aria-label="close" class="modal-close is-large"></button>
+  </section>
+  
+
+
+  
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <nav class="level">
+              
+          <div class="level-item has-text-centered">
+            <a class="button is-black is-outlined" href="https:&#x2F;&#x2F;rustlangpt.github.io&#x2F;posts&#x2F;funcoes&#x2F;">
+              <span class="icon mr-2">
+                <i class="fas fa-arrow-circle-left"></i>
+              </span>
+              Fundamentos da Linguagem Rust: Expressões, Statements e Funções.
+            </a>
+          </div>
+           
+          <div class="level-item has-text-centered">
+            <a class="button is-black is-outlined" href="https:&#x2F;&#x2F;rustlangpt.github.io&#x2F;posts&#x2F;conversoes&#x2F;">
+              Conversão de Tipos em Rust: Guia Completo.<span class="icon ml-2">
+                <i class="fas fa-arrow-circle-right"></i>
+              </span>
+            </a>
+          </div>
+          
+        </nav>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+  
+
+
+
+
+
+
+  
+  <footer class="footer py-4">
+    <div class="content has-text-centered">
+    <!--
+    <p>
+        Built with
+        <span class="icon-text">
+          <span class="icon">
+            <i class="fas fa-code"></i>
+          </span>
+          <span>code</span>
+        </span>
+        and
+        <span class="icon-text">
+          <span class="icon">
+            <i class="fas fa-heart"></i>
+          </span>
+          <span>love</span>
+        </span>
+      </p>
+    -->
+      <p>
+        Powered by
+        <span class="icon-text">
+          <span class="icon">
+            <i class="fas fa-power-off"></i>
+          </span>
+          <span>zola</span>
+        </span>
+      </p>
+    
+    </div>
+  </footer>
+  
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/galleria@1.6.1/dist/galleria.min.js" integrity="sha384-QSfwGT8/EU536DKdtyP2D6SLlh8zBaZ0cVkwfrwhqzIU9VCfJT00CLVP5t+HAiYg" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/galleria@1.6.1/dist/themes/folio/galleria.folio.min.js" integrity="sha384-DwpKI+deZB267+hPKwiOIc5Y2GKsVL0mR6hgz7GgIu7AgAMYqJwcJKY1YBNfhWcY" crossorigin="anonymous"></script>
+  
+  
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@8.13.5/dist/mermaid.min.js" integrity="sha384-0yWn54pSGtfKCU+skfA69l25VsCw+MZt4LQov3xNRoS7YkAMrFokGgSBnAWSK4pv" crossorigin="anonymous"></script>
+  
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.xkcd@1.1.13/dist/chart.xkcd.min.js" integrity="sha384-xC3h1+IHXK8seA+8KfT79Z4e0GPsznjXBoMa5nd8ooWKplPyXx92NOmljWxLC/cs" crossorigin="anonymous"></script>
+  
+  
+  <script src="https://rustlangpt.github.io/elasticlunr.min.js"></script>
+  <script src="https://rustlangpt.github.io/search_index.en.js"></script><script src="https://rustlangpt.github.io/js/site.js"></script>
+
+  
+
+<script type="text/javascript">
+  const menuBarHeight = document.querySelector("nav.navbar").clientHeight;
+  const tocItems = document.querySelectorAll(".toc");
+  const navSections = new Array(tocItems.length);
+
+  tocItems.forEach((el, i) => {
+    let id = el.getAttribute("id").substring(5);
+    navSections[i] = document.getElementById(id);
+  })
+
+  function isVisible(tocIndex) {
+    const current = navSections[tocIndex];
+    const next = tocIndex < tocItems.length - 1 ? navSections[tocIndex + 1]
+      : document.querySelectorAll("section.section").item(1);
+
+    const c = current.getBoundingClientRect();
+    const n = next.getBoundingClientRect();
+    const h = (window.innerHeight || document.documentElement.clientHeight);
+
+    return (c.top <= h) && (n.top - menuBarHeight >= 0);
+  }
+
+  function activateIfVisible() {
+    for (b = true, i = 0; i < tocItems.length; i++) {
+      if (b && isVisible(i)) {
+        tocItems[i].classList.add('is-active');
+        b = false;
+      } else
+        tocItems[i].classList.remove('is-active');
+    }
+  }
+
+  var isTicking = null;
+  window.addEventListener('scroll', () => {
+    if (!isTicking) {
+      window.requestAnimationFrame(() => {
+        activateIfVisible();
+        isTicking = false;
+      });
+      isTicking = true;
+    }
+  }, false);
+</script>
+
+
+
+
+
+  
+  
+</body>
+
+</html>
